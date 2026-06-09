@@ -7,7 +7,7 @@
   
   
   
-  <script>window.REIMU_CONFIG = {};window.REIMU_CONFIG.clipboard_tips = {"success":{"zh-CN":"复制成功 (*^▽^*)"},"fail":{"zh-CN":"复制失败 (ﾟ⊿ﾟ)ﾂ"},"copyright":{"enable":false,"count":50,"license_type":"by-nc-sa"}};window.REIMU_CONFIG.clipboard_tips.copyright.content = '本博客所有文章除特别声明外，均采用 BY-NC-SA 许可协议。转载请注明出处！';window.REIMU_CONFIG.code_block = {"expand":true};window.REIMU_CONFIG.base = 'https://drda-x.github.io';window.REIMU_CONFIG.relative = '/';</script>
+  <script>window.REIMU_CONFIG = {};window.REIMU_CONFIG.clipboard_tips = {"success":{"zh-CN":"复制成功 (*^▽^*)"},"fail":{"zh-CN":"复制失败 (ﾟ⊿ﾟ)ﾂ"},"copyright":{"enable":false,"count":50,"license_type":"by-nc-sa"}};window.REIMU_CONFIG.clipboard_tips.copyright.content = '本博客所有文章除特别声明外，均采用 BY-NC-SA 许可协议。转载请注明出处！';window.REIMU_CONFIG.code_block = {"expand":true};window.REIMU_CONFIG.base = 'https://drda-x.github.io/drda-blog';window.REIMU_CONFIG.relative = '/drda-blog/';</script>
   <title>
     Hexo 初体验 | 加辣の秘密基地
   </title>
@@ -21,12 +21,12 @@
 <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="https://npm.webcache.cn/@fortawesome/fontawesome-free@7.1.0/css/v5-font-face.min.css" integrity="sha384-nJ1ThfldViXoLpJ6jlKcP2beas8BMbYq26SG9Hi8cH89bZi4RZ644v7helMCqJxd" crossorigin="anonymous">
 <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="https://npm.webcache.cn/@fortawesome/fontawesome-free@7.1.0/css/v4-font-face.min.css" integrity="sha384-UlkrhOIvZxJFd4MElSUp7ow6/RUeYKi/orfCZIRRiOENFuQPIAA3T3HjYfmBRhNq" crossorigin="anonymous">
     
-<link rel="stylesheet" href="/css/loader.css">
+<link rel="stylesheet" href="/drda-blog/css/loader.css">
 
     <meta name="description" content="一直想搭建一个属于自己的个人博客，记录学习和生活。试过多种方案后，最终选择了 Hexo + GitHub Pages，原因是：免费、静态、速度快、主题丰富。下面把完整的搭建过程记录下来，希望能帮到有同样需求的朋友。  前置准备 在开始之前，确保你的环境已经准备好：  Node.js 和 npm（建议使用 nvm 管理版本） Git 和 GitHub 账号 VS Code 或任意代码编辑器   第一">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hexo 初体验">
-<meta property="og:url" content="https://drda-x.github.io/2026/06/08/post_1/index.html">
+<meta property="og:url" content="https://drda-x.github.io/drda-blog/2026/06/08/post_1/index.html">
 <meta property="og:site_name" content="加辣の秘密基地">
 <meta property="og:description" content="一直想搭建一个属于自己的个人博客，记录学习和生活。试过多种方案后，最终选择了 Hexo + GitHub Pages，原因是：免费、静态、速度快、主题丰富。下面把完整的搭建过程记录下来，希望能帮到有同样需求的朋友。  前置准备 在开始之前，确保你的环境已经准备好：  Node.js 和 npm（建议使用 nvm 管理版本） Git 和 GitHub 账号 VS Code 或任意代码编辑器   第一">
 <meta property="og:locale" content="zh_CN">
@@ -34,10 +34,10 @@
 <meta property="article:modified_time" content="2026-06-09T07:37:10.545Z">
 <meta property="article:author" content="Drda">
 <meta name="twitter:card" content="summary">
-    <link rel="alternate" href="/atom.xml" title="加辣の秘密基地" type="application/atom+xml">
-    <link rel="shortcut icon" href="/images/favicon.ico">
+    <link rel="alternate" href="/drda-blog/atom.xml" title="加辣の秘密基地" type="application/atom+xml">
+    <link rel="shortcut icon" href="/drda-blog/images/favicon.ico">
   
-<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/drda-blog/css/style.css">
 
   <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.css" integrity="sha384-IfxC36XL/toUyJ939C73PcgMuRzAZuIzZxE38drsmO5p6jD7ei+Zx/1oA/0l8ysE" crossorigin="anonymous">
       <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="https://npm.webcache.cn/katex@0.16.24/dist/katex.min.css" integrity="sha384-tTgKLjMYmJr94v8qu2PE5MUGSMbyN2xiH266JUB3gpm8vnnJywd1dWSOEfrFz+YI" crossorigin="anonymous">
@@ -56,7 +56,7 @@
     <div class="loading-right-bg loading-bg"></div>
     <div class="spinner-box">
       <div class="loading-taichi ">
-          <img src="/images/taichi.png" alt="loading" />
+          <img src="/drda-blog/images/taichi.png" alt="loading" />
       </div>
       <div class="loading-word">给你们加辣中...</div>
     </div>
@@ -97,34 +97,34 @@
       <div id="wrap">
         <div id="header-nav">
   <nav id="main-nav" aria-label="Primary navigation">
-        <a class="main-nav-link-wrap" href="/">
+        <a class="main-nav-link-wrap" href="/drda-blog/">
             <div class="main-nav-icon icon ">
-                  <img src="/images/taichi.png" alt="home icon" style="height: 1em;">
+                  <img src="/drda-blog/images/taichi.png" alt="home icon" style="height: 1em;">
             </div>
           <span class="main-nav-link">首页</span>
         </a>
-        <a class="main-nav-link-wrap" href="/archives">
+        <a class="main-nav-link-wrap" href="/drda-blog/archives">
             <div class="main-nav-icon icon ">
-                  <img src="/images/archives.png" alt="archives icon" style="height: 1em;">
+                  <img src="/drda-blog/images/archives.png" alt="archives icon" style="height: 1em;">
             </div>
           <span class="main-nav-link">归档</span>
         </a>
-        <a class="main-nav-link-wrap" href="/about">
+        <a class="main-nav-link-wrap" href="/drda-blog/about">
             <div class="main-nav-icon icon ">
-                  <img src="/images/about.png" alt="about icon" style="height: 1em;">
+                  <img src="/drda-blog/images/about.png" alt="about icon" style="height: 1em;">
             </div>
           <span class="main-nav-link">关于</span>
         </a>
-        <a class="main-nav-link-wrap" href="/friend">
+        <a class="main-nav-link-wrap" href="/drda-blog/friend">
             <div class="main-nav-icon icon ">
-                  <img src="/images/friend.png" alt="friend icon" style="height: 1em;">
+                  <img src="/drda-blog/images/friend.png" alt="friend icon" style="height: 1em;">
             </div>
           <span class="main-nav-link">友链</span>
         </a>
     <a id="main-nav-toggle" class="nav-icon" aria-label="Toggle navigation" role="button"></a>
   </nav>
   <nav id="sub-nav" aria-label="Secondary navigation">
-      <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS 订阅" aria-label="RSS 订阅" target="_blank"></a>
+      <a id="nav-rss-link" class="nav-icon" href="/drda-blog/atom.xml" title="RSS 订阅" aria-label="RSS 订阅" target="_blank"></a>
       <a id="nav-search-btn" class="nav-icon popup-trigger" title="搜索" aria-label="搜索"></a>
   </nav>
   <a href="https://github.com/drda-x" class="triangle-badge" title="github" target="_blank" rel="noopener nofollow noreferrer">
@@ -156,7 +156,7 @@
 </div>
 </div>
           <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
-  <img data-src="/avatar/avatar.webp" data-sizes="auto" alt="Drda" class="lazyload">
+  <img data-src="/drda-blog/avatar/avatar.webp" data-sizes="auto" alt="Drda" class="lazyload">
   <div class="sidebar-author-name">Drda</div>
   <div class="sidebar-description">Drda&#39;s Blog</div>
 </div>
@@ -187,30 +187,30 @@
 </div>
 <div class="sidebar-menu">
       <div class="sidebar-menu-link-wrap">
-        <a class="sidebar-menu-link-dummy" href="/" aria-label="首页"></a>
+        <a class="sidebar-menu-link-dummy" href="/drda-blog/" aria-label="首页"></a>
           <div class="sidebar-menu-icon icon ">
-                <img src="/images/taichi.png" alt="home icon" style="width: 1em;">
+                <img src="/drda-blog/images/taichi.png" alt="home icon" style="width: 1em;">
           </div>
         <div class="sidebar-menu-link">首页</div>
       </div>
       <div class="sidebar-menu-link-wrap">
-        <a class="sidebar-menu-link-dummy" href="/archives" aria-label="归档"></a>
+        <a class="sidebar-menu-link-dummy" href="/drda-blog/archives" aria-label="归档"></a>
           <div class="sidebar-menu-icon icon ">
-                <img src="/images/archives.png" alt="archives icon" style="width: 1em;">
+                <img src="/drda-blog/images/archives.png" alt="archives icon" style="width: 1em;">
           </div>
         <div class="sidebar-menu-link">归档</div>
       </div>
       <div class="sidebar-menu-link-wrap">
-        <a class="sidebar-menu-link-dummy" href="/about" aria-label="关于"></a>
+        <a class="sidebar-menu-link-dummy" href="/drda-blog/about" aria-label="关于"></a>
           <div class="sidebar-menu-icon icon ">
-                <img src="/images/about.png" alt="about icon" style="width: 1em;">
+                <img src="/drda-blog/images/about.png" alt="about icon" style="width: 1em;">
           </div>
         <div class="sidebar-menu-link">关于</div>
       </div>
       <div class="sidebar-menu-link-wrap">
-        <a class="sidebar-menu-link-dummy" href="/friend" aria-label="友链"></a>
+        <a class="sidebar-menu-link-dummy" href="/drda-blog/friend" aria-label="友链"></a>
           <div class="sidebar-menu-icon icon ">
-                <img src="/images/friend.png" alt="friend icon" style="width: 1em;">
+                <img src="/drda-blog/images/friend.png" alt="friend icon" style="width: 1em;">
           </div>
         <div class="sidebar-menu-link">友链</div>
       </div>
@@ -334,7 +334,7 @@
 
     </div>
     <footer class="article-footer">
-        <a class="article-category-link" href="/categories/%E5%8D%9A%E5%AE%A2/" title="博客" data-aos="zoom-in">博客</a>
+        <a class="article-category-link" href="/drda-blog/categories/%E5%8D%9A%E5%AE%A2/" title="博客" data-aos="zoom-in">博客</a>
 
       
     </footer>
@@ -342,7 +342,7 @@
     <nav id="article-nav" aria-label="Article navigation" data-aos="fade-up">
       <div class="article-nav-link-wrap left">
           <img data-src="https://p7.qhimg.com/bdm/0_0_100/t0194a1161f2ce1524e.jpg" data-sizes="auto" alt="el-table 双击单元格修改" class="lazyload">
-        <a href="/2026/06/09/post_2/" aria-label="前一篇: el-table 双击单元格修改" title="前一篇: el-table 双击单元格修改"></a>
+        <a href="/drda-blog/2026/06/09/post_2/" aria-label="前一篇: el-table 双击单元格修改" title="前一篇: el-table 双击单元格修改"></a>
         <div class="article-nav-caption">前一篇</div>
         <h3 class="article-nav-title">
             el-table 双击单元格修改
@@ -419,7 +419,7 @@
 </div>
 </div>
         <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
-  <img data-src="/avatar/avatar.webp" data-sizes="auto" alt="Drda" class="lazyload">
+  <img data-src="/drda-blog/avatar/avatar.webp" data-sizes="auto" alt="Drda" class="lazyload">
   <div class="sidebar-author-name">Drda</div>
   <div class="sidebar-description">Drda&#39;s Blog</div>
 </div>
@@ -450,30 +450,30 @@
 </div>
 <div class="sidebar-menu">
       <div class="sidebar-menu-link-wrap">
-        <a class="sidebar-menu-link-dummy" href="/" aria-label="首页"></a>
+        <a class="sidebar-menu-link-dummy" href="/drda-blog/" aria-label="首页"></a>
           <div class="sidebar-menu-icon icon ">
-                <img src="/images/taichi.png" alt="home icon" style="width: 1em;">
+                <img src="/drda-blog/images/taichi.png" alt="home icon" style="width: 1em;">
           </div>
         <div class="sidebar-menu-link">首页</div>
       </div>
       <div class="sidebar-menu-link-wrap">
-        <a class="sidebar-menu-link-dummy" href="/archives" aria-label="归档"></a>
+        <a class="sidebar-menu-link-dummy" href="/drda-blog/archives" aria-label="归档"></a>
           <div class="sidebar-menu-icon icon ">
-                <img src="/images/archives.png" alt="archives icon" style="width: 1em;">
+                <img src="/drda-blog/images/archives.png" alt="archives icon" style="width: 1em;">
           </div>
         <div class="sidebar-menu-link">归档</div>
       </div>
       <div class="sidebar-menu-link-wrap">
-        <a class="sidebar-menu-link-dummy" href="/about" aria-label="关于"></a>
+        <a class="sidebar-menu-link-dummy" href="/drda-blog/about" aria-label="关于"></a>
           <div class="sidebar-menu-icon icon ">
-                <img src="/images/about.png" alt="about icon" style="width: 1em;">
+                <img src="/drda-blog/images/about.png" alt="about icon" style="width: 1em;">
           </div>
         <div class="sidebar-menu-link">关于</div>
       </div>
       <div class="sidebar-menu-link-wrap">
-        <a class="sidebar-menu-link-dummy" href="/friend" aria-label="友链"></a>
+        <a class="sidebar-menu-link-dummy" href="/drda-blog/friend" aria-label="友链"></a>
           <div class="sidebar-menu-icon icon ">
-                <img src="/images/friend.png" alt="friend icon" style="width: 1em;">
+                <img src="/drda-blog/images/friend.png" alt="friend icon" style="width: 1em;">
           </div>
         <div class="sidebar-menu-link">友链</div>
       </div>
@@ -499,7 +499,7 @@
             <div id="reimu-hits"></div>
             <div id="reimu-pagination" class="reimu-pagination"></div>
           </div>
-          <img class="reimu-bg" src="/images/reimu.png" loading="lazy" decoding="async" fetchpriority="low"/>
+          <img class="reimu-bg" src="/drda-blog/images/reimu.png" loading="lazy" decoding="async" fetchpriority="low"/>
         </div>
       </div>
       <meting-js
@@ -527,11 +527,11 @@
 
 
 
-<script src="/js/script.js"></script>
+<script src="/drda-blog/js/script.js"></script>
 
 
   
-<script src="/js/aos.js"></script>
+<script src="/drda-blog/js/aos.js"></script>
 
   <script>
     var aosInit = () => {
@@ -550,13 +550,13 @@
   </script>
 
 
-<script src="/js/pjax_script.js" data-pjax></script>
+<script src="/drda-blog/js/pjax_script.js" data-pjax></script>
 
 
 
   <script>
     var ALGOLIA_CONFIG = {
-      logo: "/images/algolia_logo.svg",
+      logo: "/drda-blog/images/algolia_logo.svg",
       algolia: {
         applicationID: "YMYG3VEWNQ",
         apiKey: "9cc40f37d1556b019e275e62719299fa",
@@ -579,7 +579,7 @@
 <script src="https://npm.webcache.cn/@reimujs/instantsearch.js@4.57.0-beta.1/dist/instantsearch.production.min.js" integrity="sha384-aagKMe8nkqaP2DYQc8kkYOL5l+M5Q2WH&#x2F;Uhr4teOh0Ybp0RZj0kUSDm45qPikMjK" crossorigin="anonymous" defer></script>
 
   
-<script src="/js/algolia_search.js" defer></script>
+<script src="/drda-blog/js/algolia_search.js" defer></script>
 
 
   <script>
@@ -597,7 +597,7 @@
 <script src="https://npm.webcache.cn/theme-shokax-pjax@0.0.3/dist/index.umd.js" integrity="sha384-xneY1WY8hOfUzswrE4CrYq35N4BdVcxqxwHPr9zawE&#x2F;jMSCxD+jAPU55x&#x2F;jj3wlf" crossorigin="anonymous"></script>
 
   
-<script src="/js/pjax.js"></script>
+<script src="/drda-blog/js/pjax.js"></script>
 
 
 
@@ -611,7 +611,7 @@
         window.REIMU_POST = {
           author: "Drda",
           title: "Hexo 初体验",
-          url: "https://drda-x.github.io/2026/06/08/post_1/",
+          url: "https://drda-x.github.io/drda-blog/2026/06/08/post_1/",
           excerpt: "",
           description: "",
           stripContent: "一直想搭建一个属于自己的个人博客，记录学习和生活。试过多种方案后，最终选择了 Hexo + GitHub Pages，原因是：免费、静态、速度快、主题丰富。下面把完整的搭建过程记录下来，希望能帮到有同样需求的朋友。  前置准备 在开始之前，确保你的环境已经准备好：  Node.js 和 npm（建议使用 nvm 管理版本） Git 和 GitHub 账号 VS Code 或任意代码编辑器   第一步：安装 Hexo CLI 打开终端，全局安装 Hexo 命令行工具： npm install -g",
@@ -621,10 +621,10 @@
         };
       </script>
         
-<script src="/js/insert_highlight.js" data-pjax></script>
+<script src="/drda-blog/js/insert_highlight.js" data-pjax></script>
 
       
-<script src="/js/tabs.js" data-pjax defer></script>
+<script src="/drda-blog/js/tabs.js" data-pjax defer></script>
 
       <script type="module" data-pjax>
         (async () => {
