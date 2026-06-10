@@ -402,10 +402,6 @@ body [data-aos='zoom-in'] {
 .icon-bilibili:before {
   content: '\e3d9';
 }
-.icon-email:before {
-  content: '\f0e0';
-  font-weight: 900;
-}
 .sidebar-toc-btn:before {
   font-family: var(--font-icon);
   content: '\f0e8';
@@ -3111,9 +3107,6 @@ pre .emphasis {
 }
 .sidebar-social-icon:hover {
   transform: scale(1.2);
-}
-.icon-email {
-  color: var(--red-2);
 }
 .icon-github {
   color: #191717;
