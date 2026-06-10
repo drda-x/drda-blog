@@ -41,7 +41,7 @@
       </content:encoded>
     </item>
     <item>
-      <title>el-table 双击单元格修改</title>
+      <title>vue中el-table组件双击单元格修改</title>
       <link>https://drda-x.github.io/drda-blog/2026/06/09/post_2/</link>
       <description>
         <![CDATA[<p>在使用 Element UI 的 <code>el-table</code>]]>

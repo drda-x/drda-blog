@@ -9,7 +9,7 @@
   
   <script>window.REIMU_CONFIG = {};window.REIMU_CONFIG.clipboard_tips = {"success":{"zh-CN":"复制成功 (*^▽^*)"},"fail":{"zh-CN":"复制失败 (ﾟ⊿ﾟ)ﾂ"},"copyright":{"enable":false,"count":50,"license_type":"by-nc-sa"}};window.REIMU_CONFIG.clipboard_tips.copyright.content = '本博客所有文章除特别声明外，均采用 BY-NC-SA 许可协议。转载请注明出处！';window.REIMU_CONFIG.code_block = {"expand":true};window.REIMU_CONFIG.base = 'https://drda-x.github.io/drda-blog';window.REIMU_CONFIG.relative = '/drda-blog/';</script>
   <title>
-    el-table 双击单元格修改 | 加辣の秘密基地
+    vue中el-table组件双击单元格修改 | 加辣の秘密基地
   </title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic|Noto Serif SC:400,400italic,700,700italic&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic|Noto Serif SC:400,400italic,700,700italic&display=swap" media="print" onload="this.media='all'">
@@ -25,13 +25,13 @@
 
     <meta name="description" content="在使用 Element UI 的 el-table 时，我们经常会遇到这样的需求：在表格中直接双击某个单元格就能进入编辑状态，输入完成后按回车或失去焦点自动保存。这个功能在后台管理系统中非常实用，省去了跳转到编辑页面的繁琐操作。本文就来详细记录一下这个交互的实现方式。  核心思路 实现这个效果主要分为三步：  给 el-table 绑定 cell-dblclick 事件，监听单元格双击 双击时记录">
 <meta property="og:type" content="article">
-<meta property="og:title" content="el-table 双击单元格修改">
+<meta property="og:title" content="vue中el-table组件双击单元格修改">
 <meta property="og:url" content="https://drda-x.github.io/drda-blog/2026/06/09/post_2/index.html">
 <meta property="og:site_name" content="加辣の秘密基地">
 <meta property="og:description" content="在使用 Element UI 的 el-table 时，我们经常会遇到这样的需求：在表格中直接双击某个单元格就能进入编辑状态，输入完成后按回车或失去焦点自动保存。这个功能在后台管理系统中非常实用，省去了跳转到编辑页面的繁琐操作。本文就来详细记录一下这个交互的实现方式。  核心思路 实现这个效果主要分为三步：  给 el-table 绑定 cell-dblclick 事件，监听单元格双击 双击时记录">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-06-08T16:00:00.000Z">
-<meta property="article:modified_time" content="2026-06-09T09:49:36.905Z">
+<meta property="article:modified_time" content="2026-06-10T07:19:40.172Z">
 <meta property="article:author" content="Drda">
 <meta property="article:tag" content="Vue">
 <meta property="article:tag" content="Element">
@@ -135,11 +135,11 @@
 </div>
 <header id="header" aria-label="Site header">
     <picture></picture>
-    <img  fetchpriority="high" src="https://p7.qhimg.com/bdm/0_0_100/t0194a1161f2ce1524e.jpg" alt="el-table 双击单元格修改">
+    <img  fetchpriority="high" src="https://p7.qhimg.com/bdm/0_0_100/t0194a1161f2ce1524e.jpg" alt="vue中el-table组件双击单元格修改">
   <div id="header-outer">
     <div id="header-title">
           <span id="logo">
-            <h1 data-aos="slide-up">el-table 双击单元格修改</h1>
+            <h1 data-aos="slide-up">vue中el-table组件双击单元格修改</h1>
           </span>
         <h2 id="subtitle-wrap" data-aos="slide-down">
         </h2>
@@ -150,6 +150,22 @@
         <div id="content" aria-label="Page content" class="sidebar-left"  >
           <aside id="sidebar" aria-label="Sidebar">
   <div class="sidebar-wrapper-container sticky">
+      <meting-js
+        theme="var(--color-link)"
+        id="2653845699"
+        server="netease"
+        type="playlist"
+        auto="0"
+        fixed="false"
+        autoplay="false"
+        loop="all"
+        order="random"
+        preload="auto"
+        volume="0.7"
+        mutex="true"
+        list-folded="true"
+        lrc-type="3"
+      ></meting-js>
   <div class="sidebar-wrapper">
     <div class="sidebar-wrap" data-aos="fade-up">
           <div class="sidebar-toc-sidebar"><h3 class="toc-title">文章目录</h3>
@@ -235,7 +251,7 @@
       <div class="article-date">
   <span class="article-date-link icon-calendar" data-aos="zoom-in">
     <time datetime="2026-06-08T16:00:00.000Z" itemprop="datePublished">2026-06-09</time>
-    <time style="display: none;" id="post-update-time">2026-06-09</time>
+    <time style="display: none;" id="post-update-time">2026-06-10</time>
   </span>
 </div>
 
@@ -453,22 +469,6 @@
           <img class="reimu-bg" src="/drda-blog/images/reimu.png" loading="lazy" decoding="async" fetchpriority="low"/>
         </div>
       </div>
-      <meting-js
-        theme="var(--color-link)"
-        id="2653845699"
-        server="netease"
-        type="playlist"
-        auto="0"
-        fixed="true"
-        autoplay="false"
-        loop="all"
-        order="random"
-        preload="auto"
-        volume="0.7"
-        mutex="true"
-        list-folded="false"
-        lrc-type="3"
-      ></meting-js>
     
 <script src="https://npm.webcache.cn/lazysizes@5.3.2/lazysizes.min.js" integrity="sha384-3gT&#x2F;vsepWkfz&#x2F;ff7PpWNUeMzeWoH3cDhm&#x2F;A8jM7ouoAK0&#x2F;fP&#x2F;9bcHHR5kHq2nf+e" crossorigin="anonymous"></script>
 
@@ -561,13 +561,13 @@
       <script data-pjax>
         window.REIMU_POST = {
           author: "Drda",
-          title: "el-table 双击单元格修改",
+          title: "vue中el-table组件双击单元格修改",
           url: "https://drda-x.github.io/drda-blog/2026/06/09/post_2/",
           excerpt: "",
           description: "",
           stripContent: "在使用 Element UI 的 el-table 时，我们经常会遇到这样的需求：在表格中直接双击某个单元格就能进入编辑状态，输入完成后按回车或失去焦点自动保存。这个功能在后台管理系统中非常实用，省去了跳转到编辑页面的繁琐操作。本文就来详细记录一下这个交互的实现方式。  核心思路 实现这个效果主要分为三步：  给 el-table 绑定 cell-dblclick 事件，监听单元格双击 双击时记录当前行和列信息，显示输入框（el-input） 输入完成后，触发保存逻辑并更新数据   基础表格结构",
           date: "Tue Jun 09 2026 00:00:00 GMT+0800",
-          updated: "Tue Jun 09 2026 17:49:36 GMT+0800",
+          updated: "Wed Jun 10 2026 15:19:40 GMT+0800",
           cover: "https://p7.qhimg.com/bdm/0_0_100/t0194a1161f2ce1524e.jpg",
         };
       </script>
