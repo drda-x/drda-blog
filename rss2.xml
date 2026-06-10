@@ -6,14 +6,16 @@
     <description>——奶茶少糖，喜欢吃辣</description>
     <language>zh-CN</language>
     <copyright>All rights reserved 2026, Drda</copyright>
-    <lastBuildDate>Wed, 10 Jun 2026 02:36:41 GMT</lastBuildDate>
+    <lastBuildDate>Wed, 10 Jun 2026 03:01:23 GMT</lastBuildDate>
     <generator>Hexo</generator>
     <atom:link href="https://drda-x.github.io/drda-blog/rss2.xml" rel="self" type="application/rss+xml"/>
     <atom:link href="https://pubsubhubbub.appspot.com/" rel="hub"/>
     <item>
-      <title>'禁用浏览器debugger'</title>
+      <title>禁用浏览器debugger</title>
       <link>https://drda-x.github.io/drda-blog/2026/06/10/%E7%A6%81%E7%94%A8%E6%B5%8F%E8%A7%88%E5%99%A8debugger/</link>
       <author>Drda</author>
+      <category domain="https://drda-x.github.io/drda-blog/categories/%E5%89%8D%E7%AB%AF/">前端</category>
+      <category domain="https://drda-x.github.io/drda-blog/tags/js-%E6%B5%8F%E8%A7%88%E5%99%A8/">-js -浏览器</category>
       <pubDate>Wed, 10 Jun 2026 02:36:41 GMT</pubDate>
     </item>
     <item>
