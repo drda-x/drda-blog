@@ -9,7 +9,7 @@
   
   <script>window.REIMU_CONFIG = {};window.REIMU_CONFIG.clipboard_tips = {"success":{"zh-CN":"复制成功 (*^▽^*)"},"fail":{"zh-CN":"复制失败 (ﾟ⊿ﾟ)ﾂ"},"copyright":{"enable":false,"count":50,"license_type":"by-nc-sa"}};window.REIMU_CONFIG.clipboard_tips.copyright.content = '本博客所有文章除特别声明外，均采用 BY-NC-SA 许可协议。转载请注明出处！';window.REIMU_CONFIG.code_block = {"expand":true};window.REIMU_CONFIG.base = 'https://drda-x.github.io/drda-blog';window.REIMU_CONFIG.relative = '/drda-blog/';</script>
   <title>
-    vue中el-table组件双击单元格修改 | 加辣の秘密基地
+    Hexo 初体验 | 加辣の秘密基地
   </title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic|Noto Serif SC:400,400italic,700,700italic&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic|Noto Serif SC:400,400italic,700,700italic&display=swap" media="print" onload="this.media='all'">
@@ -23,18 +23,18 @@
     
 <link rel="stylesheet" href="/drda-blog/css/loader.css">
 
-    <meta name="description" content="在使用 Element UI 的 el-table 时，我们经常会遇到这样的需求：在表格中直接双击某个单元格就能进入编辑状态，输入完成后按回车或失去焦点自动保存。这个功能在后台管理系统中非常实用，省去了跳转到编辑页面的繁琐操作。本文就来详细记录一下这个交互的实现方式。  核心思路 实现这个效果主要分为三步：  给 el-table 绑定 cell-dblclick 事件，监听单元格双击 双击时记录">
+    <meta name="description" content="一直想搭建一个属于自己的个人博客，记录学习和生活。试过多种方案后，最终选择了 Hexo + GitHub Pages，原因是：免费、静态、速度快、主题丰富。下面把完整的搭建过程记录下来，希望能帮到有同样需求的朋友。  前置准备 在开始之前，确保你的环境已经准备好：  Node.js 和 npm（建议使用 nvm 管理版本） Git 和 GitHub 账号 VS Code 或任意代码编辑器   第一">
 <meta property="og:type" content="article">
-<meta property="og:title" content="vue中el-table组件双击单元格修改">
-<meta property="og:url" content="https://drda-x.github.io/drda-blog/2026/06/09/post_2/index.html">
+<meta property="og:title" content="Hexo 初体验">
+<meta property="og:url" content="https://drda-x.github.io/drda-blog/2024/07/18/post_1/index.html">
 <meta property="og:site_name" content="加辣の秘密基地">
-<meta property="og:description" content="在使用 Element UI 的 el-table 时，我们经常会遇到这样的需求：在表格中直接双击某个单元格就能进入编辑状态，输入完成后按回车或失去焦点自动保存。这个功能在后台管理系统中非常实用，省去了跳转到编辑页面的繁琐操作。本文就来详细记录一下这个交互的实现方式。  核心思路 实现这个效果主要分为三步：  给 el-table 绑定 cell-dblclick 事件，监听单元格双击 双击时记录">
+<meta property="og:description" content="一直想搭建一个属于自己的个人博客，记录学习和生活。试过多种方案后，最终选择了 Hexo + GitHub Pages，原因是：免费、静态、速度快、主题丰富。下面把完整的搭建过程记录下来，希望能帮到有同样需求的朋友。  前置准备 在开始之前，确保你的环境已经准备好：  Node.js 和 npm（建议使用 nvm 管理版本） Git 和 GitHub 账号 VS Code 或任意代码编辑器   第一">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2026-06-08T16:00:00.000Z">
-<meta property="article:modified_time" content="2026-06-10T08:04:49.649Z">
+<meta property="article:published_time" content="2024-07-18T09:16:08.000Z">
+<meta property="article:modified_time" content="2026-06-10T09:48:45.070Z">
 <meta property="article:author" content="Drda">
-<meta property="article:tag" content="Vue">
-<meta property="article:tag" content="Element">
+<meta property="article:tag" content="hexo">
+<meta property="article:tag" content="github">
 <meta name="twitter:card" content="summary">
     <link rel="alternate" href="/drda-blog/atom.xml" title="加辣の秘密基地" type="application/atom+xml"><link rel="alternate" href="/drda-blog/rss2.xml" title="加辣の秘密基地" type="application/rss+xml">
     <link rel="shortcut icon" href="/drda-blog/images/favicon.ico">
@@ -135,11 +135,11 @@
 </div>
 <header id="header" aria-label="Site header">
     <picture></picture>
-    <img  fetchpriority="high" src="https://p7.qhimg.com/bdm/0_0_100/t0194a1161f2ce1524e.jpg" alt="vue中el-table组件双击单元格修改">
+    <img  fetchpriority="high" src="https://img.8845.top/img2/%E3%80%8A%E4%BA%B2%E7%88%B1%E7%9A%84%E5%BC%97%E5%85%B0%E5%85%8B%E6%96%AF%E3%80%8B024k.jpg" alt="Hexo 初体验">
   <div id="header-outer">
     <div id="header-title">
           <span id="logo">
-            <h1 data-aos="slide-up">vue中el-table组件双击单元格修改</h1>
+            <h1 data-aos="slide-up">Hexo 初体验</h1>
           </span>
         <h2 id="subtitle-wrap" data-aos="slide-down">
         </h2>
@@ -170,7 +170,7 @@
     <div class="sidebar-wrap" data-aos="fade-up">
           <div class="sidebar-toc-sidebar"><h3 class="toc-title">文章目录</h3>
 <div class="sidebar-toc-wrapper toc-div-class" >
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E6%80%9D%E8%B7%AF"><span class="toc-number">1.</span> <span class="toc-text"> 核心思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E8%A1%A8%E6%A0%BC%E7%BB%93%E6%9E%84"><span class="toc-number">2.</span> <span class="toc-text"> 基础表格结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E5%8F%8C%E5%87%BB%E7%BC%96%E8%BE%91"><span class="toc-number">3.</span> <span class="toc-text"> 实现双击编辑</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86%E9%80%BB%E8%BE%91"><span class="toc-number">4.</span> <span class="toc-text"> 事件处理逻辑</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B3%E9%94%AE%E8%A6%81%E7%82%B9"><span class="toc-number">5.</span> <span class="toc-text"> 关键要点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E4%B8%BA%E4%BB%80%E4%B9%88%E7%94%A8-cell-dblclick-%E8%80%8C%E4%B8%8D%E6%98%AF-row-dblclick"><span class="toc-number">5.1.</span> <span class="toc-text"> 1. 为什么用 cell-dblclick 而不是 row-dblclick？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E8%BE%93%E5%85%A5%E6%A1%86%E8%87%AA%E5%8A%A8%E8%81%9A%E7%84%A6"><span class="toc-number">5.2.</span> <span class="toc-text"> 2. 输入框自动聚焦</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%A6%82%E4%BD%95%E9%81%BF%E5%85%8D%E4%BF%9D%E5%AD%98%E9%94%99%E4%B9%B1"><span class="toc-number">5.3.</span> <span class="toc-text"> 3. 如何避免保存错乱</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C"><span class="toc-number">5.4.</span> <span class="toc-text"> 4. 数据校验</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%88%E6%9E%9C%E9%A2%84%E8%A7%88"><span class="toc-number">6.</span> <span class="toc-text"> 效果预览</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%99%E5%9C%A8%E6%9C%80%E5%90%8E"><span class="toc-number">7.</span> <span class="toc-text"> 写在最后</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E7%BD%AE%E5%87%86%E5%A4%87"><span class="toc-number">1.</span> <span class="toc-text"> 前置准备</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5%E5%AE%89%E8%A3%85-hexo-cli"><span class="toc-number">2.</span> <span class="toc-text"> 第一步：安装 Hexo CLI</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5%E5%88%9D%E5%A7%8B%E5%8C%96%E9%A1%B9%E7%9B%AE"><span class="toc-number">3.</span> <span class="toc-text"> 第二步：初始化项目</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E6%AD%A5%E6%9C%AC%E5%9C%B0%E9%A2%84%E8%A7%88"><span class="toc-number">4.</span> <span class="toc-text"> 第三步：本地预览</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E5%9B%9B%E6%AD%A5%E5%88%9B%E5%BB%BA-github-%E4%BB%93%E5%BA%93"><span class="toc-number">5.</span> <span class="toc-text"> 第四步：创建 GitHub 仓库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%BA%94%E6%AD%A5%E9%85%8D%E7%BD%AE%E9%83%A8%E7%BD%B2"><span class="toc-number">6.</span> <span class="toc-text"> 第五步：配置部署</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E5%85%AD%E6%AD%A5%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2%E6%8F%92%E4%BB%B6"><span class="toc-number">7.</span> <span class="toc-text"> 第六步：安装部署插件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%83%E6%AD%A5%E7%94%9F%E6%88%90%E5%B9%B6%E6%8E%A8%E9%80%81"><span class="toc-number">8.</span> <span class="toc-text"> 第七步：生成并推送</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93"><span class="toc-number">9.</span> <span class="toc-text"> 常用命令总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98"><span class="toc-number">10.</span> <span class="toc-text"> 常见问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%99%E5%9C%A8%E6%9C%80%E5%90%8E"><span class="toc-number">11.</span> <span class="toc-text"> 写在最后</span></a></li></ol>
 </div>
 </div>
           <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
@@ -181,7 +181,7 @@
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>文章</div>
-    <div class="sidebar-state-number">4</div>
+    <div class="sidebar-state-number">5</div>
   </div>
   <div class="sidebar-state-category">
     <div>分类</div>
@@ -242,12 +242,12 @@
   </div>
 </aside>
 
-          <section id="main" aria-label="Main content"><article id="post-post_2" class="h-entry article" itemscope itemtype="https://schema.org/BlogPosting">
+          <section id="main" aria-label="Main content"><article id="post-post_1" class="h-entry article" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-inner" data-aos="fade-up">
     <div class="article-meta">
       <div class="article-date">
   <span class="article-date-link icon-calendar" data-aos="zoom-in">
-    <time datetime="2026-06-08T16:00:00.000Z" itemprop="datePublished">2026-06-09</time>
+    <time datetime="2024-07-18T09:16:08.000Z" itemprop="datePublished">2024-07-18</time>
     <time style="display: none;" id="post-update-time">2026-06-10</time>
   </span>
 </div>
@@ -257,61 +257,113 @@
     <div class="hr-line"></div>
     
     <div class="e-content article-entry" itemprop="articleBody">
-        <p>在使用 Element UI 的 <code>el-table</code> 时，我们经常会遇到这样的需求：<strong>在表格中直接双击某个单元格就能进入编辑状态，输入完成后按回车或失去焦点自动保存</strong>。这个功能在后台管理系统中非常实用，省去了跳转到编辑页面的繁琐操作。本文就来详细记录一下这个交互的实现方式。</p>
-<h2 id="核心思路"><a class="markdownIt-Anchor" href="#核心思路"></a> 核心思路</h2>
-<p>实现这个效果主要分为三步：</p>
+        <p>一直想搭建一个属于自己的个人博客，记录学习和生活。试过多种方案后，最终选择了 <strong>Hexo + GitHub Pages</strong>，原因是：免费、静态、速度快、主题丰富。下面把完整的搭建过程记录下来，希望能帮到有同样需求的朋友。</p>
+<h2 id="前置准备"><a class="markdownIt-Anchor" href="#前置准备"></a> 前置准备</h2>
+<p>在开始之前，确保你的环境已经准备好：</p>
 <ol>
-<li>给 <code>el-table</code> 绑定 <code>cell-dblclick</code> 事件，监听单元格双击</li>
-<li>双击时记录当前行和列信息，显示输入框（<code>el-input</code>）</li>
-<li>输入完成后，触发保存逻辑并更新数据</li>
+<li><strong>Node.js 和 npm</strong>（建议使用 nvm 管理版本）</li>
+<li><strong>Git</strong> 和 <strong>GitHub 账号</strong></li>
+<li><strong>VS Code</strong> 或任意代码编辑器</li>
 </ol>
-<h2 id="基础表格结构"><a class="markdownIt-Anchor" href="#基础表格结构"></a> 基础表格结构</h2>
-<p>先准备一个基础的 <code>el-table</code>：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;el-table</span><br><span class="line">    :data=&quot;tableData&quot;</span><br><span class="line">    border</span><br><span class="line">    @cell-dblclick=&quot;handleCellDblClick&quot;</span><br><span class="line">  &gt;</span><br><span class="line">    &lt;el-table-column prop=&quot;name&quot; label=&quot;姓名&quot; /&gt;</span><br><span class="line">    &lt;el-table-column prop=&quot;age&quot; label=&quot;年龄&quot; /&gt;</span><br><span class="line">    &lt;el-table-column prop=&quot;address&quot; label=&quot;地址&quot; /&gt;</span><br><span class="line">  &lt;/el-table&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">export default &#123;</span><br><span class="line">  data() &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">      tableData: [</span><br><span class="line">        &#123; name: &#x27;张三&#x27;, age: 24, address: &#x27;上海市&#x27; &#125;,</span><br><span class="line">        &#123; name: &#x27;李四&#x27;, age: 28, address: &#x27;北京市&#x27; &#125;,</span><br><span class="line">        &#123; name: &#x27;王五&#x27;, age: 32, address: &#x27;广州市&#x27; &#125;</span><br><span class="line">      ],</span><br><span class="line">      editRow: null,</span><br><span class="line">      editColumn: null,</span><br><span class="line">      editValue: &#x27;&#x27;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    handleCellDblClick(row, column, cell, event) &#123;</span><br><span class="line">      // 双击逻辑</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-<h2 id="实现双击编辑"><a class="markdownIt-Anchor" href="#实现双击编辑"></a> 实现双击编辑</h2>
-<p>关键点是利用 Vue 的 <strong>作用域插槽</strong>（<code>scoped-slot</code>）来控制单元格的渲染状态。平时显示普通文本，双击时切换成 <code>el-input</code>。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;el-table</span><br><span class="line">    :data=&quot;tableData&quot;</span><br><span class="line">    border</span><br><span class="line">    @cell-dblclick=&quot;handleCellDblClick&quot;</span><br><span class="line">  &gt;</span><br><span class="line">    &lt;el-table-column prop=&quot;name&quot; label=&quot;姓名&quot;&gt;</span><br><span class="line">      &lt;template #default=&quot;&#123; row &#125;&quot;&gt;</span><br><span class="line">        &lt;el-input</span><br><span class="line">          v-if=&quot;editRow === row &amp;&amp; editColumn === &#x27;name&#x27;&quot;</span><br><span class="line">          v-model=&quot;editValue&quot;</span><br><span class="line">          size=&quot;small&quot;</span><br><span class="line">          @blur=&quot;handleSave&quot;</span><br><span class="line">          @keyup.enter=&quot;handleSave&quot;</span><br><span class="line">          ref=&quot;inputRef&quot;</span><br><span class="line">        /&gt;</span><br><span class="line">        &lt;span v-else&gt;&#123;&#123; row.name &#125;&#125;&lt;/span&gt;</span><br><span class="line">      &lt;/template&gt;</span><br><span class="line">    &lt;/el-table-column&gt;</span><br><span class="line"></span><br><span class="line">    &lt;el-table-column prop=&quot;age&quot; label=&quot;年龄&quot;&gt;</span><br><span class="line">      &lt;template #default=&quot;&#123; row &#125;&quot;&gt;</span><br><span class="line">        &lt;el-input</span><br><span class="line">          v-if=&quot;editRow === row &amp;&amp; editColumn === &#x27;age&#x27;&quot;</span><br><span class="line">          v-model=&quot;editValue&quot;</span><br><span class="line">          size=&quot;small&quot;</span><br><span class="line">          @blur=&quot;handleSave&quot;</span><br><span class="line">          @keyup.enter=&quot;handleSave&quot;</span><br><span class="line">          ref=&quot;inputRef&quot;</span><br><span class="line">        /&gt;</span><br><span class="line">        &lt;span v-else&gt;&#123;&#123; row.age &#125;&#125;&lt;/span&gt;</span><br><span class="line">      &lt;/template&gt;</span><br><span class="line">    &lt;/el-table-column&gt;</span><br><span class="line"></span><br><span class="line">    &lt;el-table-column prop=&quot;address&quot; label=&quot;地址&quot;&gt;</span><br><span class="line">      &lt;template #default=&quot;&#123; row &#125;&quot;&gt;</span><br><span class="line">        &lt;el-input</span><br><span class="line">          v-if=&quot;editRow === row &amp;&amp; editColumn === &#x27;address&#x27;&quot;</span><br><span class="line">          v-model=&quot;editValue&quot;</span><br><span class="line">          size=&quot;small&quot;</span><br><span class="line">          @blur=&quot;handleSave&quot;</span><br><span class="line">          @keyup.enter=&quot;handleSave&quot;</span><br><span class="line">          ref=&quot;inputRef&quot;</span><br><span class="line">        /&gt;</span><br><span class="line">        &lt;span v-else&gt;&#123;&#123; row.address &#125;&#125;&lt;/span&gt;</span><br><span class="line">      &lt;/template&gt;</span><br><span class="line">    &lt;/el-table-column&gt;</span><br><span class="line">  &lt;/el-table&gt;</span><br><span class="line">&lt;/template&gt;</span><br></pre></td></tr></table></figure>
-<h2 id="事件处理逻辑"><a class="markdownIt-Anchor" href="#事件处理逻辑"></a> 事件处理逻辑</h2>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="attr">methods</span>: &#123;</span><br><span class="line">  <span class="title function_">handleCellDblClick</span>(<span class="params">row, column</span>) &#123;</span><br><span class="line">    <span class="comment">// 如果已经在编辑另一个单元格，先保存</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="variable language_">this</span>.<span class="property">editRow</span>) &#123;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="title function_">handleSave</span>()</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">editRow</span> = row</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">editColumn</span> = column.<span class="property">property</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">editValue</span> = row[column.<span class="property">property</span>]</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 自动聚焦输入框（需要等 DOM 更新）</span></span><br><span class="line">    <span class="variable language_">this</span>.$nextTick(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">$refs</span>.<span class="property">inputRef</span>?.<span class="title function_">focus</span>()</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  <span class="title function_">handleSave</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (!<span class="variable language_">this</span>.<span class="property">editRow</span> || !<span class="variable language_">this</span>.<span class="property">editColumn</span>) <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 可以在这里做数据校验</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="variable language_">this</span>.<span class="property">editColumn</span> === <span class="string">&#x27;age&#x27;</span> &amp;&amp; !<span class="regexp">/^\d+$/</span>.<span class="title function_">test</span>(<span class="variable language_">this</span>.<span class="property">editValue</span>)) &#123;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">$message</span>.<span class="title function_">warning</span>(<span class="string">&#x27;年龄必须为数字&#x27;</span>)</span><br><span class="line">      <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 更新数据</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">editRow</span>[<span class="variable language_">this</span>.<span class="property">editColumn</span>] = <span class="variable language_">this</span>.<span class="property">editValue</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 清空编辑状态</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">editRow</span> = <span class="literal">null</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">editColumn</span> = <span class="literal">null</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">editValue</span> = <span class="string">&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">$message</span>.<span class="title function_">success</span>(<span class="string">&#x27;保存成功&#x27;</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="关键要点"><a class="markdownIt-Anchor" href="#关键要点"></a> 关键要点</h2>
-<h3 id="1-为什么用-cell-dblclick-而不是-row-dblclick"><a class="markdownIt-Anchor" href="#1-为什么用-cell-dblclick-而不是-row-dblclick"></a> 1. 为什么用 <code>cell-dblclick</code> 而不是 <code>row-dblclick</code>？</h3>
-<p><code>cell-dblclick</code> 能直接拿到 <code>column</code> 参数，包含了 <code>property</code>（对应列的 <code>prop</code>），而 <code>row-dblclick</code> 只能拿到行数据，无法知道用户点了哪一列。</p>
-<h3 id="2-输入框自动聚焦"><a class="markdownIt-Anchor" href="#2-输入框自动聚焦"></a> 2. 输入框自动聚焦</h3>
-<p>用 <code>this.$nextTick()</code> 包裹 <code>focus()</code> 调用，因为 <code>v-if</code> 切换后输入框的 DOM 还未插入，要等 Vue 完成一次更新周期。</p>
-<h3 id="3-如何避免保存错乱"><a class="markdownIt-Anchor" href="#3-如何避免保存错乱"></a> 3. 如何避免保存错乱</h3>
-<p>同时只能编辑一个单元格，所以在开启新编辑前，先判断 <code>this.editRow</code> 是否存在，存在则先执行 <code>handleSave()</code>。</p>
-<h3 id="4-数据校验"><a class="markdownIt-Anchor" href="#4-数据校验"></a> 4. 数据校验</h3>
-<p><code>handleSave</code> 里可以对特定字段做校验，比如年龄必须是数字、邮箱格式等。校验不通过时阻止保存并给出提示。</p>
-<h2 id="效果预览"><a class="markdownIt-Anchor" href="#效果预览"></a> 效果预览</h2>
-<p>实际效果就是：<strong>双击任意单元格</strong> → 该单元格变成输入框并自动聚焦 → <strong>回车或点击外部</strong> → 数据更新并恢复为普通文本。</p>
+<h2 id="第一步安装-hexo-cli"><a class="markdownIt-Anchor" href="#第一步安装-hexo-cli"></a> 第一步：安装 Hexo CLI</h2>
+<p>打开终端，全局安装 Hexo 命令行工具：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
+<p>安装完成后，验证是否成功：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo -v</span><br></pre></td></tr></table></figure>
+<h2 id="第二步初始化项目"><a class="markdownIt-Anchor" href="#第二步初始化项目"></a> 第二步：初始化项目</h2>
+<p>创建一个文件夹，名字随便取，例如 <code>myHexo</code>，然后进入该目录执行初始化：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> myHexo</span><br><span class="line"><span class="built_in">cd</span> myHexo</span><br><span class="line">hexo init</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
+<p><code>hexo init</code> 会自动下载依赖并生成目录结构，看到提示 <strong>“start blogging with hexo!”</strong> 就成功了。目录结构如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">myHexo/</span><br><span class="line">├── _config.yml          # 站点配置文件</span><br><span class="line">├── package.json</span><br><span class="line">├── scaffolds/             # 文章模板</span><br><span class="line">├── source/                # 源文件（文章、页面）</span><br><span class="line">├── themes/                # 主题目录</span><br><span class="line">└── node_modules/</span><br></pre></td></tr></table></figure>
+<h2 id="第三步本地预览"><a class="markdownIt-Anchor" href="#第三步本地预览"></a> 第三步：本地预览</h2>
+<p>启动本地服务器，默认端口 4000：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo server</span><br><span class="line"><span class="comment"># 或简写</span></span><br><span class="line">hexo s</span><br></pre></td></tr></table></figure>
+<p>浏览器打开 <code>http://localhost:4000</code>，就能看到默认的 Hello World 页面了。按 <code>Ctrl + C</code> 停止服务。</p>
+<h2 id="第四步创建-github-仓库"><a class="markdownIt-Anchor" href="#第四步创建-github-仓库"></a> 第四步：创建 GitHub 仓库</h2>
+<ol>
+<li>登录 GitHub，新建一个仓库</li>
+<li>仓库名必须是 <strong><code>你的用户名.github.io</code></strong>（这是 GitHub Pages 的规则）</li>
+<li>保持仓库为空（不要勾选 README），记录仓库地址：</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">https://github.com/你的用户名/你的用户名.github.io.git</span><br></pre></td></tr></table></figure>
+<h2 id="第五步配置部署"><a class="markdownIt-Anchor" href="#第五步配置部署"></a> 第五步：配置部署</h2>
+<p>打开项目根目录的 <code>_config.yml</code>，翻到最底部，找到 <code>deploy</code> 字段并修改为：</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repo:</span> <span class="string">https://github.com/你的用户名/你的用户名.github.io.git</span></span><br><span class="line">  <span class="attr">branch:</span> <span class="string">main</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注意：<code>branch</code> 的值根据你的仓库默认分支填写，旧版 GitHub 可能是 <code>master</code>。</p>
+</blockquote>
+<p>同时把 <code>_config.yml</code> 顶部的 <code>url</code> 字段改成你的站点地址：</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">url:</span> <span class="string">https://你的用户名.github.io</span></span><br></pre></td></tr></table></figure>
+<h2 id="第六步安装部署插件"><a class="markdownIt-Anchor" href="#第六步安装部署插件"></a> 第六步：安装部署插件</h2>
+<p>Hexo 默认不自带 Git 部署功能，需要额外安装插件：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+<h2 id="第七步生成并推送"><a class="markdownIt-Anchor" href="#第七步生成并推送"></a> 第七步：生成并推送</h2>
+<p>首次部署前，建议先执行生成命令：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo generate</span><br><span class="line"><span class="comment"># 或简写</span></span><br><span class="line">hexo g</span><br></pre></td></tr></table></figure>
+<p>然后一键部署到 GitHub：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo deploy</span><br><span class="line"><span class="comment"># 或简写</span></span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure>
+<p>等待命令执行完毕，浏览器访问 <code>https://你的用户名.github.io</code>，博客就上线了！</p>
+<h2 id="常用命令总结"><a class="markdownIt-Anchor" href="#常用命令总结"></a> 常用命令总结</h2>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>hexo new &quot;文章标题&quot;</code></td>
+<td>新建文章</td>
+</tr>
+<tr>
+<td><code>hexo server</code></td>
+<td>启动本地预览</td>
+</tr>
+<tr>
+<td><code>hexo generate</code></td>
+<td>生成静态文件</td>
+</tr>
+<tr>
+<td><code>hexo deploy</code></td>
+<td>部署到远程</td>
+</tr>
+<tr>
+<td><code>hexo clean</code></td>
+<td>清理缓存和已生成文件</td>
+</tr>
+<tr>
+<td><code>hexo clean &amp;&amp; hexo generate &amp;&amp; hexo deploy</code></td>
+<td>完整发布流程</td>
+</tr>
+</tbody>
+</table>
+<h2 id="常见问题"><a class="markdownIt-Anchor" href="#常见问题"></a> 常见问题</h2>
+<ul>
+<li><strong>部署失败提示 <code>Authentication failed</code></strong>：说明你用的是 HTTPS 协议，需要输入用户名密码，或者提前配置 SSH key 免密推送。</li>
+<li><strong>页面样式丢失</strong>：检查 <code>_config.yml</code> 里的 <code>url</code> 和 <code>root</code> 是否配置正确。</li>
+<li><strong>修改后不生效</strong>：先 <code>hexo clean</code> 再重新生成。</li>
+</ul>
 <h2 id="写在最后"><a class="markdownIt-Anchor" href="#写在最后"></a> 写在最后</h2>
-<p>这种方式适合字段较少、编辑频率不高的场景。如果列数很多，可以考虑封装一个 <strong>可编辑表格组件</strong>，通过 <code>render</code> 函数动态生成插槽，避免重复写大量模板代码。如果有更多行内操作需求，也可以结合 <code>el-popover</code> 做成浮层编辑面板，体验会更好。</p>
+<p>Hexo 的社区非常活跃，主题和插件都很丰富。后续可以尝试换主题、加评论系统、接入 CDN 加速等。搭建博客只是第一步，持续输出内容才是重点。加油！</p>
 
     </div>
     <footer class="article-footer">
-        <a class="article-category-link" href="/drda-blog/categories/%E5%89%8D%E7%AB%AF/" title="前端" data-aos="zoom-in">前端</a>
+        <a class="article-category-link" href="/drda-blog/categories/%E5%8D%9A%E5%AE%A2/" title="博客" data-aos="zoom-in">博客</a>
 
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item" data-aos="zoom-in"><a class="article-tag-list-link" href="/drda-blog/tags/Element/" rel="tag" title="Element">Element</a></li><li class="article-tag-list-item" data-aos="zoom-in"><a class="article-tag-list-link" href="/drda-blog/tags/Vue/" rel="tag" title="Vue">Vue</a></li></ul>
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item" data-aos="zoom-in"><a class="article-tag-list-link" href="/drda-blog/tags/github/" rel="tag" title="github">github</a></li><li class="article-tag-list-item" data-aos="zoom-in"><a class="article-tag-list-link" href="/drda-blog/tags/hexo/" rel="tag" title="hexo">hexo</a></li></ul>
 
     </footer>
   </div>
     <nav id="article-nav" aria-label="Article navigation" data-aos="fade-up">
       <div class="article-nav-link-wrap left">
           <img data-src="https://img.8845.top/img2/7.jpg" data-sizes="auto" alt="Git 首次提交代码" class="lazyload">
-        <a href="/drda-blog/2026/06/09/post_3/" aria-label="前一篇: Git 首次提交代码" title="前一篇: Git 首次提交代码"></a>
+        <a href="/drda-blog/2024/08/02/post_3/" aria-label="前一篇: Git 首次提交代码" title="前一篇: Git 首次提交代码"></a>
         <div class="article-nav-caption">前一篇</div>
         <h3 class="article-nav-title">
             Git 首次提交代码
         </h3>
       </div>
-    <div class="article-nav-link-wrap right">
-        <img data-src="https://img.8845.top/img2/%E3%80%8A%E4%BA%B2%E7%88%B1%E7%9A%84%E5%BC%97%E5%85%B0%E5%85%8B%E6%96%AF%E3%80%8B024k.jpg" data-sizes="auto" alt="Hexo 初体验" class="lazyload">
-      <a href="/drda-blog/2026/06/08/post_1/" aria-label="后一篇: Hexo 初体验"  title="后一篇: Hexo 初体验"></a>
-      <div class="article-nav-caption">后一篇</div>
-      <h3 class="article-nav-title">
-          Hexo 初体验
-      </h3>
-    </div>
   </nav>
 
 </article>
@@ -354,10 +406,10 @@
       </div>
       <div>
         <span class="icon-brush"></span>
-        4.2k
+        5.6k
         &nbsp;|&nbsp;
         <span class="icon-coffee"></span>
-        00:20
+        00:26
       </div>
       <div>
         <span class="icon-eye"></span>
@@ -379,7 +431,7 @@
   <div class="sidebar-wrap">
         <div class="sidebar-toc-sidebar"><h3 class="toc-title">文章目录</h3>
 <div class="sidebar-toc-wrapper toc-div-class" >
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E6%80%9D%E8%B7%AF"><span class="toc-number">1.</span> <span class="toc-text"> 核心思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E8%A1%A8%E6%A0%BC%E7%BB%93%E6%9E%84"><span class="toc-number">2.</span> <span class="toc-text"> 基础表格结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E5%8F%8C%E5%87%BB%E7%BC%96%E8%BE%91"><span class="toc-number">3.</span> <span class="toc-text"> 实现双击编辑</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86%E9%80%BB%E8%BE%91"><span class="toc-number">4.</span> <span class="toc-text"> 事件处理逻辑</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B3%E9%94%AE%E8%A6%81%E7%82%B9"><span class="toc-number">5.</span> <span class="toc-text"> 关键要点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E4%B8%BA%E4%BB%80%E4%B9%88%E7%94%A8-cell-dblclick-%E8%80%8C%E4%B8%8D%E6%98%AF-row-dblclick"><span class="toc-number">5.1.</span> <span class="toc-text"> 1. 为什么用 cell-dblclick 而不是 row-dblclick？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E8%BE%93%E5%85%A5%E6%A1%86%E8%87%AA%E5%8A%A8%E8%81%9A%E7%84%A6"><span class="toc-number">5.2.</span> <span class="toc-text"> 2. 输入框自动聚焦</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%A6%82%E4%BD%95%E9%81%BF%E5%85%8D%E4%BF%9D%E5%AD%98%E9%94%99%E4%B9%B1"><span class="toc-number">5.3.</span> <span class="toc-text"> 3. 如何避免保存错乱</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C"><span class="toc-number">5.4.</span> <span class="toc-text"> 4. 数据校验</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%88%E6%9E%9C%E9%A2%84%E8%A7%88"><span class="toc-number">6.</span> <span class="toc-text"> 效果预览</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%99%E5%9C%A8%E6%9C%80%E5%90%8E"><span class="toc-number">7.</span> <span class="toc-text"> 写在最后</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E7%BD%AE%E5%87%86%E5%A4%87"><span class="toc-number">1.</span> <span class="toc-text"> 前置准备</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5%E5%AE%89%E8%A3%85-hexo-cli"><span class="toc-number">2.</span> <span class="toc-text"> 第一步：安装 Hexo CLI</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5%E5%88%9D%E5%A7%8B%E5%8C%96%E9%A1%B9%E7%9B%AE"><span class="toc-number">3.</span> <span class="toc-text"> 第二步：初始化项目</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E6%AD%A5%E6%9C%AC%E5%9C%B0%E9%A2%84%E8%A7%88"><span class="toc-number">4.</span> <span class="toc-text"> 第三步：本地预览</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E5%9B%9B%E6%AD%A5%E5%88%9B%E5%BB%BA-github-%E4%BB%93%E5%BA%93"><span class="toc-number">5.</span> <span class="toc-text"> 第四步：创建 GitHub 仓库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%BA%94%E6%AD%A5%E9%85%8D%E7%BD%AE%E9%83%A8%E7%BD%B2"><span class="toc-number">6.</span> <span class="toc-text"> 第五步：配置部署</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E5%85%AD%E6%AD%A5%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2%E6%8F%92%E4%BB%B6"><span class="toc-number">7.</span> <span class="toc-text"> 第六步：安装部署插件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%83%E6%AD%A5%E7%94%9F%E6%88%90%E5%B9%B6%E6%8E%A8%E9%80%81"><span class="toc-number">8.</span> <span class="toc-text"> 第七步：生成并推送</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93"><span class="toc-number">9.</span> <span class="toc-text"> 常用命令总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98"><span class="toc-number">10.</span> <span class="toc-text"> 常见问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%99%E5%9C%A8%E6%9C%80%E5%90%8E"><span class="toc-number">11.</span> <span class="toc-text"> 写在最后</span></a></li></ol>
 </div>
 </div>
         <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
@@ -390,7 +442,7 @@
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>文章</div>
-    <div class="sidebar-state-number">4</div>
+    <div class="sidebar-state-number">5</div>
   </div>
   <div class="sidebar-state-category">
     <div>分类</div>
@@ -555,14 +607,14 @@
       <script data-pjax>
         window.REIMU_POST = {
           author: "Drda",
-          title: "vue中el-table组件双击单元格修改",
-          url: "https://drda-x.github.io/drda-blog/2026/06/09/post_2/",
+          title: "Hexo 初体验",
+          url: "https://drda-x.github.io/drda-blog/2024/07/18/post_1/",
           excerpt: "",
           description: "",
-          stripContent: "在使用 Element UI 的 el-table 时，我们经常会遇到这样的需求：在表格中直接双击某个单元格就能进入编辑状态，输入完成后按回车或失去焦点自动保存。这个功能在后台管理系统中非常实用，省去了跳转到编辑页面的繁琐操作。本文就来详细记录一下这个交互的实现方式。  核心思路 实现这个效果主要分为三步：  给 el-table 绑定 cell-dblclick 事件，监听单元格双击 双击时记录当前行和列信息，显示输入框（el-input） 输入完成后，触发保存逻辑并更新数据   基础表格结构",
-          date: "Tue Jun 09 2026 00:00:00 GMT+0800",
-          updated: "Wed Jun 10 2026 16:04:49 GMT+0800",
-          cover: "https://p7.qhimg.com/bdm/0_0_100/t0194a1161f2ce1524e.jpg",
+          stripContent: "一直想搭建一个属于自己的个人博客，记录学习和生活。试过多种方案后，最终选择了 Hexo + GitHub Pages，原因是：免费、静态、速度快、主题丰富。下面把完整的搭建过程记录下来，希望能帮到有同样需求的朋友。  前置准备 在开始之前，确保你的环境已经准备好：  Node.js 和 npm（建议使用 nvm 管理版本） Git 和 GitHub 账号 VS Code 或任意代码编辑器   第一步：安装 Hexo CLI 打开终端，全局安装 Hexo 命令行工具： npm install -g",
+          date: "Thu Jul 18 2024 17:16:08 GMT+0800",
+          updated: "Wed Jun 10 2026 17:48:45 GMT+0800",
+          cover: "https://img.8845.top/img2/%E3%80%8A%E4%BA%B2%E7%88%B1%E7%9A%84%E5%BC%97%E5%85%B0%E5%85%8B%E6%96%AF%E3%80%8B024k.jpg",
         };
       </script>
         

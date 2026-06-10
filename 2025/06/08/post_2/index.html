@@ -9,7 +9,7 @@
   
   <script>window.REIMU_CONFIG = {};window.REIMU_CONFIG.clipboard_tips = {"success":{"zh-CN":"复制成功 (*^▽^*)"},"fail":{"zh-CN":"复制失败 (ﾟ⊿ﾟ)ﾂ"},"copyright":{"enable":false,"count":50,"license_type":"by-nc-sa"}};window.REIMU_CONFIG.clipboard_tips.copyright.content = '本博客所有文章除特别声明外，均采用 BY-NC-SA 许可协议。转载请注明出处！';window.REIMU_CONFIG.code_block = {"expand":true};window.REIMU_CONFIG.base = 'https://drda-x.github.io/drda-blog';window.REIMU_CONFIG.relative = '/drda-blog/';</script>
   <title>
-    友情链接 | 加辣の秘密基地
+    vue中el-table组件双击单元格修改 | 加辣の秘密基地
   </title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic|Noto Serif SC:400,400italic,700,700italic&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic|Noto Serif SC:400,400italic,700,700italic&display=swap" media="print" onload="this.media='all'">
@@ -23,19 +23,19 @@
     
 <link rel="stylesheet" href="/drda-blog/css/loader.css">
 
-    <meta name="description" content="本站信息  站名： 加辣の秘密基地 站长： drda 地址： https:&#x2F;&#x2F;drda-x.github.io&#x2F;drda-blog&#x2F; 备用地址：暂无   申请方法  添加本站后，在本页留言，格式如下  &#96;&#96;&#96;yml- name: #您的名字  url: #您的网址  desc: #简短描述  image: #一张图片&#96;&#96;&#96;  小伙伴们">
-<meta property="og:type" content="website">
-<meta property="og:title" content="友情链接">
-<meta property="og:url" content="https://drda-x.github.io/drda-blog/friend/index.html">
+    <meta name="description" content="在使用 Element UI 的 el-table 时，我们经常会遇到这样的需求：在表格中直接双击某个单元格就能进入编辑状态，输入完成后按回车或失去焦点自动保存。这个功能在后台管理系统中非常实用，省去了跳转到编辑页面的繁琐操作。本文就来详细记录一下这个交互的实现方式。  核心思路 实现这个效果主要分为三步：  给 el-table 绑定 cell-dblclick 事件，监听单元格双击 双击时记录">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vue中el-table组件双击单元格修改">
+<meta property="og:url" content="https://drda-x.github.io/drda-blog/2025/06/08/post_2/index.html">
 <meta property="og:site_name" content="加辣の秘密基地">
-<meta property="og:description" content="本站信息  站名： 加辣の秘密基地 站长： drda 地址： https:&#x2F;&#x2F;drda-x.github.io&#x2F;drda-blog&#x2F; 备用地址：暂无   申请方法  添加本站后，在本页留言，格式如下  &#96;&#96;&#96;yml- name: #您的名字  url: #您的网址  desc: #简短描述  image: #一张图片&#96;&#96;&#96;  小伙伴们">
+<meta property="og:description" content="在使用 Element UI 的 el-table 时，我们经常会遇到这样的需求：在表格中直接双击某个单元格就能进入编辑状态，输入完成后按回车或失去焦点自动保存。这个功能在后台管理系统中非常实用，省去了跳转到编辑页面的繁琐操作。本文就来详细记录一下这个交互的实现方式。  核心思路 实现这个效果主要分为三步：  给 el-table 绑定 cell-dblclick 事件，监听单元格双击 双击时记录">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://drda-x.github.io/images/banner.webp">
-<meta property="article:published_time" content="2026-06-10T07:06:07.435Z">
-<meta property="article:modified_time" content="2026-06-10T07:06:07.435Z">
+<meta property="article:published_time" content="2025-06-08T03:36:12.000Z">
+<meta property="article:modified_time" content="2026-06-10T09:49:50.454Z">
 <meta property="article:author" content="Drda">
+<meta property="article:tag" content="Vue">
+<meta property="article:tag" content="Element">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://drda-x.github.io/images/banner.webp">
     <link rel="alternate" href="/drda-blog/atom.xml" title="加辣の秘密基地" type="application/atom+xml"><link rel="alternate" href="/drda-blog/rss2.xml" title="加辣の秘密基地" type="application/rss+xml">
     <link rel="shortcut icon" href="/drda-blog/images/favicon.ico">
   
@@ -134,13 +134,12 @@
   </a>
 </div>
 <header id="header" aria-label="Site header">
-      <picture>
-      </picture>
-        <img  fetchpriority="high" src="/drda-blog/images/banner.webp" alt="友情链接">
+    <picture></picture>
+    <img  fetchpriority="high" src="https://p7.qhimg.com/bdm/0_0_100/t0194a1161f2ce1524e.jpg" alt="vue中el-table组件双击单元格修改">
   <div id="header-outer">
     <div id="header-title">
           <span id="logo">
-            <h1 data-aos="slide-up">友情链接</h1>
+            <h1 data-aos="slide-up">vue中el-table组件双击单元格修改</h1>
           </span>
         <h2 id="subtitle-wrap" data-aos="slide-down">
         </h2>
@@ -150,7 +149,7 @@
 
         <div id="content" aria-label="Page content" class="sidebar-left"  >
           <aside id="sidebar" aria-label="Sidebar">
-  <div class="sidebar-wrapper-container ">
+  <div class="sidebar-wrapper-container sticky">
       <meting-js
         theme="var(--color-link)"
         id="2653845699"
@@ -169,7 +168,12 @@
       ></meting-js>
   <div class="sidebar-wrapper">
     <div class="sidebar-wrap" data-aos="fade-up">
-        <div class="sidebar-author">
+          <div class="sidebar-toc-sidebar"><h3 class="toc-title">文章目录</h3>
+<div class="sidebar-toc-wrapper toc-div-class" >
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E6%80%9D%E8%B7%AF"><span class="toc-number">1.</span> <span class="toc-text"> 核心思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E8%A1%A8%E6%A0%BC%E7%BB%93%E6%9E%84"><span class="toc-number">2.</span> <span class="toc-text"> 基础表格结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E5%8F%8C%E5%87%BB%E7%BC%96%E8%BE%91"><span class="toc-number">3.</span> <span class="toc-text"> 实现双击编辑</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86%E9%80%BB%E8%BE%91"><span class="toc-number">4.</span> <span class="toc-text"> 事件处理逻辑</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B3%E9%94%AE%E8%A6%81%E7%82%B9"><span class="toc-number">5.</span> <span class="toc-text"> 关键要点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E4%B8%BA%E4%BB%80%E4%B9%88%E7%94%A8-cell-dblclick-%E8%80%8C%E4%B8%8D%E6%98%AF-row-dblclick"><span class="toc-number">5.1.</span> <span class="toc-text"> 1. 为什么用 cell-dblclick 而不是 row-dblclick？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E8%BE%93%E5%85%A5%E6%A1%86%E8%87%AA%E5%8A%A8%E8%81%9A%E7%84%A6"><span class="toc-number">5.2.</span> <span class="toc-text"> 2. 输入框自动聚焦</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%A6%82%E4%BD%95%E9%81%BF%E5%85%8D%E4%BF%9D%E5%AD%98%E9%94%99%E4%B9%B1"><span class="toc-number">5.3.</span> <span class="toc-text"> 3. 如何避免保存错乱</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C"><span class="toc-number">5.4.</span> <span class="toc-text"> 4. 数据校验</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%88%E6%9E%9C%E9%A2%84%E8%A7%88"><span class="toc-number">6.</span> <span class="toc-text"> 效果预览</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%99%E5%9C%A8%E6%9C%80%E5%90%8E"><span class="toc-number">7.</span> <span class="toc-text"> 写在最后</span></a></li></ol>
+</div>
+</div>
+          <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
   <img data-src="/drda-blog/avatar/avatar.webp" data-sizes="auto" alt="Drda" class="lazyload">
   <div class="sidebar-author-name">Drda</div>
   <div class="sidebar-description">Drda&#39;s Blog</div>
@@ -226,81 +230,24 @@
         <div class="sidebar-menu-link">友链</div>
       </div>
 </div>
-
+</div>
+          <div class="sidebar-btn-wrapper" style="position:static">
+            <div class="sidebar-toc-btn current"></div>
+            <div class="sidebar-common-btn"></div>
+          </div>
     </div>
   </div>
   <div class="sidebar-widget">
-        <div class="widget-wrapper">
-    <div class="widget-wrap" data-aos="fade-up">
-      <h3 class="widget-title">分类</h3>
-      <div class="widget">
-        <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/drda-blog/categories/%E5%89%8D%E7%AB%AF/" title="前端">前端</a></li><li class="category-list-item"><a class="category-list-link" href="/drda-blog/categories/%E5%8D%9A%E5%AE%A2/" title="博客">博客</a></li></ul>
-      </div>
-    </div>
-  </div>
-
-        <div class="widget-wrapper">
-    <div class="widget-wrap" data-aos="fade-up">
-      <h3 class="widget-title">标签</h3>
-      <div class="widget">
-        <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/drda-blog/tags/Element/" rel="tag" title="Element">Element</a></li><li class="tag-list-item"><a class="tag-list-link" href="/drda-blog/tags/Vue/" rel="tag" title="Vue">Vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/drda-blog/tags/git/" rel="tag" title="git">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/drda-blog/tags/github/" rel="tag" title="github">github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/drda-blog/tags/hexo/" rel="tag" title="hexo">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/drda-blog/tags/js/" rel="tag" title="js">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/drda-blog/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" rel="tag" title="浏览器">浏览器</a></li></ul>
-      </div>
-    </div>
-  </div>
-
-        <div class="widget-wrapper">
-    <div class="widget-wrap" data-aos="fade-up">
-      <h3 class="widget-title">标签云</h3>
-      <div class="widget tagcloud">
-        <a href="/drda-blog/tags/Element/" style="font-size: 10px;">Element</a> <a href="/drda-blog/tags/Vue/" style="font-size: 10px;">Vue</a> <a href="/drda-blog/tags/git/" style="font-size: 10px;">git</a> <a href="/drda-blog/tags/github/" style="font-size: 10px;">github</a> <a href="/drda-blog/tags/hexo/" style="font-size: 20px;">hexo</a> <a href="/drda-blog/tags/js/" style="font-size: 10px;">js</a> <a href="/drda-blog/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" style="font-size: 10px;">浏览器</a>
-      </div>
-    </div>
-  </div>
-
-        <div class="widget-wrapper">
-    <div class="widget-wrap" data-aos="fade-up">
-      <h3 class="widget-title">归档</h3>
-      <div class="widget">
-        <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/drda-blog/archives/2026/06/">六月 2026</a></li><li class="archive-list-item"><a class="archive-list-link" href="/drda-blog/archives/2025/06/">六月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/drda-blog/archives/2024/08/">八月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/drda-blog/archives/2024/07/">七月 2024</a></li></ul>
-      </div>
-    </div>
-  </div>
-
-        <div class="widget-wrapper">
-    <div class="widget-wrap" data-aos="fade-up">
-      <h3 class="widget-title">最新文章</h3>
-      <div class="widget">
-        <ul>
-            <li>
-              <a href="/drda-blog/2026/06/09/%E4%BD%BF%E7%94%A8%E4%B8%BB%E9%A2%98%E5%8C%85/" title="Hexo使用主题包">Hexo使用主题包</a>
-            </li>
-            <li>
-              <a href="/drda-blog/2026/06/07/%E7%A6%81%E7%94%A8%E6%B5%8F%E8%A7%88%E5%99%A8debugger/" title="禁用浏览器debugger">禁用浏览器debugger</a>
-            </li>
-            <li>
-              <a href="/drda-blog/2025/06/08/post_2/" title="vue中el-table组件双击单元格修改">vue中el-table组件双击单元格修改</a>
-            </li>
-            <li>
-              <a href="/drda-blog/2024/08/02/post_3/" title="Git 首次提交代码">Git 首次提交代码</a>
-            </li>
-            <li>
-              <a href="/drda-blog/2024/07/18/post_1/" title="Hexo 初体验">Hexo 初体验</a>
-            </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
   </div>
   </div>
 </aside>
 
-          <section id="main" aria-label="Main content"><article id="page-" class="h-entry article" itemscope itemtype="https://schema.org/BlogPosting">
+          <section id="main" aria-label="Main content"><article id="post-post_2" class="h-entry article" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-inner" data-aos="fade-up">
     <div class="article-meta">
       <div class="article-date">
   <span class="article-date-link icon-calendar" data-aos="zoom-in">
-    <time datetime="2026-06-10T07:06:07.435Z" itemprop="datePublished">2026-06-10</time>
+    <time datetime="2025-06-08T03:36:12.000Z" itemprop="datePublished">2025-06-08</time>
     <time style="display: none;" id="post-update-time">2026-06-10</time>
   </span>
 </div>
@@ -310,54 +257,63 @@
     <div class="hr-line"></div>
     
     <div class="e-content article-entry" itemprop="articleBody">
-        <h2 id="本站信息"><a class="markdownIt-Anchor" href="#本站信息"></a> 本站信息</h2>
-<ul>
-<li>站名： 加辣の秘密基地</li>
-<li>站长： drda</li>
-<li>地址： <a href="https://drda-x.github.io/drda-blog/">https://drda-x.github.io/drda-blog/</a></li>
-<li>备用地址：暂无</li>
-</ul>
-<h2 id="申请方法"><a class="markdownIt-Anchor" href="#申请方法"></a> 申请方法</h2>
-<ul>
-<li>添加本站后，在本页留言，格式如下</li>
-</ul>
-<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="string">```yml</span></span><br><span class="line"><span class="bullet">-</span> <span class="attr">name:</span> <span class="comment">#您的名字</span></span><br><span class="line">  <span class="attr">url:</span> <span class="comment">#您的网址</span></span><br><span class="line">  <span class="attr">desc:</span> <span class="comment">#简短描述</span></span><br><span class="line">  <span class="attr">image:</span> <span class="comment">#一张图片</span></span><br><span class="line"><span class="string">```</span></span><br></pre></td></tr></table></figure>
-<h2 id="小伙伴们"><a class="markdownIt-Anchor" href="#小伙伴们"></a> 小伙伴们</h2>
-<div class="friend-wrap" data-aos="zoom-in"><div class="friend-item-wrap">
-    <a href="https://drda-x.github.io/drda-blog/" rel="noopener nofollow noreferrer" target="_blank"></a>
-    <div class="friend-icon-wrap">
-      <img class="no-lightbox" src="https://drda-x.github.io/drda-blog/avatar/avatar.webp" alt="零糖加辣（drda）">
-    </div>
-    <div class="friend-info-wrap">
-      <div class="friend-name">
-          零糖加辣（drda） 
-      </div>
-      <div class="friend-desc">
-        大家好，希望你们的奶茶少放一点糖，还是一个无辣不欢的人
-      </div>
-    </div>
-  </div><div class="friend-item-wrap">
-    <a href="https://fishpi.cn/member/drda" rel="noopener nofollow noreferrer" target="_blank"></a>
-    <div class="friend-icon-wrap">
-      <img class="no-lightbox" src="https://file.fishpi.cn/2025/04/9efb7eec434478a22decde86c65e6460-db4267b2.gif" alt="奶茶加辣（drda）">
-    </div>
-    <div class="friend-info-wrap">
-      <div class="friend-name">
-          奶茶加辣（drda） 
-      </div>
-      <div class="friend-desc">
-        这是我在一个摸鱼网站上的个人页面
-      </div>
-    </div>
-  </div></div>
+        <p>在使用 Element UI 的 <code>el-table</code> 时，我们经常会遇到这样的需求：<strong>在表格中直接双击某个单元格就能进入编辑状态，输入完成后按回车或失去焦点自动保存</strong>。这个功能在后台管理系统中非常实用，省去了跳转到编辑页面的繁琐操作。本文就来详细记录一下这个交互的实现方式。</p>
+<h2 id="核心思路"><a class="markdownIt-Anchor" href="#核心思路"></a> 核心思路</h2>
+<p>实现这个效果主要分为三步：</p>
+<ol>
+<li>给 <code>el-table</code> 绑定 <code>cell-dblclick</code> 事件，监听单元格双击</li>
+<li>双击时记录当前行和列信息，显示输入框（<code>el-input</code>）</li>
+<li>输入完成后，触发保存逻辑并更新数据</li>
+</ol>
+<h2 id="基础表格结构"><a class="markdownIt-Anchor" href="#基础表格结构"></a> 基础表格结构</h2>
+<p>先准备一个基础的 <code>el-table</code>：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;el-table</span><br><span class="line">    :data=&quot;tableData&quot;</span><br><span class="line">    border</span><br><span class="line">    @cell-dblclick=&quot;handleCellDblClick&quot;</span><br><span class="line">  &gt;</span><br><span class="line">    &lt;el-table-column prop=&quot;name&quot; label=&quot;姓名&quot; /&gt;</span><br><span class="line">    &lt;el-table-column prop=&quot;age&quot; label=&quot;年龄&quot; /&gt;</span><br><span class="line">    &lt;el-table-column prop=&quot;address&quot; label=&quot;地址&quot; /&gt;</span><br><span class="line">  &lt;/el-table&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">export default &#123;</span><br><span class="line">  data() &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">      tableData: [</span><br><span class="line">        &#123; name: &#x27;张三&#x27;, age: 24, address: &#x27;上海市&#x27; &#125;,</span><br><span class="line">        &#123; name: &#x27;李四&#x27;, age: 28, address: &#x27;北京市&#x27; &#125;,</span><br><span class="line">        &#123; name: &#x27;王五&#x27;, age: 32, address: &#x27;广州市&#x27; &#125;</span><br><span class="line">      ],</span><br><span class="line">      editRow: null,</span><br><span class="line">      editColumn: null,</span><br><span class="line">      editValue: &#x27;&#x27;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    handleCellDblClick(row, column, cell, event) &#123;</span><br><span class="line">      // 双击逻辑</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="实现双击编辑"><a class="markdownIt-Anchor" href="#实现双击编辑"></a> 实现双击编辑</h2>
+<p>关键点是利用 Vue 的 <strong>作用域插槽</strong>（<code>scoped-slot</code>）来控制单元格的渲染状态。平时显示普通文本，双击时切换成 <code>el-input</code>。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;el-table</span><br><span class="line">    :data=&quot;tableData&quot;</span><br><span class="line">    border</span><br><span class="line">    @cell-dblclick=&quot;handleCellDblClick&quot;</span><br><span class="line">  &gt;</span><br><span class="line">    &lt;el-table-column prop=&quot;name&quot; label=&quot;姓名&quot;&gt;</span><br><span class="line">      &lt;template #default=&quot;&#123; row &#125;&quot;&gt;</span><br><span class="line">        &lt;el-input</span><br><span class="line">          v-if=&quot;editRow === row &amp;&amp; editColumn === &#x27;name&#x27;&quot;</span><br><span class="line">          v-model=&quot;editValue&quot;</span><br><span class="line">          size=&quot;small&quot;</span><br><span class="line">          @blur=&quot;handleSave&quot;</span><br><span class="line">          @keyup.enter=&quot;handleSave&quot;</span><br><span class="line">          ref=&quot;inputRef&quot;</span><br><span class="line">        /&gt;</span><br><span class="line">        &lt;span v-else&gt;&#123;&#123; row.name &#125;&#125;&lt;/span&gt;</span><br><span class="line">      &lt;/template&gt;</span><br><span class="line">    &lt;/el-table-column&gt;</span><br><span class="line"></span><br><span class="line">    &lt;el-table-column prop=&quot;age&quot; label=&quot;年龄&quot;&gt;</span><br><span class="line">      &lt;template #default=&quot;&#123; row &#125;&quot;&gt;</span><br><span class="line">        &lt;el-input</span><br><span class="line">          v-if=&quot;editRow === row &amp;&amp; editColumn === &#x27;age&#x27;&quot;</span><br><span class="line">          v-model=&quot;editValue&quot;</span><br><span class="line">          size=&quot;small&quot;</span><br><span class="line">          @blur=&quot;handleSave&quot;</span><br><span class="line">          @keyup.enter=&quot;handleSave&quot;</span><br><span class="line">          ref=&quot;inputRef&quot;</span><br><span class="line">        /&gt;</span><br><span class="line">        &lt;span v-else&gt;&#123;&#123; row.age &#125;&#125;&lt;/span&gt;</span><br><span class="line">      &lt;/template&gt;</span><br><span class="line">    &lt;/el-table-column&gt;</span><br><span class="line"></span><br><span class="line">    &lt;el-table-column prop=&quot;address&quot; label=&quot;地址&quot;&gt;</span><br><span class="line">      &lt;template #default=&quot;&#123; row &#125;&quot;&gt;</span><br><span class="line">        &lt;el-input</span><br><span class="line">          v-if=&quot;editRow === row &amp;&amp; editColumn === &#x27;address&#x27;&quot;</span><br><span class="line">          v-model=&quot;editValue&quot;</span><br><span class="line">          size=&quot;small&quot;</span><br><span class="line">          @blur=&quot;handleSave&quot;</span><br><span class="line">          @keyup.enter=&quot;handleSave&quot;</span><br><span class="line">          ref=&quot;inputRef&quot;</span><br><span class="line">        /&gt;</span><br><span class="line">        &lt;span v-else&gt;&#123;&#123; row.address &#125;&#125;&lt;/span&gt;</span><br><span class="line">      &lt;/template&gt;</span><br><span class="line">    &lt;/el-table-column&gt;</span><br><span class="line">  &lt;/el-table&gt;</span><br><span class="line">&lt;/template&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="事件处理逻辑"><a class="markdownIt-Anchor" href="#事件处理逻辑"></a> 事件处理逻辑</h2>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="attr">methods</span>: &#123;</span><br><span class="line">  <span class="title function_">handleCellDblClick</span>(<span class="params">row, column</span>) &#123;</span><br><span class="line">    <span class="comment">// 如果已经在编辑另一个单元格，先保存</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="variable language_">this</span>.<span class="property">editRow</span>) &#123;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="title function_">handleSave</span>()</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">editRow</span> = row</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">editColumn</span> = column.<span class="property">property</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">editValue</span> = row[column.<span class="property">property</span>]</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 自动聚焦输入框（需要等 DOM 更新）</span></span><br><span class="line">    <span class="variable language_">this</span>.$nextTick(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">$refs</span>.<span class="property">inputRef</span>?.<span class="title function_">focus</span>()</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  <span class="title function_">handleSave</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (!<span class="variable language_">this</span>.<span class="property">editRow</span> || !<span class="variable language_">this</span>.<span class="property">editColumn</span>) <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 可以在这里做数据校验</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="variable language_">this</span>.<span class="property">editColumn</span> === <span class="string">&#x27;age&#x27;</span> &amp;&amp; !<span class="regexp">/^\d+$/</span>.<span class="title function_">test</span>(<span class="variable language_">this</span>.<span class="property">editValue</span>)) &#123;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">$message</span>.<span class="title function_">warning</span>(<span class="string">&#x27;年龄必须为数字&#x27;</span>)</span><br><span class="line">      <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 更新数据</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">editRow</span>[<span class="variable language_">this</span>.<span class="property">editColumn</span>] = <span class="variable language_">this</span>.<span class="property">editValue</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 清空编辑状态</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">editRow</span> = <span class="literal">null</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">editColumn</span> = <span class="literal">null</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">editValue</span> = <span class="string">&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">$message</span>.<span class="title function_">success</span>(<span class="string">&#x27;保存成功&#x27;</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="关键要点"><a class="markdownIt-Anchor" href="#关键要点"></a> 关键要点</h2>
+<h3 id="1-为什么用-cell-dblclick-而不是-row-dblclick"><a class="markdownIt-Anchor" href="#1-为什么用-cell-dblclick-而不是-row-dblclick"></a> 1. 为什么用 <code>cell-dblclick</code> 而不是 <code>row-dblclick</code>？</h3>
+<p><code>cell-dblclick</code> 能直接拿到 <code>column</code> 参数，包含了 <code>property</code>（对应列的 <code>prop</code>），而 <code>row-dblclick</code> 只能拿到行数据，无法知道用户点了哪一列。</p>
+<h3 id="2-输入框自动聚焦"><a class="markdownIt-Anchor" href="#2-输入框自动聚焦"></a> 2. 输入框自动聚焦</h3>
+<p>用 <code>this.$nextTick()</code> 包裹 <code>focus()</code> 调用，因为 <code>v-if</code> 切换后输入框的 DOM 还未插入，要等 Vue 完成一次更新周期。</p>
+<h3 id="3-如何避免保存错乱"><a class="markdownIt-Anchor" href="#3-如何避免保存错乱"></a> 3. 如何避免保存错乱</h3>
+<p>同时只能编辑一个单元格，所以在开启新编辑前，先判断 <code>this.editRow</code> 是否存在，存在则先执行 <code>handleSave()</code>。</p>
+<h3 id="4-数据校验"><a class="markdownIt-Anchor" href="#4-数据校验"></a> 4. 数据校验</h3>
+<p><code>handleSave</code> 里可以对特定字段做校验，比如年龄必须是数字、邮箱格式等。校验不通过时阻止保存并给出提示。</p>
+<h2 id="效果预览"><a class="markdownIt-Anchor" href="#效果预览"></a> 效果预览</h2>
+<p>实际效果就是：<strong>双击任意单元格</strong> → 该单元格变成输入框并自动聚焦 → <strong>回车或点击外部</strong> → 数据更新并恢复为普通文本。</p>
+<h2 id="写在最后"><a class="markdownIt-Anchor" href="#写在最后"></a> 写在最后</h2>
+<p>这种方式适合字段较少、编辑频率不高的场景。如果列数很多，可以考虑封装一个 <strong>可编辑表格组件</strong>，通过 <code>render</code> 函数动态生成插槽，避免重复写大量模板代码。如果有更多行内操作需求，也可以结合 <code>el-popover</code> 做成浮层编辑面板，体验会更好。</p>
 
     </div>
     <footer class="article-footer">
-      
-      
+        <a class="article-category-link" href="/drda-blog/categories/%E5%89%8D%E7%AB%AF/" title="前端" data-aos="zoom-in">前端</a>
+
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item" data-aos="zoom-in"><a class="article-tag-list-link" href="/drda-blog/tags/Element/" rel="tag" title="Element">Element</a></li><li class="article-tag-list-item" data-aos="zoom-in"><a class="article-tag-list-link" href="/drda-blog/tags/Vue/" rel="tag" title="Vue">Vue</a></li></ul>
+
     </footer>
   </div>
-  
+    <nav id="article-nav" aria-label="Article navigation" data-aos="fade-up">
+      <div class="article-nav-link-wrap left">
+          <img data-src="https://img.8845.top/img2/%E5%A4%A7%E9%9B%86%E7%BB%934K.jpg" data-sizes="auto" alt="禁用浏览器debugger" class="lazyload">
+        <a href="/drda-blog/2026/06/07/%E7%A6%81%E7%94%A8%E6%B5%8F%E8%A7%88%E5%99%A8debugger/" aria-label="前一篇: 禁用浏览器debugger" title="前一篇: 禁用浏览器debugger"></a>
+        <div class="article-nav-caption">前一篇</div>
+        <h3 class="article-nav-title">
+            禁用浏览器debugger
+        </h3>
+      </div>
+    <div class="article-nav-link-wrap right">
+        <img data-src="https://img.8845.top/img2/7.jpg" data-sizes="auto" alt="Git 首次提交代码" class="lazyload">
+      <a href="/drda-blog/2024/08/02/post_3/" aria-label="后一篇: Git 首次提交代码"  title="后一篇: Git 首次提交代码"></a>
+      <div class="article-nav-caption">后一篇</div>
+      <h3 class="article-nav-title">
+          Git 首次提交代码
+      </h3>
+    </div>
+  </nav>
+
 </article>
 
   <section id="comments" data-aos="fade-up">
@@ -421,7 +377,12 @@
       </div>
       <nav id="mobile-nav" aria-label="Mobile navigation">
   <div class="sidebar-wrap">
-      <div class="sidebar-author">
+        <div class="sidebar-toc-sidebar"><h3 class="toc-title">文章目录</h3>
+<div class="sidebar-toc-wrapper toc-div-class" >
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E6%80%9D%E8%B7%AF"><span class="toc-number">1.</span> <span class="toc-text"> 核心思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E8%A1%A8%E6%A0%BC%E7%BB%93%E6%9E%84"><span class="toc-number">2.</span> <span class="toc-text"> 基础表格结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E5%8F%8C%E5%87%BB%E7%BC%96%E8%BE%91"><span class="toc-number">3.</span> <span class="toc-text"> 实现双击编辑</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86%E9%80%BB%E8%BE%91"><span class="toc-number">4.</span> <span class="toc-text"> 事件处理逻辑</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B3%E9%94%AE%E8%A6%81%E7%82%B9"><span class="toc-number">5.</span> <span class="toc-text"> 关键要点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E4%B8%BA%E4%BB%80%E4%B9%88%E7%94%A8-cell-dblclick-%E8%80%8C%E4%B8%8D%E6%98%AF-row-dblclick"><span class="toc-number">5.1.</span> <span class="toc-text"> 1. 为什么用 cell-dblclick 而不是 row-dblclick？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E8%BE%93%E5%85%A5%E6%A1%86%E8%87%AA%E5%8A%A8%E8%81%9A%E7%84%A6"><span class="toc-number">5.2.</span> <span class="toc-text"> 2. 输入框自动聚焦</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%A6%82%E4%BD%95%E9%81%BF%E5%85%8D%E4%BF%9D%E5%AD%98%E9%94%99%E4%B9%B1"><span class="toc-number">5.3.</span> <span class="toc-text"> 3. 如何避免保存错乱</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C"><span class="toc-number">5.4.</span> <span class="toc-text"> 4. 数据校验</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%88%E6%9E%9C%E9%A2%84%E8%A7%88"><span class="toc-number">6.</span> <span class="toc-text"> 效果预览</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%99%E5%9C%A8%E6%9C%80%E5%90%8E"><span class="toc-number">7.</span> <span class="toc-text"> 写在最后</span></a></li></ol>
+</div>
+</div>
+        <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
   <img data-src="/drda-blog/avatar/avatar.webp" data-sizes="auto" alt="Drda" class="lazyload">
   <div class="sidebar-author-name">Drda</div>
   <div class="sidebar-description">Drda&#39;s Blog</div>
@@ -478,8 +439,12 @@
         <div class="sidebar-menu-link">友链</div>
       </div>
 </div>
-
+</div>
   </div>
+      <div class="sidebar-btn-wrapper">
+        <div class="sidebar-toc-btn current"></div>
+        <div class="sidebar-common-btn"></div>
+      </div>
 </nav>
 
     </div>
@@ -590,14 +555,14 @@
       <script data-pjax>
         window.REIMU_POST = {
           author: "Drda",
-          title: "友情链接",
-          url: "https://drda-x.github.io/drda-blog/friend/index.html",
+          title: "vue中el-table组件双击单元格修改",
+          url: "https://drda-x.github.io/drda-blog/2025/06/08/post_2/",
           excerpt: "",
           description: "",
-          stripContent: " 本站信息  站名： 加辣の秘密基地 站长： drda 地址： https://drda-x.github.io/drda-blog/ 备用地址：暂无   申请方法  添加本站后，在本页留言，格式如下  ```yml- name: #您的名字  url: #您的网址  desc: #简短描述  image: #一张图片```  小伙伴们                                              零糖加辣（drda）                        大",
-          date: "Wed Jun 10 2026 15:06:07 GMT+0800",
-          updated: "Wed Jun 10 2026 15:06:07 GMT+0800",
-          cover: "/drda-blog/images/banner.webp",
+          stripContent: "在使用 Element UI 的 el-table 时，我们经常会遇到这样的需求：在表格中直接双击某个单元格就能进入编辑状态，输入完成后按回车或失去焦点自动保存。这个功能在后台管理系统中非常实用，省去了跳转到编辑页面的繁琐操作。本文就来详细记录一下这个交互的实现方式。  核心思路 实现这个效果主要分为三步：  给 el-table 绑定 cell-dblclick 事件，监听单元格双击 双击时记录当前行和列信息，显示输入框（el-input） 输入完成后，触发保存逻辑并更新数据   基础表格结构",
+          date: "Sun Jun 08 2025 11:36:12 GMT+0800",
+          updated: "Wed Jun 10 2026 17:49:50 GMT+0800",
+          cover: "https://p7.qhimg.com/bdm/0_0_100/t0194a1161f2ce1524e.jpg",
         };
       </script>
         
