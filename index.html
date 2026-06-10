@@ -277,63 +277,8 @@
 
           <section id="main" aria-label="Main content">      <div class="post-wrapper">
   <div class="post-wrap left" data-aos="fade-up">
-      <a class="post-link" href="/drda-blog/2026/06/09/post_3/" aria-label="Git 首次提交代码" title="Git 首次提交代码"></a>
-    <div class="post-cover left">
-        <img data-src="https://img.8845.top/img2/7.jpg" data-sizes="auto" alt="Git 首次提交代码" class="lazyload">
-    </div>
-    <div class="post-info">
-      <div class="post-meta">
-        <span><span class="icon-calendar"></span>2026-06-09</span>
-        <span><span class="icon-pencil"></span>502 字</span>
-        <span><span class="icon-clock"></span>2 分钟</span>
-      </div>
-      <h2 class="post-title">Git 首次提交代码</h2>
-      <article class="post-article">
-          记录一下本地项目第一次提交到 Git 仓库的完整流程。
- 1. 初始化仓库
-进入项目根目录，执行：
-git init
-该命令会在当前目录生成一个 .git 隐藏目录，Git 会从这里开始追踪所有文件的变更。
- 2. 配置用户信息
-首次使用 Git 必须要配置用户名和邮箱，否则提交会失败：
-git config --global user.name &amp;quot;你的用户名&amp;quot;git config --global user.email &amp;quot;your_email@example.com&amp;quot;
---global 表示对当前用户下所有仓库生效。如果只想对当前仓库配置，去掉 --g
-      </article>
-    </div>
-  </div>
-</div>
-      <div class="post-wrapper">
-  <div class="post-wrap right" data-aos="fade-up">
-      <a class="post-link" href="/drda-blog/2026/06/09/post_2/" aria-label="el-table 双击单元格修改" title="el-table 双击单元格修改"></a>
-    <div class="post-cover right">
-        <img data-src="https://p7.qhimg.com/bdm/0_0_100/t0194a1161f2ce1524e.jpg" data-sizes="auto" alt="el-table 双击单元格修改" class="lazyload">
-    </div>
-    <div class="post-info">
-      <div class="post-meta">
-        <span><span class="icon-calendar"></span>2026-06-09</span>
-        <span><span class="icon-pencil"></span>1.2k 字</span>
-        <span><span class="icon-clock"></span>6 分钟</span>
-      </div>
-      <h2 class="post-title">el-table 双击单元格修改</h2>
-      <article class="post-article">
-          在使用 Element UI 的 el-table 时，我们经常会遇到这样的需求：在表格中直接双击某个单元格就能进入编辑状态，输入完成后按回车或失去焦点自动保存。这个功能在后台管理系统中非常实用，省去了跳转到编辑页面的繁琐操作。本文就来详细记录一下这个交互的实现方式。
- 核心思路
-实现这个效果主要分为三步：
-
-给 el-table 绑定 cell-dblclick 事件，监听单元格双击
-双击时记录当前行和列信息，显示输入框（el-input）
-输入完成后，触发保存逻辑并更新数据
-
- 基础表格结构
-先准备一个基础的 el-table：
-&amp;lt;template&amp;gt;  &amp;lt;el-table
-      </article>
-    </div>
-  </div>
-</div>
-      <div class="post-wrapper">
-  <div class="post-wrap left" data-aos="fade-up">
       <a class="post-link" href="/drda-blog/2026/06/08/post_1/" aria-label="Hexo 初体验" title="Hexo 初体验"></a>
+      <div class="post-sticky">置顶</div>
     <div class="post-cover left">
         <img data-src="https://img.8845.top/img2/%E3%80%8A%E4%BA%B2%E7%88%B1%E7%9A%84%E5%BC%97%E5%85%B0%E5%85%8B%E6%96%AF%E3%80%8B024k.jpg" data-sizes="auto" alt="Hexo 初体验" class="lazyload">
     </div>
@@ -360,6 +305,62 @@ npm install -g hexo-cli
 hexo -v
  第二步：初始化项目
 创建一个文件夹
+      </article>
+    </div>
+  </div>
+</div>
+      <div class="post-wrapper">
+  <div class="post-wrap right" data-aos="fade-up">
+      <a class="post-link" href="/drda-blog/2026/06/09/post_3/" aria-label="Git 首次提交代码" title="Git 首次提交代码"></a>
+    <div class="post-cover right">
+        <img data-src="https://img.8845.top/img2/7.jpg" data-sizes="auto" alt="Git 首次提交代码" class="lazyload">
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2026-06-09</span>
+        <span><span class="icon-pencil"></span>502 字</span>
+        <span><span class="icon-clock"></span>2 分钟</span>
+      </div>
+      <h2 class="post-title">Git 首次提交代码</h2>
+      <article class="post-article">
+          记录一下本地项目第一次提交到 Git 仓库的完整流程。
+ 1. 初始化仓库
+进入项目根目录，执行：
+git init
+该命令会在当前目录生成一个 .git 隐藏目录，Git 会从这里开始追踪所有文件的变更。
+ 2. 配置用户信息
+首次使用 Git 必须要配置用户名和邮箱，否则提交会失败：
+git config --global user.name &amp;quot;你的用户名&amp;quot;git config --global user.email &amp;quot;your_email@example.com&amp;quot;
+--global 表示对当前用户下所有仓库生效。如果只想对当前仓库配置，去掉 --g
+      </article>
+    </div>
+  </div>
+</div>
+      <div class="post-wrapper">
+  <div class="post-wrap left" data-aos="fade-up">
+      <a class="post-link" href="/drda-blog/2026/06/09/post_2/" aria-label="el-table 双击单元格修改" title="el-table 双击单元格修改"></a>
+    <div class="post-cover left">
+        <img data-src="https://p7.qhimg.com/bdm/0_0_100/t0194a1161f2ce1524e.jpg" data-sizes="auto" alt="el-table 双击单元格修改" class="lazyload">
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2026-06-09</span>
+        <span><span class="icon-pencil"></span>1.2k 字</span>
+        <span><span class="icon-clock"></span>6 分钟</span>
+      </div>
+      <h2 class="post-title">el-table 双击单元格修改</h2>
+      <article class="post-article">
+          在使用 Element UI 的 el-table 时，我们经常会遇到这样的需求：在表格中直接双击某个单元格就能进入编辑状态，输入完成后按回车或失去焦点自动保存。这个功能在后台管理系统中非常实用，省去了跳转到编辑页面的繁琐操作。本文就来详细记录一下这个交互的实现方式。
+ 核心思路
+实现这个效果主要分为三步：
+
+给 el-table 绑定 cell-dblclick 事件，监听单元格双击
+双击时记录当前行和列信息，显示输入框（el-input）
+输入完成后，触发保存逻辑并更新数据
+
+ 基础表格结构
+先准备一个基础的 el-table：
+&amp;lt;template&amp;gt;  &amp;lt;el-table
       </article>
     </div>
   </div>
