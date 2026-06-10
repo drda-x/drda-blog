@@ -69,8 +69,8 @@ importers:
         specifier: ^8.2.3
         version: 8.2.3
       inferno-create-element:
-        specifier: ^8.2.3
-        version: 8.2.3
+        specifier: ^9.1.0
+        version: 9.1.0
       semver:
         specifier: ^7.8.2
         version: 7.8.2
@@ -1000,7 +1000,7 @@ packages:
 
   glob@7.2.3:
     resolution: {integrity: sha512-nFR0zLpU2YCaRxwoCJvL6UvCH2JFyFVIvwTLsIf21AuHlMskA1hhTdk+LlYJtOlYt9v6dvszD2BGRqBL+iQK9Q==}
-    deprecated: Glob versions prior to v9 are no longer supported
+    deprecated: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
 
   graceful-fs@4.2.11:
     resolution: {integrity: sha512-RbJ5/jmFcNNCcDV5o9eTnBLJ/HszWV0P73bc+Ff4nS/rJj+YaS6IGyiOL0VoBYX+l1Wrl3k63h/KrH+nhJ0XvQ==}
@@ -1127,6 +1127,9 @@ packages:
   inferno-create-element@8.2.3:
     resolution: {integrity: sha512-YEwX4OiFlgeTutvE16uCGxkaSVwZ1DklpAPX8okjVsGaLIWQrM8QIQFxn3mTLWSu70Uea+afQfKL5wE4hxn39Q==}
 
+  inferno-create-element@9.1.0:
+    resolution: {integrity: sha512-CobApGEDHKlz2LuYNoagklXzCxShz/6bXS4EZqMzppOKnUGut/9FDM8cdJ+ZvtQcbcYcnKhogVDnwsPQSWERMQ==}
+
   inferno-server@8.2.3:
     resolution: {integrity: sha512-swaDCaTYPplKwcBDbveu7xKIAooLXOOdfRoETTCIZwKyfKBGR3JnqsrwcL6miFR8TG6CNibvYKG8eSYHzkoA4Q==}
     engines: {node: '>=8'}
@@ -1134,8 +1137,14 @@ packages:
   inferno-vnode-flags@8.2.3:
     resolution: {integrity: sha512-dfC0MIwFv9PCbZCUsuk9ISejFS3fKJODC0rZ/LjxxzE+OrCk+PMwPLsUnGU6O9/jbBnPACVz1BkACDf5LWgU5Q==}
 
+  inferno-vnode-flags@9.1.0:
+    resolution: {integrity: sha512-pyM4YQbYGiKS/YHgXUBsrrG6VHDZCqtas4Ba3OQqxZE6UMNWDO9Sz9q3y2hLHO7Ue1e4gcBV9S1BCr5gnUuQ8A==}
+
   inferno@8.2.3:
     resolution: {integrity: sha512-LMeRlCe+RlXw8kHCLyOWRk2PsZ3Fo4jkESyAR1g4FfPT48N78i11YhTVXW2ukCx5MFjv+qrfa73JzJWU9sg4CQ==}
+
+  inferno@9.1.0:
+    resolution: {integrity: sha512-Cw7iu5Yn//PDZKZPZGy2+7b7hCaVhbKuPP1ikyyOvXILZno1faIfcQOyfQkNKh4h6LSQ6VhImaG7sxvS0IrhuA==}
 
   inflight@1.0.6:
     resolution: {integrity: sha512-k92I/b08q4wvFscXCLvqfsHCrjrF7yiXsQuIVvVE7N82W3+aqpzuUdBbfhWcy/FZR3/4IgflMgKLOsvPDrGCJA==}
@@ -3074,16 +3083,28 @@ snapshots:
     dependencies:
       inferno: 8.2.3
 
+  inferno-create-element@9.1.0:
+    dependencies:
+      inferno: 9.1.0
+
   inferno-server@8.2.3:
     dependencies:
       inferno: 8.2.3
 
   inferno-vnode-flags@8.2.3: {}
 
+  inferno-vnode-flags@9.1.0: {}
+
   inferno@8.2.3:
     dependencies:
       csstype: 3.2.3
       inferno-vnode-flags: 8.2.3
+      opencollective-postinstall: 2.0.3
+
+  inferno@9.1.0:
+    dependencies:
+      csstype: 3.2.3
+      inferno-vnode-flags: 9.1.0
       opencollective-postinstall: 2.0.3
 
   inflight@1.0.6:
