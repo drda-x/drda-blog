@@ -1,0 +1,829 @@
+  <!DOCTYPE html>
+  <html lang="zh-CN"  
+      data-theme-mode="auto"
+  >
+  <head>
+  <meta charset="utf-8">
+  
+  
+  
+  <script>window.REIMU_CONFIG = {};window.REIMU_CONFIG.clipboard_tips = {"success":{"zh-CN":"复制成功 (*^▽^*)"},"fail":{"zh-CN":"复制失败 (ﾟ⊿ﾟ)ﾂ"},"copyright":{"enable":false,"count":50,"license_type":"by-nc-sa"}};window.REIMU_CONFIG.clipboard_tips.copyright.content = '本博客所有文章除特别声明外，均采用 BY-NC-SA 许可协议。转载请注明出处！';window.REIMU_CONFIG.code_block = {"expand":true};window.REIMU_CONFIG.base = 'https://drda-x.github.io/drda-blog';window.REIMU_CONFIG.relative = '/drda-blog/';</script>
+  <title>
+    Hexo添加板娘 | 加辣の秘密基地
+  </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic|Noto Serif SC:400,400italic,700,700italic&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic|Noto Serif SC:400,400italic,700,700italic&display=swap" media="print" onload="this.media='all'">
+    
+<link rel="stylesheet" href="https://npm.webcache.cn/@fortawesome/fontawesome-free@7.1.0/css/regular.min.css" integrity="sha384-4qYppzjH8EiA+cGdaubu2vL7Rk8WGiqCSj7oRuP1uwtFWkfKNHD20lPfcrbQc8dU" crossorigin="anonymous">
+<link rel="stylesheet" href="https://npm.webcache.cn/@fortawesome/fontawesome-free@7.1.0/css/solid.min.css" integrity="sha384-wbMWab3UDSPm2kvIgVOn&#x2F;d9KPTecgPU1+Nb3zoQrm&#x2F;oVu0EkPL6IaKinjbwW0rum" crossorigin="anonymous">
+
+    <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="https://npm.webcache.cn/@fortawesome/fontawesome-free@7.1.0/css/brands.min.css" integrity="sha384-KTGeC2hIMzpeQakhsmzB9bZfhCD5xZZCgI1iZH6f/O457SxzlkzTQg/WXFNoi3ih" crossorigin="anonymous">
+<link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="https://npm.webcache.cn/@fortawesome/fontawesome-free@7.1.0/css/v5-font-face.min.css" integrity="sha384-nJ1ThfldViXoLpJ6jlKcP2beas8BMbYq26SG9Hi8cH89bZi4RZ644v7helMCqJxd" crossorigin="anonymous">
+<link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="https://npm.webcache.cn/@fortawesome/fontawesome-free@7.1.0/css/v4-font-face.min.css" integrity="sha384-UlkrhOIvZxJFd4MElSUp7ow6/RUeYKi/orfCZIRRiOENFuQPIAA3T3HjYfmBRhNq" crossorigin="anonymous">
+    
+<link rel="stylesheet" href="/drda-blog/css/loader.css">
+
+    <meta name="description" content="前言 Live2D 看板娘可以为博客增添趣味性和互动感。本文以 Reimu 主题为例，介绍两种添加看板娘的方式：主题内置 和 自定义配置。   方式一：使用主题内置的 Live2D（推荐新手） 很多 Hexo 主题（如 Reimu、Butterfly 等）已经集成了 Live2D 功能，只需简单配置即可启用。  1. 开启方法 打开主题配置文件 themes&#x2F;reimu&#x2F;_config.yml，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo添加板娘">
+<meta property="og:url" content="https://drda-x.github.io/drda-blog/2026/06/17/Hexo%E6%B7%BB%E5%8A%A0%E6%9D%BF%E5%A8%98/index.html">
+<meta property="og:site_name" content="加辣の秘密基地">
+<meta property="og:description" content="前言 Live2D 看板娘可以为博客增添趣味性和互动感。本文以 Reimu 主题为例，介绍两种添加看板娘的方式：主题内置 和 自定义配置。   方式一：使用主题内置的 Live2D（推荐新手） 很多 Hexo 主题（如 Reimu、Butterfly 等）已经集成了 Live2D 功能，只需简单配置即可启用。  1. 开启方法 打开主题配置文件 themes&#x2F;reimu&#x2F;_config.yml，">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://file.fishpi.cn/2026/06/kbn-38f3482a.png">
+<meta property="article:published_time" content="2026-06-17T06:26:29.000Z">
+<meta property="article:modified_time" content="2026-06-17T08:16:09.024Z">
+<meta property="article:author" content="Drda">
+<meta property="article:tag" content="hexo">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://file.fishpi.cn/2026/06/kbn-38f3482a.png">
+    <link rel="alternate" href="/drda-blog/atom.xml" title="加辣の秘密基地" type="application/atom+xml"><link rel="alternate" href="/drda-blog/rss2.xml" title="加辣の秘密基地" type="application/rss+xml">
+    <link rel="shortcut icon" href="/drda-blog/images/favicon.ico">
+  
+<link rel="stylesheet" href="/drda-blog/css/style.css">
+
+  <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.css" integrity="sha384-IfxC36XL/toUyJ939C73PcgMuRzAZuIzZxE38drsmO5p6jD7ei+Zx/1oA/0l8ysE" crossorigin="anonymous">
+      <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="https://npm.webcache.cn/katex@0.16.24/dist/katex.min.css" integrity="sha384-tTgKLjMYmJr94v8qu2PE5MUGSMbyN2xiH266JUB3gpm8vnnJywd1dWSOEfrFz+YI" crossorigin="anonymous">
+    
+<script src="https://npm.webcache.cn/pace-js@1.2.4/pace.min.js" integrity="sha384-k6YtvFUEIuEFBdrLKJ3YAUbBki333tj1CSUisai5Cswsg9wcLNaPzsTHDswp4Az8" crossorigin="anonymous"></script>
+
+    
+<link rel="stylesheet" href="https://npm.webcache.cn/@reimujs/aos@0.1.2/dist/aos.css" integrity="sha384-GMRP93c6Hkz9JVKGAuRR3nTS7M07RwPgTFenXiosjq2VbVgvdDNcz1g6Mkj8AONa" crossorigin="anonymous">
+
+    <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="https://npm.webcache.cn/aplayer@1.10.1/dist/APlayer.min.css" integrity="sha384-tLMkTWh2pfXNWGFlUS0w1TFtRG5xZ9lPWFOooj+vDDLIL+xBGQU/voDBY5XE2lVh" crossorigin="anonymous">
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+  <body>
+      <div id='loader'>
+    <div class="loading-left-bg loading-bg"></div>
+    <div class="loading-right-bg loading-bg"></div>
+    <div class="spinner-box">
+      <div class="loading-taichi ">
+          <img src="/drda-blog/images/taichi.png" alt="loading" />
+      </div>
+      <div class="loading-word">给你们加辣中...</div>
+    </div>
+  </div>
+  <script>
+    var time = null;
+    var loaderEl = document.getElementById('loader');
+    var startLoading = () => {
+      time = Date.now();
+      loaderEl.classList.remove("loading");
+    }
+    var hideLoader = () => {
+      document.body.style.overflow = 'auto';
+      loader.classList.add('loading');
+    };
+
+    var endLoading = () => {
+      if (!time) {
+        hideLoader();
+      } else {
+        if (Date.now() - time > 500) {
+          time = null;
+          hideLoader();
+        } else {
+          setTimeout(endLoading, 500 - (Date.now() - time));
+          time = null;
+        }
+      }
+    }
+    window.addEventListener('DOMContentLoaded', endLoading);
+    loaderEl.addEventListener('click', endLoading);
+  </script>
+<div id="copy-tooltip"></div>
+<div id="heatmap-tooltip"></div>
+
+
+    <div id="container">
+      <div id="wrap">
+        <div id="header-nav">
+  <nav id="main-nav" aria-label="Primary navigation">
+        <a class="main-nav-link-wrap" href="/drda-blog/">
+            <div class="main-nav-icon icon ">
+                  <img src="/drda-blog/images/taichi.png" alt="home icon" style="height: 1em;">
+            </div>
+          <span class="main-nav-link">首页</span>
+        </a>
+        <a class="main-nav-link-wrap" href="/drda-blog/archives">
+            <div class="main-nav-icon icon ">
+                  <img src="/drda-blog/images/archives.png" alt="archives icon" style="height: 1em;">
+            </div>
+          <span class="main-nav-link">归档</span>
+        </a>
+        <a class="main-nav-link-wrap" href="/drda-blog/about">
+            <div class="main-nav-icon icon ">
+                  <img src="/drda-blog/images/about.png" alt="about icon" style="height: 1em;">
+            </div>
+          <span class="main-nav-link">关于</span>
+        </a>
+        <a class="main-nav-link-wrap" href="/drda-blog/friend">
+            <div class="main-nav-icon icon ">
+                  <img src="/drda-blog/images/friend.png" alt="friend icon" style="height: 1em;">
+            </div>
+          <span class="main-nav-link">友链</span>
+        </a>
+    <a id="main-nav-toggle" class="nav-icon" aria-label="Toggle navigation" role="button"></a>
+  </nav>
+  <nav id="sub-nav" aria-label="Secondary navigation">
+      <a id="nav-rss-link" class="nav-icon" href="/drda-blog/atom.xml" title="RSS 订阅" aria-label="RSS 订阅" target="_blank"></a>
+      <a id="nav-search-btn" class="nav-icon popup-trigger" title="搜索" aria-label="搜索"></a>
+  </nav>
+  <a href="https://github.com/drda-x/drda-blog" class="triangle-badge" title="github" target="_blank" rel="noopener nofollow noreferrer">
+    <div class="icon icon-github triangle-badge-icon"></div>
+  </a>
+</div>
+<header id="header" aria-label="Site header">
+    <picture></picture>
+    <img  fetchpriority="high" src="https://img.8845.top/img2/%E3%80%8ARe%EF%BC%9A%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84%E5%BC%82%E4%B8%96%E7%95%8C%E7%94%9F%E6%B4%BB%E3%80%8B%E9%9B%B7%E5%A7%866k.png" alt="Hexo添加板娘">
+  <div id="header-outer">
+    <div id="header-title">
+          <span id="logo">
+            <h1 data-aos="slide-up">Hexo添加板娘</h1>
+          </span>
+        <h2 id="subtitle-wrap" data-aos="slide-down">
+        </h2>
+    </div>
+  </div>
+</header>
+
+        <div id="content" aria-label="Page content" class="sidebar-left"  >
+          <aside id="sidebar" aria-label="Sidebar">
+  <div class="sidebar-wrapper-container sticky">
+      <meting-js
+        theme="var(--color-link)"
+        id="28018264"
+        server="netease"
+        type="song"
+        auto="0"
+        fixed="false"
+        autoplay="false"
+        loop="all"
+        order="random"
+        preload="auto"
+        volume="0.7"
+        mutex="true"
+        list-folded="true"
+        lrc-type="3"
+      ></meting-js>
+  <div class="sidebar-wrapper">
+    <div class="sidebar-wrap" data-aos="fade-up">
+          <div class="sidebar-toc-sidebar"><h3 class="toc-title">文章目录</h3>
+<div class="sidebar-toc-wrapper toc-div-class" >
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text"> 前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B9%E5%BC%8F%E4%B8%80%E4%BD%BF%E7%94%A8%E4%B8%BB%E9%A2%98%E5%86%85%E7%BD%AE%E7%9A%84-live2d%E6%8E%A8%E8%8D%90%E6%96%B0%E6%89%8B"><span class="toc-number">2.</span> <span class="toc-text"> 方式一：使用主题内置的 Live2D（推荐新手）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%BC%80%E5%90%AF%E6%96%B9%E6%B3%95"><span class="toc-number">2.1.</span> <span class="toc-text"> 1. 开启方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%8E%9F%E7%90%86%E8%AF%B4%E6%98%8E"><span class="toc-number">2.2.</span> <span class="toc-text"> 2. 原理说明</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B9%E5%BC%8F%E4%BA%8C%E4%BD%BF%E7%94%A8-hexo-helper-live2d-%E6%8F%92%E4%BB%B6%E6%8E%A8%E8%8D%90%E8%BF%9B%E9%98%B6%E7%94%A8%E6%88%B7"><span class="toc-number">3.</span> <span class="toc-text"> 方式二：使用 hexo-helper-live2d 插件（推荐进阶用户）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%AE%89%E8%A3%85%E6%8F%92%E4%BB%B6"><span class="toc-number">3.1.</span> <span class="toc-text"> 1. 安装插件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%AE%89%E8%A3%85%E6%A8%A1%E5%9E%8B"><span class="toc-number">3.2.</span> <span class="toc-text"> 2. 安装模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E9%85%8D%E7%BD%AE%E6%8F%92%E4%BB%B6"><span class="toc-number">3.3.</span> <span class="toc-text"> 3. 配置插件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E7%A6%81%E7%94%A8%E4%B8%BB%E9%A2%98%E5%86%85%E7%BD%AE%E7%9A%84-live2d"><span class="toc-number">3.4.</span> <span class="toc-text"> 4. 禁用主题内置的 Live2D</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E6%B5%8B%E8%AF%95"><span class="toc-number">3.5.</span> <span class="toc-text"> 5. 测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E6%9B%B4%E6%8D%A2%E6%A8%A1%E5%9E%8B"><span class="toc-number">3.6.</span> <span class="toc-text"> 如何更换模型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">4.</span> <span class="toc-text"> 总结</span></a></li></ol>
+</div>
+</div>
+          <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/drda-blog/avatar/avatar.webp" data-sizes="auto" alt="Drda" class="lazyload">
+  <div class="sidebar-author-name">Drda</div>
+  <div class="sidebar-description">Drda&#39;s Blog</div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div>
+    <div class="sidebar-state-number">6</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>分类</div>
+    <div class="sidebar-state-number">2</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>标签</div>
+    <div class="sidebar-state-number">7</div>
+  </div>
+</div>
+<div class="sidebar-social" >
+    <div class="icon-github sidebar-social-icon">
+      <a href=https://github.com/drda-x itemprop="url" target="_blank" aria-label="github" rel="noopener nofollow noreferrer"></a>
+    </div>
+    <div class="icon-bilibili sidebar-social-icon">
+      <a href=https://space.bilibili.com/28903889 itemprop="url" target="_blank" aria-label="bilibili" rel="noopener nofollow noreferrer"></a>
+    </div>
+</div>
+<div class="sidebar-menu">
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/drda-blog/" aria-label="首页"></a>
+          <div class="sidebar-menu-icon icon ">
+                <img src="/drda-blog/images/taichi.png" alt="home icon" style="width: 1em;">
+          </div>
+        <div class="sidebar-menu-link">首页</div>
+      </div>
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/drda-blog/archives" aria-label="归档"></a>
+          <div class="sidebar-menu-icon icon ">
+                <img src="/drda-blog/images/archives.png" alt="archives icon" style="width: 1em;">
+          </div>
+        <div class="sidebar-menu-link">归档</div>
+      </div>
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/drda-blog/about" aria-label="关于"></a>
+          <div class="sidebar-menu-icon icon ">
+                <img src="/drda-blog/images/about.png" alt="about icon" style="width: 1em;">
+          </div>
+        <div class="sidebar-menu-link">关于</div>
+      </div>
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/drda-blog/friend" aria-label="友链"></a>
+          <div class="sidebar-menu-icon icon ">
+                <img src="/drda-blog/images/friend.png" alt="friend icon" style="width: 1em;">
+          </div>
+        <div class="sidebar-menu-link">友链</div>
+      </div>
+</div>
+</div>
+          <div class="sidebar-btn-wrapper" style="position:static">
+            <div class="sidebar-toc-btn current"></div>
+            <div class="sidebar-common-btn"></div>
+          </div>
+    </div>
+  </div>
+  <div class="sidebar-widget">
+  </div>
+  </div>
+</aside>
+
+          <section id="main" aria-label="Main content"><article id="post-Hexo添加板娘" class="h-entry article" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner" data-aos="fade-up">
+    <div class="article-meta">
+      <div class="article-date">
+  <span class="article-date-link icon-calendar" data-aos="zoom-in">
+    <time datetime="2026-06-17T06:26:29.000Z" itemprop="datePublished">2026-06-17</time>
+    <time style="display: none;" id="post-update-time">2026-06-17</time>
+  </span>
+</div>
+
+    </div>
+    
+    <div class="hr-line"></div>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+        <h2 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h2>
+<p>Live2D 看板娘可以为博客增添趣味性和互动感。本文以 Reimu 主题为例，介绍两种添加看板娘的方式：<strong>主题内置</strong> 和 <strong>自定义配置</strong>。</p>
+<hr />
+<h2 id="方式一使用主题内置的-live2d推荐新手"><a class="markdownIt-Anchor" href="#方式一使用主题内置的-live2d推荐新手"></a> 方式一：使用主题内置的 Live2D（推荐新手）</h2>
+<p>很多 Hexo 主题（如 Reimu、Butterfly 等）已经集成了 Live2D 功能，只需简单配置即可启用。</p>
+<h3 id="1-开启方法"><a class="markdownIt-Anchor" href="#1-开启方法"></a> 1. 开启方法</h3>
+<p>打开主题配置文件 <code>themes/reimu/_config.yml</code>，找到 <code>live2d</code> 配置节：</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Experimental</span></span><br><span class="line"><span class="attr">live2d:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<p>将 <code>enable</code> 改为 <code>true</code>，保存后重启 Hexo 即可看到看板娘。</p>
+<p><img src="https://file.fishpi.cn/2026/06/kbn-38f3482a.png" alt="kbn.png" /></p>
+<p>在页面中有多个板娘可以进行切换，还可以换装，拍照等许多互动体验。想了解更多功能实现可以访问<a target="_blank" rel="noopener" href="https://github.com/LIlGG/plugin-live2d">https://github.com/LIlGG/plugin-live2d</a></p>
+<h3 id="2-原理说明"><a class="markdownIt-Anchor" href="#2-原理说明"></a> 2. 原理说明</h3>
+<p>Reimu 主题内置的 Live2D 使用 <a target="_blank" rel="noopener" href="https://github.com/D-Sketon/plugin-live2d">D-Sketon/plugin-live2d</a> 库，脚本从 CDN 自动加载，无需额外安装任何依赖。</p>
+<h2 id="方式二使用-hexo-helper-live2d-插件推荐进阶用户"><a class="markdownIt-Anchor" href="#方式二使用-hexo-helper-live2d-插件推荐进阶用户"></a> 方式二：使用 hexo-helper-live2d 插件（推荐进阶用户）</h2>
+<p>如果需要更多模型选择或使用本地模型，可以使用 <code>hexo-helper-live2d</code> 插件。</p>
+<h3 id="1-安装插件"><a class="markdownIt-Anchor" href="#1-安装插件"></a> 1. 安装插件</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install hexo-helper-live2d --save</span><br></pre></td></tr></table></figure>
+<h3 id="2-安装模型"><a class="markdownIt-Anchor" href="#2-安装模型"></a> 2. 安装模型</h3>
+<p><strong>方式 A：使用 npm 模型包（推荐）</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 模型包</span></span><br><span class="line">npm install live2d-widget-model-shizuku --save   <span class="comment"># 诗库</span></span><br><span class="line">npm install live2d-widget-model-koharu --save    <span class="comment"># 小春</span></span><br><span class="line">npm install live2d-widget-model-hijiki --save    <span class="comment"># 羊驼</span></span><br><span class="line">npm install live2d-widget-model-tororo --save    <span class="comment"># 小白</span></span><br></pre></td></tr></table></figure>
+<p><strong>方式 B：使用本地模型</strong></p>
+<p>如果你有自定义的模型文件，可以放在项目根目录的 <code>live2d_modules/</code> 目录下，结构如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">live2d_modules/</span><br><span class="line">└── live2D/</span><br><span class="line">    ├── js/</span><br><span class="line">    │   ├── live2d.min.js</span><br><span class="line">    │   └── message.js</span><br><span class="line">    └── model/</span><br><span class="line">        └── xiaomai/</span><br><span class="line">            ├── xiaomai.model.json</span><br><span class="line">            ├── umaru.moc</span><br><span class="line">            └── ...</span><br></pre></td></tr></table></figure>
+<h3 id="3-配置插件"><a class="markdownIt-Anchor" href="#3-配置插件"></a> 3. 配置插件</h3>
+<p>在站点配置文件 <code>_config.yml</code>（不是主题的）中添加：</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># live2d</span></span><br><span class="line"><span class="attr">live2d:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">scriptFrom:</span> <span class="string">local</span></span><br><span class="line">  <span class="attr">pluginRootPath:</span> <span class="string">live2dw/</span>      <span class="comment"># 静态资源根路径</span></span><br><span class="line">  <span class="attr">pluginJsPath:</span> <span class="string">lib/</span>            <span class="comment"># JS 文件路径</span></span><br><span class="line">  <span class="attr">pluginModelPath:</span> <span class="string">assets/</span>      <span class="comment"># 模型文件路径</span></span><br><span class="line">  <span class="attr">tagMode:</span> <span class="literal">false</span></span><br><span class="line">  <span class="attr">log:</span> <span class="literal">false</span></span><br><span class="line">  <span class="attr">model:</span></span><br><span class="line">    <span class="attr">use:</span> <span class="string">live2d-widget-model-hijiki</span>  <span class="comment"># npm 包名称</span></span><br><span class="line">  <span class="attr">display:</span></span><br><span class="line">    <span class="attr">position:</span> <span class="string">right</span>             <span class="comment"># 位置：left 或 right</span></span><br><span class="line">    <span class="attr">width:</span> <span class="number">150</span>                  <span class="comment"># 宽度</span></span><br><span class="line">    <span class="attr">height:</span> <span class="number">300</span>                 <span class="comment"># 高度</span></span><br><span class="line">  <span class="attr">mobile:</span></span><br><span class="line">    <span class="attr">show:</span> <span class="literal">true</span>                  <span class="comment"># 移动端是否显示</span></span><br><span class="line">  <span class="attr">react:</span></span><br><span class="line">    <span class="attr">opacity:</span> <span class="number">0.7</span>                <span class="comment"># 透明度</span></span><br></pre></td></tr></table></figure>
+<p><strong>如果使用本地模型</strong>，将 <code>model.use</code> 改为本地目录路径：</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">model:</span></span><br><span class="line">  <span class="attr">use:</span> <span class="string">live2d_modules/live2D/model/xiaomai</span> <span class="comment"># 这里我使用的是自定义的小埋模型</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>注意</strong>：<code>model.use</code> 应该指向模型<strong>目录</strong>，而不是 <code>.model.json</code> 文件本身。</p>
+</blockquote>
+<h3 id="4-禁用主题内置的-live2d"><a class="markdownIt-Anchor" href="#4-禁用主题内置的-live2d"></a> 4. 禁用主题内置的 Live2D</h3>
+<p>使用插件时，记得禁用主题内置的 Live2D，避免冲突：</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># themes/reimu/_config.yml</span></span><br><span class="line"><span class="attr">live2d:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+<h3 id="5-测试"><a class="markdownIt-Anchor" href="#5-测试"></a> 5. 测试</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo server</span><br></pre></td></tr></table></figure>
+<p>访问 <code>http://localhost:4000</code>，查看看板娘是否正常显示。</p>
+<hr />
+<h3 id="如何更换模型"><a class="markdownIt-Anchor" href="#如何更换模型"></a> 如何更换模型</h3>
+<p>只需修改 <code>model.use</code> 的值：</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 使用 npm 包</span></span><br><span class="line"><span class="attr">model:</span></span><br><span class="line">  <span class="attr">use:</span> <span class="string">live2d-widget-model-shizuku</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 或使用本地模型</span></span><br><span class="line"><span class="attr">model:</span></span><br><span class="line">  <span class="attr">use:</span> <span class="string">live2d_modules/live2D/model/shizuku</span></span><br></pre></td></tr></table></figure>
+<hr />
+<h2 id="总结"><a class="markdownIt-Anchor" href="#总结"></a> 总结</h2>
+<p>如果只是想让博客多个看板娘，直接用主题内置的最简单；如果想深度定制或使用自己的模型，选择 <code>hexo-helper-live2d</code> 插件。</p>
+
+    </div>
+    <footer class="article-footer">
+        <a class="article-category-link" href="/drda-blog/categories/%E5%8D%9A%E5%AE%A2/" title="博客" data-aos="zoom-in">博客</a>
+
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item" data-aos="zoom-in"><a class="article-tag-list-link" href="/drda-blog/tags/hexo/" rel="tag" title="hexo">hexo</a></li></ul>
+
+    </footer>
+  </div>
+    <nav id="article-nav" aria-label="Article navigation" data-aos="fade-up">
+    <div class="article-nav-link-wrap right">
+        <img data-src="https://img.8845.top/img2/G5ZJOsgb0AEGSHm.jpg" data-sizes="auto" alt="Hexo使用主题包" class="lazyload">
+      <a href="/drda-blog/2026/06/09/%E4%BD%BF%E7%94%A8%E4%B8%BB%E9%A2%98%E5%8C%85/" aria-label="后一篇: Hexo使用主题包"  title="后一篇: Hexo使用主题包"></a>
+      <div class="article-nav-caption">后一篇</div>
+      <h3 class="article-nav-title">
+          Hexo使用主题包
+      </h3>
+    </div>
+  </nav>
+
+</article>
+
+  <section id="comments" data-aos="fade-up">
+    <div class="comment-header">
+        
+      <h2 class="comment-title">说些什么吧！</h2>
+      <div class="comment-selector">
+        <div class="comment-selector-wrap">
+            <div class="selector-item" data-selector="beaudar">
+              <span>beaudar</span>
+            </div>
+        </div>
+      </div>
+    </div>
+    <div class="comment-content">
+          <div class="comment beaudar-comment" data-aos="fade-up"
+            id="beaudar-comment">
+          </div>
+    </div>
+  </section>
+
+</section>
+        </div>
+        <footer id="footer" aria-label="Site footer">
+  <div style="width: 100%; overflow: hidden">
+    <div class="footer-line"></div>
+  </div>
+  <div id="footer-info">
+    <div>
+      <span class="icon-copyright"></span>
+        2020-2026
+        <span class="footer-info-sep "></span>
+      Drda
+    </div>
+      <div>
+        基于&nbsp;<a href="https://hexo.io/" rel="noopener nofollow noreferrer" target="_blank">Hexo</a>&nbsp;
+        Theme.<a href="https://github.com/D-Sketon/hexo-theme-reimu" rel="noopener nofollow noreferrer" target="_blank">Reimu</a>
+      </div>
+      <div>
+        <span class="icon-brush"></span>
+        6.3k
+        &nbsp;|&nbsp;
+        <span class="icon-coffee"></span>
+        00:29
+      </div>
+      <div>
+        <span class="icon-eye"></span>
+        <span id="busuanzi_container_site_pv">总访问量&nbsp;<span id="busuanzi_value_site_pv"></span></span>
+        &nbsp;|&nbsp;
+        <span class="icon-user"></span>
+        <span id="busuanzi_container_site_uv">总访客量&nbsp;<span id="busuanzi_value_site_uv"></span></span>
+      </div>
+  </div>
+</footer>
+
+          <div class="sidebar-top">
+            <div class="sidebar-top-taichi "></div>
+            <div class="arrow-up"></div>
+          </div>
+        <div id="mask" class="hide"></div>
+      </div>
+      <nav id="mobile-nav" aria-label="Mobile navigation">
+  <div class="sidebar-wrap">
+        <div class="sidebar-toc-sidebar"><h3 class="toc-title">文章目录</h3>
+<div class="sidebar-toc-wrapper toc-div-class" >
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text"> 前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B9%E5%BC%8F%E4%B8%80%E4%BD%BF%E7%94%A8%E4%B8%BB%E9%A2%98%E5%86%85%E7%BD%AE%E7%9A%84-live2d%E6%8E%A8%E8%8D%90%E6%96%B0%E6%89%8B"><span class="toc-number">2.</span> <span class="toc-text"> 方式一：使用主题内置的 Live2D（推荐新手）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%BC%80%E5%90%AF%E6%96%B9%E6%B3%95"><span class="toc-number">2.1.</span> <span class="toc-text"> 1. 开启方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%8E%9F%E7%90%86%E8%AF%B4%E6%98%8E"><span class="toc-number">2.2.</span> <span class="toc-text"> 2. 原理说明</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B9%E5%BC%8F%E4%BA%8C%E4%BD%BF%E7%94%A8-hexo-helper-live2d-%E6%8F%92%E4%BB%B6%E6%8E%A8%E8%8D%90%E8%BF%9B%E9%98%B6%E7%94%A8%E6%88%B7"><span class="toc-number">3.</span> <span class="toc-text"> 方式二：使用 hexo-helper-live2d 插件（推荐进阶用户）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%AE%89%E8%A3%85%E6%8F%92%E4%BB%B6"><span class="toc-number">3.1.</span> <span class="toc-text"> 1. 安装插件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%AE%89%E8%A3%85%E6%A8%A1%E5%9E%8B"><span class="toc-number">3.2.</span> <span class="toc-text"> 2. 安装模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E9%85%8D%E7%BD%AE%E6%8F%92%E4%BB%B6"><span class="toc-number">3.3.</span> <span class="toc-text"> 3. 配置插件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E7%A6%81%E7%94%A8%E4%B8%BB%E9%A2%98%E5%86%85%E7%BD%AE%E7%9A%84-live2d"><span class="toc-number">3.4.</span> <span class="toc-text"> 4. 禁用主题内置的 Live2D</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E6%B5%8B%E8%AF%95"><span class="toc-number">3.5.</span> <span class="toc-text"> 5. 测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E6%9B%B4%E6%8D%A2%E6%A8%A1%E5%9E%8B"><span class="toc-number">3.6.</span> <span class="toc-text"> 如何更换模型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">4.</span> <span class="toc-text"> 总结</span></a></li></ol>
+</div>
+</div>
+        <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/drda-blog/avatar/avatar.webp" data-sizes="auto" alt="Drda" class="lazyload">
+  <div class="sidebar-author-name">Drda</div>
+  <div class="sidebar-description">Drda&#39;s Blog</div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div>
+    <div class="sidebar-state-number">6</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>分类</div>
+    <div class="sidebar-state-number">2</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>标签</div>
+    <div class="sidebar-state-number">7</div>
+  </div>
+</div>
+<div class="sidebar-social" >
+    <div class="icon-github sidebar-social-icon">
+      <a href=https://github.com/drda-x itemprop="url" target="_blank" aria-label="github" rel="noopener nofollow noreferrer"></a>
+    </div>
+    <div class="icon-bilibili sidebar-social-icon">
+      <a href=https://space.bilibili.com/28903889 itemprop="url" target="_blank" aria-label="bilibili" rel="noopener nofollow noreferrer"></a>
+    </div>
+</div>
+<div class="sidebar-menu">
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/drda-blog/" aria-label="首页"></a>
+          <div class="sidebar-menu-icon icon ">
+                <img src="/drda-blog/images/taichi.png" alt="home icon" style="width: 1em;">
+          </div>
+        <div class="sidebar-menu-link">首页</div>
+      </div>
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/drda-blog/archives" aria-label="归档"></a>
+          <div class="sidebar-menu-icon icon ">
+                <img src="/drda-blog/images/archives.png" alt="archives icon" style="width: 1em;">
+          </div>
+        <div class="sidebar-menu-link">归档</div>
+      </div>
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/drda-blog/about" aria-label="关于"></a>
+          <div class="sidebar-menu-icon icon ">
+                <img src="/drda-blog/images/about.png" alt="about icon" style="width: 1em;">
+          </div>
+        <div class="sidebar-menu-link">关于</div>
+      </div>
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/drda-blog/friend" aria-label="友链"></a>
+          <div class="sidebar-menu-icon icon ">
+                <img src="/drda-blog/images/friend.png" alt="friend icon" style="width: 1em;">
+          </div>
+        <div class="sidebar-menu-link">友链</div>
+      </div>
+</div>
+</div>
+  </div>
+      <div class="sidebar-btn-wrapper">
+        <div class="sidebar-toc-btn current"></div>
+        <div class="sidebar-common-btn"></div>
+      </div>
+</nav>
+
+    </div>
+      <div class="site-search">
+        <div class="reimu-popup popup">
+          <div class="reimu-search">
+            <div class="reimu-search-input-icon"></div>
+            <div id="reimu-search-input"></div>
+            <div class="popup-btn-close"></div>
+          </div>
+          <div class="reimu-results">
+            <div id="reimu-stats"></div>
+            <div id="reimu-hits"></div>
+            <div id="reimu-pagination" class="reimu-pagination"></div>
+          </div>
+          <img class="reimu-bg" src="/drda-blog/images/reimu.png" loading="lazy" decoding="async" fetchpriority="low"/>
+        </div>
+      </div>
+    
+<script src="https://npm.webcache.cn/lazysizes@5.3.2/lazysizes.min.js" integrity="sha384-3gT&#x2F;vsepWkfz&#x2F;ff7PpWNUeMzeWoH3cDhm&#x2F;A8jM7ouoAK0&#x2F;fP&#x2F;9bcHHR5kHq2nf+e" crossorigin="anonymous"></script>
+
+
+<script src="https://npm.webcache.cn/clipboard@2.0.11/dist/clipboard.min.js" integrity="sha384-J08i8An&#x2F;QeARD9ExYpvphB8BsyOj3Gh2TSh1aLINKO3L0cMSH2dN3E22zFoXEi0Q" crossorigin="anonymous"></script>
+
+
+
+
+<script src="/drda-blog/js/script.js"></script>
+
+
+  
+<script src="/drda-blog/js/aos.js"></script>
+
+  <script>
+    var aosInit = () => {
+      AOS.init({
+        duration: 1000,
+        easing: "ease",
+        once: true,
+        offset: 50,
+      });
+    };
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', aosInit);
+    } else {
+      aosInit();
+    }
+  </script>
+
+
+<script src="/drda-blog/js/pjax_script.js" data-pjax></script>
+
+
+
+  <script>
+    var ALGOLIA_CONFIG = {
+      logo: "/drda-blog/images/algolia_logo.svg",
+      algolia: {
+        applicationID: "YMYG3VEWNQ",
+        apiKey: "9cc40f37d1556b019e275e62719299fa",
+        indexName: "drdaBlog",
+        hits: {
+          "per_page": parseInt("10")
+        },
+        labels: {
+          "input_placeholder": "搜索.....",
+          "hits_empty": "未发现与 「${query}」相关内容",
+          "hits_stats": "找到${hits}条结果（用时 ${time} ms）"
+        }
+      }
+    };
+  </script>
+  
+<script src="https://npm.webcache.cn/algoliasearch@4.17.1/dist/algoliasearch-lite.umd.js" integrity="sha384-xvLS0jfKuoREs7pqkRI&#x2F;OI8GcqohO5S+jQz7ZBtQXnsXmD+9jDOOY4cL6dCPzlrk" crossorigin="anonymous" defer></script>
+
+  
+<script src="https://npm.webcache.cn/@reimujs/instantsearch.js@4.57.0-beta.1/dist/instantsearch.production.min.js" integrity="sha384-aagKMe8nkqaP2DYQc8kkYOL5l+M5Q2WH&#x2F;Uhr4teOh0Ybp0RZj0kUSDm45qPikMjK" crossorigin="anonymous" defer></script>
+
+  
+<script src="/drda-blog/js/algolia_search.js" defer></script>
+
+
+  <script>
+    var setupFirework = () => {
+      if (!false || !window.matchMedia('(max-width: 768px)').matches) {
+        window.firework && window.firework(JSON.parse('{"excludeElements":["a","button"],"particles":[{"shape":"circle","move":["emit"],"easing":"easeOutExpo","colors":["var(--red-1)","var(--red-2)","var(--red-3)","var(--red-4)"],"number":20,"duration":[1200,1800],"shapeOptions":{"radius":[16,32],"alpha":[0.3,0.5]}},{"shape":"circle","move":["diffuse"],"easing":"easeOutExpo","colors":["var(--red-0)"],"number":1,"duration":[1200,1800],"shapeOptions":{"radius":20,"alpha":[0.2,0.5],"lineWidth":6}}]}'));
+      }
+    }
+  </script>
+  
+<script src="https://npm.webcache.cn/mouse-firework@0.2.0/dist/index.umd.js" integrity="sha384-qi9WggRt19tv8Vc7pCHW3ulMNLwrn515zaLEWZjl1px07vz8+pUoWX8n1rgq282T" crossorigin="anonymous" onload="setupFirework()" defer></script>
+
+
+  
+<script src="https://npm.webcache.cn/theme-shokax-pjax@0.0.3/dist/index.umd.js" integrity="sha384-xneY1WY8hOfUzswrE4CrYq35N4BdVcxqxwHPr9zawE&#x2F;jMSCxD+jAPU55x&#x2F;jj3wlf" crossorigin="anonymous"></script>
+
+  
+<script src="/drda-blog/js/pjax.js"></script>
+
+
+
+
+
+<div id="lazy-script">
+  <div>
+      
+      
+      <script data-pjax>
+        window.REIMU_POST = {
+          author: "Drda",
+          title: "Hexo添加板娘",
+          url: "https://drda-x.github.io/drda-blog/2026/06/17/Hexo%E6%B7%BB%E5%8A%A0%E6%9D%BF%E5%A8%98/",
+          excerpt: "",
+          description: "",
+          stripContent: " 前言 Live2D 看板娘可以为博客增添趣味性和互动感。本文以 Reimu 主题为例，介绍两种添加看板娘的方式：主题内置 和 自定义配置。   方式一：使用主题内置的 Live2D（推荐新手） 很多 Hexo 主题（如 Reimu、Butterfly 等）已经集成了 Live2D 功能，只需简单配置即可启用。  1. 开启方法 打开主题配置文件 themes/reimu/_config.yml，找到 live2d 配置节： # Experimentallive2d:  enable: true",
+          date: "Wed Jun 17 2026 14:26:29 GMT+0800",
+          updated: "Wed Jun 17 2026 16:16:09 GMT+0800",
+          cover: "https://img.8845.top/img2/%E3%80%8ARe%EF%BC%9A%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84%E5%BC%82%E4%B8%96%E7%95%8C%E7%94%9F%E6%B4%BB%E3%80%8B%E9%9B%B7%E5%A7%866k.png",
+        };
+      </script>
+        
+<script src="/drda-blog/js/insert_highlight.js" data-pjax></script>
+
+      
+<script src="/drda-blog/js/tabs.js" data-pjax defer></script>
+
+      <script type="module" data-pjax>
+        (async () => {
+          const PhotoSwipeLightbox = (await safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe-lightbox.esm.min.js", "sha384-DiL6M/gG+wmTxmCRZyD1zee6lIhawn5TGvED0FOh7fXcN9B0aZ9dexSF/N6lrZi/")).default;
+          const initPswp = (gallery, children) => {
+            if (_$$(`${gallery} ${children}`).length > 0) {
+              new PhotoSwipeLightbox({
+                gallery,
+                children,
+                pswpModule: () => safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8+oTJ7m3DfYEWX1fu1scuS4+s")
+              }).init();
+            }
+          }
+          const pswp = () => {
+            initPswp('.article-entry', 'a.article-gallery-item');
+            initPswp('.article-gallery', 'a.article-gallery-item');
+          }
+          pswp();
+        })();
+      </script>
+        
+
+<script data-pjax>
+  var loadScript = (src, integrity) => {
+    const script = document.createElement('script');
+    script.src = src;
+    if (integrity) script.integrity = integrity;
+    script.crossOrigin = 'anonymous';
+    return script;
+  };
+
+  var commentConfigKeys = ["beaudar"];
+  var commentConfig = {
+    beaudar: {
+      enable: true,
+      load: () => {
+        const container = document.querySelector('.beaudar-comment'); 
+        if (!container) return;
+        container.style.display = 'block';
+
+        let theme = 'auto';
+        const parsedTheme = theme === 'auto' ? (document.documentElement.getAttribute('data-theme') === 'dark' ? 'github-dark' : 'github-light') : theme;
+
+        // 创建 beaudar 脚本
+        const script = document.createElement('script');
+        script.src = 'https://beaudar.lipk.org/client.js';
+        script.setAttribute('repo', 'drda-x/drda-blog');
+        script.setAttribute('branch', 'main');
+        script.setAttribute('theme', parsedTheme);
+        script.setAttribute('crossorigin', 'anonymous');
+        script.async = true;
+
+        // 透传其他字段
+            script.setAttribute('issue-term', 'title');
+            script.setAttribute('input-position', 'top');
+            script.setAttribute('comment-order', 'desc');
+            script.setAttribute('keep-theme', 'true');
+            script.setAttribute('loading', 'true');
+        
+
+        // 清空容器（防止重复加载）并插入脚本
+        container.innerHTML = '';
+        container.appendChild(script);
+        if (theme === 'auto') {
+          const themeHandler = (e) => {
+            const iframe = container.querySelector('iframe.beaudar-frame');
+            if (!iframe || !iframe.contentWindow) {
+              document.body.removeEventListener('reimu:theme-set', themeHandler);
+              return;
+            }
+            iframe.contentWindow.postMessage({ type: 'set-theme', theme: e.detail.isDark ? 'github-dark' : 'github-light' }, 'https://beaudar.lipk.org');
+          };
+          document.body.addEventListener('reimu:theme-set', themeHandler);
+        }
+      }
+    },
+  }
+  commentConfig.enable = commentConfigKeys.some(key => commentConfig[key].enable);
+
+  var defaultComment = '';
+  if (commentConfig.enable) {
+    // 1. 首先检查localStorage中是否有保存的评论类型
+    var savedCommentType = localStorage.getItem('commentType');
+    
+    // 2. 如果localStorage中有值且对应的评论系统可用，就使用它
+    if (savedCommentType) {
+      if (commentConfig[savedCommentType]?.enable) {
+        defaultComment = savedCommentType;
+      }
+    }
+    
+    // 3. 如果localStorage无效，检查配置的默认评论系统
+    if (!defaultComment) {
+      var configDefault = 'waline';
+      if (commentConfig[configDefault]?.enable) {
+        defaultComment = configDefault;
+      }
+    }
+    
+    // 4. 如果前两项都无效，按指定顺序找到第一个可用的评论系统
+    if (!defaultComment) {
+      defaultComment = commentConfigKeys.find(sys => commentConfig[sys].enable) || '';
+    }
+  }
+  function loadComments() {
+    if (!commentConfig.enable) return;
+    const loadedComments = {
+      valine: false,
+      waline: false,
+      twikoo: false,
+      gitalk: false,
+      giscus: false,
+      utterances: false,
+      beaudar: false,
+      disqus: false,
+    };
+
+    // 隐藏所有评论容器
+    const hideAllComments = () => {
+      const commentContainers = document.querySelectorAll('.comment');
+      commentContainers.forEach(container => {
+        container.style.display = 'none';
+      });
+    };
+
+    // 按需加载评论系统
+    const loadCommentSystem = (type) => {
+      if (loadedComments[type]) {
+        // 如果已加载，只需显示对应容器
+        document.querySelector(`.${type}-comment`).style.display = 'block';
+        return;
+      }
+
+      // 根据类型加载对应的脚本
+      commentConfig[type]?.load();
+      loadedComments[type] = true;
+    };
+
+    // 评论组件选择器
+    const changeActiveCommentItems = (item) => {
+      const commentItems = document.querySelectorAll('.selector-item');
+      for (let i = 0; i < commentItems.length; i++) {
+        commentItems[i].classList.remove('active');
+      }
+      item.classList.add('active');
+
+      // 获取要加载的评论系统类型
+      const commentType = item.getAttribute('data-selector');
+
+      // 隐藏所有评论系统
+      hideAllComments();
+
+      // 加载选中的评论系统
+      loadCommentSystem(commentType);
+    };
+
+    const commentInit = () => {
+      // 评论组件选择器点击事件
+      const commentItems = document.querySelectorAll('.selector-item');
+      for (let item of commentItems) {
+        item.addEventListener('click', () => {
+          // 保存选择器状态
+          const commentType = item.getAttribute('data-selector');
+          window.localStorage.setItem('commentType', commentType);
+          // 切换选中状态
+          changeActiveCommentItems(item);
+        });
+      }
+
+      // 检查是否需要加载默认评论系统
+      if (defaultComment) {
+        const defaultSelectorItem = document.querySelector(`[data-selector="${defaultComment}"]`);
+        if (!defaultSelectorItem) return;
+        defaultSelectorItem.style.display = 'block';
+        defaultSelectorItem.classList.add('active');
+        loadCommentSystem(defaultComment);
+      }
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', commentInit);
+    } else {
+      commentInit();
+    }
+  };
+  loadComments();
+</script>
+
+  </div>
+</div>
+
+
+  <script>
+    console.log(String.raw`%c 
+ ______     ______     __     __    __     __  __    
+/\  == \   /\  ___\   /\ \   /\ "-./  \   /\ \/\ \   
+\ \  __<   \ \  __\   \ \ \  \ \ \-./\ \  \ \ \_\ \  
+ \ \_\ \_\  \ \_____\  \ \_\  \ \_\ \ \_\  \ \_____\ 
+  \/_/ /_/   \/_____/   \/_/   \/_/  \/_/   \/_____/ 
+                                                  
+`,'color: #ff5252;')
+    console.log('%c Theme.Reimu v' + '1.12.5' + ' %c https://github.com/D-Sketon/hexo-theme-reimu ', 'color: white; background: #ff5252; padding:5px 0;', 'padding:4px;border:1px solid #ff5252;')
+  </script>
+  
+
+
+  
+<script src="https://npm.webcache.cn/busuanzi@2.3.0/bsz.pure.mini.js" integrity="sha384-0M75wtSkhjIInv4coYlaJU83+OypaRCIq2SukQVQX04eGTCBXJDuWAbJet56id+S" crossorigin="anonymous" async></script>
+
+
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.getRegistrations().then((registrations) => {
+      for (let registration of registrations) {
+        registration.unregister();
+      }
+    });
+  }
+</script>
+
+
+    <script>
+      var setupAPlayer = () => {
+        if (!false || !window.matchMedia('(max-width: 768px)').matches) {
+          if (window.matchMedia('(max-width: 959px)').matches) {
+            const meting = _$('meting-js');
+            if (meting) {
+              meting.setAttribute('fixed', 'true');
+              const aside = meting.parentNode?.parentNode;
+              if (aside?.tagName === 'ASIDE') {
+                meting.parentNode.removeChild(meting);
+                document.body.appendChild(meting);
+              }
+            }
+          }
+        }
+      };
+        var meting_api = "https://api.i-meto.com/meting/api?server=:server&type=:type&id=:id&r=:r";
+    </script>
+  
+<script src="https://npm.webcache.cn/aplayer@1.10.1/dist/APlayer.min.js" integrity="sha384-gdGYZwHnfJM54evoZhpO0s6ZF5BQiybkiyW7VXr+h5UfruuRL&#x2F;aORyw+5+HZoU6e" crossorigin="anonymous" defer onload="setupAPlayer()"></script>
+
+    
+<script src="https://npm.webcache.cn/meting@2.0.1/dist/Meting.min.js" integrity="sha384-ASVlpKF80A22OXTK3tfEjZm1EL6uFMKIC4p8+0maanw1S&#x2F;IyB+Y4JG+ZDU7GpKE8" crossorigin="anonymous" defer></script>
+
+
+
+  <script src="/drda-blog/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/drda-blog/live2dw/assets/xiaomai.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7}});</script></body>
+  </html>
