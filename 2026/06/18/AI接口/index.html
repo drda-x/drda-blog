@@ -9,7 +9,7 @@
   
   <script>window.REIMU_CONFIG = {};window.REIMU_CONFIG.clipboard_tips = {"success":{"zh-CN":"复制成功 (*^▽^*)"},"fail":{"zh-CN":"复制失败 (ﾟ⊿ﾟ)ﾂ"},"copyright":{"enable":false,"count":50,"license_type":"by-nc-sa"}};window.REIMU_CONFIG.clipboard_tips.copyright.content = '本博客所有文章除特别声明外，均采用 BY-NC-SA 许可协议。转载请注明出处！';window.REIMU_CONFIG.code_block = {"expand":true};window.REIMU_CONFIG.base = 'https://drda-x.github.io/drda-blog';window.REIMU_CONFIG.relative = '/drda-blog/';</script>
   <title>
-    友情链接 | 加辣の秘密基地
+    VSCode Copilot 接入第三方 OpenAI 兼容接口 | 加辣の秘密基地
   </title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic|Noto Serif SC:400,400italic,700,700italic&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic|Noto Serif SC:400,400italic,700,700italic&display=swap" media="print" onload="this.media='all'">
@@ -23,19 +23,30 @@
     
 <link rel="stylesheet" href="/drda-blog/css/loader.css">
 
-    <meta name="description" content="本站信息  站名： 加辣の秘密基地 站长： drda 地址： https:&#x2F;&#x2F;drda-x.github.io&#x2F;drda-blog&#x2F; 备用地址：暂无   申请方法  添加本站后，在本页留言，格式如下  &#96;&#96;&#96;yml- name: #您的名字  url: #您的网址  desc: #简短描述  image: #一张图片&#96;&#96;&#96;  小伙伴们">
-<meta property="og:type" content="website">
-<meta property="og:title" content="友情链接">
-<meta property="og:url" content="https://drda-x.github.io/drda-blog/friend/index.html">
+    <meta name="description" content="教你如何使用 OAI Compatible Provider 插件，让 VSCode Copilot 接入讯飞星辰等第三方 OpenAI 兼容接口，免费使用大模型。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="VSCode Copilot 接入第三方 OpenAI 兼容接口">
+<meta property="og:url" content="https://drda-x.github.io/drda-blog/2026/06/18/AI%E6%8E%A5%E5%8F%A3/index.html">
 <meta property="og:site_name" content="加辣の秘密基地">
-<meta property="og:description" content="本站信息  站名： 加辣の秘密基地 站长： drda 地址： https:&#x2F;&#x2F;drda-x.github.io&#x2F;drda-blog&#x2F; 备用地址：暂无   申请方法  添加本站后，在本页留言，格式如下  &#96;&#96;&#96;yml- name: #您的名字  url: #您的网址  desc: #简短描述  image: #一张图片&#96;&#96;&#96;  小伙伴们">
+<meta property="og:description" content="教你如何使用 OAI Compatible Provider 插件，让 VSCode Copilot 接入讯飞星辰等第三方 OpenAI 兼容接口，免费使用大模型。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://drda-x.github.io/images/banner.webp">
-<meta property="article:published_time" content="2026-06-10T07:06:07.435Z">
-<meta property="article:modified_time" content="2026-06-10T07:06:07.435Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/drda-x/images/main/20260618111434954.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/drda-x/images/main/20260618111631737.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/drda-x/images/main/1.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/drda-x/images/main/20260618113246819.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/drda-x/images/main/20260618133255488.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/drda-x/images/main/20260618113955666.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/drda-x/images/main/20260618133930051.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/drda-x/images/main/20260618134007284.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/drda-x/images/main/20260618135446750.png">
+<meta property="article:published_time" content="2026-06-18T02:07:08.000Z">
+<meta property="article:modified_time" content="2026-06-18T06:04:23.814Z">
 <meta property="article:author" content="Drda">
+<meta property="article:tag" content="AI">
+<meta property="article:tag" content="VSCode">
+<meta property="article:tag" content="Copilot">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://drda-x.github.io/images/banner.webp">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/drda-x/images/main/20260618111434954.png">
     <link rel="alternate" href="/drda-blog/atom.xml" title="加辣の秘密基地" type="application/atom+xml"><link rel="alternate" href="/drda-blog/rss2.xml" title="加辣の秘密基地" type="application/rss+xml">
     <link rel="shortcut icon" href="/drda-blog/images/favicon.ico">
   
@@ -134,13 +145,12 @@
   </a>
 </div>
 <header id="header" aria-label="Site header">
-      <picture>
-      </picture>
-        <img  fetchpriority="high" src="/drda-blog/images/banner.webp" alt="友情链接">
+    <picture></picture>
+    <img  fetchpriority="high" src="https://img.8845.top/img2/1942944226892972282.jpg" alt="VSCode Copilot 接入第三方 OpenAI 兼容接口">
   <div id="header-outer">
     <div id="header-title">
           <span id="logo">
-            <h1 data-aos="slide-up">友情链接</h1>
+            <h1 data-aos="slide-up">VSCode Copilot 接入第三方 OpenAI 兼容接口</h1>
           </span>
         <h2 id="subtitle-wrap" data-aos="slide-down">
         </h2>
@@ -150,7 +160,7 @@
 
         <div id="content" aria-label="Page content" class="sidebar-left"  >
           <aside id="sidebar" aria-label="Sidebar">
-  <div class="sidebar-wrapper-container ">
+  <div class="sidebar-wrapper-container sticky">
       <meting-js
         theme="var(--color-link)"
         id="646465"
@@ -169,7 +179,12 @@
       ></meting-js>
   <div class="sidebar-wrapper">
     <div class="sidebar-wrap" data-aos="fade-up">
-        <div class="sidebar-author">
+          <div class="sidebar-toc-sidebar"><h3 class="toc-title">文章目录</h3>
+<div class="sidebar-toc-wrapper toc-div-class" >
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text"> 前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80-%E5%AE%89%E8%A3%85%E6%8F%92%E4%BB%B6"><span class="toc-number">2.</span> <span class="toc-text"> 一、安装插件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C-%E8%8E%B7%E5%8F%96%E5%B9%B6%E9%85%8D%E7%BD%AE-api-key"><span class="toc-number">3.</span> <span class="toc-text"> 二、获取并配置 API Key</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#21-%E5%88%9B%E5%BB%BA%E5%BA%94%E7%94%A8"><span class="toc-number">3.1.</span> <span class="toc-text"> 2.1 创建应用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#22-%E9%85%8D%E7%BD%AE%E6%A8%A1%E5%9E%8B%E6%9C%8D%E5%8A%A1"><span class="toc-number">3.2.</span> <span class="toc-text"> 2.2 配置模型服务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#23-%E8%8E%B7%E5%8F%96-api-key"><span class="toc-number">3.3.</span> <span class="toc-text"> 2.3 获取 API Key</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89-%E9%85%8D%E7%BD%AE%E6%8F%92%E4%BB%B6"><span class="toc-number">4.</span> <span class="toc-text"> 三、配置插件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#31-%E9%85%8D%E7%BD%AE-base-url"><span class="toc-number">4.1.</span> <span class="toc-text"> 3.1 配置 Base URL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#32-%E6%B7%BB%E5%8A%A0%E6%A8%A1%E5%9E%8B"><span class="toc-number">4.2.</span> <span class="toc-text"> 3.2 添加模型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B-%E6%B5%8B%E8%AF%95%E4%BD%BF%E7%94%A8"><span class="toc-number">5.</span> <span class="toc-text"> 四、测试使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94-%E6%80%BB%E7%BB%93"><span class="toc-number">6.</span> <span class="toc-text"> 五、总结</span></a></li></ol>
+</div>
+</div>
+          <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
   <img data-src="/drda-blog/avatar/avatar.webp" data-sizes="auto" alt="Drda" class="lazyload">
   <div class="sidebar-author-name">Drda</div>
   <div class="sidebar-description">Drda&#39;s Blog</div>
@@ -226,82 +241,25 @@
         <div class="sidebar-menu-link">友链</div>
       </div>
 </div>
-
+</div>
+          <div class="sidebar-btn-wrapper" style="position:static">
+            <div class="sidebar-toc-btn current"></div>
+            <div class="sidebar-common-btn"></div>
+          </div>
     </div>
   </div>
   <div class="sidebar-widget">
-        <div class="widget-wrapper">
-    <div class="widget-wrap" data-aos="fade-up">
-      <h3 class="widget-title">分类</h3>
-      <div class="widget">
-        <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/drda-blog/categories/hexo/" title="hexo">hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/drda-blog/categories/%E6%95%99%E7%A8%8B/" title="教程">教程</a></li><li class="category-list-item"><a class="category-list-link" href="/drda-blog/categories/%E7%94%9F%E6%B4%BB/" title="生活">生活</a></li><li class="category-list-item"><a class="category-list-link" href="/drda-blog/categories/%E7%AC%94%E8%AE%B0/" title="笔记">笔记</a></li></ul>
-      </div>
-    </div>
-  </div>
-
-        <div class="widget-wrapper">
-    <div class="widget-wrap" data-aos="fade-up">
-      <h3 class="widget-title">标签</h3>
-      <div class="widget">
-        <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/drda-blog/tags/AI/" rel="tag" title="AI">AI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/drda-blog/tags/Copilot/" rel="tag" title="Copilot">Copilot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/drda-blog/tags/Element/" rel="tag" title="Element">Element</a></li><li class="tag-list-item"><a class="tag-list-link" href="/drda-blog/tags/VSCode/" rel="tag" title="VSCode">VSCode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/drda-blog/tags/Vue/" rel="tag" title="Vue">Vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/drda-blog/tags/git/" rel="tag" title="git">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/drda-blog/tags/github/" rel="tag" title="github">github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/drda-blog/tags/hexo/" rel="tag" title="hexo">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/drda-blog/tags/js/" rel="tag" title="js">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/drda-blog/tags/%E6%9C%8B%E5%8F%8B/" rel="tag" title="朋友">朋友</a></li><li class="tag-list-item"><a class="tag-list-link" href="/drda-blog/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" rel="tag" title="浏览器">浏览器</a></li></ul>
-      </div>
-    </div>
-  </div>
-
-        <div class="widget-wrapper">
-    <div class="widget-wrap" data-aos="fade-up">
-      <h3 class="widget-title">标签云</h3>
-      <div class="widget tagcloud">
-        <a href="/drda-blog/tags/AI/" style="font-size: 10px;">AI</a> <a href="/drda-blog/tags/Copilot/" style="font-size: 10px;">Copilot</a> <a href="/drda-blog/tags/Element/" style="font-size: 10px;">Element</a> <a href="/drda-blog/tags/VSCode/" style="font-size: 10px;">VSCode</a> <a href="/drda-blog/tags/Vue/" style="font-size: 10px;">Vue</a> <a href="/drda-blog/tags/git/" style="font-size: 10px;">git</a> <a href="/drda-blog/tags/github/" style="font-size: 10px;">github</a> <a href="/drda-blog/tags/hexo/" style="font-size: 20px;">hexo</a> <a href="/drda-blog/tags/js/" style="font-size: 10px;">js</a> <a href="/drda-blog/tags/%E6%9C%8B%E5%8F%8B/" style="font-size: 10px;">朋友</a> <a href="/drda-blog/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" style="font-size: 10px;">浏览器</a>
-      </div>
-    </div>
-  </div>
-
-        <div class="widget-wrapper">
-    <div class="widget-wrap" data-aos="fade-up">
-      <h3 class="widget-title">归档</h3>
-      <div class="widget">
-        <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/drda-blog/archives/2026/06/">六月 2026</a></li><li class="archive-list-item"><a class="archive-list-link" href="/drda-blog/archives/2026/03/">三月 2026</a></li><li class="archive-list-item"><a class="archive-list-link" href="/drda-blog/archives/2025/06/">六月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/drda-blog/archives/2024/08/">八月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/drda-blog/archives/2024/07/">七月 2024</a></li></ul>
-      </div>
-    </div>
-  </div>
-
-        <div class="widget-wrapper">
-    <div class="widget-wrap" data-aos="fade-up">
-      <h3 class="widget-title">最新文章</h3>
-      <div class="widget">
-        <ul>
-            <li>
-              <a href="/drda-blog/2026/06/18/AI%E6%8E%A5%E5%8F%A3/" title="VSCode Copilot 接入第三方 OpenAI 兼容接口">VSCode Copilot 接入第三方 OpenAI 兼容接口</a>
-            </li>
-            <li>
-              <a href="/drda-blog/2026/06/17/Hexo%E6%B7%BB%E5%8A%A0%E6%9D%BF%E5%A8%98/" title="Hexo添加板娘">Hexo添加板娘</a>
-            </li>
-            <li>
-              <a href="/drda-blog/2026/06/09/%E4%BD%BF%E7%94%A8%E4%B8%BB%E9%A2%98%E5%8C%85/" title="Hexo使用主题包">Hexo使用主题包</a>
-            </li>
-            <li>
-              <a href="/drda-blog/2026/06/07/%E7%A6%81%E7%94%A8%E6%B5%8F%E8%A7%88%E5%99%A8debugger/" title="禁用浏览器debugger">禁用浏览器debugger</a>
-            </li>
-            <li>
-              <a href="/drda-blog/2026/03/05/%E6%9C%80%E5%90%8E%E7%9A%84%E6%8D%AE%E7%82%B9/" title="最后的据点">最后的据点</a>
-            </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
   </div>
   </div>
 </aside>
 
-          <section id="main" aria-label="Main content"><article id="page-" class="h-entry article" itemscope itemtype="https://schema.org/BlogPosting">
+          <section id="main" aria-label="Main content"><article id="post-AI接口" class="h-entry article" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-inner" data-aos="fade-up">
     <div class="article-meta">
       <div class="article-date">
   <span class="article-date-link icon-calendar" data-aos="zoom-in">
-    <time datetime="2026-06-10T07:06:07.435Z" itemprop="datePublished">2026-06-10</time>
-    <time style="display: none;" id="post-update-time">2026-06-10</time>
+    <time datetime="2026-06-18T02:07:08.000Z" itemprop="datePublished">2026-06-18</time>
+    <time style="display: none;" id="post-update-time">2026-06-18</time>
   </span>
 </div>
 
@@ -310,93 +268,119 @@
     <div class="hr-line"></div>
     
     <div class="e-content article-entry" itemprop="articleBody">
-        <h2 id="本站信息"><a class="markdownIt-Anchor" href="#本站信息"></a> 本站信息</h2>
+        <h2 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h2>
+<p>近日在关注 <strong>GitHubDaily</strong> 的公众号推送时，偶然看到一个标题吸引住了我 —— <strong>「无限量 Token 免费白嫖，科大讯飞大手笔啊！」</strong></p>
+<p>如今 Claude Code、Codex 已成为开发者日常使用最多的 AI 生产力工具，但不少人都是时刻盯着 API 账单来使用，看着 Token 的大量消耗，心里都是一颤一颤的。所以有免费的当然值得试试，看看好不好用。</p>
+<blockquote>
+<p>💡 该活动来自 <a target="_blank" rel="noopener" href="https://maas.xfyun.cn/modelSquare">讯飞星辰 MaaS 平台</a> 的模型集市，限时一个月免费，主打一个白嫖。</p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/drda-x/images/main/20260618111434954.png" alt="Qwen 模型列表" /><br />
+<img src="https://raw.githubusercontent.com/drda-x/images/main/20260618111631737.png" alt="Qwen 模型详情" /></p>
+<p>但是，<strong>如何使用这些 OpenAI 兼容接口呢？</strong></p>
+<p>我使用的 VSCode Copilot 一直不支持通过 OpenAI 兼容接口来接入任意模型，默认的模型选择有限：</p>
+<p><img src="https://raw.githubusercontent.com/drda-x/images/main/1.png" alt="Copilot 默认模型" /></p>
+<p>经过一番搜索，发现有一个插件实现了让 VSCode Copilot 支持其他 OpenAI 兼容接口的功能，本文将详细记录使用方法。</p>
+<h2 id="一-安装插件"><a class="markdownIt-Anchor" href="#一-安装插件"></a> 一、安装插件</h2>
+<ol>
+<li>打开 VSCode，点击左侧扩展市场（快捷键 <code>Ctrl+Shift+X</code>）</li>
+<li>搜索 <strong><code>OAI Compatible Provider for Copilot</code></strong></li>
+<li>点击 <strong>Install</strong> 安装该插件</li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/drda-x/images/main/20260618113246819.png" alt="插件搜索与安装" /></p>
+<h2 id="二-获取并配置-api-key"><a class="markdownIt-Anchor" href="#二-获取并配置-api-key"></a> 二、获取并配置 API Key</h2>
+<p>本文以<strong>科大讯飞模型</strong>为例进行演示：</p>
+<h3 id="21-创建应用"><a class="markdownIt-Anchor" href="#21-创建应用"></a> 2.1 创建应用</h3>
+<ol>
+<li>访问 <a target="_blank" rel="noopener" href="https://console.xfyun.cn/app/myapp">讯飞开放平台</a></li>
+<li>登录账号，点击 <strong>创建新应用</strong></li>
+</ol>
+<h3 id="22-配置模型服务"><a class="markdownIt-Anchor" href="#22-配置模型服务"></a> 2.2 配置模型服务</h3>
+<ol>
+<li>访问 <a target="_blank" rel="noopener" href="https://maas.xfyun.cn/modelSquare">讯飞星辰 MaaS 平台</a></li>
+<li>在模型集市中选择限时免费的模型</li>
+<li>点击 <strong>API 调用</strong></li>
+<li>配置以下信息：
 <ul>
-<li>站名： 加辣の秘密基地</li>
-<li>站长： drda</li>
-<li>地址： <a href="https://drda-x.github.io/drda-blog/">https://drda-x.github.io/drda-blog/</a></li>
-<li>备用地址：暂无</li>
+<li><strong>模型服务 API 名称</strong>：自定义填写（随便写）</li>
+<li><strong>授权应用</strong>：选择刚刚创建的新应用</li>
 </ul>
-<h2 id="申请方法"><a class="markdownIt-Anchor" href="#申请方法"></a> 申请方法</h2>
+</li>
+<li>点击 <strong>确定</strong>，创建服务成功</li>
+</ol>
+<h3 id="23-获取-api-key"><a class="markdownIt-Anchor" href="#23-获取-api-key"></a> 2.3 获取 API Key</h3>
+<p>创建成功后，在 MaaS 平台的 <strong>推理服务</strong> 中可以看到调用信息以及 <strong>API Key</strong>：</p>
+<p><img src="https://raw.githubusercontent.com/drda-x/images/main/20260618133255488.png" alt="API Key 获取" /></p>
+<blockquote>
+<p>📌 <strong>提示</strong>：请妥善保管你的 API Key，不要泄露给他人。</p>
+</blockquote>
+<h2 id="三-配置插件"><a class="markdownIt-Anchor" href="#三-配置插件"></a> 三、配置插件</h2>
+<h3 id="31-配置-base-url"><a class="markdownIt-Anchor" href="#31-配置-base-url"></a> 3.1 配置 Base URL</h3>
+<ol>
+<li>打开 VSCode 设置（快捷键 <code>Ctrl+,</code> 或点击左下角齿轮图标）</li>
+<li>搜索 <strong><code>OAI</code></strong></li>
+<li>选择 <strong>用户（User）</strong> 设置，拉到最下方的 <strong>扩展</strong> 部分</li>
+<li>找到 <strong>OAI Compatible Provider for Copilot</strong> 插件设置</li>
+<li>配置 <strong>Base URL</strong></li>
+</ol>
+<blockquote>
+<p>✅ Base URL 只要是 OpenAI 兼容的接口都可以使用，例如讯飞星辰的接口地址。</p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/drda-x/images/main/20260618113955666.png" alt="Base URL 配置" /></p>
+<h3 id="32-添加模型"><a class="markdownIt-Anchor" href="#32-添加模型"></a> 3.2 添加模型</h3>
+<ol>
+<li>打开 Copilot 对话框</li>
+<li>点击下方的 <strong>Auto</strong> 按钮，打开 Copilot 设置</li>
+<li>在 <strong>语言模型列表</strong> 中添加你的模型信息</li>
+<li>模型类型选择 <strong>OAI Compatible</strong><br />
+<img src="https://raw.githubusercontent.com/drda-x/images/main/20260618133930051.png" alt="添加模型" /><br />
+<img src="https://raw.githubusercontent.com/drda-x/images/main/20260618134007284.png" alt="模型配置完成" /></li>
+</ol>
+<h2 id="四-测试使用"><a class="markdownIt-Anchor" href="#四-测试使用"></a> 四、测试使用</h2>
+<p>配置完成后，在对话框点击 <strong>Auto</strong>，选择你刚刚添加的模型，然后开始使用：</p>
+<p><img src="https://raw.githubusercontent.com/drda-x/images/main/20260618135446750.png" alt="测试结果" /></p>
+<blockquote>
+<p>✨ 如果正常收到回复，说明配置成功！</p>
+</blockquote>
+<h2 id="五-总结"><a class="markdownIt-Anchor" href="#五-总结"></a> 五、总结</h2>
+<p>通过 <strong>OAI Compatible Provider for Copilot</strong> 插件，我们可以突破 Copilot 默认模型的限制，灵活接入各种 OpenAI 兼容的第三方 API。这不仅能够节省 API 费用，还能体验到不同厂商的大模型能力。</p>
+<p><strong>优点：</strong></p>
 <ul>
-<li>添加本站后，在本页留言，格式如下</li>
+<li>🆓 可以利用各平台的免费额度</li>
+<li>🔧 灵活切换不同模型</li>
+<li>🌐 支持所有 OpenAI 兼容接口</li>
 </ul>
-<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="string">```yml</span></span><br><span class="line"><span class="bullet">-</span> <span class="attr">name:</span> <span class="comment">#您的名字</span></span><br><span class="line">  <span class="attr">url:</span> <span class="comment">#您的网址</span></span><br><span class="line">  <span class="attr">desc:</span> <span class="comment">#简短描述</span></span><br><span class="line">  <span class="attr">image:</span> <span class="comment">#一张图片</span></span><br><span class="line"><span class="string">```</span></span><br></pre></td></tr></table></figure>
-<h2 id="小伙伴们"><a class="markdownIt-Anchor" href="#小伙伴们"></a> 小伙伴们</h2>
-<div class="friend-wrap" data-aos="zoom-in"><div class="friend-item-wrap">
-    <a href="https://drda-x.github.io/drda-blog/" rel="noopener nofollow noreferrer" target="_blank"></a>
-    <div class="friend-icon-wrap">
-      <img class="no-lightbox" src="https://drda-x.github.io/drda-blog/avatar/avatar.webp" alt="零糖加辣（drda）">
-    </div>
-    <div class="friend-info-wrap">
-      <div class="friend-name">
-          零糖加辣（drda） 
-      </div>
-      <div class="friend-desc">
-        奶茶少放一点糖，老板加辣
-      </div>
-    </div>
-  </div><div class="friend-item-wrap">
-    <a href="https://fishpi.cn/member/drda" rel="noopener nofollow noreferrer" target="_blank"></a>
-    <div class="friend-icon-wrap">
-      <img class="no-lightbox" src="https://fishpi.cn/images/faviconH.png" alt="摸鱼派">
-    </div>
-    <div class="friend-info-wrap">
-      <div class="friend-name">
-          摸鱼派 
-      </div>
-      <div class="friend-desc">
-        这一个摸鱼聊天室
-      </div>
-    </div>
-  </div><div class="friend-item-wrap">
-    <a href="https://sszsj.com/" rel="noopener nofollow noreferrer" target="_blank"></a>
-    <div class="friend-icon-wrap">
-      <img class="no-lightbox" src="https://tmx.fishpi.cn/image/head.jpg" alt="唐墨夏">
-    </div>
-    <div class="friend-info-wrap">
-      <div class="friend-name">
-          唐墨夏 
-      </div>
-      <div class="friend-desc">
-        鼠鼠在碎觉，请勿打扰~
-      </div>
-    </div>
-  </div><div class="friend-item-wrap">
-    <a href="https://chaichaisocute.top/" rel="noopener nofollow noreferrer" target="_blank"></a>
-    <div class="friend-icon-wrap">
-      <img class="no-lightbox" src="https://tmx.fishpi.cn/img/QQ%E5%9B%BE%E7%89%8720231215172256.jpg" alt="ChaiChai">
-    </div>
-    <div class="friend-info-wrap">
-      <div class="friend-name">
-          ChaiChai 
-      </div>
-      <div class="friend-desc">
-        励志成为优秀且花里胡哨的前端程序员
-      </div>
-    </div>
-  </div><div class="friend-item-wrap">
-    <a href="https://www.lingmx.com/" rel="noopener nofollow noreferrer" target="_blank"></a>
-    <div class="friend-icon-wrap">
-      <img class="no-lightbox" src="https://file.fishpi.cn/2023/07/124527d9kfoo995f6u041ba8d4357bd467530e-7750ef4a.gif" alt="Yui">
-    </div>
-    <div class="friend-info-wrap">
-      <div class="friend-name">
-          Yui 
-      </div>
-      <div class="friend-desc">
-        会点代码，就是浪。
-      </div>
-    </div>
-  </div></div>
+<p><strong>注意事项：</strong></p>
+<ul>
+<li>确保 Base URL 正确且可访问</li>
+<li>API Key 要妥善保管</li>
+<li>注意各平台的调用频率限制</li>
+</ul>
+<hr />
+<p><em>参考资料：</em></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://maas.xfyun.cn/modelSquare">讯飞星辰 MaaS 平台</a></li>
+<li><a target="_blank" rel="noopener" href="https://console.xfyun.cn/app/myapp">讯飞开放平台</a></li>
+</ul>
 
     </div>
     <footer class="article-footer">
-      
-      
+        <a class="article-category-link" href="/drda-blog/categories/%E7%AC%94%E8%AE%B0/" title="笔记" data-aos="zoom-in">笔记</a>
+
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item" data-aos="zoom-in"><a class="article-tag-list-link" href="/drda-blog/tags/AI/" rel="tag" title="AI">AI</a></li><li class="article-tag-list-item" data-aos="zoom-in"><a class="article-tag-list-link" href="/drda-blog/tags/Copilot/" rel="tag" title="Copilot">Copilot</a></li><li class="article-tag-list-item" data-aos="zoom-in"><a class="article-tag-list-link" href="/drda-blog/tags/VSCode/" rel="tag" title="VSCode">VSCode</a></li></ul>
+
     </footer>
   </div>
-  
+    <nav id="article-nav" aria-label="Article navigation" data-aos="fade-up">
+    <div class="article-nav-link-wrap right">
+        <img data-src="https://img.8845.top/img2/%E3%80%8ARe%EF%BC%9A%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84%E5%BC%82%E4%B8%96%E7%95%8C%E7%94%9F%E6%B4%BB%E3%80%8B%E9%9B%B7%E5%A7%866k.png" data-sizes="auto" alt="Hexo添加板娘" class="lazyload">
+      <a href="/drda-blog/2026/06/17/Hexo%E6%B7%BB%E5%8A%A0%E6%9D%BF%E5%A8%98/" aria-label="后一篇: Hexo添加板娘"  title="后一篇: Hexo添加板娘"></a>
+      <div class="article-nav-caption">后一篇</div>
+      <h3 class="article-nav-title">
+          Hexo添加板娘
+      </h3>
+    </div>
+  </nav>
+
 </article>
 
   <section id="comments" data-aos="fade-up">
@@ -460,7 +444,12 @@
       </div>
       <nav id="mobile-nav" aria-label="Mobile navigation">
   <div class="sidebar-wrap">
-      <div class="sidebar-author">
+        <div class="sidebar-toc-sidebar"><h3 class="toc-title">文章目录</h3>
+<div class="sidebar-toc-wrapper toc-div-class" >
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text"> 前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80-%E5%AE%89%E8%A3%85%E6%8F%92%E4%BB%B6"><span class="toc-number">2.</span> <span class="toc-text"> 一、安装插件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C-%E8%8E%B7%E5%8F%96%E5%B9%B6%E9%85%8D%E7%BD%AE-api-key"><span class="toc-number">3.</span> <span class="toc-text"> 二、获取并配置 API Key</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#21-%E5%88%9B%E5%BB%BA%E5%BA%94%E7%94%A8"><span class="toc-number">3.1.</span> <span class="toc-text"> 2.1 创建应用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#22-%E9%85%8D%E7%BD%AE%E6%A8%A1%E5%9E%8B%E6%9C%8D%E5%8A%A1"><span class="toc-number">3.2.</span> <span class="toc-text"> 2.2 配置模型服务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#23-%E8%8E%B7%E5%8F%96-api-key"><span class="toc-number">3.3.</span> <span class="toc-text"> 2.3 获取 API Key</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89-%E9%85%8D%E7%BD%AE%E6%8F%92%E4%BB%B6"><span class="toc-number">4.</span> <span class="toc-text"> 三、配置插件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#31-%E9%85%8D%E7%BD%AE-base-url"><span class="toc-number">4.1.</span> <span class="toc-text"> 3.1 配置 Base URL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#32-%E6%B7%BB%E5%8A%A0%E6%A8%A1%E5%9E%8B"><span class="toc-number">4.2.</span> <span class="toc-text"> 3.2 添加模型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B-%E6%B5%8B%E8%AF%95%E4%BD%BF%E7%94%A8"><span class="toc-number">5.</span> <span class="toc-text"> 四、测试使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94-%E6%80%BB%E7%BB%93"><span class="toc-number">6.</span> <span class="toc-text"> 五、总结</span></a></li></ol>
+</div>
+</div>
+        <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
   <img data-src="/drda-blog/avatar/avatar.webp" data-sizes="auto" alt="Drda" class="lazyload">
   <div class="sidebar-author-name">Drda</div>
   <div class="sidebar-description">Drda&#39;s Blog</div>
@@ -517,8 +506,12 @@
         <div class="sidebar-menu-link">友链</div>
       </div>
 </div>
-
+</div>
   </div>
+      <div class="sidebar-btn-wrapper">
+        <div class="sidebar-toc-btn current"></div>
+        <div class="sidebar-common-btn"></div>
+      </div>
 </nav>
 
     </div>
@@ -629,14 +622,14 @@
       <script data-pjax>
         window.REIMU_POST = {
           author: "Drda",
-          title: "友情链接",
-          url: "https://drda-x.github.io/drda-blog/friend/index.html",
+          title: "VSCode Copilot 接入第三方 OpenAI 兼容接口",
+          url: "https://drda-x.github.io/drda-blog/2026/06/18/AI%E6%8E%A5%E5%8F%A3/",
           excerpt: "",
-          description: "",
-          stripContent: " 本站信息  站名： 加辣の秘密基地 站长： drda 地址： https://drda-x.github.io/drda-blog/ 备用地址：暂无   申请方法  添加本站后，在本页留言，格式如下  ```yml- name: #您的名字  url: #您的网址  desc: #简短描述  image: #一张图片```  小伙伴们                                              零糖加辣（drda）                        奶",
-          date: "Wed Jun 10 2026 15:06:07 GMT+0800",
-          updated: "Wed Jun 10 2026 15:06:07 GMT+0800",
-          cover: "/drda-blog/images/banner.webp",
+          description: "教你如何使用 OAI Compatible Provider 插件，让 VSCode Copilot 接入讯飞星辰等第三方 OpenAI 兼容接口，免费使用大模型。",
+          stripContent: " 前言 近日在关注 GitHubDaily 的公众号推送时，偶然看到一个标题吸引住了我 —— 「无限量 Token 免费白嫖，科大讯飞大手笔啊！」 如今 Claude Code、Codex 已成为开发者日常使用最多的 AI 生产力工具，但不少人都是时刻盯着 API 账单来使用，看着 Token 的大量消耗，心里都是一颤一颤的。所以有免费的当然值得试试，看看好不好用。  💡 该活动来自 讯飞星辰 MaaS 平台 的模型集市，限时一个月免费，主打一个白嫖。    但是，如何使用这些 OpenAI ",
+          date: "Thu Jun 18 2026 10:07:08 GMT+0800",
+          updated: "Thu Jun 18 2026 14:04:23 GMT+0800",
+          cover: "https://img.8845.top/img2/1942944226892972282.jpg",
         };
       </script>
         
