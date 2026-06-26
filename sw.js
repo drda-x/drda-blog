@@ -1,4 +1,4 @@
-const VERSION = "1782465406995";const preCache = ["/drda-blog/images/taichi.png","/drda-blog/images/banner.webp","/drda-blog/css/loader.css","/drda-blog/css/style.css","/drda-blog/js/script.js"];const cacheDomain = [
+const VERSION = "1782465496715";const preCache = ["/drda-blog/images/taichi.png","/drda-blog/images/banner.webp","/drda-blog/css/loader.css","/drda-blog/css/style.css","/drda-blog/js/script.js"];const cacheDomain = [
   "fonts.googleapis.com",
   "npm.webcache.cn",
   "unpkg.com",
