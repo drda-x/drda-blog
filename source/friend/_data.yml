@@ -1,0 +1,35 @@
+- name: 零糖加辣（drda）
+  url: https://drda-x.github.io/drda-blog/
+  desc: 奶茶少糖，喜欢吃辣
+  image: https://drda-x.github.io/drda-blog/avatar/avatar.webp
+
+- name: 摸鱼派
+  url: https://fishpi.cn/member/drda
+  desc: 这一个摸鱼聊天室
+  image: https://fishpi.cn/images/faviconH.png
+
+- name: 唐墨夏
+  url: https://sszsj.com/
+  desc: 鼠鼠在碎觉，请勿打扰~
+  image: https://tmx.fishpi.cn/image/head.jpg
+
+- name: ChaiChai
+  url: https://chaichaisocute.top/
+  desc: 励志成为优秀且花里胡哨的前端程序员
+  image: https://tmx.fishpi.cn/img/QQ%E5%9B%BE%E7%89%8720231215172256.jpg
+
+- name: Yui
+  url: https://www.lingmx.com/
+  desc: 会点代码，就是浪。
+  image: https://file.fishpi.cn/2023/07/124527d9kfoo995f6u041ba8d4357bd467530e-7750ef4a.gif
+
+- name: 咕咕咕
+  url: https://cooooing.github.io/
+  desc: 路漫漫其修远兮，吾将上下而求索。
+  image: https://avatars.githubusercontent.com/u/75006169?v=4
+
+- name: ncc的个人网站
+  url: https://www.zqcnc.cn
+  desc: keep trying!
+  image: https://www.zqcnc.cn/favicon.ico
+
