@@ -120,7 +120,7 @@ sidebar:
     show_common: true # whether to show common sidebar, ignored on mobile devices
 
 social:
-  email: 1239816490@qq.com
+  # email: 1239816490@qq.com
   github: https://github.com/drda-x
   # google: https://plus.google.com/yourname
   # twitter: https://twitter.com/yourname
@@ -189,7 +189,7 @@ i18n:
 triangle_badge:
   enable: true
   icon: github # same as the icon in the social config
-  link: https://github.com/drda-x/drda-blog
+  link: https://github.com/drda-x
 
 layout:
   max_width: 1350px # the max width of the main content area
@@ -568,12 +568,14 @@ firework:
 
 # show categories card on home page
 home_categories:
-  enable: false
+  enable: true
   content:
-    - categories: # string (single-layer category) or array (multi-layer category)
-      cover: # empty means random cover
-    - categories:
-      cover:
+    - categories: 笔记 # string (single-layer category) or array (multi-layer category)
+      cover: https://img.8845.top/img2/133074326_p0.jpg # empty means random cover
+    - categories: 生活
+      cover: https://img.8845.top/img2/126185064.jpg
+    - categories: 其它
+      cover: https://img.8845.top/img2/4.jpg
 
 # whether to display the notification when the article is outdated
 outdate:
@@ -695,14 +697,14 @@ live2d_widgets:
 # Please turn on pjax to use this feature
 player:
   disable_on_mobile: false
-  position: after_sidebar # before_sidebar / after_sidebar / after_widget
+  position: before_sidebar # before_sidebar / after_sidebar / after_widget
   # if you enable meting, you must enable aplayer first
   aplayer:
     # https://github.com/DIYgod/APlayer
     enable: true
     options:
       audio: [ ]
-      fixed: true
+      fixed: false
       autoplay: false
       loop: all
       order: random
@@ -715,11 +717,11 @@ player:
     # https://github.com/metowolf/MetingJS
     # if you want to use meting, please enable aplayer first
     enable: true
-    meting_api: https://api.injahow.cn/meting/?server=:server&type=:type&id=:id # custom api
+    meting_api: https://api.i-meto.com/meting/api?server=:server&type=:type&id=:id&auth=c6e770266f69eab18dcb51fcc31710a47779ec5a # custom api
     options:
-      id: 2653845699
+      id: 646465
       server: netease
-      type: playlist
+      type: song
       auto: 0  # 是否自动播放（0 否 / 1 是）
       loop: all # 循环模式: all / one / none
       order: random # 播放顺序: list / random

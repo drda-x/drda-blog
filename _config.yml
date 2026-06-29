@@ -136,6 +136,26 @@ include:
 exclude:
 ignore:
 
+# live2d
+live2d:
+  enable: true
+  scriptFrom: local
+  pluginRootPath: live2dw/      # 静态资源根路径
+  pluginJsPath: lib/            # JS 文件路径
+  pluginModelPath: assets/      # 模型文件路径
+  tagMode: false
+  log: false
+  model:
+    use: live2d_modules/live2D/model/xiaomai  # npm 包名称
+  display:
+    position: right             # 位置：left 或 right
+    width: 150                  # 宽度
+    height: 300                 # 高度
+  mobile:
+    show: true                  # 移动端是否显示
+  react:
+    opacity: 0.7                # 透明度
+
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
