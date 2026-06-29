@@ -9,7 +9,7 @@
   
   <script>window.REIMU_CONFIG = {};window.REIMU_CONFIG.clipboard_tips = {"success":{"zh-CN":"复制成功 (*^▽^*)"},"fail":{"zh-CN":"复制失败 (ﾟ⊿ﾟ)ﾂ"},"copyright":{"enable":false,"count":50,"license_type":"by-nc-sa"}};window.REIMU_CONFIG.clipboard_tips.copyright.content = '本博客所有文章除特别声明外，均采用 BY-NC-SA 许可协议。转载请注明出处！';window.REIMU_CONFIG.code_block = {"expand":true};window.REIMU_CONFIG.base = 'https://drda-x.github.io/drda-blog';window.REIMU_CONFIG.relative = '/drda-blog/';</script>
   <title>
-    Hexo 初体验 | 加辣の秘密基地
+    Hexo添加板娘 | 加辣の秘密基地
   </title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic|Noto Serif SC:400,400italic,700,700italic&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic|Noto Serif SC:400,400italic,700,700italic&display=swap" media="print" onload="this.media='all'">
@@ -23,19 +23,20 @@
     
 <link rel="stylesheet" href="/drda-blog/css/loader.css">
 
-    <meta name="description" content="一直想搭建一个属于自己的个人博客，记录学习和生活。试过多种方案后，最终选择了 Hexo + GitHub Pages，原因是：免费、静态、速度快、主题丰富。下面把完整的搭建过程记录下来，希望能帮到有同样需求的朋友。  前置准备 在开始之前，确保你的环境已经准备好：  Node.js 和 npm（建议使用 nvm 管理版本） Git 和 GitHub 账号 VS Code 或任意代码编辑器   第一">
+    <meta name="description" content="前言 Live2D 看板娘可以为博客增添趣味性和互动感。本文以 Reimu 主题为例，介绍两种添加看板娘的方式：主题内置 和 自定义配置。   方式一：使用主题内置的 Live2D（推荐新手） 很多 Hexo 主题（如 Reimu、Butterfly 等）已经集成了 Live2D 功能，只需简单配置即可启用。  1. 开启方法 打开主题配置文件 themes&#x2F;reimu&#x2F;_config.yml，">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hexo 初体验">
-<meta property="og:url" content="https://drda-x.github.io/drda-blog/2024/07/18/post_1/index.html">
+<meta property="og:title" content="Hexo添加板娘">
+<meta property="og:url" content="https://drda-x.github.io/drda-blog/2025/12/17/Hexo%E6%B7%BB%E5%8A%A0%E6%9D%BF%E5%A8%98/index.html">
 <meta property="og:site_name" content="加辣の秘密基地">
-<meta property="og:description" content="一直想搭建一个属于自己的个人博客，记录学习和生活。试过多种方案后，最终选择了 Hexo + GitHub Pages，原因是：免费、静态、速度快、主题丰富。下面把完整的搭建过程记录下来，希望能帮到有同样需求的朋友。  前置准备 在开始之前，确保你的环境已经准备好：  Node.js 和 npm（建议使用 nvm 管理版本） Git 和 GitHub 账号 VS Code 或任意代码编辑器   第一">
+<meta property="og:description" content="前言 Live2D 看板娘可以为博客增添趣味性和互动感。本文以 Reimu 主题为例，介绍两种添加看板娘的方式：主题内置 和 自定义配置。   方式一：使用主题内置的 Live2D（推荐新手） 很多 Hexo 主题（如 Reimu、Butterfly 等）已经集成了 Live2D 功能，只需简单配置即可启用。  1. 开启方法 打开主题配置文件 themes&#x2F;reimu&#x2F;_config.yml，">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-07-18T09:16:08.000Z">
-<meta property="article:modified_time" content="2026-06-26T09:21:00.974Z">
+<meta property="og:image" content="https://file.fishpi.cn/2026/06/kbn-38f3482a.png">
+<meta property="article:published_time" content="2025-12-17T06:26:29.000Z">
+<meta property="article:modified_time" content="2026-06-29T09:41:12.429Z">
 <meta property="article:author" content="Drda">
 <meta property="article:tag" content="hexo">
-<meta property="article:tag" content="github">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://file.fishpi.cn/2026/06/kbn-38f3482a.png">
     <link rel="alternate" href="/drda-blog/atom.xml" title="加辣の秘密基地" type="application/atom+xml"><link rel="alternate" href="/drda-blog/rss2.xml" title="加辣の秘密基地" type="application/rss+xml">
     <link rel="shortcut icon" href="/drda-blog/images/favicon.ico">
   
@@ -129,17 +130,17 @@
       <a id="nav-rss-link" class="nav-icon" href="/drda-blog/atom.xml" title="RSS 订阅" aria-label="RSS 订阅" target="_blank"></a>
       <a id="nav-search-btn" class="nav-icon popup-trigger" title="搜索" aria-label="搜索"></a>
   </nav>
-  <a href="https://github.com/drda-x/drda-blog" class="triangle-badge" title="github" target="_blank" rel="noopener nofollow noreferrer">
+  <a href="https://github.com/drda-x" class="triangle-badge" title="github" target="_blank" rel="noopener nofollow noreferrer">
     <div class="icon icon-github triangle-badge-icon"></div>
   </a>
 </div>
 <header id="header" aria-label="Site header">
     <picture></picture>
-    <img  fetchpriority="high" src="https://img.8845.top/img2/%E3%80%8A%E4%BA%B2%E7%88%B1%E7%9A%84%E5%BC%97%E5%85%B0%E5%85%8B%E6%96%AF%E3%80%8B024k.jpg" alt="Hexo 初体验">
+    <img  fetchpriority="high" src="https://img.8845.top/img2/%E3%80%8ARe%EF%BC%9A%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84%E5%BC%82%E4%B8%96%E7%95%8C%E7%94%9F%E6%B4%BB%E3%80%8B%E9%9B%B7%E5%A7%866k.png" alt="Hexo添加板娘">
   <div id="header-outer">
     <div id="header-title">
           <span id="logo">
-            <h1 data-aos="slide-up">Hexo 初体验</h1>
+            <h1 data-aos="slide-up">Hexo添加板娘</h1>
           </span>
         <h2 id="subtitle-wrap" data-aos="slide-down">
         </h2>
@@ -163,14 +164,14 @@
         preload="auto"
         volume="0.7"
         mutex="true"
-        list-folded="true"
+        list-folded="false"
         lrc-type="3"
       ></meting-js>
   <div class="sidebar-wrapper">
     <div class="sidebar-wrap" data-aos="fade-up">
           <div class="sidebar-toc-sidebar"><h3 class="toc-title">文章目录</h3>
 <div class="sidebar-toc-wrapper toc-div-class" >
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E7%BD%AE%E5%87%86%E5%A4%87"><span class="toc-number">1.</span> <span class="toc-text"> 前置准备</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5%E5%AE%89%E8%A3%85-hexo-cli"><span class="toc-number">2.</span> <span class="toc-text"> 第一步：安装 Hexo CLI</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5%E5%88%9D%E5%A7%8B%E5%8C%96%E9%A1%B9%E7%9B%AE"><span class="toc-number">3.</span> <span class="toc-text"> 第二步：初始化项目</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E6%AD%A5%E6%9C%AC%E5%9C%B0%E9%A2%84%E8%A7%88"><span class="toc-number">4.</span> <span class="toc-text"> 第三步：本地预览</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E5%9B%9B%E6%AD%A5%E5%88%9B%E5%BB%BA-github-%E4%BB%93%E5%BA%93"><span class="toc-number">5.</span> <span class="toc-text"> 第四步：创建 GitHub 仓库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%BA%94%E6%AD%A5%E9%85%8D%E7%BD%AE%E9%83%A8%E7%BD%B2"><span class="toc-number">6.</span> <span class="toc-text"> 第五步：配置部署</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E5%85%AD%E6%AD%A5%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2%E6%8F%92%E4%BB%B6"><span class="toc-number">7.</span> <span class="toc-text"> 第六步：安装部署插件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%83%E6%AD%A5%E7%94%9F%E6%88%90%E5%B9%B6%E6%8E%A8%E9%80%81"><span class="toc-number">8.</span> <span class="toc-text"> 第七步：生成并推送</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93"><span class="toc-number">9.</span> <span class="toc-text"> 常用命令总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98"><span class="toc-number">10.</span> <span class="toc-text"> 常见问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%99%E5%9C%A8%E6%9C%80%E5%90%8E"><span class="toc-number">11.</span> <span class="toc-text"> 写在最后</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text"> 前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B9%E5%BC%8F%E4%B8%80%E4%BD%BF%E7%94%A8%E4%B8%BB%E9%A2%98%E5%86%85%E7%BD%AE%E7%9A%84-live2d%E6%8E%A8%E8%8D%90%E6%96%B0%E6%89%8B"><span class="toc-number">2.</span> <span class="toc-text"> 方式一：使用主题内置的 Live2D（推荐新手）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%BC%80%E5%90%AF%E6%96%B9%E6%B3%95"><span class="toc-number">2.1.</span> <span class="toc-text"> 1. 开启方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%8E%9F%E7%90%86%E8%AF%B4%E6%98%8E"><span class="toc-number">2.2.</span> <span class="toc-text"> 2. 原理说明</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B9%E5%BC%8F%E4%BA%8C%E4%BD%BF%E7%94%A8-hexo-helper-live2d-%E6%8F%92%E4%BB%B6%E6%8E%A8%E8%8D%90%E8%BF%9B%E9%98%B6%E7%94%A8%E6%88%B7"><span class="toc-number">3.</span> <span class="toc-text"> 方式二：使用 hexo-helper-live2d 插件（推荐进阶用户）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%AE%89%E8%A3%85%E6%8F%92%E4%BB%B6"><span class="toc-number">3.1.</span> <span class="toc-text"> 1. 安装插件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%AE%89%E8%A3%85%E6%A8%A1%E5%9E%8B"><span class="toc-number">3.2.</span> <span class="toc-text"> 2. 安装模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E9%85%8D%E7%BD%AE%E6%8F%92%E4%BB%B6"><span class="toc-number">3.3.</span> <span class="toc-text"> 3. 配置插件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E7%A6%81%E7%94%A8%E4%B8%BB%E9%A2%98%E5%86%85%E7%BD%AE%E7%9A%84-live2d"><span class="toc-number">3.4.</span> <span class="toc-text"> 4. 禁用主题内置的 Live2D</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E6%B5%8B%E8%AF%95"><span class="toc-number">3.5.</span> <span class="toc-text"> 5. 测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E6%9B%B4%E6%8D%A2%E6%A8%A1%E5%9E%8B"><span class="toc-number">3.6.</span> <span class="toc-text"> 如何更换模型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">4.</span> <span class="toc-text"> 总结</span></a></li></ol>
 </div>
 </div>
           <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
@@ -242,13 +243,13 @@
   </div>
 </aside>
 
-          <section id="main" aria-label="Main content"><article id="post-post_1" class="h-entry article" itemscope itemtype="https://schema.org/BlogPosting">
+          <section id="main" aria-label="Main content"><article id="post-Hexo添加板娘" class="h-entry article" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-inner" data-aos="fade-up">
     <div class="article-meta">
       <div class="article-date">
   <span class="article-date-link icon-calendar" data-aos="zoom-in">
-    <time datetime="2024-07-18T09:16:08.000Z" itemprop="datePublished">2024-07-18</time>
-    <time style="display: none;" id="post-update-time">2026-06-26</time>
+    <time datetime="2025-12-17T06:26:29.000Z" itemprop="datePublished">2025-12-17</time>
+    <time style="display: none;" id="post-update-time">2026-06-29</time>
   </span>
 </div>
 
@@ -257,113 +258,76 @@
     <div class="hr-line"></div>
     
     <div class="e-content article-entry" itemprop="articleBody">
-        <p>一直想搭建一个属于自己的个人博客，记录学习和生活。试过多种方案后，最终选择了 <strong>Hexo + GitHub Pages</strong>，原因是：免费、静态、速度快、主题丰富。下面把完整的搭建过程记录下来，希望能帮到有同样需求的朋友。</p>
-<h2 id="前置准备"><a class="markdownIt-Anchor" href="#前置准备"></a> 前置准备</h2>
-<p>在开始之前，确保你的环境已经准备好：</p>
-<ol>
-<li><strong>Node.js 和 npm</strong>（建议使用 nvm 管理版本）</li>
-<li><strong>Git</strong> 和 <strong>GitHub 账号</strong></li>
-<li><strong>VS Code</strong> 或任意代码编辑器</li>
-</ol>
-<h2 id="第一步安装-hexo-cli"><a class="markdownIt-Anchor" href="#第一步安装-hexo-cli"></a> 第一步：安装 Hexo CLI</h2>
-<p>打开终端，全局安装 Hexo 命令行工具：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
-<p>安装完成后，验证是否成功：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo -v</span><br></pre></td></tr></table></figure>
-<h2 id="第二步初始化项目"><a class="markdownIt-Anchor" href="#第二步初始化项目"></a> 第二步：初始化项目</h2>
-<p>创建一个文件夹，名字随便取，例如 <code>myHexo</code>，然后进入该目录执行初始化：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> myHexo</span><br><span class="line"><span class="built_in">cd</span> myHexo</span><br><span class="line">hexo init</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
-<p><code>hexo init</code> 会自动下载依赖并生成目录结构，看到提示 <strong>“start blogging with hexo!”</strong> 就成功了。目录结构如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">myHexo/</span><br><span class="line">├── _config.yml          # 站点配置文件</span><br><span class="line">├── package.json</span><br><span class="line">├── scaffolds/             # 文章模板</span><br><span class="line">├── source/                # 源文件（文章、页面）</span><br><span class="line">├── themes/                # 主题目录</span><br><span class="line">└── node_modules/</span><br></pre></td></tr></table></figure>
-<h2 id="第三步本地预览"><a class="markdownIt-Anchor" href="#第三步本地预览"></a> 第三步：本地预览</h2>
-<p>启动本地服务器，默认端口 4000：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo server</span><br><span class="line"><span class="comment"># 或简写</span></span><br><span class="line">hexo s</span><br></pre></td></tr></table></figure>
-<p>浏览器打开 <code>http://localhost:4000</code>，就能看到默认的 Hello World 页面了。按 <code>Ctrl + C</code> 停止服务。</p>
-<h2 id="第四步创建-github-仓库"><a class="markdownIt-Anchor" href="#第四步创建-github-仓库"></a> 第四步：创建 GitHub 仓库</h2>
-<ol>
-<li>登录 GitHub，新建一个仓库</li>
-<li>仓库名必须是 <strong><code>你的用户名.github.io</code></strong>（这是 GitHub Pages 的规则）</li>
-<li>保持仓库为空（不要勾选 README），记录仓库地址：</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">https://github.com/你的用户名/你的用户名.github.io.git</span><br></pre></td></tr></table></figure>
-<h2 id="第五步配置部署"><a class="markdownIt-Anchor" href="#第五步配置部署"></a> 第五步：配置部署</h2>
-<p>打开项目根目录的 <code>_config.yml</code>，翻到最底部，找到 <code>deploy</code> 字段并修改为：</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repo:</span> <span class="string">https://github.com/你的用户名/你的用户名.github.io.git</span></span><br><span class="line">  <span class="attr">branch:</span> <span class="string">main</span></span><br></pre></td></tr></table></figure>
+        <h2 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h2>
+<p>Live2D 看板娘可以为博客增添趣味性和互动感。本文以 Reimu 主题为例，介绍两种添加看板娘的方式：<strong>主题内置</strong> 和 <strong>自定义配置</strong>。</p>
+<hr />
+<h2 id="方式一使用主题内置的-live2d推荐新手"><a class="markdownIt-Anchor" href="#方式一使用主题内置的-live2d推荐新手"></a> 方式一：使用主题内置的 Live2D（推荐新手）</h2>
+<p>很多 Hexo 主题（如 Reimu、Butterfly 等）已经集成了 Live2D 功能，只需简单配置即可启用。</p>
+<h3 id="1-开启方法"><a class="markdownIt-Anchor" href="#1-开启方法"></a> 1. 开启方法</h3>
+<p>打开主题配置文件 <code>themes/reimu/_config.yml</code>，找到 <code>live2d</code> 配置节：</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Experimental</span></span><br><span class="line"><span class="attr">live2d:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<p>将 <code>enable</code> 改为 <code>true</code>，保存后重启 Hexo 即可看到看板娘。</p>
+<p><img src="https://file.fishpi.cn/2026/06/kbn-38f3482a.png" alt="kbn.png" /></p>
+<p>在页面中有多个板娘可以进行切换，还可以换装，拍照等许多互动体验。想了解更多功能实现可以访问<a target="_blank" rel="noopener" href="https://github.com/LIlGG/plugin-live2d">https://github.com/LIlGG/plugin-live2d</a></p>
+<h3 id="2-原理说明"><a class="markdownIt-Anchor" href="#2-原理说明"></a> 2. 原理说明</h3>
+<p>Reimu 主题内置的 Live2D 使用 <a target="_blank" rel="noopener" href="https://github.com/D-Sketon/plugin-live2d">D-Sketon/plugin-live2d</a> 库，脚本从 CDN 自动加载，无需额外安装任何依赖。</p>
+<h2 id="方式二使用-hexo-helper-live2d-插件推荐进阶用户"><a class="markdownIt-Anchor" href="#方式二使用-hexo-helper-live2d-插件推荐进阶用户"></a> 方式二：使用 hexo-helper-live2d 插件（推荐进阶用户）</h2>
+<p>如果需要更多模型选择或使用本地模型，可以使用 <code>hexo-helper-live2d</code> 插件。</p>
+<h3 id="1-安装插件"><a class="markdownIt-Anchor" href="#1-安装插件"></a> 1. 安装插件</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install hexo-helper-live2d --save</span><br></pre></td></tr></table></figure>
+<h3 id="2-安装模型"><a class="markdownIt-Anchor" href="#2-安装模型"></a> 2. 安装模型</h3>
+<p><strong>方式 A：使用 npm 模型包（推荐）</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 模型包</span></span><br><span class="line">npm install live2d-widget-model-shizuku --save   <span class="comment"># 诗库</span></span><br><span class="line">npm install live2d-widget-model-koharu --save    <span class="comment"># 小春</span></span><br><span class="line">npm install live2d-widget-model-hijiki --save    <span class="comment"># 羊驼</span></span><br><span class="line">npm install live2d-widget-model-tororo --save    <span class="comment"># 小白</span></span><br></pre></td></tr></table></figure>
+<p><strong>方式 B：使用本地模型</strong></p>
+<p>如果你有自定义的模型文件，可以放在项目根目录的 <code>live2d_modules/</code> 目录下，结构如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">live2d_modules/</span><br><span class="line">└── live2D/</span><br><span class="line">    ├── js/</span><br><span class="line">    │   ├── live2d.min.js</span><br><span class="line">    │   └── message.js</span><br><span class="line">    └── model/</span><br><span class="line">        └── xiaomai/</span><br><span class="line">            ├── xiaomai.model.json</span><br><span class="line">            ├── umaru.moc</span><br><span class="line">            └── ...</span><br></pre></td></tr></table></figure>
+<h3 id="3-配置插件"><a class="markdownIt-Anchor" href="#3-配置插件"></a> 3. 配置插件</h3>
+<p>在站点配置文件 <code>_config.yml</code>（不是主题的）中添加：</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># live2d</span></span><br><span class="line"><span class="attr">live2d:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">scriptFrom:</span> <span class="string">local</span></span><br><span class="line">  <span class="attr">pluginRootPath:</span> <span class="string">live2dw/</span>      <span class="comment"># 静态资源根路径</span></span><br><span class="line">  <span class="attr">pluginJsPath:</span> <span class="string">lib/</span>            <span class="comment"># JS 文件路径</span></span><br><span class="line">  <span class="attr">pluginModelPath:</span> <span class="string">assets/</span>      <span class="comment"># 模型文件路径</span></span><br><span class="line">  <span class="attr">tagMode:</span> <span class="literal">false</span></span><br><span class="line">  <span class="attr">log:</span> <span class="literal">false</span></span><br><span class="line">  <span class="attr">model:</span></span><br><span class="line">    <span class="attr">use:</span> <span class="string">live2d-widget-model-hijiki</span>  <span class="comment"># npm 包名称</span></span><br><span class="line">  <span class="attr">display:</span></span><br><span class="line">    <span class="attr">position:</span> <span class="string">right</span>             <span class="comment"># 位置：left 或 right</span></span><br><span class="line">    <span class="attr">width:</span> <span class="number">150</span>                  <span class="comment"># 宽度</span></span><br><span class="line">    <span class="attr">height:</span> <span class="number">300</span>                 <span class="comment"># 高度</span></span><br><span class="line">  <span class="attr">mobile:</span></span><br><span class="line">    <span class="attr">show:</span> <span class="literal">true</span>                  <span class="comment"># 移动端是否显示</span></span><br><span class="line">  <span class="attr">react:</span></span><br><span class="line">    <span class="attr">opacity:</span> <span class="number">0.7</span>                <span class="comment"># 透明度</span></span><br></pre></td></tr></table></figure>
+<p><strong>如果使用本地模型</strong>，将 <code>model.use</code> 改为本地目录路径：</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">model:</span></span><br><span class="line">  <span class="attr">use:</span> <span class="string">live2d_modules/live2D/model/xiaomai</span> <span class="comment"># 这里我使用的是自定义的小埋模型</span></span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>注意：<code>branch</code> 的值根据你的仓库默认分支填写，旧版 GitHub 可能是 <code>master</code>。</p>
+<p><strong>注意</strong>：<code>model.use</code> 应该指向模型<strong>目录</strong>，而不是 <code>.model.json</code> 文件本身。</p>
 </blockquote>
-<p>同时把 <code>_config.yml</code> 顶部的 <code>url</code> 字段改成你的站点地址：</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">url:</span> <span class="string">https://你的用户名.github.io</span></span><br></pre></td></tr></table></figure>
-<h2 id="第六步安装部署插件"><a class="markdownIt-Anchor" href="#第六步安装部署插件"></a> 第六步：安装部署插件</h2>
-<p>Hexo 默认不自带 Git 部署功能，需要额外安装插件：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
-<h2 id="第七步生成并推送"><a class="markdownIt-Anchor" href="#第七步生成并推送"></a> 第七步：生成并推送</h2>
-<p>首次部署前，建议先执行生成命令：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo generate</span><br><span class="line"><span class="comment"># 或简写</span></span><br><span class="line">hexo g</span><br></pre></td></tr></table></figure>
-<p>然后一键部署到 GitHub：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo deploy</span><br><span class="line"><span class="comment"># 或简写</span></span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure>
-<p>等待命令执行完毕，浏览器访问 <code>https://你的用户名.github.io</code>，博客就上线了！</p>
-<h2 id="常用命令总结"><a class="markdownIt-Anchor" href="#常用命令总结"></a> 常用命令总结</h2>
-<table>
-<thead>
-<tr>
-<th>命令</th>
-<th>作用</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>hexo new &quot;文章标题&quot;</code></td>
-<td>新建文章</td>
-</tr>
-<tr>
-<td><code>hexo server</code></td>
-<td>启动本地预览</td>
-</tr>
-<tr>
-<td><code>hexo generate</code></td>
-<td>生成静态文件</td>
-</tr>
-<tr>
-<td><code>hexo deploy</code></td>
-<td>部署到远程</td>
-</tr>
-<tr>
-<td><code>hexo clean</code></td>
-<td>清理缓存和已生成文件</td>
-</tr>
-<tr>
-<td><code>hexo clean &amp;&amp; hexo generate &amp;&amp; hexo deploy</code></td>
-<td>完整发布流程</td>
-</tr>
-</tbody>
-</table>
-<h2 id="常见问题"><a class="markdownIt-Anchor" href="#常见问题"></a> 常见问题</h2>
-<ul>
-<li><strong>部署失败提示 <code>Authentication failed</code></strong>：说明你用的是 HTTPS 协议，需要输入用户名密码，或者提前配置 SSH key 免密推送。</li>
-<li><strong>页面样式丢失</strong>：检查 <code>_config.yml</code> 里的 <code>url</code> 和 <code>root</code> 是否配置正确。</li>
-<li><strong>修改后不生效</strong>：先 <code>hexo clean</code> 再重新生成。</li>
-</ul>
-<h2 id="写在最后"><a class="markdownIt-Anchor" href="#写在最后"></a> 写在最后</h2>
-<p>Hexo 的社区非常活跃，主题和插件都很丰富。后续可以尝试换主题、加评论系统、接入 CDN 加速等。搭建博客只是第一步，持续输出内容才是重点。加油！</p>
+<h3 id="4-禁用主题内置的-live2d"><a class="markdownIt-Anchor" href="#4-禁用主题内置的-live2d"></a> 4. 禁用主题内置的 Live2D</h3>
+<p>使用插件时，记得禁用主题内置的 Live2D，避免冲突：</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># themes/reimu/_config.yml</span></span><br><span class="line"><span class="attr">live2d:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+<h3 id="5-测试"><a class="markdownIt-Anchor" href="#5-测试"></a> 5. 测试</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo server</span><br></pre></td></tr></table></figure>
+<p>访问 <code>http://localhost:4000</code>，查看看板娘是否正常显示。</p>
+<hr />
+<h3 id="如何更换模型"><a class="markdownIt-Anchor" href="#如何更换模型"></a> 如何更换模型</h3>
+<p>只需修改 <code>model.use</code> 的值：</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 使用 npm 包</span></span><br><span class="line"><span class="attr">model:</span></span><br><span class="line">  <span class="attr">use:</span> <span class="string">live2d-widget-model-shizuku</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 或使用本地模型</span></span><br><span class="line"><span class="attr">model:</span></span><br><span class="line">  <span class="attr">use:</span> <span class="string">live2d_modules/live2D/model/shizuku</span></span><br></pre></td></tr></table></figure>
+<hr />
+<h2 id="总结"><a class="markdownIt-Anchor" href="#总结"></a> 总结</h2>
+<p>如果只是想让博客多个看板娘，直接用主题内置的最简单；如果想深度定制或使用自己的模型，选择 <code>hexo-helper-live2d</code> 插件。</p>
 
     </div>
     <footer class="article-footer">
         <a class="article-category-link" href="/drda-blog/categories/%E7%AC%94%E8%AE%B0/" title="笔记" data-aos="zoom-in">笔记</a>
 
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item" data-aos="zoom-in"><a class="article-tag-list-link" href="/drda-blog/tags/github/" rel="tag" title="github">github</a></li><li class="article-tag-list-item" data-aos="zoom-in"><a class="article-tag-list-link" href="/drda-blog/tags/hexo/" rel="tag" title="hexo">hexo</a></li></ul>
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item" data-aos="zoom-in"><a class="article-tag-list-link" href="/drda-blog/tags/hexo/" rel="tag" title="hexo">hexo</a></li></ul>
 
     </footer>
   </div>
     <nav id="article-nav" aria-label="Article navigation" data-aos="fade-up">
       <div class="article-nav-link-wrap left">
-          <img data-src="https://img.8845.top/img2/7.jpg" data-sizes="auto" alt="Git 首次提交代码" class="lazyload">
-        <a href="/drda-blog/2024/08/02/post_3/" aria-label="前一篇: Git 首次提交代码" title="前一篇: Git 首次提交代码"></a>
+          <img data-src="https://img.8845.top/good" data-sizes="auto" alt="最后的据点" class="lazyload">
+        <a href="/drda-blog/2026/03/05/%E6%9C%80%E5%90%8E%E7%9A%84%E6%8D%AE%E7%82%B9/" aria-label="前一篇: 最后的据点" title="前一篇: 最后的据点"></a>
         <div class="article-nav-caption">前一篇</div>
         <h3 class="article-nav-title">
-            Git 首次提交代码
+            最后的据点
         </h3>
       </div>
+    <div class="article-nav-link-wrap right">
+        <img data-src="https://img.8845.top/img2/G5ZJOsgb0AEGSHm.jpg" data-sizes="auto" alt="Hexo使用主题包" class="lazyload">
+      <a href="/drda-blog/2025/07/10/%E4%BD%BF%E7%94%A8%E4%B8%BB%E9%A2%98%E5%8C%85/" aria-label="后一篇: Hexo使用主题包"  title="后一篇: Hexo使用主题包"></a>
+      <div class="article-nav-caption">后一篇</div>
+      <h3 class="article-nav-title">
+          Hexo使用主题包
+      </h3>
+    </div>
   </nav>
 
 </article>
@@ -431,7 +395,7 @@
   <div class="sidebar-wrap">
         <div class="sidebar-toc-sidebar"><h3 class="toc-title">文章目录</h3>
 <div class="sidebar-toc-wrapper toc-div-class" >
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E7%BD%AE%E5%87%86%E5%A4%87"><span class="toc-number">1.</span> <span class="toc-text"> 前置准备</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5%E5%AE%89%E8%A3%85-hexo-cli"><span class="toc-number">2.</span> <span class="toc-text"> 第一步：安装 Hexo CLI</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5%E5%88%9D%E5%A7%8B%E5%8C%96%E9%A1%B9%E7%9B%AE"><span class="toc-number">3.</span> <span class="toc-text"> 第二步：初始化项目</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E6%AD%A5%E6%9C%AC%E5%9C%B0%E9%A2%84%E8%A7%88"><span class="toc-number">4.</span> <span class="toc-text"> 第三步：本地预览</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E5%9B%9B%E6%AD%A5%E5%88%9B%E5%BB%BA-github-%E4%BB%93%E5%BA%93"><span class="toc-number">5.</span> <span class="toc-text"> 第四步：创建 GitHub 仓库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%BA%94%E6%AD%A5%E9%85%8D%E7%BD%AE%E9%83%A8%E7%BD%B2"><span class="toc-number">6.</span> <span class="toc-text"> 第五步：配置部署</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E5%85%AD%E6%AD%A5%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2%E6%8F%92%E4%BB%B6"><span class="toc-number">7.</span> <span class="toc-text"> 第六步：安装部署插件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%83%E6%AD%A5%E7%94%9F%E6%88%90%E5%B9%B6%E6%8E%A8%E9%80%81"><span class="toc-number">8.</span> <span class="toc-text"> 第七步：生成并推送</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93"><span class="toc-number">9.</span> <span class="toc-text"> 常用命令总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98"><span class="toc-number">10.</span> <span class="toc-text"> 常见问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%99%E5%9C%A8%E6%9C%80%E5%90%8E"><span class="toc-number">11.</span> <span class="toc-text"> 写在最后</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text"> 前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B9%E5%BC%8F%E4%B8%80%E4%BD%BF%E7%94%A8%E4%B8%BB%E9%A2%98%E5%86%85%E7%BD%AE%E7%9A%84-live2d%E6%8E%A8%E8%8D%90%E6%96%B0%E6%89%8B"><span class="toc-number">2.</span> <span class="toc-text"> 方式一：使用主题内置的 Live2D（推荐新手）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%BC%80%E5%90%AF%E6%96%B9%E6%B3%95"><span class="toc-number">2.1.</span> <span class="toc-text"> 1. 开启方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%8E%9F%E7%90%86%E8%AF%B4%E6%98%8E"><span class="toc-number">2.2.</span> <span class="toc-text"> 2. 原理说明</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B9%E5%BC%8F%E4%BA%8C%E4%BD%BF%E7%94%A8-hexo-helper-live2d-%E6%8F%92%E4%BB%B6%E6%8E%A8%E8%8D%90%E8%BF%9B%E9%98%B6%E7%94%A8%E6%88%B7"><span class="toc-number">3.</span> <span class="toc-text"> 方式二：使用 hexo-helper-live2d 插件（推荐进阶用户）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%AE%89%E8%A3%85%E6%8F%92%E4%BB%B6"><span class="toc-number">3.1.</span> <span class="toc-text"> 1. 安装插件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%AE%89%E8%A3%85%E6%A8%A1%E5%9E%8B"><span class="toc-number">3.2.</span> <span class="toc-text"> 2. 安装模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E9%85%8D%E7%BD%AE%E6%8F%92%E4%BB%B6"><span class="toc-number">3.3.</span> <span class="toc-text"> 3. 配置插件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E7%A6%81%E7%94%A8%E4%B8%BB%E9%A2%98%E5%86%85%E7%BD%AE%E7%9A%84-live2d"><span class="toc-number">3.4.</span> <span class="toc-text"> 4. 禁用主题内置的 Live2D</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E6%B5%8B%E8%AF%95"><span class="toc-number">3.5.</span> <span class="toc-text"> 5. 测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E6%9B%B4%E6%8D%A2%E6%A8%A1%E5%9E%8B"><span class="toc-number">3.6.</span> <span class="toc-text"> 如何更换模型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">4.</span> <span class="toc-text"> 总结</span></a></li></ol>
 </div>
 </div>
         <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
@@ -607,14 +571,14 @@
       <script data-pjax>
         window.REIMU_POST = {
           author: "Drda",
-          title: "Hexo 初体验",
-          url: "https://drda-x.github.io/drda-blog/2024/07/18/post_1/",
+          title: "Hexo添加板娘",
+          url: "https://drda-x.github.io/drda-blog/2025/12/17/Hexo%E6%B7%BB%E5%8A%A0%E6%9D%BF%E5%A8%98/",
           excerpt: "",
           description: "",
-          stripContent: "一直想搭建一个属于自己的个人博客，记录学习和生活。试过多种方案后，最终选择了 Hexo + GitHub Pages，原因是：免费、静态、速度快、主题丰富。下面把完整的搭建过程记录下来，希望能帮到有同样需求的朋友。  前置准备 在开始之前，确保你的环境已经准备好：  Node.js 和 npm（建议使用 nvm 管理版本） Git 和 GitHub 账号 VS Code 或任意代码编辑器   第一步：安装 Hexo CLI 打开终端，全局安装 Hexo 命令行工具： npm install -g",
-          date: "Thu Jul 18 2024 17:16:08 GMT+0800",
-          updated: "Fri Jun 26 2026 17:21:00 GMT+0800",
-          cover: "https://img.8845.top/img2/%E3%80%8A%E4%BA%B2%E7%88%B1%E7%9A%84%E5%BC%97%E5%85%B0%E5%85%8B%E6%96%AF%E3%80%8B024k.jpg",
+          stripContent: " 前言 Live2D 看板娘可以为博客增添趣味性和互动感。本文以 Reimu 主题为例，介绍两种添加看板娘的方式：主题内置 和 自定义配置。   方式一：使用主题内置的 Live2D（推荐新手） 很多 Hexo 主题（如 Reimu、Butterfly 等）已经集成了 Live2D 功能，只需简单配置即可启用。  1. 开启方法 打开主题配置文件 themes/reimu/_config.yml，找到 live2d 配置节： # Experimentallive2d:  enable: true",
+          date: "Wed Dec 17 2025 14:26:29 GMT+0800",
+          updated: "Mon Jun 29 2026 17:41:12 GMT+0800",
+          cover: "https://img.8845.top/img2/%E3%80%8ARe%EF%BC%9A%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84%E5%BC%82%E4%B8%96%E7%95%8C%E7%94%9F%E6%B4%BB%E3%80%8B%E9%9B%B7%E5%A7%866k.png",
         };
       </script>
         
@@ -859,7 +823,7 @@
           }
         }
       };
-        var meting_api = "https://api.i-meto.com/meting/api?server=:server&type=:type&id=:id&r=:r";
+        var meting_api = "https://api.i-meto.com/meting/api?server=:server&type=:type&id=:id&auth=c6e770266f69eab18dcb51fcc31710a47779ec5a";
     </script>
   
 <script src="https://npm.webcache.cn/aplayer@1.10.1/dist/APlayer.min.js" integrity="sha384-gdGYZwHnfJM54evoZhpO0s6ZF5BQiybkiyW7VXr+h5UfruuRL&#x2F;aORyw+5+HZoU6e" crossorigin="anonymous" defer onload="setupAPlayer()"></script>
