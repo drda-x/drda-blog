@@ -1,14 +1,11 @@
 ---
 title: Git 首次提交代码
-banner: https://img.8845.top/img2/7.jpg
-cover: https://img.8845.top/img2/7.jpg
+banner: "https://img.8845.top/img2/7.jpg"
+cover: "https://img.8845.top/img2/7.jpg"
 date: 2023-04-12 13:19:00
-categories: 
-  - 笔记
-tags:
-  - git
+categories: [笔记]
+tags: [git]
 ---
-
 记录一下本地项目第一次提交到 Git 仓库的完整流程。
 
 ## 1. 初始化仓库
@@ -18,7 +15,7 @@ tags:
 ```bash
 git init
 ```
-
+![3e2a4097ec980299bfc089d7c5746a6c.gif.gif](https://raw.githubusercontent.com/drda-x/images/main/2026/06/1782779878106.gif)
 该命令会在当前目录生成一个 `.git` 隐藏目录，Git 会从这里开始追踪所有文件的变更。
 
 ## 2. 配置用户信息
