@@ -8,10 +8,15 @@
   desc: 这一个摸鱼聊天室
   image: https://fishpi.cn/images/faviconH.png
 
-- name: 唐墨夏
-  url: https://sszsj.com/
-  desc: 鼠鼠在碎觉，请勿打扰~
+- name: 鼠鼠在碎觉
+  url: https://sszsj.com
+  desc: 我是不慎落入世界的一滴水墨
   image: https://tmx.fishpi.cn/image/head.jpg
+
+- name: 贼拉正经的技术博客
+  url: https://www.stackoverflow.wiki/
+  desc: 死钻技术 | 绝不抄袭
+  image: https://pic.stackoverflow.wiki/uploadImages/123/113/181/232/2019/12/08/20/25/63b7333e-b51d-4af9-9857-b192de5ae10a.jpeg
 
 - name: ChaiChai
   url: https://chaichaisocute.top/

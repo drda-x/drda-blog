@@ -1,13 +1,7 @@
-<!--
- * @Author: txd
- * @Date: 2026-06-29 16:18:19
- * @LastEditors: Do not edit
- * @LastEditTime: 2026-06-29 17:02:32
- * @FilePath: \drda-blog-fix\source\about\index.md
--->
 ---
 title: 关于我的
 ---
+
 # ✈️ 飞行足迹：0 国（但梦想已环游太阳系 🌌）
 
 | 标签 | 详情 |
