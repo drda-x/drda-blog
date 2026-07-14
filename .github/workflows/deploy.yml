@@ -37,7 +37,11 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git config --global url."https://${{ secrets.GITHUB_TOKEN }}@github.com/".insteadOf "https://github.com/"
+          git config --global advice.detachedHead false
+          # Set origin to use the injected token for non-interactive push
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+        env:
+          GIT_TERMINAL_PROMPT: 0
 
       - name: Deploy with Hexo
         run: |
@@ -45,4 +49,5 @@ jobs:
           pnpm hexo deploy
         env:
           CI: false
+          GIT_TERMINAL_PROMPT: 0
 
