@@ -1,11 +1,13 @@
 ---
 title: Hexo自动部署到 GitHub Pages
-banner: https://img.8845.top/good
-cover: https://img.8845.top/good
+banner: https://img.8845.top/img2/126611624.jpg
+cover: https://img.8845.top/img2/126611624.jpg
 sticky: false
 date: 2026-07-14 13:58:10
-categories: [笔记]
-tags: [hexo]
+categories: 
+ - 笔记
+tags: 
+ - hexo
 ---
 
 
