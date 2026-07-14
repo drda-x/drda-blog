@@ -9,9 +9,7 @@ categories:
 tags: 
  - hexo
 ---
-
-
-## 介绍
+## 前言
 本文记录如何在写好文章后通过 GitHub Actions 自动使用 `hexo deploy` 将生成的站点发布到 GitHub Pages。
 
 **前提**
