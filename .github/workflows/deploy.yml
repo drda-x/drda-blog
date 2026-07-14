@@ -16,7 +16,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          submodules: false          # 如果主题是 git submodule 必须加
+          submodules: true          # 如果主题是 git submodule 必须加
           fetch-depth: 0
 
       # 2. 安装 Node.js
