@@ -1,8 +1,8 @@
 name: Deploy Hexo to GitHub Pages
 
-on:
+于:
   push:
-    branches:
+    分支:
       - main          # 每次 push 到 main 触发
 
 permissions:
@@ -16,7 +16,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          submodules: true          # 如果主题是 git submodule 必须加
+          submodules: false          # 如果主题是 git submodule 必须加
           fetch-depth: 0
 
       # 2. 安装 Node.js
