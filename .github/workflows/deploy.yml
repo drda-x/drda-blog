@@ -43,6 +43,16 @@ jobs:
         env:
           GIT_TERMINAL_PROMPT: 0
 
+      - name: Inject token into Hexo deploy config
+        run: |
+          DEPLOY_REPO="https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git"
+          echo "Replacing deploy.repo with tokenized URL"
+          sed -E -i "s#^\s*repo: .*#repo: ${DEPLOY_REPO}#" _config.yml
+          echo "---_config.yml after replace---"
+          sed -n '1,200p' _config.yml
+        env:
+          GIT_TERMINAL_PROMPT: 0
+
       - name: Deploy with Hexo
         run: |
           pnpm hexo clean
