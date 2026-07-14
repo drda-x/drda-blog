@@ -1,18 +1,14 @@
 ---
 title: 禁用浏览器debugger
 date: 2026-06-07 10:36:41
-banner: https://img.8845.top/img2/%E5%A4%A7%E9%9B%86%E7%BB%934K.jpg
-cover: https://img.8845.top/img2/%E5%A4%A7%E9%9B%86%E7%BB%934K.jpg
-categories: 
-  - 其它
-tags:
-  - js
-  - 浏览器
+banner: "https://img.8845.top/img2/%E5%A4%A7%E9%9B%86%E7%BB%934K.jpg"
+cover: "https://img.8845.top/img2/%E5%A4%A7%E9%9B%86%E7%BB%934K.jpg"
+categories: [其它]
+tags: [js, 浏览器]
 ---
-
 # 禁用浏览器 Debugger 使用说明
 
-> 保护前端代码逻辑，防止通过浏览器 DevTools 调试器逆向分析业务流程。
+> 保护前端代码逻辑，防止通过F12浏览器 DevTools 调试器逆向分析业务流程。
 
 ---
 
