@@ -48,7 +48,7 @@ jobs:
           DEPLOY_REPO="https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git"
           echo "Replacing deploy.repo with tokenized URL"
           # use POSIX character class for whitespace to be portable in GNU sed
-          sed -E -i "s#^[[:space:]]*repo:.*#repo: \"${DEPLOY_REPO}\"#" _config.yml
+          sed -E -i "s#^([[:space:]]*)repo:.*#\1repo: \"${DEPLOY_REPO}\"#" _config.yml
           echo "---_config.yml after replace---"
           sed -n '1,200p' _config.yml
         env:
