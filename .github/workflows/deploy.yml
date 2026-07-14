@@ -42,7 +42,7 @@ jobs:
       - name: Deploy with Hexo
         run: |
           pnpm hexo clean
-          pnpm hexo generate
+          pnpm hexo deploy
         env:
           CI: false
 
