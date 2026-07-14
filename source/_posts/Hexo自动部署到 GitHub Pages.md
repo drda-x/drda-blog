@@ -1,15 +1,13 @@
 ---
 title: Hexo自动部署到 GitHub Pages
-banner: https://img.8845.top/good
-cover: https://img.8845.top/good
-sticky: false
+banner: "https://img.8845.top/good"
+cover: "https://img.8845.top/good"
+sticky: "false"
 date: 2026-07-14 13:58:10
 categories: [笔记]
 tags: [hexo]
 ---
-
-
-## 介绍
+## 前言
 本文记录如何在写好文章后通过 GitHub Actions 自动使用 `hexo deploy` 将生成的站点发布到 GitHub Pages。
 
 **前提**
