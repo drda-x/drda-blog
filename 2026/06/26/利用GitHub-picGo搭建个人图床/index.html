@@ -1,0 +1,1142 @@
+  <!DOCTYPE html>
+  <html lang="zh-CN"  
+      data-theme-mode="auto"
+  >
+  <head>
+  <meta charset="utf-8">
+  
+  
+  
+  <script>window.REIMU_CONFIG = {};window.REIMU_CONFIG.clipboard_tips = {"success":{"zh-CN":"复制成功 (*^▽^*)"},"fail":{"zh-CN":"复制失败 (ﾟ⊿ﾟ)ﾂ"},"copyright":{"enable":false,"count":50,"license_type":"by-nc-sa"}};window.REIMU_CONFIG.clipboard_tips.copyright.content = '本博客所有文章除特别声明外，均采用 BY-NC-SA 许可协议。转载请注明出处！';window.REIMU_CONFIG.code_block = {"expand":true};window.REIMU_CONFIG.base = 'https://drda-x.github.io/drda-blog';window.REIMU_CONFIG.relative = '/drda-blog/';</script>
+  <title>
+    利用GitHub+PicGo搭建个人图床 | 加辣の秘密基地
+  </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic|Noto Serif SC:400,400italic,700,700italic&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic|Noto Serif SC:400,400italic,700,700italic&display=swap" media="print" onload="this.media='all'">
+    
+<link rel="stylesheet" href="https://npm.webcache.cn/@fortawesome/fontawesome-free@7.1.0/css/regular.min.css" integrity="sha384-4qYppzjH8EiA+cGdaubu2vL7Rk8WGiqCSj7oRuP1uwtFWkfKNHD20lPfcrbQc8dU" crossorigin="anonymous">
+<link rel="stylesheet" href="https://npm.webcache.cn/@fortawesome/fontawesome-free@7.1.0/css/solid.min.css" integrity="sha384-wbMWab3UDSPm2kvIgVOn&#x2F;d9KPTecgPU1+Nb3zoQrm&#x2F;oVu0EkPL6IaKinjbwW0rum" crossorigin="anonymous">
+
+    <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="https://npm.webcache.cn/@fortawesome/fontawesome-free@7.1.0/css/brands.min.css" integrity="sha384-KTGeC2hIMzpeQakhsmzB9bZfhCD5xZZCgI1iZH6f/O457SxzlkzTQg/WXFNoi3ih" crossorigin="anonymous">
+<link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="https://npm.webcache.cn/@fortawesome/fontawesome-free@7.1.0/css/v5-font-face.min.css" integrity="sha384-nJ1ThfldViXoLpJ6jlKcP2beas8BMbYq26SG9Hi8cH89bZi4RZ644v7helMCqJxd" crossorigin="anonymous">
+<link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="https://npm.webcache.cn/@fortawesome/fontawesome-free@7.1.0/css/v4-font-face.min.css" integrity="sha384-UlkrhOIvZxJFd4MElSUp7ow6/RUeYKi/orfCZIRRiOENFuQPIAA3T3HjYfmBRhNq" crossorigin="anonymous">
+    
+<link rel="stylesheet" href="/drda-blog/css/loader.css">
+
+    <meta name="description" content="引言 由于写博客的时候发现有时候需要上传一些图片，就想着自己搭建一个图床用来保存和使用自己上传的图片,于是我就搜到PicGo PicGo 正是为此而生的图片上传管理工具。官网中有PicGo.exe安装包，是可视化的上传工具，但是我不想下载软件，于是乎，在看了文档之后，发现它有完整的 Node.js API 和 CLI 接口，可以将图片上传能力无缝集成到任何 Node.js 工作流中。 我想了想了">
+<meta property="og:type" content="article">
+<meta property="og:title" content="利用GitHub+PicGo搭建个人图床">
+<meta property="og:url" content="https://drda-x.github.io/drda-blog/2026/06/26/%E5%88%A9%E7%94%A8GitHub-picGo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%9B%BE%E5%BA%8A/index.html">
+<meta property="og:site_name" content="加辣の秘密基地">
+<meta property="og:description" content="引言 由于写博客的时候发现有时候需要上传一些图片，就想着自己搭建一个图床用来保存和使用自己上传的图片,于是我就搜到PicGo PicGo 正是为此而生的图片上传管理工具。官网中有PicGo.exe安装包，是可视化的上传工具，但是我不想下载软件，于是乎，在看了文档之后，发现它有完整的 Node.js API 和 CLI 接口，可以将图片上传能力无缝集成到任何 Node.js 工作流中。 我想了想了">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-06-26T15:29:00.000Z">
+<meta property="article:modified_time" content="2026-07-20T08:30:37.842Z">
+<meta property="article:author" content="Drda">
+<meta property="article:tag" content="GitHub">
+<meta property="article:tag" content="picgo">
+<meta property="article:tag" content="Vue3">
+<meta property="article:tag" content="ts">
+<meta name="twitter:card" content="summary">
+    <link rel="alternate" href="/drda-blog/atom.xml" title="加辣の秘密基地" type="application/atom+xml"><link rel="alternate" href="/drda-blog/rss2.xml" title="加辣の秘密基地" type="application/rss+xml">
+    <link rel="shortcut icon" href="/drda-blog/images/favicon.ico">
+  
+<link rel="stylesheet" href="/drda-blog/css/style.css">
+
+  <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.css" integrity="sha384-IfxC36XL/toUyJ939C73PcgMuRzAZuIzZxE38drsmO5p6jD7ei+Zx/1oA/0l8ysE" crossorigin="anonymous">
+      <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="https://npm.webcache.cn/katex@0.16.24/dist/katex.min.css" integrity="sha384-tTgKLjMYmJr94v8qu2PE5MUGSMbyN2xiH266JUB3gpm8vnnJywd1dWSOEfrFz+YI" crossorigin="anonymous">
+    
+<script src="https://npm.webcache.cn/pace-js@1.2.4/pace.min.js" integrity="sha384-k6YtvFUEIuEFBdrLKJ3YAUbBki333tj1CSUisai5Cswsg9wcLNaPzsTHDswp4Az8" crossorigin="anonymous"></script>
+
+    
+<link rel="stylesheet" href="https://npm.webcache.cn/@reimujs/aos@0.1.2/dist/aos.css" integrity="sha384-GMRP93c6Hkz9JVKGAuRR3nTS7M07RwPgTFenXiosjq2VbVgvdDNcz1g6Mkj8AONa" crossorigin="anonymous">
+
+    <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="https://npm.webcache.cn/aplayer@1.10.1/dist/APlayer.min.css" integrity="sha384-tLMkTWh2pfXNWGFlUS0w1TFtRG5xZ9lPWFOooj+vDDLIL+xBGQU/voDBY5XE2lVh" crossorigin="anonymous">
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+  <body>
+      <div id='loader'>
+    <div class="loading-left-bg loading-bg"></div>
+    <div class="loading-right-bg loading-bg"></div>
+    <div class="spinner-box">
+      <div class="loading-taichi ">
+          <img src="/drda-blog/images/taichi.png" alt="loading" />
+      </div>
+      <div class="loading-word">给你们加辣中...</div>
+    </div>
+  </div>
+  <script>
+    var time = null;
+    var loaderEl = document.getElementById('loader');
+    var startLoading = () => {
+      time = Date.now();
+      loaderEl.classList.remove("loading");
+    }
+    var hideLoader = () => {
+      document.body.style.overflow = 'auto';
+      loader.classList.add('loading');
+    };
+
+    var endLoading = () => {
+      if (!time) {
+        hideLoader();
+      } else {
+        if (Date.now() - time > 500) {
+          time = null;
+          hideLoader();
+        } else {
+          setTimeout(endLoading, 500 - (Date.now() - time));
+          time = null;
+        }
+      }
+    }
+    window.addEventListener('DOMContentLoaded', endLoading);
+    loaderEl.addEventListener('click', endLoading);
+  </script>
+<div id="copy-tooltip"></div>
+<div id="heatmap-tooltip"></div>
+
+
+    <div id="container">
+      <div id="wrap">
+        <div id="header-nav">
+  <nav id="main-nav" aria-label="Primary navigation">
+        <a class="main-nav-link-wrap" href="/drda-blog/">
+            <div class="main-nav-icon icon ">
+                  <img src="/drda-blog/images/taichi.png" alt="home icon" style="height: 1em;">
+            </div>
+          <span class="main-nav-link">首页</span>
+        </a>
+        <a class="main-nav-link-wrap" href="/drda-blog/archives">
+            <div class="main-nav-icon icon ">
+                  <img src="/drda-blog/images/archives.png" alt="archives icon" style="height: 1em;">
+            </div>
+          <span class="main-nav-link">归档</span>
+        </a>
+        <a class="main-nav-link-wrap" href="/drda-blog/about">
+            <div class="main-nav-icon icon ">
+                  <img src="/drda-blog/images/about.png" alt="about icon" style="height: 1em;">
+            </div>
+          <span class="main-nav-link">关于</span>
+        </a>
+        <a class="main-nav-link-wrap" href="/drda-blog/friend">
+            <div class="main-nav-icon icon ">
+                  <img src="/drda-blog/images/friend.png" alt="friend icon" style="height: 1em;">
+            </div>
+          <span class="main-nav-link">友链</span>
+        </a>
+    <a id="main-nav-toggle" class="nav-icon" aria-label="Toggle navigation" role="button"></a>
+  </nav>
+  <nav id="sub-nav" aria-label="Secondary navigation">
+      <a id="nav-rss-link" class="nav-icon" href="/drda-blog/atom.xml" title="RSS 订阅" aria-label="RSS 订阅" target="_blank"></a>
+      <a id="nav-search-btn" class="nav-icon popup-trigger" title="搜索" aria-label="搜索"></a>
+  </nav>
+  <a href="https://github.com/drda-x" class="triangle-badge" title="github" target="_blank" rel="noopener nofollow noreferrer">
+    <div class="icon icon-github triangle-badge-icon"></div>
+  </a>
+</div>
+<header id="header" aria-label="Site header">
+    <picture></picture>
+    <img  fetchpriority="high" src="https://p6.qhimg.com/bdm/0_0_100/t0190b2f324de258f72.jpg" alt="利用GitHub+PicGo搭建个人图床">
+  <div id="header-outer">
+    <div id="header-title">
+          <span id="logo">
+            <h1 data-aos="slide-up">利用GitHub+PicGo搭建个人图床</h1>
+          </span>
+        <h2 id="subtitle-wrap" data-aos="slide-down">
+        </h2>
+    </div>
+  </div>
+</header>
+
+        <div id="content" aria-label="Page content" class="sidebar-left"  >
+          <aside id="sidebar" aria-label="Sidebar">
+  <div class="sidebar-wrapper-container sticky">
+      <meting-js
+        theme="var(--color-link)"
+        id="646465"
+        server="netease"
+        type="song"
+        auto="0"
+        fixed="false"
+        autoplay="false"
+        loop="all"
+        order="random"
+        preload="auto"
+        volume="0.7"
+        mutex="true"
+        list-folded="false"
+        lrc-type="3"
+      ></meting-js>
+  <div class="sidebar-wrapper">
+    <div class="sidebar-wrap" data-aos="fade-up">
+          <div class="sidebar-toc-sidebar"><h3 class="toc-title">文章目录</h3>
+<div class="sidebar-toc-wrapper toc-div-class" >
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%95%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text"> 引言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80-picgo-%E7%AE%80%E4%BB%8B"><span class="toc-number">2.</span> <span class="toc-text"> 一、PicGo 简介</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#11-%E4%BB%80%E4%B9%88%E6%98%AF-picgo"><span class="toc-number">2.1.</span> <span class="toc-text"> 1.1 什么是 PicGo</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12-picgo-%E7%9A%84%E6%A0%B8%E5%BF%83%E6%9E%B6%E6%9E%84"><span class="toc-number">2.2.</span> <span class="toc-text"> 1.2 PicGo 的核心架构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#13-%E4%B8%BA%E4%BB%80%E4%B9%88%E9%80%89%E6%8B%A9-picgo-api"><span class="toc-number">2.3.</span> <span class="toc-text"> 1.3 为什么选择 PicGo API</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E4%B8%8E%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE"><span class="toc-number">3.</span> <span class="toc-text"> 二、环境搭建与基础配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#21-%E5%AE%89%E8%A3%85-picgo"><span class="toc-number">3.1.</span> <span class="toc-text"> 2.1 安装 PicGo</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#22-%E5%88%9D%E5%A7%8B%E5%8C%96-picgo-%E5%AE%9E%E4%BE%8B"><span class="toc-number">3.2.</span> <span class="toc-text"> 2.2 初始化 PicGo 实例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#23-%E9%85%8D%E7%BD%AE%E4%B8%8A%E4%BC%A0%E6%8F%92%E4%BB%B6"><span class="toc-number">3.3.</span> <span class="toc-text"> 2.3 配置上传插件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89-%E9%80%9A%E8%BF%87-api-%E9%9B%86%E6%88%90%E5%9B%BE%E7%89%87%E4%B8%8A%E4%BC%A0"><span class="toc-number">4.</span> <span class="toc-text"> 三、通过 API 集成图片上传</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#31-%E5%9F%BA%E7%A1%80%E4%B8%8A%E4%BC%A0%E6%B5%81%E7%A8%8B"><span class="toc-number">4.1.</span> <span class="toc-text"> 3.1 基础上传流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#32-%E4%B8%8A%E4%BC%A0%E6%8C%87%E5%AE%9A%E6%96%87%E4%BB%B6"><span class="toc-number">4.2.</span> <span class="toc-text"> 3.2 上传指定文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#33-%E4%B8%8A%E4%BC%A0%E5%89%AA%E8%B4%B4%E6%9D%BF%E5%9B%BE%E7%89%87"><span class="toc-number">4.3.</span> <span class="toc-text"> 3.3 上传剪贴板图片</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#34-%E6%89%B9%E9%87%8F%E4%B8%8A%E4%BC%A0"><span class="toc-number">4.4.</span> <span class="toc-text"> 3.4 批量上传</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#35-%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86%E4%B8%8E%E4%BA%8B%E4%BB%B6%E7%9B%91%E5%90%AC"><span class="toc-number">4.5.</span> <span class="toc-text"> 3.5 错误处理与事件监听</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B-cli-%E5%91%BD%E4%BB%A4%E8%A1%8C%E9%9B%86%E6%88%90"><span class="toc-number">5.</span> <span class="toc-text"> 四、CLI 命令行集成</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#41-%E5%9F%BA%E6%9C%AC-cli-%E7%94%A8%E6%B3%95"><span class="toc-number">5.1.</span> <span class="toc-text"> 4.1 基本 CLI 用法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#42-%E5%9C%A8%E6%9E%84%E5%BB%BA%E8%84%9A%E6%9C%AC%E4%B8%AD%E4%BD%BF%E7%94%A8-cli"><span class="toc-number">5.2.</span> <span class="toc-text"> 4.2 在构建脚本中使用 CLI</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#43-%E5%9C%A8-cicd-%E6%B5%81%E6%B0%B4%E7%BA%BF%E4%B8%AD%E9%9B%86%E6%88%90"><span class="toc-number">5.3.</span> <span class="toc-text"> 4.3 在 CI&#x2F;CD 流水线中集成</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94-%E7%BC%96%E8%BE%91%E5%99%A8%E4%B8%8E%E5%B7%A5%E4%BD%9C%E6%B5%81%E9%9B%86%E6%88%90"><span class="toc-number">6.</span> <span class="toc-text"> 五、编辑器与工作流集成</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#51-%E5%9C%A8-vs-code-%E6%89%A9%E5%B1%95%E4%B8%AD%E4%BD%BF%E7%94%A8-picgo"><span class="toc-number">6.1.</span> <span class="toc-text"> 5.1 在 VS Code 扩展中使用 PicGo</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#52-%E5%9C%A8-markdown-%E7%BC%96%E8%BE%91%E5%99%A8%E4%B8%AD%E5%AE%9E%E6%97%B6%E4%B8%8A%E4%BC%A0"><span class="toc-number">6.2.</span> <span class="toc-text"> 5.2 在 Markdown 编辑器中实时上传</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#53-git-hook-%E8%87%AA%E5%8A%A8%E4%B8%8A%E4%BC%A0"><span class="toc-number">6.3.</span> <span class="toc-text"> 5.3 Git Hook 自动上传</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AD-%E9%AB%98%E7%BA%A7%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-number">7.</span> <span class="toc-text"> 六、高级应用场景</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#61-%E8%87%AA%E5%AE%9A%E4%B9%89%E4%B8%8A%E4%BC%A0%E6%8F%92%E4%BB%B6"><span class="toc-number">7.1.</span> <span class="toc-text"> 6.1 自定义上传插件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#62-%E4%B8%8E-github-api-%E7%BB%93%E5%90%88%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%96%B9%E6%A1%88"><span class="toc-number">7.2.</span> <span class="toc-text"> 6.2 与 GitHub API 结合的实现方案</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#63-%E5%A4%9A%E5%B9%B3%E5%8F%B0%E4%B8%8A%E4%BC%A0%E7%AD%96%E7%95%A5"><span class="toc-number">7.3.</span> <span class="toc-text"> 6.3 多平台上传策略</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%83-%E5%AE%8C%E6%95%B4%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98"><span class="toc-number">8.</span> <span class="toc-text"> 七、完整项目实战</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#71-%E9%A1%B9%E7%9B%AE%E6%A6%82%E8%BF%B0"><span class="toc-number">8.1.</span> <span class="toc-text"> 7.1 项目概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#72-%E6%A0%B8%E5%BF%83%E4%BB%A3%E7%A0%81%E8%A7%A3%E6%9E%90"><span class="toc-number">8.2.</span> <span class="toc-text"> 7.2 核心代码解析</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#721-picgo-%E5%B7%A5%E5%85%B7%E5%B0%81%E8%A3%85"><span class="toc-number">8.2.1.</span> <span class="toc-text"> 7.2.1 PicGo 工具封装</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#722-github-api-%E7%9B%B4%E6%8E%A5%E8%B0%83%E7%94%A8"><span class="toc-number">8.2.2.</span> <span class="toc-text"> 7.2.2 GitHub API 直接调用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#723-%E9%93%BE%E6%8E%A5%E7%94%9F%E6%88%90%E5%B7%A5%E5%85%B7"><span class="toc-number">8.2.3.</span> <span class="toc-text"> 7.2.3 链接生成工具</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#73-%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84"><span class="toc-number">8.3.</span> <span class="toc-text"> 7.3 项目结构</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AB-%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5%E4%B8%8E%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96"><span class="toc-number">9.</span> <span class="toc-text"> 八、最佳实践与性能优化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#81-%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5"><span class="toc-number">9.1.</span> <span class="toc-text"> 8.1 错误处理最佳实践</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#82-%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%BB%BA%E8%AE%AE"><span class="toc-number">9.2.</span> <span class="toc-text"> 8.2 性能优化建议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#83-%E5%AE%89%E5%85%A8%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="toc-number">9.3.</span> <span class="toc-text"> 8.3 安全注意事项</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AF%AD"><span class="toc-number">10.</span> <span class="toc-text"> 结语</span></a></li></ol>
+</div>
+</div>
+          <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/drda-blog/avatar/avatar.webp" data-sizes="auto" alt="Drda" class="lazyload">
+  <div class="sidebar-author-name">Drda</div>
+  <div class="sidebar-description">Drda&#39;s Blog</div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div>
+    <div class="sidebar-state-number">12</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>分类</div>
+    <div class="sidebar-state-number">3</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>标签</div>
+    <div class="sidebar-state-number">17</div>
+  </div>
+</div>
+<div class="sidebar-social" >
+    <div class="icon-github sidebar-social-icon">
+      <a href=https://github.com/drda-x itemprop="url" target="_blank" aria-label="github" rel="noopener nofollow noreferrer"></a>
+    </div>
+    <div class="icon-bilibili sidebar-social-icon">
+      <a href=https://space.bilibili.com/28903889 itemprop="url" target="_blank" aria-label="bilibili" rel="noopener nofollow noreferrer"></a>
+    </div>
+</div>
+<div class="sidebar-menu">
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/drda-blog/" aria-label="首页"></a>
+          <div class="sidebar-menu-icon icon ">
+                <img src="/drda-blog/images/taichi.png" alt="home icon" style="width: 1em;">
+          </div>
+        <div class="sidebar-menu-link">首页</div>
+      </div>
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/drda-blog/archives" aria-label="归档"></a>
+          <div class="sidebar-menu-icon icon ">
+                <img src="/drda-blog/images/archives.png" alt="archives icon" style="width: 1em;">
+          </div>
+        <div class="sidebar-menu-link">归档</div>
+      </div>
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/drda-blog/about" aria-label="关于"></a>
+          <div class="sidebar-menu-icon icon ">
+                <img src="/drda-blog/images/about.png" alt="about icon" style="width: 1em;">
+          </div>
+        <div class="sidebar-menu-link">关于</div>
+      </div>
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/drda-blog/friend" aria-label="友链"></a>
+          <div class="sidebar-menu-icon icon ">
+                <img src="/drda-blog/images/friend.png" alt="friend icon" style="width: 1em;">
+          </div>
+        <div class="sidebar-menu-link">友链</div>
+      </div>
+</div>
+</div>
+          <div class="sidebar-btn-wrapper" style="position:static">
+            <div class="sidebar-toc-btn current"></div>
+            <div class="sidebar-common-btn"></div>
+          </div>
+    </div>
+  </div>
+  <div class="sidebar-widget">
+  </div>
+  </div>
+</aside>
+
+          <section id="main" aria-label="Main content"><article id="post-利用GitHub-picGo搭建个人图床" class="h-entry article" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner" data-aos="fade-up">
+    <div class="article-meta">
+      <div class="article-date">
+  <span class="article-date-link icon-calendar" data-aos="zoom-in">
+    <time datetime="2026-06-26T15:29:00.000Z" itemprop="datePublished">2026-06-26</time>
+    <time style="display: none;" id="post-update-time">2026-07-20</time>
+  </span>
+</div>
+
+    </div>
+    
+    <div class="hr-line"></div>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+        <h2 id="引言"><a class="markdownIt-Anchor" href="#引言"></a> 引言</h2>
+<p>由于写博客的时候发现有时候需要上传一些图片，就想着自己搭建一个图床用来保存和使用自己上传的图片,于是我就搜到PicGo</p>
+<p><strong>PicGo</strong> 正是为此而生的图片上传管理工具。官网中有PicGo.exe安装包，是可视化的上传工具，但是我不想下载软件，于是乎，在看了文档之后，发现它有完整的 <strong>Node.js API</strong> 和 <strong>CLI 接口</strong>，可以将图片上传能力无缝集成到任何 Node.js 工作流中。</p>
+<p>我想了想了，自己写一个web网站作为我的图片上传工具—— <strong>ImgTools</strong></p>
+<p>本文将基于一个完整的实战项目 —— <strong>ImgTools</strong>，深入讲解如何利用 PicGo 的 API 和 CLI 接口，将图片上传功能集成到构建脚本、编辑器以及各种自动化工作流中。</p>
+<hr />
+<h2 id="一-picgo-简介"><a class="markdownIt-Anchor" href="#一-picgo-简介"></a> 一、PicGo 简介</h2>
+<h3 id="11-什么是-picgo"><a class="markdownIt-Anchor" href="#11-什么是-picgo"></a> 1.1 什么是 PicGo</h3>
+<p>PicGo 是一个用 Node.js 编写的使用简单即可看又可高图片上传管理工具，它支持将图片快速上传到各种图床服务，并返回可访问的图片 URL。</p>
+<p>核心特性包括：</p>
+<ul>
+<li><strong>多平台支持</strong>：支持 SMMS、Imgur、GitHub、阿里云 OSS、腾讯云 COS、七牛云、又拍云等数十种图床</li>
+<li><strong>插件化架构</strong>：通过插件系统可以轻松扩展新的上传目标</li>
+<li><strong>CLI 接口</strong>：支持命令行调用，方便集成到自动化脚本</li>
+<li><strong>API 接口</strong>：提供完整的 Node.js API，可在任何 Node.js 项目中调用</li>
+<li><strong>剪贴板支持</strong>：直接上传系统剪贴板中的图片</li>
+</ul>
+<h3 id="12-picgo-的核心架构"><a class="markdownIt-Anchor" href="#12-picgo-的核心架构"></a> 1.2 PicGo 的核心架构</h3>
+<p>PicGo 的核心架构由以下几个关键部分组成：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">┌─────────────────────────────────────────────┐</span><br><span class="line">│              PicGo 核心                       │</span><br><span class="line">├─────────────────────────────────────────────┤</span><br><span class="line">│  API 层      │  upload() / uploadByBuf()    │</span><br><span class="line">│  事件系统    │  on(&#x27;upload&#x27;) / on(&#x27;failed&#x27;) │</span><br><span class="line">│  插件管理    │  registerPlugin()            │</span><br><span class="line">├─────────────────────────────────────────────┤</span><br><span class="line">│  插件层      │  上传插件 / 转化插件          │</span><br><span class="line">│              │  上传插件 / 转化插件          │</span><br><span class="line">│              │  上传插件 / 转化插件          │</span><br><span class="line">├─────────────────────────────────────────────┤</span><br><span class="line">│  数据层      │  配置管理 / 上下文传递        │</span><br><span class="line">└─────────────────────────────────────────────┘</span><br></pre></td></tr></table></figure>
+<p><strong>核心类 <code>PicGo</code></strong> 提供以下关键方法：</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>upload(paths: string[])</code></td>
+<td>上传指定路径的图片文件</td>
+</tr>
+<tr>
+<td><code>uploadByBuf(buffer: Buffer[])</code></td>
+<td>上传 Buffer 数组形式的图片</td>
+</tr>
+<tr>
+<td><code>upload()</code></td>
+<td>上传剪贴板中的第一张图片</td>
+</tr>
+<tr>
+<td><code>on(event, callback)</code></td>
+<td>监听事件（如 <code>upload</code>、<code>failed</code>、<code>error</code>）</td>
+</tr>
+<tr>
+<td><code>publish(ctx)</code></td>
+<td>发布处理后的上下文</td>
+</tr>
+</tbody>
+</table>
+<h3 id="13-为什么选择-picgo-api"><a class="markdownIt-Anchor" href="#13-为什么选择-picgo-api"></a> 1.3 为什么选择 PicGo API</h3>
+<p>选择 PicGo API 而非直接调用图床 API 的原因：</p>
+<ol>
+<li><strong>统一接口</strong>：一个 API 对接多种图床，无需为每个平台编写不同的上传逻辑</li>
+<li><strong>插件化处理</strong>：支持上传前处理（压缩、裁剪、格式转换）和上传后处理（链接替换）</li>
+<li><strong>配置管理</strong>：内置配置文件管理，支持多平台切换</li>
+<li><strong>社区生态</strong>：丰富的插件生态，持续更新维护</li>
+</ol>
+<hr />
+<h2 id="二-环境搭建与基础配置"><a class="markdownIt-Anchor" href="#二-环境搭建与基础配置"></a> 二、环境搭建与基础配置</h2>
+<h3 id="21-安装-picgo"><a class="markdownIt-Anchor" href="#21-安装-picgo"></a> 2.1 安装 PicGo</h3>
+<p>在你的 Node.js 项目中安装 PicGo：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install picgo</span><br></pre></td></tr></table></figure>
+<p>或者使用 yarn：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yarn add picgo</span><br></pre></td></tr></table></figure>
+<p><strong>版本要求</strong>：建议使用 <code>picgo@1.5.0</code> 或更高版本，这些版本提供了更稳定的 API 接口。</p>
+<p>在我们的 ImgTools 项目中，<code>package.json</code> 中的依赖配置如下：</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;devDependencies&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;picgo&quot;</span><span class="punctuation">:</span> <span class="string">&quot;^2.0.3&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+<h3 id="22-初始化-picgo-实例"><a class="markdownIt-Anchor" href="#22-初始化-picgo-实例"></a> 2.2 初始化 PicGo 实例</h3>
+<p>在 TypeScript/JavaScript 项目中，你需要如下初始化 PicGo：</p>
+<figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// @ts-ignore</span></span><br><span class="line"><span class="keyword">const</span> &#123; <span class="title class_">PicGo</span> &#125; = <span class="built_in">require</span>(<span class="string">&#x27;picgo&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> picgo = <span class="keyword">new</span> <span class="title class_">PicGo</span>()</span><br></pre></td></tr></table></figure>
+<p><strong>为什么使用 <code>require</code> 而不是 <code>import</code>？</strong></p>
+<p>因为 PicGo 使用 CommonJS 模块导出，而许多现代项目使用 ES Modules。使用 <code>require</code> 可以避免模块兼容性问题。<code>@ts-ignore</code> 注释用于抑制 TypeScript 的类型检查错误。</p>
+<h3 id="23-配置上传插件"><a class="markdownIt-Anchor" href="#23-配置上传插件"></a> 2.3 配置上传插件</h3>
+<p>在调用上传 API 之前，需要配置 PicGo 使用哪个上传插件。以 GitHub 为例：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">picgo.<span class="property">gitHub</span> = &#123;</span><br><span class="line">  <span class="attr">token</span>: <span class="string">&#x27;ghp_xxxxxxxxxxxxxxxxxxxx&#x27;</span>,</span><br><span class="line">  <span class="attr">repo</span>: <span class="string">&#x27;username/repo&#x27;</span>,</span><br><span class="line">  <span class="attr">path</span>: <span class="string">&#x27;images&#x27;</span>,</span><br><span class="line">  <span class="attr">branch</span>: <span class="string">&#x27;main&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 或者使用 setConfig</span></span><br><span class="line">picgo.<span class="title function_">setConfig</span>(&#123;</span><br><span class="line">  picGo-<span class="attr">BED</span>: <span class="string">&#x27;github&#x27;</span>,  <span class="comment">// 设置默认上传平台</span></span><br><span class="line">  picGo-<span class="title class_">GitHub</span>-<span class="attr">token</span>: <span class="string">&#x27;ghp_xxxxxxxxxxxxxxxxxxxx&#x27;</span>,</span><br><span class="line">  picGo-<span class="title class_">GitHub</span>-<span class="attr">repo</span>: <span class="string">&#x27;username/repo&#x27;</span>,</span><br><span class="line">  picGo-<span class="title class_">GitHub</span>-<span class="attr">path</span>: <span class="string">&#x27;images&#x27;</span>,</span><br><span class="line">  picGo-<span class="title class_">GitHub</span>-<span class="attr">branch</span>: <span class="string">&#x27;main&#x27;</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<hr />
+<h2 id="三-通过-api-集成图片上传"><a class="markdownIt-Anchor" href="#三-通过-api-集成图片上传"></a> 三、通过 API 集成图片上传</h2>
+<h3 id="31-基础上传流程"><a class="markdownIt-Anchor" href="#31-基础上传流程"></a> 3.1 基础上传流程</h3>
+<p>PicGo API 的核心上传流程可以用以下流程图表示：</p>
+<pre class="mermaid">sequenceDiagram
+    participant App as 应用程序
+    participant PicGo as PicGo 实例
+    participant Plugin as 上传插件
+    participant Bed as 图床服务
+
+    App->>PicGo: new PicGo()
+    App->>PicGo: 配置上传插件
+    App->>PicGo: 注册事件监听
+    PicGo->>PicGo: on('upload', callback)
+    PicGo->>PicGo: on('failed', callback)
+    PicGo->>PicGo: on('error', callback)
+    
+    App->>PicGo: upload(files)
+    PicGo->>Plugin: 处理图片
+    Plugin->>Plugin: 上传前处理（可选）
+    Plugin->>Bed: 上传图片
+    Bed-->>Plugin: 返回 URL
+    Plugin->>Plugin: 上传后处理（可选）
+    Plugin-->>PicGo: 返回结果
+    PicGo-->>App: 触发 'upload' 事件</pre>
+<h3 id="32-上传指定文件"><a class="markdownIt-Anchor" href="#32-上传指定文件"></a> 3.2 上传指定文件</h3>
+<p>这是最常用的上传方式。你可以通过传入文件路径数组来指定要上传的图片：</p>
+<figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">PicGo</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;picgo&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> picgo = <span class="keyword">new</span> <span class="title class_">PicGo</span>()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 配置上传插件</span></span><br><span class="line">picgo.<span class="title function_">setConfig</span>(&#123;</span><br><span class="line">  <span class="string">&#x27;picGo-BED&#x27;</span>: <span class="string">&#x27;github&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;picGo-GitHub-token&#x27;</span>: <span class="string">&#x27;your-token&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;picGo-GitHub-repo&#x27;</span>: <span class="string">&#x27;username/repo&#x27;</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 上传指定文件</span></span><br><span class="line"><span class="keyword">const</span> files = [<span class="string">&#x27;/path/to/image1.jpg&#x27;</span>, <span class="string">&#x27;/path/to/image2.png&#x27;</span>]</span><br><span class="line"><span class="keyword">const</span> result = <span class="keyword">await</span> picgo.<span class="title function_">upload</span>(files)</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(result.<span class="property">output</span>) <span class="comment">// 返回的图片 URL 数组</span></span><br></pre></td></tr></table></figure>
+<p>在我们的 ImgTools 项目中，<code>picgo.ts</code> 工具函数的实现如下：</p>
+<figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * PicGo 工具封装（TypeScript）</span></span><br><span class="line"><span class="comment"> * 依赖：picgo (v1.5.0+)</span></span><br><span class="line"><span class="comment"> * 用法示例：</span></span><br><span class="line"><span class="comment"> *   import &#123; upload &#125; from &#x27;@/utils/picgo&#x27;</span></span><br><span class="line"><span class="comment"> *   await upload([&#x27;/path/to/img.jpg&#x27;]) // 上传指定文件</span></span><br><span class="line"><span class="comment"> *   await upload() // 上传剪贴板第一张图片</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用 require 以兼容 picgo 的 CommonJS 导出</span></span><br><span class="line"><span class="comment">// @ts-ignore</span></span><br><span class="line"><span class="keyword">const</span> &#123; <span class="title class_">PicGo</span> &#125; = <span class="built_in">require</span>(<span class="string">&#x27;picgo&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> <span class="title class_">UploadResult</span> = <span class="built_in">any</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 上传图片（支持传入文件路径数组，或不传则上传剪贴板第一张图片）</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> paths 可选的本地文件路径数组</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">upload</span>(<span class="params"><span class="attr">paths</span>?: <span class="built_in">string</span>[]</span>): <span class="title class_">Promise</span>&lt;<span class="title class_">UploadResult</span>&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> picgo = <span class="keyword">new</span> <span class="title class_">PicGo</span>()</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> <span class="title function_">onUpload</span> = (<span class="params"><span class="attr">ctx</span>: <span class="built_in">any</span></span>) =&gt; &#123;</span><br><span class="line">      <span class="comment">// PicGo 在上传完成会触发 &#x27;upload&#x27; 事件，回调中包含 ctx</span></span><br><span class="line">      <span class="title function_">cleanup</span>()</span><br><span class="line">      <span class="title function_">resolve</span>(ctx)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> <span class="title function_">onFailed</span> = (<span class="params"><span class="attr">ctx</span>: <span class="built_in">any</span></span>) =&gt; &#123;</span><br><span class="line">      <span class="title function_">cleanup</span>()</span><br><span class="line">      <span class="title function_">reject</span>(ctx)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> <span class="title function_">onError</span> = (<span class="params"><span class="attr">err</span>: <span class="built_in">any</span></span>) =&gt; &#123;</span><br><span class="line">      <span class="title function_">cleanup</span>()</span><br><span class="line">      <span class="title function_">reject</span>(err)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">cleanup</span>(<span class="params"></span>) &#123;</span><br><span class="line">      <span class="keyword">try</span> &#123;</span><br><span class="line">        picgo.<span class="property">removeListener</span> &amp;&amp; picgo.<span class="title function_">removeListener</span>(<span class="string">&#x27;upload&#x27;</span>, onUpload)</span><br><span class="line">        picgo.<span class="property">removeListener</span> &amp;&amp; picgo.<span class="title function_">removeListener</span>(<span class="string">&#x27;failed&#x27;</span>, onFailed)</span><br><span class="line">        picgo.<span class="property">removeListener</span> &amp;&amp; picgo.<span class="title function_">removeListener</span>(<span class="string">&#x27;error&#x27;</span>, onError)</span><br><span class="line">      &#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">        <span class="comment">// ignore</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 绑定事件</span></span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      picgo.<span class="property">on</span> &amp;&amp; picgo.<span class="title function_">on</span>(<span class="string">&#x27;upload&#x27;</span>, onUpload)</span><br><span class="line">      picgo.<span class="property">on</span> &amp;&amp; picgo.<span class="title function_">on</span>(<span class="string">&#x27;failed&#x27;</span>, onFailed)</span><br><span class="line">      picgo.<span class="property">on</span> &amp;&amp; picgo.<span class="title function_">on</span>(<span class="string">&#x27;error&#x27;</span>, onError)</span><br><span class="line"></span><br><span class="line">      <span class="comment">// 触发上传：传入数组则按路径上传；不传则尝试上传剪贴板里的第一张图片</span></span><br><span class="line">      <span class="keyword">if</span> (<span class="title class_">Array</span>.<span class="title function_">isArray</span>(paths) &amp;&amp; paths.<span class="property">length</span> &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        picgo.<span class="title function_">upload</span>(paths)</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        picgo.<span class="title function_">upload</span>()</span><br><span class="line">      &#125;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (err) &#123;</span><br><span class="line">      <span class="title function_">cleanup</span>()</span><br><span class="line">      <span class="title function_">reject</span>(err)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123; upload &#125;</span><br></pre></td></tr></table></figure>
+<p><strong>关键要点：</strong></p>
+<ol>
+<li><strong>Promise 封装</strong>：PicGo 的 API 基于事件系统，我们通过 Promise 将其封装为异步函数，方便与现代异步代码风格结合</li>
+<li><strong>事件清理</strong>：在上传完成或失败后，及时移除事件监听器，避免内存泄漏</li>
+<li><strong>灵活参数</strong>：支持传入文件路径数组，或不传参数（上传剪贴板图片）</li>
+</ol>
+<h3 id="33-上传剪贴板图片"><a class="markdownIt-Anchor" href="#33-上传剪贴板图片"></a> 3.3 上传剪贴板图片</h3>
+<p>PicGo 的另一个强大功能是直接上传系统剪贴板中的图片。这在编辑器集成中特别有用：</p>
+<figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 不传参数，自动上传剪贴板中的第一张图片</span></span><br><span class="line"><span class="keyword">const</span> result = <span class="keyword">await</span> picgo.<span class="title function_">upload</span>()</span><br></pre></td></tr></table></figure>
+<p>当不调用 <code>upload()</code> 方法传入文件路径时，PicGo 会自动检测系统剪贴板中的图片并进行上传。这在以下场景中非常有用：</p>
+<ul>
+<li><strong>截图后直接粘贴</strong>：用户截图后按 Ctrl+V，图片自动上传</li>
+<li><strong>网页图片右键复制</strong>：复制网页图片后，自动上传并获取链接</li>
+<li><strong>编辑器集成</strong>：在 Markdown 编辑器中粘贴图片，自动上传并插入 Markdown 链接</li>
+</ul>
+<h3 id="34-批量上传"><a class="markdownIt-Anchor" href="#34-批量上传"></a> 3.4 批量上传</h3>
+<p>PicGo 支持一次上传多张图片：</p>
+<figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> files = [</span><br><span class="line">  <span class="string">&#x27;/path/to/image1.jpg&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;/path/to/image2.png&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;/path/to/image3.webp&#x27;</span></span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> result = <span class="keyword">await</span> picgo.<span class="title function_">upload</span>(files)</span><br><span class="line"><span class="comment">// result.output 包含所有上传成功的图片 URL</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(result.<span class="property">output</span>)</span><br><span class="line"><span class="comment">// [</span></span><br><span class="line"><span class="comment">//   &#x27;https://example.com/image1.jpg&#x27;,</span></span><br><span class="line"><span class="comment">//   &#x27;https://example.com/image2.png&#x27;,</span></span><br><span class="line"><span class="comment">//   &#x27;https://example.com/image3.webp&#x27;</span></span><br><span class="line"><span class="comment">// ]</span></span><br></pre></td></tr></table></figure>
+<h3 id="35-错误处理与事件监听"><a class="markdownIt-Anchor" href="#35-错误处理与事件监听"></a> 3.5 错误处理与事件监听</h3>
+<p>PicGo 提供了完善的事件系统来处理上传过程中的各种情况：</p>
+<figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line">picgo.<span class="title function_">on</span>(<span class="string">&#x27;upload&#x27;</span>, <span class="function">(<span class="params"><span class="attr">ctx</span>: <span class="built_in">any</span></span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;上传成功！&#x27;</span>, ctx.<span class="property">output</span>)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">picgo.<span class="title function_">on</span>(<span class="string">&#x27;failed&#x27;</span>, <span class="function">(<span class="params"><span class="attr">ctx</span>: <span class="built_in">any</span></span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">error</span>(<span class="string">&#x27;上传失败！&#x27;</span>, ctx.<span class="property">output</span>)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">picgo.<span class="title function_">on</span>(<span class="string">&#x27;error&#x27;</span>, <span class="function">(<span class="params"><span class="attr">err</span>: <span class="built_in">any</span></span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">error</span>(<span class="string">&#x27;发生错误！&#x27;</span>, err)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p><strong>常用事件：</strong></p>
+<table>
+<thead>
+<tr>
+<th>事件</th>
+<th>触发时机</th>
+<th>回调参数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>upload</code></td>
+<td>上传成功完成</td>
+<td><code>ctx</code>（上下文对象，包含 output）</td>
+</tr>
+<tr>
+<td><code>failed</code></td>
+<td>上传失败</td>
+<td><code>ctx</code>（上下文对象，包含错误信息）</td>
+</tr>
+<tr>
+<td><code>error</code></td>
+<td>发生异常错误</td>
+<td><code>err</code>（错误对象）</td>
+</tr>
+<tr>
+<td><code>beforePlugin</code></td>
+<td>插件处理前</td>
+<td><code>(pluginName, ctx)</code></td>
+</tr>
+<tr>
+<td><code>afterPlugin</code></td>
+<td>插件处理后</td>
+<td><code>(pluginName, ctx)</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="四-cli-命令行集成"><a class="markdownIt-Anchor" href="#四-cli-命令行集成"></a> 四、CLI 命令行集成</h2>
+<h3 id="41-基本-cli-用法"><a class="markdownIt-Anchor" href="#41-基本-cli-用法"></a> 4.1 基本 CLI 用法</h3>
+<p>PicGo 提供了完整的命令行接口，可以在终端中直接使用：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 上传指定文件</span></span><br><span class="line">picgo upload /path/to/image.jpg</span><br><span class="line"></span><br><span class="line"><span class="comment"># 批量上传</span></span><br><span class="line">picgo upload /path/to/image1.jpg /path/to/image2.png</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看当前配置</span></span><br><span class="line">picgo config</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置上传平台</span></span><br><span class="line">picgo <span class="built_in">set</span> upload-bed bed</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装插件</span></span><br><span class="line">picgo install plugin-name</span><br><span class="line"></span><br><span class="line"><span class="comment"># 更新插件</span></span><br><span class="line">picgo update plugin-name</span><br></pre></td></tr></table></figure>
+<h3 id="42-在构建脚本中使用-cli"><a class="markdownIt-Anchor" href="#42-在构建脚本中使用-cli"></a> 4.2 在构建脚本中使用 CLI</h3>
+<p>你可以在 npm scripts 或自定义构建脚本中调用 PicGo CLI：</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;scripts&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;upload:images&quot;</span><span class="punctuation">:</span> <span class="string">&quot;picgo upload ./assets/images/*.jpg&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;build:docs&quot;</span><span class="punctuation">:</span> <span class="string">&quot;vite build &amp;&amp; picgo upload docs/images/*&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>或者在 Node.js 脚本中使用 <code>child_process</code>：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123; execSync &#125; = <span class="built_in">require</span>(<span class="string">&#x27;child_process&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> result = <span class="title function_">execSync</span>(<span class="string">&#x27;picgo upload ./images/*.jpg&#x27;</span>, &#123;</span><br><span class="line">    <span class="attr">encoding</span>: <span class="string">&#x27;utf-8&#x27;</span></span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;上传结果：&#x27;</span>, result)</span><br><span class="line">&#125; <span class="keyword">catch</span> (error) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">error</span>(<span class="string">&#x27;上传失败：&#x27;</span>, error.<span class="property">message</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="43-在-cicd-流水线中集成"><a class="markdownIt-Anchor" href="#43-在-cicd-流水线中集成"></a> 4.3 在 CI/CD 流水线中集成</h3>
+<p>在 GitHub Actions 中集成 PicGo 自动上传图片：</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">name:</span> <span class="string">Upload</span> <span class="string">Images</span></span><br><span class="line"></span><br><span class="line"><span class="attr">on:</span></span><br><span class="line">  <span class="attr">push:</span></span><br><span class="line">    <span class="attr">paths:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&#x27;images/**&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">jobs:</span></span><br><span class="line">  <span class="attr">upload:</span></span><br><span class="line">    <span class="attr">runs-on:</span> <span class="string">ubuntu-latest</span></span><br><span class="line">    <span class="attr">steps:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">uses:</span> <span class="string">actions/checkout@v3</span></span><br><span class="line">      </span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Setup</span> <span class="string">Node.js</span></span><br><span class="line">        <span class="attr">uses:</span> <span class="string">actions/setup-node@v3</span></span><br><span class="line">        <span class="attr">with:</span></span><br><span class="line">          <span class="attr">node-version:</span> <span class="string">&#x27;18&#x27;</span></span><br><span class="line">      </span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Install</span> <span class="string">PicGo</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">npm</span> <span class="string">install</span> <span class="string">-g</span> <span class="string">picgo</span></span><br><span class="line">      </span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Configure</span> <span class="string">PicGo</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line"><span class="string">          picgo set upload-bed github</span></span><br><span class="line"><span class="string">          picgo set picGo-GitHub-token $&#123;&#123; secrets.GITHUB_TOKEN &#125;&#125;</span></span><br><span class="line"><span class="string">          picgo set picGo-GitHub-repo username/repo</span></span><br><span class="line"><span class="string">          picgo set picGo-GitHub-path images</span></span><br><span class="line"><span class="string">          picgo set picGo-GitHub-branch main</span></span><br><span class="line"><span class="string"></span>      </span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Upload</span> <span class="string">Images</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">picgo</span> <span class="string">upload</span> <span class="string">images/**/*</span></span><br></pre></td></tr></table></figure>
+<hr />
+<h2 id="五-编辑器与工作流集成"><a class="markdownIt-Anchor" href="#五-编辑器与工作流集成"></a> 五、编辑器与工作流集成</h2>
+<h3 id="51-在-vs-code-扩展中使用-picgo"><a class="markdownIt-Anchor" href="#51-在-vs-code-扩展中使用-picgo"></a> 5.1 在 VS Code 扩展中使用 PicGo</h3>
+<p>PicGo 的 API 设计使其非常适合集成到 VS Code 扩展中：</p>
+<figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> vscode <span class="keyword">from</span> <span class="string">&#x27;vscode&#x27;</span></span><br><span class="line"><span class="comment">// @ts-ignore</span></span><br><span class="line"><span class="keyword">const</span> &#123; <span class="title class_">PicGo</span> &#125; = <span class="built_in">require</span>(<span class="string">&#x27;picgo&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">activate</span>(<span class="params"><span class="attr">context</span>: vscode.<span class="title class_">ExtensionContext</span></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> picgo = <span class="keyword">new</span> <span class="title class_">PicGo</span>()</span><br><span class="line">  </span><br><span class="line">  context.<span class="property">subscriptions</span>.<span class="title function_">push</span>(vscode.<span class="property">commands</span>.<span class="title function_">registerCommand</span>(</span><br><span class="line">    <span class="string">&#x27;my-extension.uploadImage&#x27;</span>,</span><br><span class="line">    <span class="title function_">async</span> () =&gt; &#123;</span><br><span class="line">      <span class="keyword">const</span> editor = vscode.<span class="property">window</span>.<span class="property">activeTextEditor</span></span><br><span class="line">      <span class="keyword">if</span> (!editor) <span class="keyword">return</span></span><br><span class="line">      </span><br><span class="line">      <span class="keyword">const</span> selection = editor.<span class="property">selection</span></span><br><span class="line">      <span class="keyword">const</span> text = editor.<span class="property">document</span>.<span class="title function_">getText</span>(selection)</span><br><span class="line">      </span><br><span class="line">      <span class="comment">// 处理粘贴的图片</span></span><br><span class="line">      <span class="keyword">const</span> result = <span class="keyword">await</span> picgo.<span class="title function_">upload</span>()</span><br><span class="line">      <span class="keyword">const</span> urls = result.<span class="property">output</span> <span class="keyword">as</span> <span class="built_in">string</span>[]</span><br><span class="line">      </span><br><span class="line">      <span class="comment">// 插入 Markdown 链接</span></span><br><span class="line">      urls.<span class="title function_">forEach</span>(<span class="function"><span class="params">url</span> =&gt;</span> &#123;</span><br><span class="line">        editor.<span class="title function_">edit</span>(<span class="function"><span class="params">editBuilder</span> =&gt;</span> &#123;</span><br><span class="line">          editBuilder.<span class="title function_">insert</span>(selection.<span class="property">start</span>, <span class="string">`![image](<span class="subst">$&#123;url&#125;</span>)`</span>)</span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">  ))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="52-在-markdown-编辑器中实时上传"><a class="markdownIt-Anchor" href="#52-在-markdown-编辑器中实时上传"></a> 5.2 在 Markdown 编辑器中实时上传</h3>
+<p>结合剪贴板监听和 PicGo API，可以实现实时粘贴上传图片：</p>
+<figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">PasteUploader</span> &#123;</span><br><span class="line">  <span class="keyword">private</span> <span class="attr">picgo</span>: <span class="title class_">PicGo</span></span><br><span class="line">  </span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">picgo</span> = <span class="keyword">new</span> <span class="title class_">PicGo</span>()</span><br><span class="line">    <span class="variable language_">this</span>.<span class="title function_">configure</span>()</span><br><span class="line">    <span class="variable language_">this</span>.<span class="title function_">bindEvents</span>()</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">private</span> <span class="title function_">configure</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">picgo</span>.<span class="title function_">setConfig</span>(&#123;</span><br><span class="line">      <span class="string">&#x27;picGo-BED&#x27;</span>: <span class="string">&#x27;github&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;picGo-GitHub-token&#x27;</span>: process.<span class="property">env</span>.<span class="property">GITHUB_TOKEN</span>!,</span><br><span class="line">      <span class="string">&#x27;picGo-GitHub-repo&#x27;</span>: <span class="string">&#x27;username/repo&#x27;</span></span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">private</span> <span class="title function_">bindEvents</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="comment">// 监听粘贴事件</span></span><br><span class="line">    <span class="variable language_">document</span>.<span class="title function_">addEventListener</span>(<span class="string">&#x27;paste&#x27;</span>, <span class="title function_">async</span> (<span class="attr">event</span>: <span class="title class_">ClipboardEvent</span>) =&gt; &#123;</span><br><span class="line">      <span class="keyword">const</span> items = event.<span class="property">clipboardData</span>?.<span class="property">items</span></span><br><span class="line">      <span class="keyword">if</span> (!items) <span class="keyword">return</span></span><br><span class="line">      </span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">const</span> item <span class="keyword">of</span> items) &#123;</span><br><span class="line">        <span class="keyword">if</span> (item.<span class="property">type</span>.<span class="title function_">startsWith</span>(<span class="string">&#x27;image/&#x27;</span>)) &#123;</span><br><span class="line">          <span class="keyword">const</span> blob = item.<span class="title function_">getAsFile</span>()</span><br><span class="line">          <span class="keyword">if</span> (blob) &#123;</span><br><span class="line">            <span class="keyword">const</span> url = <span class="keyword">await</span> <span class="variable language_">this</span>.<span class="title function_">uploadBlob</span>(blob)</span><br><span class="line">            <span class="variable language_">this</span>.<span class="title function_">insertAtCursor</span>(<span class="string">`![image](<span class="subst">$&#123;url&#125;</span>)`</span>)</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">async</span> <span class="title function_">uploadBlob</span>(<span class="attr">blob</span>: <span class="title class_">Blob</span>): <span class="title class_">Promise</span>&lt;<span class="built_in">string</span>&gt; &#123;</span><br><span class="line">    <span class="comment">// 将 Blob 转为临时文件</span></span><br><span class="line">    <span class="keyword">const</span> tempPath = <span class="keyword">await</span> <span class="variable language_">this</span>.<span class="title function_">saveToTemp</span>(blob)</span><br><span class="line">    <span class="comment">// 调用 PicGo 上传</span></span><br><span class="line">    <span class="keyword">const</span> result = <span class="keyword">await</span> <span class="variable language_">this</span>.<span class="property">picgo</span>.<span class="title function_">upload</span>([tempPath])</span><br><span class="line">    <span class="keyword">return</span> (result.<span class="property">output</span> <span class="keyword">as</span> <span class="built_in">string</span>[])[<span class="number">0</span>]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="53-git-hook-自动上传"><a class="markdownIt-Anchor" href="#53-git-hook-自动上传"></a> 5.3 Git Hook 自动上传</h3>
+<p>通过 Git Hook，可以在提交代码时自动上传新增的图片资源：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="comment"># .git/hooks/post-commit</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取本次提交新增的图片文件</span></span><br><span class="line">NEW_IMAGES=$(git diff-tree --no-commit-id --name-only -r HEAD | \</span><br><span class="line">  grep -E <span class="string">&#x27;\.(jpg|jpeg|png|gif|webp|svg)$&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> [ -n <span class="string">&quot;<span class="variable">$NEW_IMAGES</span>&quot;</span> ]; <span class="keyword">then</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="string">&quot;发现新增图片，开始上传...&quot;</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment"># 使用 PicGo 上传</span></span><br><span class="line">  <span class="keyword">for</span> img <span class="keyword">in</span> <span class="variable">$NEW_IMAGES</span>; <span class="keyword">do</span></span><br><span class="line">    picgo upload <span class="string">&quot;<span class="variable">$img</span>&quot;</span></span><br><span class="line">  <span class="keyword">done</span></span><br><span class="line">  </span><br><span class="line">  <span class="built_in">echo</span> <span class="string">&quot;图片上传完成！&quot;</span></span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
+<hr />
+<h2 id="六-高级应用场景"><a class="markdownIt-Anchor" href="#六-高级应用场景"></a> 六、高级应用场景</h2>
+<h3 id="61-自定义上传插件"><a class="markdownIt-Anchor" href="#61-自定义上传插件"></a> 6.1 自定义上传插件</h3>
+<p>PicGo 的插件系统非常强大，你可以编写自定义上传插件：</p>
+<figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123; <span class="title class_">PicGo</span> &#125; = <span class="built_in">require</span>(<span class="string">&#x27;picgo&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> picgo = <span class="keyword">new</span> <span class="title class_">PicGo</span>()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 注册自定义上传插件</span></span><br><span class="line">picgo.<span class="title function_">registerUploadPlugin</span>(<span class="string">&#x27;custom-bed&#x27;</span>, <span class="keyword">class</span> <span class="title class_">CustomUpload</span> &#123;</span><br><span class="line">  <span class="title function_">constructor</span> (<span class="params">ctx</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">ctx</span> = ctx</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">async</span> <span class="title function_">upload</span> (fileArray) &#123;</span><br><span class="line">    <span class="comment">// fileArray 格式：</span></span><br><span class="line">    <span class="comment">// [</span></span><br><span class="line">    <span class="comment">//   &#123;</span></span><br><span class="line">    <span class="comment">//     url: &#x27;file:///path/to/image.jpg&#x27;,</span></span><br><span class="line">    <span class="comment">//     base64Address: &#x27;data:image/jpeg;base64,...&#x27;,</span></span><br><span class="line">    <span class="comment">//     isImage: true</span></span><br><span class="line">    <span class="comment">//   &#125;</span></span><br><span class="line">    <span class="comment">// ]</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">const</span> results = <span class="keyword">await</span> <span class="title class_">Promise</span>.<span class="title function_">all</span>(</span><br><span class="line">      fileArray.<span class="title function_">map</span>(<span class="title function_">async</span> (file) =&gt; &#123;</span><br><span class="line">        <span class="comment">// 自定义上传逻辑</span></span><br><span class="line">        <span class="keyword">const</span> url = <span class="keyword">await</span> <span class="variable language_">this</span>.<span class="title function_">uploadToCustomServer</span>(file)</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">          url,</span><br><span class="line">          <span class="attr">base64Address</span>: file.<span class="property">base64Address</span>,</span><br><span class="line">          <span class="attr">isImage</span>: <span class="literal">true</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;)</span><br><span class="line">    )</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> results</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">async</span> <span class="title function_">uploadToCustomServer</span> (file) &#123;</span><br><span class="line">    <span class="comment">// 你的自定义上传逻辑</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;https://your-server.com/uploaded-image.jpg&#x27;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用自定义平台</span></span><br><span class="line">picgo.<span class="title function_">setConfig</span>(<span class="string">&#x27;picGo-BED&#x27;</span>, <span class="string">&#x27;custom-bed&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="62-与-github-api-结合的实现方案"><a class="markdownIt-Anchor" href="#62-与-github-api-结合的实现方案"></a> 6.2 与 GitHub API 结合的实现方案</h3>
+<p>除了使用 PicGo 的 GitHub 插件，你也可以直接调用 GitHub API 实现图片上传。这种方式提供了更大的灵活性：</p>
+<figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> axios <span class="keyword">from</span> <span class="string">&#x27;axios&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> <span class="title class_">GitHubConfig</span> &#123;</span><br><span class="line">  <span class="attr">token</span>: <span class="built_in">string</span></span><br><span class="line">  <span class="attr">owner</span>: <span class="built_in">string</span></span><br><span class="line">  <span class="attr">repo</span>: <span class="built_in">string</span></span><br><span class="line">  <span class="attr">branch</span>: <span class="built_in">string</span></span><br><span class="line">  <span class="attr">uploadPath</span>: <span class="built_in">string</span></span><br><span class="line">  <span class="attr">customDomain</span>?: <span class="built_in">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> <span class="title class_">ImageItem</span> &#123;</span><br><span class="line">  <span class="attr">id</span>: <span class="built_in">string</span></span><br><span class="line">  <span class="attr">url</span>: <span class="built_in">string</span></span><br><span class="line">  <span class="attr">name</span>: <span class="built_in">string</span></span><br><span class="line">  <span class="attr">size</span>: <span class="built_in">number</span></span><br><span class="line">  <span class="attr">uploadDate</span>: <span class="built_in">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 上传文件到 GitHub Repository</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">uploadToGitHub</span>(<span class="params"></span></span><br><span class="line"><span class="params">  <span class="attr">config</span>: <span class="title class_">GitHubConfig</span>,</span></span><br><span class="line"><span class="params">  <span class="attr">file</span>: <span class="title class_">File</span>,</span></span><br><span class="line"><span class="params">  <span class="attr">progress</span>?: (percent: <span class="built_in">number</span>) =&gt; <span class="built_in">void</span></span></span><br><span class="line"><span class="params"></span>): <span class="title class_">Promise</span>&lt;<span class="title class_">ImageItem</span>&gt; &#123;</span><br><span class="line">  <span class="comment">// 生成文件名：年月日时分秒 + 3 位随机数</span></span><br><span class="line">  <span class="keyword">const</span> now = <span class="keyword">new</span> <span class="title class_">Date</span>()</span><br><span class="line">  <span class="keyword">const</span> <span class="title function_">pad</span> = (<span class="params"><span class="attr">n</span>: <span class="built_in">number</span>, len = <span class="number">2</span></span>) =&gt; n.<span class="title function_">toString</span>().<span class="title function_">padStart</span>(len, <span class="string">&#x27;0&#x27;</span>)</span><br><span class="line">  <span class="keyword">const</span> fileName = <span class="string">`<span class="subst">$&#123;now.getFullYear()&#125;</span><span class="subst">$&#123;pad(now.getMonth() + <span class="number">1</span>)&#125;</span><span class="subst">$&#123;pad(now.getDate())&#125;</span><span class="subst">$&#123;pad(now.getHours())&#125;</span><span class="subst">$&#123;pad(now.getMinutes())&#125;</span><span class="subst">$&#123;pad(now.getSeconds())&#125;</span><span class="subst">$&#123;<span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.random() * <span class="number">900</span>) + <span class="number">100</span>&#125;</span><span class="subst">$&#123;getFileExtension(file.name)&#125;</span>`</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> normalizedPath = (config.<span class="property">uploadPath</span> || <span class="string">&#x27;&#x27;</span>).<span class="title function_">replace</span>(<span class="regexp">/^\/+|\/+$/g</span>, <span class="string">&#x27;&#x27;</span>)</span><br><span class="line">  <span class="keyword">const</span> path = normalizedPath ? <span class="string">`<span class="subst">$&#123;normalizedPath&#125;</span>/<span class="subst">$&#123;fileName&#125;</span>`</span> : fileName</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> base64 = <span class="keyword">await</span> <span class="title function_">fileToBase64</span>(file)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">await</span> axios.<span class="title function_">put</span>(</span><br><span class="line">      <span class="string">`https://api.github.com/repos/<span class="subst">$&#123;config.owner&#125;</span>/<span class="subst">$&#123;config.repo&#125;</span>/contents/<span class="subst">$&#123;<span class="built_in">encodeURIComponent</span>(path)&#125;</span>`</span>,</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="attr">message</span>: <span class="string">`Upload image: <span class="subst">$&#123;file.name&#125;</span>`</span>,</span><br><span class="line">        <span class="attr">content</span>: base64,</span><br><span class="line">        <span class="attr">branch</span>: config.<span class="property">branch</span></span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="attr">headers</span>: &#123;</span><br><span class="line">          <span class="title class_">Authorization</span>: <span class="string">`Bearer <span class="subst">$&#123;config.token&#125;</span>`</span>,</span><br><span class="line">          <span class="string">&#x27;Content-Type&#x27;</span>: <span class="string">&#x27;application/json&#x27;</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">onUploadProgress</span>: <span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line">          <span class="keyword">if</span> (progress &amp;&amp; e.<span class="property">total</span>) &#123;</span><br><span class="line">            <span class="title function_">progress</span>(<span class="title class_">Math</span>.<span class="title function_">round</span>((e.<span class="property">loaded</span> * <span class="number">100</span>) / e.<span class="property">total</span>))</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> imageUrl = config.<span class="property">customDomain</span></span><br><span class="line">      ? <span class="string">`<span class="subst">$&#123;config.customDomain&#125;</span>/<span class="subst">$&#123;path&#125;</span>`</span></span><br><span class="line">      : <span class="string">`https://raw.githubusercontent.com/<span class="subst">$&#123;config.owner&#125;</span>/<span class="subst">$&#123;config.repo&#125;</span>/<span class="subst">$&#123;config.branch&#125;</span>/<span class="subst">$&#123;path&#125;</span>`</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      <span class="attr">id</span>: <span class="title class_">Date</span>.<span class="title function_">now</span>().<span class="title function_">toString</span>(),</span><br><span class="line">      <span class="attr">url</span>: imageUrl,</span><br><span class="line">      <span class="attr">name</span>: file.<span class="property">name</span>,</span><br><span class="line">      <span class="attr">size</span>: file.<span class="property">size</span>,</span><br><span class="line">      <span class="attr">uploadDate</span>: <span class="keyword">new</span> <span class="title class_">Date</span>().<span class="title function_">toISOString</span>()</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; <span class="keyword">catch</span> (<span class="attr">err</span>: <span class="built_in">any</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (err?.<span class="property">message</span> === <span class="string">&#x27;Network Error&#x27;</span> || err?.<span class="property">code</span> === <span class="string">&#x27;ERR_NETWORK&#x27;</span>) &#123;</span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">Error</span>(<span class="string">&#x27;Network Error: 无法连接到 GitHub API&#x27;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (err?.<span class="property">response</span>) &#123;</span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">Error</span>(<span class="string">`Upload failed: <span class="subst">$&#123;err.response.status&#125;</span> <span class="subst">$&#123;err.response.data?.message&#125;</span>`</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">throw</span> err</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>直接调用 GitHub API 的优势：</strong></p>
+<ol>
+<li><strong>浏览器端兼容</strong>：可以在前端浏览器中直接调用（需处理 CORS）</li>
+<li><strong>进度反馈</strong>：原生支持上传进度回调</li>
+<li><strong>错误处理</strong>：更细粒度的错误控制</li>
+<li><strong>无需依赖</strong>：不需要安装 PicGo，减少依赖</li>
+</ol>
+<h3 id="63-多平台上传策略"><a class="markdownIt-Anchor" href="#63-多平台上传策略"></a> 6.3 多平台上传策略</h3>
+<p>你可以实现多平台上传策略，将图片同时上传到多个平台以实现备份：</p>
+<figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">uploadToMultiplePlatforms</span>(<span class="params"><span class="attr">files</span>: <span class="built_in">string</span>[], <span class="attr">platforms</span>: <span class="built_in">string</span>[]</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> <span class="attr">results</span>: <span class="title class_">Record</span>&lt;<span class="built_in">string</span>, <span class="built_in">string</span>[]&gt; = &#123;&#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">const</span> platform <span class="keyword">of</span> platforms) &#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      <span class="keyword">const</span> picgo = <span class="keyword">new</span> <span class="title class_">PicGo</span>()</span><br><span class="line">      </span><br><span class="line">      <span class="comment">// 配置不同平台</span></span><br><span class="line">      <span class="keyword">switch</span> (platform) &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;github&#x27;</span>:</span><br><span class="line">          picgo.<span class="title function_">setConfig</span>(&#123;</span><br><span class="line">            <span class="string">&#x27;picGo-BED&#x27;</span>: <span class="string">&#x27;github&#x27;</span>,</span><br><span class="line">            <span class="string">&#x27;picGo-GitHub-token&#x27;</span>: process.<span class="property">env</span>.<span class="property">GITHUB_TOKEN</span>!,</span><br><span class="line">            <span class="string">&#x27;picGo-GitHub-repo&#x27;</span>: <span class="string">&#x27;username/repo&#x27;</span></span><br><span class="line">          &#125;)</span><br><span class="line">          <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;aliyun&#x27;</span>:</span><br><span class="line">          picgo.<span class="title function_">setConfig</span>(&#123;</span><br><span class="line">            <span class="string">&#x27;picGo-BED&#x27;</span>: <span class="string">&#x27;upstream-aliyun-oss&#x27;</span>,</span><br><span class="line">            <span class="string">&#x27;picGo-Aliyun-OSS-bucket&#x27;</span>: <span class="string">&#x27;my-bucket&#x27;</span>,</span><br><span class="line">            <span class="string">&#x27;picGo-Aliyun-OSS-region&#x27;</span>: <span class="string">&#x27;oss-cn-shanghai&#x27;</span></span><br><span class="line">          &#125;)</span><br><span class="line">          <span class="keyword">break</span></span><br><span class="line">      &#125;</span><br><span class="line">      </span><br><span class="line">      <span class="keyword">const</span> result = <span class="keyword">await</span> picgo.<span class="title function_">upload</span>(files)</span><br><span class="line">      results[platform] = result.<span class="property">output</span> <span class="keyword">as</span> <span class="built_in">string</span>[]</span><br><span class="line">    &#125; <span class="keyword">catch</span> (err) &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">error</span>(<span class="string">`Platform <span class="subst">$&#123;platform&#125;</span> upload failed:`</span>, err)</span><br><span class="line">      results[platform] = []</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> results</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr />
+<h2 id="七-完整项目实战"><a class="markdownIt-Anchor" href="#七-完整项目实战"></a> 七、完整项目实战</h2>
+<h3 id="71-项目概述"><a class="markdownIt-Anchor" href="#71-项目概述"></a> 7.1 项目概述</h3>
+<p><strong>ImgTools</strong> 是一个基于 Vue 3 + TypeScript 的图片管理工具，它结合了 PicGo API 和 GitHub API，提供了完整的图片上传、管理和链接生成功能。</p>
+<p><strong>技术栈：</strong></p>
+<table>
+<thead>
+<tr>
+<th>技术</th>
+<th>版本</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Vue 3</td>
+<td>3.5.13</td>
+<td>前端框架</td>
+</tr>
+<tr>
+<td>TypeScript</td>
+<td>5.7.3</td>
+<td>类型安全</td>
+</tr>
+<tr>
+<td>Vite</td>
+<td>6.1.0</td>
+<td>构建工具</td>
+</tr>
+<tr>
+<td>Element Plus</td>
+<td>2.9.1</td>
+<td>UI 组件库</td>
+</tr>
+<tr>
+<td>Pinia</td>
+<td>2.3.0</td>
+<td>状态管理</td>
+</tr>
+<tr>
+<td>Axios</td>
+<td>1.7.9</td>
+<td>HTTP 客户端</td>
+</tr>
+<tr>
+<td>PicGo</td>
+<td>2.0.3</td>
+<td>图片上传</td>
+</tr>
+<tr>
+<td>Less</td>
+<td>4.2.1</td>
+<td>CSS 预处理器</td>
+</tr>
+</tbody>
+</table>
+<p><strong>核心功能：</strong></p>
+<ul>
+<li>📤 <strong>多图上传</strong>：支持批量上传、拖拽上传、粘贴上传</li>
+<li>🖼️ <strong>图片管理</strong>：浏览、搜索、删除已上传图片</li>
+<li>🔗 <strong>多格式链接</strong>：支持 Markdown、HTML、URL、UBB、自定义格式</li>
+<li>⚙️ <strong>灵活配置</strong>：可配置 GitHub 仓库参数</li>
+<li>📱 <strong>响应式设计</strong>：支持桌面端和移动端</li>
+</ul>
+<h3 id="72-核心代码解析"><a class="markdownIt-Anchor" href="#72-核心代码解析"></a> 7.2 核心代码解析</h3>
+<h4 id="721-picgo-工具封装"><a class="markdownIt-Anchor" href="#721-picgo-工具封装"></a> 7.2.1 PicGo 工具封装</h4>
+<p><code>src/utils/picgo.ts</code> 是 PicGo API 的核心封装：</p>
+<figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 使用 require 以兼容 picgo 的 CommonJS 导出</span></span><br><span class="line"><span class="comment">// @ts-ignore</span></span><br><span class="line"><span class="keyword">const</span> &#123; <span class="title class_">PicGo</span> &#125; = <span class="built_in">require</span>(<span class="string">&#x27;picgo&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">upload</span>(<span class="params"><span class="attr">paths</span>?: <span class="built_in">string</span>[]</span>): <span class="title class_">Promise</span>&lt;<span class="title class_">UploadResult</span>&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> picgo = <span class="keyword">new</span> <span class="title class_">PicGo</span>()</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> <span class="title function_">onUpload</span> = (<span class="params"><span class="attr">ctx</span>: <span class="built_in">any</span></span>) =&gt; &#123;</span><br><span class="line">      <span class="title function_">cleanup</span>()</span><br><span class="line">      <span class="title function_">resolve</span>(ctx)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> <span class="title function_">onFailed</span> = (<span class="params"><span class="attr">ctx</span>: <span class="built_in">any</span></span>) =&gt; &#123;</span><br><span class="line">      <span class="title function_">cleanup</span>()</span><br><span class="line">      <span class="title function_">reject</span>(ctx)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> <span class="title function_">onError</span> = (<span class="params"><span class="attr">err</span>: <span class="built_in">any</span></span>) =&gt; &#123;</span><br><span class="line">      <span class="title function_">cleanup</span>()</span><br><span class="line">      <span class="title function_">reject</span>(err)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">cleanup</span>(<span class="params"></span>) &#123;</span><br><span class="line">      <span class="keyword">try</span> &#123;</span><br><span class="line">        picgo.<span class="property">removeListener</span> &amp;&amp; picgo.<span class="title function_">removeListener</span>(<span class="string">&#x27;upload&#x27;</span>, onUpload)</span><br><span class="line">        picgo.<span class="property">removeListener</span> &amp;&amp; picgo.<span class="title function_">removeListener</span>(<span class="string">&#x27;failed&#x27;</span>, onFailed)</span><br><span class="line">        picgo.<span class="property">removeListener</span> &amp;&amp; picgo.<span class="title function_">removeListener</span>(<span class="string">&#x27;error&#x27;</span>, onError)</span><br><span class="line">      &#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">        <span class="comment">// ignore</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      picgo.<span class="property">on</span> &amp;&amp; picgo.<span class="title function_">on</span>(<span class="string">&#x27;upload&#x27;</span>, onUpload)</span><br><span class="line">      picgo.<span class="property">on</span> &amp;&amp; picgo.<span class="title function_">on</span>(<span class="string">&#x27;failed&#x27;</span>, onFailed)</span><br><span class="line">      picgo.<span class="property">on</span> &amp;&amp; picgo.<span class="title function_">on</span>(<span class="string">&#x27;error&#x27;</span>, onError)</span><br><span class="line"></span><br><span class="line">      <span class="keyword">if</span> (<span class="title class_">Array</span>.<span class="title function_">isArray</span>(paths) &amp;&amp; paths.<span class="property">length</span> &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        picgo.<span class="title function_">upload</span>(paths)</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        picgo.<span class="title function_">upload</span>()</span><br><span class="line">      &#125;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (err) &#123;</span><br><span class="line">      <span class="title function_">cleanup</span>()</span><br><span class="line">      <span class="title function_">reject</span>(err)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>封装要点：</strong></p>
+<ol>
+<li><strong>Promise 化</strong>：将基于事件的 API 封装为 Promise，便于 async/await 使用</li>
+<li><strong>事件清理</strong>：防止内存泄漏</li>
+<li><strong>灵活参数</strong>：支持文件路径和剪贴板两种上传方式</li>
+</ol>
+<h4 id="722-github-api-直接调用"><a class="markdownIt-Anchor" href="#722-github-api-直接调用"></a> 7.2.2 GitHub API 直接调用</h4>
+<p><code>src/utils/github.ts</code> 展示了如何直接调用 GitHub API 上传图片：</p>
+<figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">uploadToGitHub</span>(<span class="params"></span></span><br><span class="line"><span class="params">  <span class="attr">config</span>: <span class="title class_">GitHubConfig</span>,</span></span><br><span class="line"><span class="params">  <span class="attr">file</span>: <span class="title class_">File</span>,</span></span><br><span class="line"><span class="params">  <span class="attr">progress</span>?: (percent: <span class="built_in">number</span>) =&gt; <span class="built_in">void</span></span></span><br><span class="line"><span class="params"></span>): <span class="title class_">Promise</span>&lt;<span class="title class_">ImageItem</span>&gt; &#123;</span><br><span class="line">  <span class="comment">// 生成唯一文件名</span></span><br><span class="line">  <span class="keyword">const</span> fileName = <span class="title function_">generateUniqueFileName</span>(file.<span class="property">name</span>)</span><br><span class="line">  <span class="keyword">const</span> path = <span class="string">`<span class="subst">$&#123;config.uploadPath&#125;</span>/<span class="subst">$&#123;fileName&#125;</span>`</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">const</span> base64 = <span class="keyword">await</span> <span class="title function_">fileToBase64</span>(file)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">await</span> api.<span class="title function_">put</span>(</span><br><span class="line">    <span class="string">`/repos/<span class="subst">$&#123;config.owner&#125;</span>/<span class="subst">$&#123;config.repo&#125;</span>/contents/<span class="subst">$&#123;<span class="built_in">encodeURIComponent</span>(path)&#125;</span>`</span>,</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">message</span>: <span class="string">`Upload image: <span class="subst">$&#123;file.name&#125;</span>`</span>,</span><br><span class="line">      <span class="attr">content</span>: base64,</span><br><span class="line">      <span class="attr">branch</span>: config.<span class="property">branch</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">headers</span>: &#123;</span><br><span class="line">        <span class="title class_">Authorization</span>: <span class="string">`Bearer <span class="subst">$&#123;config.token&#125;</span>`</span>,</span><br><span class="line">        <span class="string">&#x27;Content-Type&#x27;</span>: <span class="string">&#x27;application/json&#x27;</span></span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="attr">onUploadProgress</span>: <span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (progress &amp;&amp; e.<span class="property">total</span>) &#123;</span><br><span class="line">          <span class="title function_">progress</span>(<span class="title class_">Math</span>.<span class="title function_">round</span>((e.<span class="property">loaded</span> * <span class="number">100</span>) / e.<span class="property">total</span>))</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  )</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> imageUrl = config.<span class="property">customDomain</span></span><br><span class="line">    ? <span class="string">`<span class="subst">$&#123;config.customDomain&#125;</span>/<span class="subst">$&#123;path&#125;</span>`</span></span><br><span class="line">    : <span class="string">`https://raw.githubusercontent.com/<span class="subst">$&#123;config.owner&#125;</span>/<span class="subst">$&#123;config.repo&#125;</span>/<span class="subst">$&#123;config.branch&#125;</span>/<span class="subst">$&#123;path&#125;</span>`</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    <span class="attr">id</span>: <span class="title class_">Date</span>.<span class="title function_">now</span>().<span class="title function_">toString</span>(),</span><br><span class="line">    <span class="attr">url</span>: imageUrl,</span><br><span class="line">    <span class="attr">name</span>: file.<span class="property">name</span>,</span><br><span class="line">    <span class="attr">size</span>: file.<span class="property">size</span>,</span><br><span class="line">    <span class="attr">uploadDate</span>: <span class="keyword">new</span> <span class="title class_">Date</span>().<span class="title function_">toISOString</span>()</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>直接 API 调用的优势：</strong></p>
+<ul>
+<li>浏览器端可直接使用</li>
+<li>支持上传进度回调</li>
+<li>更细粒度的错误控制</li>
+<li>无需安装额外依赖</li>
+</ul>
+<h4 id="723-链接生成工具"><a class="markdownIt-Anchor" href="#723-链接生成工具"></a> 7.2.3 链接生成工具</h4>
+<p><code>src/utils/links.ts</code> 提供了多种格式的图片链接生成：</p>
+<figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">generateLink</span>(<span class="params"></span></span><br><span class="line"><span class="params">  <span class="attr">image</span>: <span class="title class_">ImageItem</span>,</span></span><br><span class="line"><span class="params">  <span class="attr">format</span>: <span class="built_in">string</span>,</span></span><br><span class="line"><span class="params">  <span class="attr">customPattern</span>?: <span class="built_in">string</span></span></span><br><span class="line"><span class="params"></span>): <span class="built_in">string</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> url = image.<span class="property">url</span></span><br><span class="line">  <span class="keyword">switch</span> (format) &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&#x27;markdown&#x27;</span>:</span><br><span class="line">      <span class="keyword">return</span> <span class="string">`![<span class="subst">$&#123;image.name&#125;</span>](<span class="subst">$&#123;url&#125;</span>)`</span></span><br><span class="line">    <span class="keyword">case</span> <span class="string">&#x27;html&#x27;</span>:</span><br><span class="line">      <span class="keyword">return</span> <span class="string">`&lt;img src=&quot;<span class="subst">$&#123;url&#125;</span>&quot; alt=&quot;<span class="subst">$&#123;image.name&#125;</span>&quot; /&gt;`</span></span><br><span class="line">    <span class="keyword">case</span> <span class="string">&#x27;url&#x27;</span>:</span><br><span class="line">      <span class="keyword">return</span> url</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&#x27;ubb&#x27;</span>:</span><br><span class="line">      <span class="keyword">return</span> <span class="string">`[img]<span class="subst">$&#123;url&#125;</span>[/img]`</span></span><br><span class="line">    <span class="keyword">case</span> <span class="string">&#x27;custom&#x27;</span>:</span><br><span class="line">      <span class="keyword">return</span> customPattern</span><br><span class="line">        ?.<span class="title function_">replace</span>(<span class="string">&#x27;&#123;url&#125;&#x27;</span>, url)</span><br><span class="line">        .<span class="title function_">replace</span>(<span class="string">&#x27;&#123;name&#125;&#x27;</span>, image.<span class="property">name</span>) || url</span><br><span class="line">    <span class="attr">default</span>:</span><br><span class="line">      <span class="keyword">return</span> <span class="string">`![<span class="subst">$&#123;image.name&#125;</span>](<span class="subst">$&#123;url&#125;</span>)`</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="73-项目结构"><a class="markdownIt-Anchor" href="#73-项目结构"></a> 7.3 项目结构</h3>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">imgTools/</span><br><span class="line">├── src/</span><br><span class="line">│   ├── utils/</span><br><span class="line">│   │   ├── picgo.ts        # PicGo API 封装</span><br><span class="line">│   │   ├── github.ts       # GitHub API 直接调用</span><br><span class="line">│   │   └── links.ts        # 链接格式生成</span><br><span class="line">│   ├── stores/</span><br><span class="line">│   │   └── index.ts        # Pinia 状态管理</span><br><span class="line">│   ├── views/</span><br><span class="line">│   │   ├── Home.vue        # 上传页面</span><br><span class="line">│   │   ├── Album.vue       # 相册管理</span><br><span class="line">│   │   └── Settings.vue    # 设置页面</span><br><span class="line">│   ├── layouts/</span><br><span class="line">│   │   └── default.vue     # 默认布局</span><br><span class="line">│   ├── router/</span><br><span class="line">│   │   └── index.ts        # 路由配置</span><br><span class="line">│   ├── styles/</span><br><span class="line">│   │   ├── global.less     # 全局样式</span><br><span class="line">│   │   └── variables.less  # Less 变量</span><br><span class="line">│   ├── App.vue             # 根组件</span><br><span class="line">│   └── main.ts             # 入口文件</span><br><span class="line">├── package.json            # 依赖配置</span><br><span class="line">├── vite.config.ts          # Vite 配置</span><br><span class="line">└── tsconfig.json           # TypeScript 配置</span><br></pre></td></tr></table></figure>
+<hr />
+<h2 id="八-最佳实践与性能优化"><a class="markdownIt-Anchor" href="#八-最佳实践与性能优化"></a> 八、最佳实践与性能优化</h2>
+<h3 id="81-错误处理最佳实践"><a class="markdownIt-Anchor" href="#81-错误处理最佳实践"></a> 8.1 错误处理最佳实践</h3>
+<figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> result = <span class="keyword">await</span> picgo.<span class="title function_">upload</span>(files)</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;上传成功:&#x27;</span>, result.<span class="property">output</span>)</span><br><span class="line">&#125; <span class="keyword">catch</span> (err) &#123;</span><br><span class="line">  <span class="keyword">if</span> (err.<span class="property">code</span> === <span class="string">&#x27;PLUGIN_UPLOAD_ERROR&#x27;</span>) &#123;</span><br><span class="line">    <span class="comment">// 上传插件错误</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">error</span>(<span class="string">&#x27;上传失败:&#x27;</span>, err.<span class="property">message</span>)</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (err.<span class="property">code</span> === <span class="string">&#x27;CONFIG_NOT_FOUND&#x27;</span>) &#123;</span><br><span class="line">    <span class="comment">// 配置缺失</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">error</span>(<span class="string">&#x27;请检查 PicGo 配置&#x27;</span>)</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">// 其他错误</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">error</span>(<span class="string">&#x27;未知错误:&#x27;</span>, err)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="82-性能优化建议"><a class="markdownIt-Anchor" href="#82-性能优化建议"></a> 8.2 性能优化建议</h3>
+<ol>
+<li><strong>复用 PicGo 实例</strong>：避免频繁创建新实例</li>
+</ol>
+<figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 推荐：复用实例</span></span><br><span class="line"><span class="keyword">const</span> picgo = <span class="keyword">new</span> <span class="title class_">PicGo</span>()</span><br><span class="line"><span class="comment">// 多次调用 upload</span></span><br><span class="line"><span class="keyword">await</span> picgo.<span class="title function_">upload</span>(files1)</span><br><span class="line"><span class="keyword">await</span> picgo.<span class="title function_">upload</span>(files2)</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>
+<p><strong>批量上传</strong>：将多张图片一起上传，减少网络请求次数</p>
+</li>
+<li>
+<p><strong>图片压缩</strong>：在上传前使用插件对图片进行压缩</p>
+</li>
+</ol>
+<figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line">picgo.<span class="title function_">registerTransformPlugin</span>(<span class="string">&#x27;compress&#x27;</span>, <span class="keyword">class</span> <span class="title class_">Compress</span> &#123;</span><br><span class="line">  <span class="keyword">async</span> <span class="title function_">transform</span> (file) &#123;</span><br><span class="line">    <span class="comment">// 使用 sharp 或其他库压缩图片</span></span><br><span class="line">    <span class="keyword">return</span> compressedBuffer</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h3 id="83-安全注意事项"><a class="markdownIt-Anchor" href="#83-安全注意事项"></a> 8.3 安全注意事项</h3>
+<ol>
+<li><strong>Token 安全</strong>：不要将 GitHub Token 硬编码在代码中，使用环境变量</li>
+</ol>
+<figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> token = process.<span class="property">env</span>.<span class="property">GITHUB_TOKEN</span></span><br><span class="line"><span class="keyword">if</span> (!token) &#123;</span><br><span class="line">  <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">Error</span>(<span class="string">&#x27;GITHUB_TOKEN not set&#x27;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li><strong>环境变量管理</strong>：使用 <code>.env</code> 文件管理敏感信息</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># .env</span></span><br><span class="line">GITHUB_TOKEN=ghp_xxxxxxxxxxxxxxxxxxxx</span><br><span class="line">GITHUB_REPO=username/repo</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li><strong>生产环境隔离</strong>：开发环境和生产环境使用不同的配置</li>
+</ol>
+<hr />
+<h2 id="结语"><a class="markdownIt-Anchor" href="#结语"></a> 结语</h2>
+<p>通过本文的详细介绍，你应该已经掌握了：</p>
+<ol>
+<li><strong>PicGo API 的基础用法</strong>：初始化、配置、上传</li>
+<li><strong>CLI 命令行集成</strong>：在脚本和 CI/CD 中使用 PicGo</li>
+<li><strong>编辑器工作流集成</strong>：在 VS Code 扩展、Markdown 编辑器中实时上传</li>
+<li><strong>高级应用场景</strong>：自定义插件、多平台上传、与 GitHub API 结合</li>
+<li><strong>完整项目实战</strong>：基于 ImgTools 项目的代码解析</li>
+</ol>
+<p>PicGo 不仅仅是一个图片上传工具，更是一个强大的图片处理框架。通过其灵活的 API 设计和插件系统，你可以将图片上传能力无缝集成到任何 Node.js 工作流中。</p>
+<p>无论是构建自动化脚本、开发编辑器扩展，还是搭建自己的图片管理工具，PicGo 都是你值得信赖的选择。</p>
+<hr />
+<p><strong>参考资料：</strong></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://picgo.github.io/PicGo-Doc/">PicGo 官方文档</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/Molunerfinn/PicGo">PicGo GitHub 仓库</a></li>
+<li><a target="_blank" rel="noopener" href="https://docs.github.com/en/rest">GitHub API 文档</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/drda-x/imgTools">本项目 - ImgTools</a></li>
+</ul>
+<hr />
+<p><em>本文基于 ImgTools 项目实战编写，项目地址：<a href="https://drda-x.github.io/imgTools/">imgTools</a></em></p>
+
+    </div>
+    <footer class="article-footer">
+        <a class="article-category-link" href="/drda-blog/categories/%E7%AC%94%E8%AE%B0/" title="笔记" data-aos="zoom-in">笔记</a>
+
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item" data-aos="zoom-in"><a class="article-tag-list-link" href="/drda-blog/tags/GitHub/" rel="tag" title="GitHub">GitHub</a></li><li class="article-tag-list-item" data-aos="zoom-in"><a class="article-tag-list-link" href="/drda-blog/tags/Vue3/" rel="tag" title="Vue3">Vue3</a></li><li class="article-tag-list-item" data-aos="zoom-in"><a class="article-tag-list-link" href="/drda-blog/tags/picgo/" rel="tag" title="picgo">picgo</a></li><li class="article-tag-list-item" data-aos="zoom-in"><a class="article-tag-list-link" href="/drda-blog/tags/ts/" rel="tag" title="ts">ts</a></li></ul>
+
+    </footer>
+  </div>
+    <nav id="article-nav" aria-label="Article navigation" data-aos="fade-up">
+      <div class="article-nav-link-wrap left">
+          <img data-src="https://img.8845.top/img2/18.jpg" data-sizes="auto" alt="发票批量识别工具油猴脚本" class="lazyload">
+        <a href="/drda-blog/2026/07/10/%E5%8F%91%E7%A5%A8%E6%89%B9%E9%87%8F%E8%AF%86%E5%88%AB%E5%B7%A5%E5%85%B7%E6%B2%B9%E7%8C%B4%E8%84%9A%E6%9C%AC/" aria-label="前一篇: 发票批量识别工具油猴脚本" title="前一篇: 发票批量识别工具油猴脚本"></a>
+        <div class="article-nav-caption">前一篇</div>
+        <h3 class="article-nav-title">
+            发票批量识别工具油猴脚本
+        </h3>
+      </div>
+    <div class="article-nav-link-wrap right">
+        <img data-src="https://img.8845.top/img2/1942944226892972282.jpg" data-sizes="auto" alt="VSCode Copilot 接入第三方 OpenAI 兼容接口" class="lazyload">
+      <a href="/drda-blog/2026/06/18/AI%E6%8E%A5%E5%8F%A3/" aria-label="后一篇: VSCode Copilot 接入第三方 OpenAI 兼容接口"  title="后一篇: VSCode Copilot 接入第三方 OpenAI 兼容接口"></a>
+      <div class="article-nav-caption">后一篇</div>
+      <h3 class="article-nav-title">
+          VSCode Copilot 接入第三方 OpenAI 兼容接口
+      </h3>
+    </div>
+  </nav>
+
+</article>
+
+  <section id="comments" data-aos="fade-up">
+    <div class="comment-header">
+        
+      <h2 class="comment-title">说些什么吧！</h2>
+      <div class="comment-selector">
+        <div class="comment-selector-wrap">
+            <div class="selector-item" data-selector="beaudar">
+              <span>beaudar</span>
+            </div>
+        </div>
+      </div>
+    </div>
+    <div class="comment-content">
+          <div class="comment beaudar-comment" data-aos="fade-up"
+            id="beaudar-comment">
+          </div>
+    </div>
+  </section>
+
+</section>
+        </div>
+        <footer id="footer" aria-label="Site footer">
+  <div style="width: 100%; overflow: hidden">
+    <div class="footer-line"></div>
+  </div>
+  <div id="footer-info">
+    <div>
+      <span class="icon-copyright"></span>
+        2020-2026
+        <span class="footer-info-sep "></span>
+      Drda
+    </div>
+      <div>
+        基于&nbsp;<a href="https://hexo.io/" rel="noopener nofollow noreferrer" target="_blank">Hexo</a>&nbsp;
+        Theme.<a href="https://github.com/D-Sketon/hexo-theme-reimu" rel="noopener nofollow noreferrer" target="_blank">Reimu</a>
+      </div>
+      <div>
+        <span class="icon-brush"></span>
+        15.5k
+        &nbsp;|&nbsp;
+        <span class="icon-coffee"></span>
+        01:11
+      </div>
+      <div>
+        <span class="icon-eye"></span>
+        <span id="busuanzi_container_site_pv">总访问量&nbsp;<span id="busuanzi_value_site_pv"></span></span>
+        &nbsp;|&nbsp;
+        <span class="icon-user"></span>
+        <span id="busuanzi_container_site_uv">总访客量&nbsp;<span id="busuanzi_value_site_uv"></span></span>
+      </div>
+  </div>
+</footer>
+
+          <div class="sidebar-top">
+            <div class="sidebar-top-taichi "></div>
+            <div class="arrow-up"></div>
+          </div>
+        <div id="mask" class="hide"></div>
+      </div>
+      <nav id="mobile-nav" aria-label="Mobile navigation">
+  <div class="sidebar-wrap">
+        <div class="sidebar-toc-sidebar"><h3 class="toc-title">文章目录</h3>
+<div class="sidebar-toc-wrapper toc-div-class" >
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%95%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text"> 引言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80-picgo-%E7%AE%80%E4%BB%8B"><span class="toc-number">2.</span> <span class="toc-text"> 一、PicGo 简介</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#11-%E4%BB%80%E4%B9%88%E6%98%AF-picgo"><span class="toc-number">2.1.</span> <span class="toc-text"> 1.1 什么是 PicGo</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12-picgo-%E7%9A%84%E6%A0%B8%E5%BF%83%E6%9E%B6%E6%9E%84"><span class="toc-number">2.2.</span> <span class="toc-text"> 1.2 PicGo 的核心架构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#13-%E4%B8%BA%E4%BB%80%E4%B9%88%E9%80%89%E6%8B%A9-picgo-api"><span class="toc-number">2.3.</span> <span class="toc-text"> 1.3 为什么选择 PicGo API</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E4%B8%8E%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE"><span class="toc-number">3.</span> <span class="toc-text"> 二、环境搭建与基础配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#21-%E5%AE%89%E8%A3%85-picgo"><span class="toc-number">3.1.</span> <span class="toc-text"> 2.1 安装 PicGo</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#22-%E5%88%9D%E5%A7%8B%E5%8C%96-picgo-%E5%AE%9E%E4%BE%8B"><span class="toc-number">3.2.</span> <span class="toc-text"> 2.2 初始化 PicGo 实例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#23-%E9%85%8D%E7%BD%AE%E4%B8%8A%E4%BC%A0%E6%8F%92%E4%BB%B6"><span class="toc-number">3.3.</span> <span class="toc-text"> 2.3 配置上传插件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89-%E9%80%9A%E8%BF%87-api-%E9%9B%86%E6%88%90%E5%9B%BE%E7%89%87%E4%B8%8A%E4%BC%A0"><span class="toc-number">4.</span> <span class="toc-text"> 三、通过 API 集成图片上传</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#31-%E5%9F%BA%E7%A1%80%E4%B8%8A%E4%BC%A0%E6%B5%81%E7%A8%8B"><span class="toc-number">4.1.</span> <span class="toc-text"> 3.1 基础上传流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#32-%E4%B8%8A%E4%BC%A0%E6%8C%87%E5%AE%9A%E6%96%87%E4%BB%B6"><span class="toc-number">4.2.</span> <span class="toc-text"> 3.2 上传指定文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#33-%E4%B8%8A%E4%BC%A0%E5%89%AA%E8%B4%B4%E6%9D%BF%E5%9B%BE%E7%89%87"><span class="toc-number">4.3.</span> <span class="toc-text"> 3.3 上传剪贴板图片</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#34-%E6%89%B9%E9%87%8F%E4%B8%8A%E4%BC%A0"><span class="toc-number">4.4.</span> <span class="toc-text"> 3.4 批量上传</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#35-%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86%E4%B8%8E%E4%BA%8B%E4%BB%B6%E7%9B%91%E5%90%AC"><span class="toc-number">4.5.</span> <span class="toc-text"> 3.5 错误处理与事件监听</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B-cli-%E5%91%BD%E4%BB%A4%E8%A1%8C%E9%9B%86%E6%88%90"><span class="toc-number">5.</span> <span class="toc-text"> 四、CLI 命令行集成</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#41-%E5%9F%BA%E6%9C%AC-cli-%E7%94%A8%E6%B3%95"><span class="toc-number">5.1.</span> <span class="toc-text"> 4.1 基本 CLI 用法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#42-%E5%9C%A8%E6%9E%84%E5%BB%BA%E8%84%9A%E6%9C%AC%E4%B8%AD%E4%BD%BF%E7%94%A8-cli"><span class="toc-number">5.2.</span> <span class="toc-text"> 4.2 在构建脚本中使用 CLI</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#43-%E5%9C%A8-cicd-%E6%B5%81%E6%B0%B4%E7%BA%BF%E4%B8%AD%E9%9B%86%E6%88%90"><span class="toc-number">5.3.</span> <span class="toc-text"> 4.3 在 CI&#x2F;CD 流水线中集成</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94-%E7%BC%96%E8%BE%91%E5%99%A8%E4%B8%8E%E5%B7%A5%E4%BD%9C%E6%B5%81%E9%9B%86%E6%88%90"><span class="toc-number">6.</span> <span class="toc-text"> 五、编辑器与工作流集成</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#51-%E5%9C%A8-vs-code-%E6%89%A9%E5%B1%95%E4%B8%AD%E4%BD%BF%E7%94%A8-picgo"><span class="toc-number">6.1.</span> <span class="toc-text"> 5.1 在 VS Code 扩展中使用 PicGo</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#52-%E5%9C%A8-markdown-%E7%BC%96%E8%BE%91%E5%99%A8%E4%B8%AD%E5%AE%9E%E6%97%B6%E4%B8%8A%E4%BC%A0"><span class="toc-number">6.2.</span> <span class="toc-text"> 5.2 在 Markdown 编辑器中实时上传</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#53-git-hook-%E8%87%AA%E5%8A%A8%E4%B8%8A%E4%BC%A0"><span class="toc-number">6.3.</span> <span class="toc-text"> 5.3 Git Hook 自动上传</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AD-%E9%AB%98%E7%BA%A7%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-number">7.</span> <span class="toc-text"> 六、高级应用场景</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#61-%E8%87%AA%E5%AE%9A%E4%B9%89%E4%B8%8A%E4%BC%A0%E6%8F%92%E4%BB%B6"><span class="toc-number">7.1.</span> <span class="toc-text"> 6.1 自定义上传插件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#62-%E4%B8%8E-github-api-%E7%BB%93%E5%90%88%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%96%B9%E6%A1%88"><span class="toc-number">7.2.</span> <span class="toc-text"> 6.2 与 GitHub API 结合的实现方案</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#63-%E5%A4%9A%E5%B9%B3%E5%8F%B0%E4%B8%8A%E4%BC%A0%E7%AD%96%E7%95%A5"><span class="toc-number">7.3.</span> <span class="toc-text"> 6.3 多平台上传策略</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%83-%E5%AE%8C%E6%95%B4%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98"><span class="toc-number">8.</span> <span class="toc-text"> 七、完整项目实战</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#71-%E9%A1%B9%E7%9B%AE%E6%A6%82%E8%BF%B0"><span class="toc-number">8.1.</span> <span class="toc-text"> 7.1 项目概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#72-%E6%A0%B8%E5%BF%83%E4%BB%A3%E7%A0%81%E8%A7%A3%E6%9E%90"><span class="toc-number">8.2.</span> <span class="toc-text"> 7.2 核心代码解析</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#721-picgo-%E5%B7%A5%E5%85%B7%E5%B0%81%E8%A3%85"><span class="toc-number">8.2.1.</span> <span class="toc-text"> 7.2.1 PicGo 工具封装</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#722-github-api-%E7%9B%B4%E6%8E%A5%E8%B0%83%E7%94%A8"><span class="toc-number">8.2.2.</span> <span class="toc-text"> 7.2.2 GitHub API 直接调用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#723-%E9%93%BE%E6%8E%A5%E7%94%9F%E6%88%90%E5%B7%A5%E5%85%B7"><span class="toc-number">8.2.3.</span> <span class="toc-text"> 7.2.3 链接生成工具</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#73-%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84"><span class="toc-number">8.3.</span> <span class="toc-text"> 7.3 项目结构</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AB-%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5%E4%B8%8E%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96"><span class="toc-number">9.</span> <span class="toc-text"> 八、最佳实践与性能优化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#81-%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5"><span class="toc-number">9.1.</span> <span class="toc-text"> 8.1 错误处理最佳实践</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#82-%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%BB%BA%E8%AE%AE"><span class="toc-number">9.2.</span> <span class="toc-text"> 8.2 性能优化建议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#83-%E5%AE%89%E5%85%A8%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="toc-number">9.3.</span> <span class="toc-text"> 8.3 安全注意事项</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AF%AD"><span class="toc-number">10.</span> <span class="toc-text"> 结语</span></a></li></ol>
+</div>
+</div>
+        <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/drda-blog/avatar/avatar.webp" data-sizes="auto" alt="Drda" class="lazyload">
+  <div class="sidebar-author-name">Drda</div>
+  <div class="sidebar-description">Drda&#39;s Blog</div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div>
+    <div class="sidebar-state-number">12</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>分类</div>
+    <div class="sidebar-state-number">3</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>标签</div>
+    <div class="sidebar-state-number">17</div>
+  </div>
+</div>
+<div class="sidebar-social" >
+    <div class="icon-github sidebar-social-icon">
+      <a href=https://github.com/drda-x itemprop="url" target="_blank" aria-label="github" rel="noopener nofollow noreferrer"></a>
+    </div>
+    <div class="icon-bilibili sidebar-social-icon">
+      <a href=https://space.bilibili.com/28903889 itemprop="url" target="_blank" aria-label="bilibili" rel="noopener nofollow noreferrer"></a>
+    </div>
+</div>
+<div class="sidebar-menu">
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/drda-blog/" aria-label="首页"></a>
+          <div class="sidebar-menu-icon icon ">
+                <img src="/drda-blog/images/taichi.png" alt="home icon" style="width: 1em;">
+          </div>
+        <div class="sidebar-menu-link">首页</div>
+      </div>
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/drda-blog/archives" aria-label="归档"></a>
+          <div class="sidebar-menu-icon icon ">
+                <img src="/drda-blog/images/archives.png" alt="archives icon" style="width: 1em;">
+          </div>
+        <div class="sidebar-menu-link">归档</div>
+      </div>
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/drda-blog/about" aria-label="关于"></a>
+          <div class="sidebar-menu-icon icon ">
+                <img src="/drda-blog/images/about.png" alt="about icon" style="width: 1em;">
+          </div>
+        <div class="sidebar-menu-link">关于</div>
+      </div>
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/drda-blog/friend" aria-label="友链"></a>
+          <div class="sidebar-menu-icon icon ">
+                <img src="/drda-blog/images/friend.png" alt="friend icon" style="width: 1em;">
+          </div>
+        <div class="sidebar-menu-link">友链</div>
+      </div>
+</div>
+</div>
+  </div>
+      <div class="sidebar-btn-wrapper">
+        <div class="sidebar-toc-btn current"></div>
+        <div class="sidebar-common-btn"></div>
+      </div>
+</nav>
+
+    </div>
+      <div class="site-search">
+        <div class="reimu-popup popup">
+          <div class="reimu-search">
+            <div class="reimu-search-input-icon"></div>
+            <div id="reimu-search-input"></div>
+            <div class="popup-btn-close"></div>
+          </div>
+          <div class="reimu-results">
+            <div id="reimu-stats"></div>
+            <div id="reimu-hits"></div>
+            <div id="reimu-pagination" class="reimu-pagination"></div>
+          </div>
+          <img class="reimu-bg" src="/drda-blog/images/reimu.png" loading="lazy" decoding="async" fetchpriority="low"/>
+        </div>
+      </div>
+    
+<script src="https://npm.webcache.cn/lazysizes@5.3.2/lazysizes.min.js" integrity="sha384-3gT&#x2F;vsepWkfz&#x2F;ff7PpWNUeMzeWoH3cDhm&#x2F;A8jM7ouoAK0&#x2F;fP&#x2F;9bcHHR5kHq2nf+e" crossorigin="anonymous"></script>
+
+
+<script src="https://npm.webcache.cn/clipboard@2.0.11/dist/clipboard.min.js" integrity="sha384-J08i8An&#x2F;QeARD9ExYpvphB8BsyOj3Gh2TSh1aLINKO3L0cMSH2dN3E22zFoXEi0Q" crossorigin="anonymous"></script>
+
+
+
+
+<script src="/drda-blog/js/script.js"></script>
+
+
+  
+<script src="/drda-blog/js/aos.js"></script>
+
+  <script>
+    var aosInit = () => {
+      AOS.init({
+        duration: 1000,
+        easing: "ease",
+        once: true,
+        offset: 50,
+      });
+    };
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', aosInit);
+    } else {
+      aosInit();
+    }
+  </script>
+
+
+<script src="/drda-blog/js/pjax_script.js" data-pjax></script>
+
+
+
+  <script>
+    var ALGOLIA_CONFIG = {
+      logo: "/drda-blog/images/algolia_logo.svg",
+      algolia: {
+        applicationID: "YMYG3VEWNQ",
+        apiKey: "9cc40f37d1556b019e275e62719299fa",
+        indexName: "drdaBlog",
+        hits: {
+          "per_page": parseInt("10")
+        },
+        labels: {
+          "input_placeholder": "搜索.....",
+          "hits_empty": "未发现与 「${query}」相关内容",
+          "hits_stats": "找到${hits}条结果（用时 ${time} ms）"
+        }
+      }
+    };
+  </script>
+  
+<script src="https://npm.webcache.cn/algoliasearch@4.17.1/dist/algoliasearch-lite.umd.js" integrity="sha384-xvLS0jfKuoREs7pqkRI&#x2F;OI8GcqohO5S+jQz7ZBtQXnsXmD+9jDOOY4cL6dCPzlrk" crossorigin="anonymous" defer></script>
+
+  
+<script src="https://npm.webcache.cn/@reimujs/instantsearch.js@4.57.0-beta.1/dist/instantsearch.production.min.js" integrity="sha384-aagKMe8nkqaP2DYQc8kkYOL5l+M5Q2WH&#x2F;Uhr4teOh0Ybp0RZj0kUSDm45qPikMjK" crossorigin="anonymous" defer></script>
+
+  
+<script src="/drda-blog/js/algolia_search.js" defer></script>
+
+
+  <script>
+    var setupFirework = () => {
+      if (!false || !window.matchMedia('(max-width: 768px)').matches) {
+        window.firework && window.firework(JSON.parse('{"excludeElements":["a","button"],"particles":[{"shape":"circle","move":["emit"],"easing":"easeOutExpo","colors":["var(--red-1)","var(--red-2)","var(--red-3)","var(--red-4)"],"number":20,"duration":[1200,1800],"shapeOptions":{"radius":[16,32],"alpha":[0.3,0.5]}},{"shape":"circle","move":["diffuse"],"easing":"easeOutExpo","colors":["var(--red-0)"],"number":1,"duration":[1200,1800],"shapeOptions":{"radius":20,"alpha":[0.2,0.5],"lineWidth":6}}]}'));
+      }
+    }
+  </script>
+  
+<script src="https://npm.webcache.cn/mouse-firework@0.2.0/dist/index.umd.js" integrity="sha384-qi9WggRt19tv8Vc7pCHW3ulMNLwrn515zaLEWZjl1px07vz8+pUoWX8n1rgq282T" crossorigin="anonymous" onload="setupFirework()" defer></script>
+
+
+  
+<script src="https://npm.webcache.cn/theme-shokax-pjax@0.0.3/dist/index.umd.js" integrity="sha384-xneY1WY8hOfUzswrE4CrYq35N4BdVcxqxwHPr9zawE&#x2F;jMSCxD+jAPU55x&#x2F;jj3wlf" crossorigin="anonymous"></script>
+
+  
+<script src="/drda-blog/js/pjax.js"></script>
+
+
+
+
+
+<div id="lazy-script">
+  <div>
+      
+      
+      <script data-pjax>
+        window.REIMU_POST = {
+          author: "Drda",
+          title: "利用GitHub+PicGo搭建个人图床",
+          url: "https://drda-x.github.io/drda-blog/2026/06/26/%E5%88%A9%E7%94%A8GitHub-picGo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%9B%BE%E5%BA%8A/",
+          excerpt: "",
+          description: "",
+          stripContent: " 引言 由于写博客的时候发现有时候需要上传一些图片，就想着自己搭建一个图床用来保存和使用自己上传的图片,于是我就搜到PicGo PicGo 正是为此而生的图片上传管理工具。官网中有PicGo.exe安装包，是可视化的上传工具，但是我不想下载软件，于是乎，在看了文档之后，发现它有完整的 Node.js API 和 CLI 接口，可以将图片上传能力无缝集成到任何 Node.js 工作流中。 我想了想了，自己写一个web网站作为我的图片上传工具—— ImgTools 本文将基于一个完整的实战项目 ——",
+          date: "Fri Jun 26 2026 15:29:00 GMT+0000",
+          updated: "Mon Jul 20 2026 08:30:37 GMT+0000",
+          cover: "https://p6.qhimg.com/bdm/0_0_100/t0190b2f324de258f72.jpg",
+        };
+      </script>
+        
+<script src="/drda-blog/js/insert_highlight.js" data-pjax></script>
+
+      
+<script src="/drda-blog/js/tabs.js" data-pjax defer></script>
+
+      <script type="module" data-pjax>
+        (async () => {
+          const PhotoSwipeLightbox = (await safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe-lightbox.esm.min.js", "sha384-DiL6M/gG+wmTxmCRZyD1zee6lIhawn5TGvED0FOh7fXcN9B0aZ9dexSF/N6lrZi/")).default;
+          const initPswp = (gallery, children) => {
+            if (_$$(`${gallery} ${children}`).length > 0) {
+              new PhotoSwipeLightbox({
+                gallery,
+                children,
+                pswpModule: () => safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8+oTJ7m3DfYEWX1fu1scuS4+s")
+              }).init();
+            }
+          }
+          const pswp = () => {
+            initPswp('.article-entry', 'a.article-gallery-item');
+            initPswp('.article-gallery', 'a.article-gallery-item');
+          }
+          pswp();
+        })();
+      </script>
+        
+
+<script data-pjax>
+  var loadScript = (src, integrity) => {
+    const script = document.createElement('script');
+    script.src = src;
+    if (integrity) script.integrity = integrity;
+    script.crossOrigin = 'anonymous';
+    return script;
+  };
+
+  var commentConfigKeys = ["beaudar"];
+  var commentConfig = {
+    beaudar: {
+      enable: true,
+      load: () => {
+        const container = document.querySelector('.beaudar-comment'); 
+        if (!container) return;
+        container.style.display = 'block';
+
+        let theme = 'auto';
+        const parsedTheme = theme === 'auto' ? (document.documentElement.getAttribute('data-theme') === 'dark' ? 'github-dark' : 'github-light') : theme;
+
+        // 创建 beaudar 脚本
+        const script = document.createElement('script');
+        script.src = 'https://beaudar.lipk.org/client.js';
+        script.setAttribute('repo', 'drda-x/drda-blog');
+        script.setAttribute('branch', 'main');
+        script.setAttribute('theme', parsedTheme);
+        script.setAttribute('crossorigin', 'anonymous');
+        script.async = true;
+
+        // 透传其他字段
+            script.setAttribute('issue-term', 'title');
+            script.setAttribute('input-position', 'top');
+            script.setAttribute('comment-order', 'desc');
+            script.setAttribute('keep-theme', 'true');
+            script.setAttribute('loading', 'true');
+        
+
+        // 清空容器（防止重复加载）并插入脚本
+        container.innerHTML = '';
+        container.appendChild(script);
+        if (theme === 'auto') {
+          const themeHandler = (e) => {
+            const iframe = container.querySelector('iframe.beaudar-frame');
+            if (!iframe || !iframe.contentWindow) {
+              document.body.removeEventListener('reimu:theme-set', themeHandler);
+              return;
+            }
+            iframe.contentWindow.postMessage({ type: 'set-theme', theme: e.detail.isDark ? 'github-dark' : 'github-light' }, 'https://beaudar.lipk.org');
+          };
+          document.body.addEventListener('reimu:theme-set', themeHandler);
+        }
+      }
+    },
+  }
+  commentConfig.enable = commentConfigKeys.some(key => commentConfig[key].enable);
+
+  var defaultComment = '';
+  if (commentConfig.enable) {
+    // 1. 首先检查localStorage中是否有保存的评论类型
+    var savedCommentType = localStorage.getItem('commentType');
+    
+    // 2. 如果localStorage中有值且对应的评论系统可用，就使用它
+    if (savedCommentType) {
+      if (commentConfig[savedCommentType]?.enable) {
+        defaultComment = savedCommentType;
+      }
+    }
+    
+    // 3. 如果localStorage无效，检查配置的默认评论系统
+    if (!defaultComment) {
+      var configDefault = 'waline';
+      if (commentConfig[configDefault]?.enable) {
+        defaultComment = configDefault;
+      }
+    }
+    
+    // 4. 如果前两项都无效，按指定顺序找到第一个可用的评论系统
+    if (!defaultComment) {
+      defaultComment = commentConfigKeys.find(sys => commentConfig[sys].enable) || '';
+    }
+  }
+  function loadComments() {
+    if (!commentConfig.enable) return;
+    const loadedComments = {
+      valine: false,
+      waline: false,
+      twikoo: false,
+      gitalk: false,
+      giscus: false,
+      utterances: false,
+      beaudar: false,
+      disqus: false,
+    };
+
+    // 隐藏所有评论容器
+    const hideAllComments = () => {
+      const commentContainers = document.querySelectorAll('.comment');
+      commentContainers.forEach(container => {
+        container.style.display = 'none';
+      });
+    };
+
+    // 按需加载评论系统
+    const loadCommentSystem = (type) => {
+      if (loadedComments[type]) {
+        // 如果已加载，只需显示对应容器
+        document.querySelector(`.${type}-comment`).style.display = 'block';
+        return;
+      }
+
+      // 根据类型加载对应的脚本
+      commentConfig[type]?.load();
+      loadedComments[type] = true;
+    };
+
+    // 评论组件选择器
+    const changeActiveCommentItems = (item) => {
+      const commentItems = document.querySelectorAll('.selector-item');
+      for (let i = 0; i < commentItems.length; i++) {
+        commentItems[i].classList.remove('active');
+      }
+      item.classList.add('active');
+
+      // 获取要加载的评论系统类型
+      const commentType = item.getAttribute('data-selector');
+
+      // 隐藏所有评论系统
+      hideAllComments();
+
+      // 加载选中的评论系统
+      loadCommentSystem(commentType);
+    };
+
+    const commentInit = () => {
+      // 评论组件选择器点击事件
+      const commentItems = document.querySelectorAll('.selector-item');
+      for (let item of commentItems) {
+        item.addEventListener('click', () => {
+          // 保存选择器状态
+          const commentType = item.getAttribute('data-selector');
+          window.localStorage.setItem('commentType', commentType);
+          // 切换选中状态
+          changeActiveCommentItems(item);
+        });
+      }
+
+      // 检查是否需要加载默认评论系统
+      if (defaultComment) {
+        const defaultSelectorItem = document.querySelector(`[data-selector="${defaultComment}"]`);
+        if (!defaultSelectorItem) return;
+        defaultSelectorItem.style.display = 'block';
+        defaultSelectorItem.classList.add('active');
+        loadCommentSystem(defaultComment);
+      }
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', commentInit);
+    } else {
+      commentInit();
+    }
+  };
+  loadComments();
+</script>
+
+  </div>
+</div>
+
+
+  <script>
+    console.log(String.raw`%c 
+ ______     ______     __     __    __     __  __    
+/\  == \   /\  ___\   /\ \   /\ "-./  \   /\ \/\ \   
+\ \  __<   \ \  __\   \ \ \  \ \ \-./\ \  \ \ \_\ \  
+ \ \_\ \_\  \ \_____\  \ \_\  \ \_\ \ \_\  \ \_____\ 
+  \/_/ /_/   \/_____/   \/_/   \/_/  \/_/   \/_____/ 
+                                                  
+`,'color: #ff5252;')
+    console.log('%c Theme.Reimu v' + '1.12.5' + ' %c https://github.com/D-Sketon/hexo-theme-reimu ', 'color: white; background: #ff5252; padding:5px 0;', 'padding:4px;border:1px solid #ff5252;')
+  </script>
+  
+
+
+  
+<script src="https://npm.webcache.cn/busuanzi@2.3.0/bsz.pure.mini.js" integrity="sha384-0M75wtSkhjIInv4coYlaJU83+OypaRCIq2SukQVQX04eGTCBXJDuWAbJet56id+S" crossorigin="anonymous" async></script>
+
+
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.getRegistrations().then((registrations) => {
+      for (let registration of registrations) {
+        registration.unregister();
+      }
+    });
+  }
+</script>
+
+
+    <script>
+      var setupAPlayer = () => {
+        if (!false || !window.matchMedia('(max-width: 768px)').matches) {
+          if (window.matchMedia('(max-width: 959px)').matches) {
+            const meting = _$('meting-js');
+            if (meting) {
+              meting.setAttribute('fixed', 'true');
+              const aside = meting.parentNode?.parentNode;
+              if (aside?.tagName === 'ASIDE') {
+                meting.parentNode.removeChild(meting);
+                document.body.appendChild(meting);
+              }
+            }
+          }
+        }
+      };
+        var meting_api = "https://api.i-meto.com/meting/api?server=:server&type=:type&id=:id&auth=c6e770266f69eab18dcb51fcc31710a47779ec5a";
+    </script>
+  
+<script src="https://npm.webcache.cn/aplayer@1.10.1/dist/APlayer.min.js" integrity="sha384-gdGYZwHnfJM54evoZhpO0s6ZF5BQiybkiyW7VXr+h5UfruuRL&#x2F;aORyw+5+HZoU6e" crossorigin="anonymous" defer onload="setupAPlayer()"></script>
+
+    
+<script src="https://npm.webcache.cn/meting@2.0.1/dist/Meting.min.js" integrity="sha384-ASVlpKF80A22OXTK3tfEjZm1EL6uFMKIC4p8+0maanw1S&#x2F;IyB+Y4JG+ZDU7GpKE8" crossorigin="anonymous" defer></script>
+
+
+
+  <script src="/drda-blog/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"live2d_modules/live2D/model/xiaomai"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7}});</script></body>
+  </html>

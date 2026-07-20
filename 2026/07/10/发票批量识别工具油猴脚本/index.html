@@ -1,0 +1,1099 @@
+  <!DOCTYPE html>
+  <html lang="zh-CN"  
+      data-theme-mode="auto"
+  >
+  <head>
+  <meta charset="utf-8">
+  
+  
+  
+  <script>window.REIMU_CONFIG = {};window.REIMU_CONFIG.clipboard_tips = {"success":{"zh-CN":"复制成功 (*^▽^*)"},"fail":{"zh-CN":"复制失败 (ﾟ⊿ﾟ)ﾂ"},"copyright":{"enable":false,"count":50,"license_type":"by-nc-sa"}};window.REIMU_CONFIG.clipboard_tips.copyright.content = '本博客所有文章除特别声明外，均采用 BY-NC-SA 许可协议。转载请注明出处！';window.REIMU_CONFIG.code_block = {"expand":true};window.REIMU_CONFIG.base = 'https://drda-x.github.io/drda-blog';window.REIMU_CONFIG.relative = '/drda-blog/';</script>
+  <title>
+    发票批量识别工具油猴脚本 | 加辣の秘密基地
+  </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic|Noto Serif SC:400,400italic,700,700italic&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic|Noto Serif SC:400,400italic,700,700italic&display=swap" media="print" onload="this.media='all'">
+    
+<link rel="stylesheet" href="https://npm.webcache.cn/@fortawesome/fontawesome-free@7.1.0/css/regular.min.css" integrity="sha384-4qYppzjH8EiA+cGdaubu2vL7Rk8WGiqCSj7oRuP1uwtFWkfKNHD20lPfcrbQc8dU" crossorigin="anonymous">
+<link rel="stylesheet" href="https://npm.webcache.cn/@fortawesome/fontawesome-free@7.1.0/css/solid.min.css" integrity="sha384-wbMWab3UDSPm2kvIgVOn&#x2F;d9KPTecgPU1+Nb3zoQrm&#x2F;oVu0EkPL6IaKinjbwW0rum" crossorigin="anonymous">
+
+    <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="https://npm.webcache.cn/@fortawesome/fontawesome-free@7.1.0/css/brands.min.css" integrity="sha384-KTGeC2hIMzpeQakhsmzB9bZfhCD5xZZCgI1iZH6f/O457SxzlkzTQg/WXFNoi3ih" crossorigin="anonymous">
+<link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="https://npm.webcache.cn/@fortawesome/fontawesome-free@7.1.0/css/v5-font-face.min.css" integrity="sha384-nJ1ThfldViXoLpJ6jlKcP2beas8BMbYq26SG9Hi8cH89bZi4RZ644v7helMCqJxd" crossorigin="anonymous">
+<link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="https://npm.webcache.cn/@fortawesome/fontawesome-free@7.1.0/css/v4-font-face.min.css" integrity="sha384-UlkrhOIvZxJFd4MElSUp7ow6/RUeYKi/orfCZIRRiOENFuQPIAA3T3HjYfmBRhNq" crossorigin="anonymous">
+    
+<link rel="stylesheet" href="/drda-blog/css/loader.css">
+
+    <meta name="description" content="发票批量识别工具 · 使用说明文档  版本：v5.0 运行环境：Tampermonkey &#x2F; Violentmonkey 等浏览器脚本管理器 适用页面：任意网页（*:&#x2F;&#x2F;*&#x2F;*） 依赖接口：阿里云市场 — 发票 OCR 识别 API    目录  功能概述 前置准备 安装与启动 使用流程 界面说明 数据导出 技术架构    1. 功能概述 本脚本是一个独立运行于任意网页上的发票批量 OCR 识别">
+<meta property="og:type" content="article">
+<meta property="og:title" content="发票批量识别工具油猴脚本">
+<meta property="og:url" content="https://drda-x.github.io/drda-blog/2026/07/10/%E5%8F%91%E7%A5%A8%E6%89%B9%E9%87%8F%E8%AF%86%E5%88%AB%E5%B7%A5%E5%85%B7%E6%B2%B9%E7%8C%B4%E8%84%9A%E6%9C%AC/index.html">
+<meta property="og:site_name" content="加辣の秘密基地">
+<meta property="og:description" content="发票批量识别工具 · 使用说明文档  版本：v5.0 运行环境：Tampermonkey &#x2F; Violentmonkey 等浏览器脚本管理器 适用页面：任意网页（*:&#x2F;&#x2F;*&#x2F;*） 依赖接口：阿里云市场 — 发票 OCR 识别 API    目录  功能概述 前置准备 安装与启动 使用流程 界面说明 数据导出 技术架构    1. 功能概述 本脚本是一个独立运行于任意网页上的发票批量 OCR 识别">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-07-10T17:19:38.000Z">
+<meta property="article:modified_time" content="2026-07-20T08:30:37.843Z">
+<meta property="article:author" content="Drda">
+<meta property="article:tag" content="油猴">
+<meta name="twitter:card" content="summary">
+    <link rel="alternate" href="/drda-blog/atom.xml" title="加辣の秘密基地" type="application/atom+xml"><link rel="alternate" href="/drda-blog/rss2.xml" title="加辣の秘密基地" type="application/rss+xml">
+    <link rel="shortcut icon" href="/drda-blog/images/favicon.ico">
+  
+<link rel="stylesheet" href="/drda-blog/css/style.css">
+
+  <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.css" integrity="sha384-IfxC36XL/toUyJ939C73PcgMuRzAZuIzZxE38drsmO5p6jD7ei+Zx/1oA/0l8ysE" crossorigin="anonymous">
+      <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="https://npm.webcache.cn/katex@0.16.24/dist/katex.min.css" integrity="sha384-tTgKLjMYmJr94v8qu2PE5MUGSMbyN2xiH266JUB3gpm8vnnJywd1dWSOEfrFz+YI" crossorigin="anonymous">
+    
+<script src="https://npm.webcache.cn/pace-js@1.2.4/pace.min.js" integrity="sha384-k6YtvFUEIuEFBdrLKJ3YAUbBki333tj1CSUisai5Cswsg9wcLNaPzsTHDswp4Az8" crossorigin="anonymous"></script>
+
+    
+<link rel="stylesheet" href="https://npm.webcache.cn/@reimujs/aos@0.1.2/dist/aos.css" integrity="sha384-GMRP93c6Hkz9JVKGAuRR3nTS7M07RwPgTFenXiosjq2VbVgvdDNcz1g6Mkj8AONa" crossorigin="anonymous">
+
+    <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="https://npm.webcache.cn/aplayer@1.10.1/dist/APlayer.min.css" integrity="sha384-tLMkTWh2pfXNWGFlUS0w1TFtRG5xZ9lPWFOooj+vDDLIL+xBGQU/voDBY5XE2lVh" crossorigin="anonymous">
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+  <body>
+      <div id='loader'>
+    <div class="loading-left-bg loading-bg"></div>
+    <div class="loading-right-bg loading-bg"></div>
+    <div class="spinner-box">
+      <div class="loading-taichi ">
+          <img src="/drda-blog/images/taichi.png" alt="loading" />
+      </div>
+      <div class="loading-word">给你们加辣中...</div>
+    </div>
+  </div>
+  <script>
+    var time = null;
+    var loaderEl = document.getElementById('loader');
+    var startLoading = () => {
+      time = Date.now();
+      loaderEl.classList.remove("loading");
+    }
+    var hideLoader = () => {
+      document.body.style.overflow = 'auto';
+      loader.classList.add('loading');
+    };
+
+    var endLoading = () => {
+      if (!time) {
+        hideLoader();
+      } else {
+        if (Date.now() - time > 500) {
+          time = null;
+          hideLoader();
+        } else {
+          setTimeout(endLoading, 500 - (Date.now() - time));
+          time = null;
+        }
+      }
+    }
+    window.addEventListener('DOMContentLoaded', endLoading);
+    loaderEl.addEventListener('click', endLoading);
+  </script>
+<div id="copy-tooltip"></div>
+<div id="heatmap-tooltip"></div>
+
+
+    <div id="container">
+      <div id="wrap">
+        <div id="header-nav">
+  <nav id="main-nav" aria-label="Primary navigation">
+        <a class="main-nav-link-wrap" href="/drda-blog/">
+            <div class="main-nav-icon icon ">
+                  <img src="/drda-blog/images/taichi.png" alt="home icon" style="height: 1em;">
+            </div>
+          <span class="main-nav-link">首页</span>
+        </a>
+        <a class="main-nav-link-wrap" href="/drda-blog/archives">
+            <div class="main-nav-icon icon ">
+                  <img src="/drda-blog/images/archives.png" alt="archives icon" style="height: 1em;">
+            </div>
+          <span class="main-nav-link">归档</span>
+        </a>
+        <a class="main-nav-link-wrap" href="/drda-blog/about">
+            <div class="main-nav-icon icon ">
+                  <img src="/drda-blog/images/about.png" alt="about icon" style="height: 1em;">
+            </div>
+          <span class="main-nav-link">关于</span>
+        </a>
+        <a class="main-nav-link-wrap" href="/drda-blog/friend">
+            <div class="main-nav-icon icon ">
+                  <img src="/drda-blog/images/friend.png" alt="friend icon" style="height: 1em;">
+            </div>
+          <span class="main-nav-link">友链</span>
+        </a>
+    <a id="main-nav-toggle" class="nav-icon" aria-label="Toggle navigation" role="button"></a>
+  </nav>
+  <nav id="sub-nav" aria-label="Secondary navigation">
+      <a id="nav-rss-link" class="nav-icon" href="/drda-blog/atom.xml" title="RSS 订阅" aria-label="RSS 订阅" target="_blank"></a>
+      <a id="nav-search-btn" class="nav-icon popup-trigger" title="搜索" aria-label="搜索"></a>
+  </nav>
+  <a href="https://github.com/drda-x" class="triangle-badge" title="github" target="_blank" rel="noopener nofollow noreferrer">
+    <div class="icon icon-github triangle-badge-icon"></div>
+  </a>
+</div>
+<header id="header" aria-label="Site header">
+    <picture></picture>
+    <img  fetchpriority="high" src="https://img.8845.top/img2/18.jpg" alt="发票批量识别工具油猴脚本">
+  <div id="header-outer">
+    <div id="header-title">
+          <span id="logo">
+            <h1 data-aos="slide-up">发票批量识别工具油猴脚本</h1>
+          </span>
+        <h2 id="subtitle-wrap" data-aos="slide-down">
+        </h2>
+    </div>
+  </div>
+</header>
+
+        <div id="content" aria-label="Page content" class="sidebar-left"  >
+          <aside id="sidebar" aria-label="Sidebar">
+  <div class="sidebar-wrapper-container sticky">
+      <meting-js
+        theme="var(--color-link)"
+        id="646465"
+        server="netease"
+        type="song"
+        auto="0"
+        fixed="false"
+        autoplay="false"
+        loop="all"
+        order="random"
+        preload="auto"
+        volume="0.7"
+        mutex="true"
+        list-folded="false"
+        lrc-type="3"
+      ></meting-js>
+  <div class="sidebar-wrapper">
+    <div class="sidebar-wrap" data-aos="fade-up">
+          <div class="sidebar-toc-sidebar"><h3 class="toc-title">文章目录</h3>
+<div class="sidebar-toc-wrapper toc-div-class" >
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%91%E7%A5%A8%E6%89%B9%E9%87%8F%E8%AF%86%E5%88%AB%E5%B7%A5%E5%85%B7-%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E6%96%87%E6%A1%A3"><span class="toc-number">1.</span> <span class="toc-text"> 发票批量识别工具 · 使用说明文档</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%AE%E5%BD%95"><span class="toc-number">1.1.</span> <span class="toc-text"> 目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%8A%9F%E8%83%BD%E6%A6%82%E8%BF%B0"><span class="toc-number">1.2.</span> <span class="toc-text"> 1. 功能概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%89%8D%E7%BD%AE%E5%87%86%E5%A4%87"><span class="toc-number">1.3.</span> <span class="toc-text"> 2. 前置准备</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#21-%E8%8E%B7%E5%8F%96-appcode"><span class="toc-number">1.3.1.</span> <span class="toc-text"> 2.1 获取 AppCode</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#22-%E6%B5%8F%E8%A7%88%E5%99%A8%E7%8E%AF%E5%A2%83"><span class="toc-number">1.3.2.</span> <span class="toc-text"> 2.2 浏览器环境</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%AE%89%E8%A3%85%E4%B8%8E%E5%90%AF%E5%8A%A8"><span class="toc-number">1.4.</span> <span class="toc-text"> 3. 安装与启动</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E4%BD%BF%E7%94%A8%E6%B5%81%E7%A8%8B"><span class="toc-number">1.5.</span> <span class="toc-text"> 4. 使用流程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#41-%E6%94%AF%E6%8C%81%E7%9A%84%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F"><span class="toc-number">1.5.1.</span> <span class="toc-text"> 4.1 支持的文件格式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#42-%E8%AF%86%E5%88%AB%E6%B5%81%E7%A8%8B"><span class="toc-number">1.5.2.</span> <span class="toc-text"> 4.2 识别流程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E7%95%8C%E9%9D%A2%E8%AF%B4%E6%98%8E"><span class="toc-number">1.6.</span> <span class="toc-text"> 5. 界面说明</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#51-%E6%82%AC%E6%B5%AE%E6%8C%89%E9%92%AE"><span class="toc-number">1.6.1.</span> <span class="toc-text"> 5.1 悬浮按钮</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#52-%E6%93%8D%E4%BD%9C%E9%9D%A2%E6%9D%BF"><span class="toc-number">1.6.2.</span> <span class="toc-text"> 5.2 操作面板</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#53-%E8%A1%A8%E6%A0%BC%E7%BB%93%E6%9E%84"><span class="toc-number">1.6.3.</span> <span class="toc-text"> 5.3 表格结构</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E6%95%B0%E6%8D%AE%E5%AF%BC%E5%87%BA"><span class="toc-number">1.7.</span> <span class="toc-text"> 6. 数据导出</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#61-%E5%A4%8D%E5%88%B6-html"><span class="toc-number">1.7.1.</span> <span class="toc-text"> 6.1 复制 HTML</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#62-%E5%A4%8D%E5%88%B6-csv"><span class="toc-number">1.7.2.</span> <span class="toc-text"> 6.2 复制 CSV</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#63-%E6%B8%85%E7%A9%BA%E6%95%B0%E6%8D%AE"><span class="toc-number">1.7.3.</span> <span class="toc-text"> 6.3 清空数据</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-%E6%8A%80%E6%9C%AF%E6%9E%B6%E6%9E%84"><span class="toc-number">1.8.</span> <span class="toc-text"> 7. 技术架构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#71-%E6%A8%A1%E5%9D%97%E5%88%92%E5%88%86"><span class="toc-number">1.8.1.</span> <span class="toc-text"> 7.1 模块划分</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#72-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="toc-number">1.8.2.</span> <span class="toc-text"> 7.2 数据结构</span></a></li></ol></li></ol></li></ol>
+</div>
+</div>
+          <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/drda-blog/avatar/avatar.webp" data-sizes="auto" alt="Drda" class="lazyload">
+  <div class="sidebar-author-name">Drda</div>
+  <div class="sidebar-description">Drda&#39;s Blog</div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div>
+    <div class="sidebar-state-number">12</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>分类</div>
+    <div class="sidebar-state-number">3</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>标签</div>
+    <div class="sidebar-state-number">17</div>
+  </div>
+</div>
+<div class="sidebar-social" >
+    <div class="icon-github sidebar-social-icon">
+      <a href=https://github.com/drda-x itemprop="url" target="_blank" aria-label="github" rel="noopener nofollow noreferrer"></a>
+    </div>
+    <div class="icon-bilibili sidebar-social-icon">
+      <a href=https://space.bilibili.com/28903889 itemprop="url" target="_blank" aria-label="bilibili" rel="noopener nofollow noreferrer"></a>
+    </div>
+</div>
+<div class="sidebar-menu">
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/drda-blog/" aria-label="首页"></a>
+          <div class="sidebar-menu-icon icon ">
+                <img src="/drda-blog/images/taichi.png" alt="home icon" style="width: 1em;">
+          </div>
+        <div class="sidebar-menu-link">首页</div>
+      </div>
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/drda-blog/archives" aria-label="归档"></a>
+          <div class="sidebar-menu-icon icon ">
+                <img src="/drda-blog/images/archives.png" alt="archives icon" style="width: 1em;">
+          </div>
+        <div class="sidebar-menu-link">归档</div>
+      </div>
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/drda-blog/about" aria-label="关于"></a>
+          <div class="sidebar-menu-icon icon ">
+                <img src="/drda-blog/images/about.png" alt="about icon" style="width: 1em;">
+          </div>
+        <div class="sidebar-menu-link">关于</div>
+      </div>
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/drda-blog/friend" aria-label="友链"></a>
+          <div class="sidebar-menu-icon icon ">
+                <img src="/drda-blog/images/friend.png" alt="friend icon" style="width: 1em;">
+          </div>
+        <div class="sidebar-menu-link">友链</div>
+      </div>
+</div>
+</div>
+          <div class="sidebar-btn-wrapper" style="position:static">
+            <div class="sidebar-toc-btn current"></div>
+            <div class="sidebar-common-btn"></div>
+          </div>
+    </div>
+  </div>
+  <div class="sidebar-widget">
+  </div>
+  </div>
+</aside>
+
+          <section id="main" aria-label="Main content"><article id="post-发票批量识别工具油猴脚本" class="h-entry article" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner" data-aos="fade-up">
+    <div class="article-meta">
+      <div class="article-date">
+  <span class="article-date-link icon-calendar" data-aos="zoom-in">
+    <time datetime="2026-07-10T17:19:38.000Z" itemprop="datePublished">2026-07-10</time>
+    <time style="display: none;" id="post-update-time">2026-07-20</time>
+  </span>
+</div>
+
+    </div>
+    
+    <div class="hr-line"></div>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+        <h1 id="发票批量识别工具-使用说明文档"><a class="markdownIt-Anchor" href="#发票批量识别工具-使用说明文档"></a> 发票批量识别工具 · 使用说明文档</h1>
+<blockquote>
+<p><strong>版本</strong>：v5.0<br />
+<strong>运行环境</strong>：Tampermonkey / Violentmonkey 等浏览器脚本管理器<br />
+<strong>适用页面</strong>：任意网页（<code>*://*/*</code>）<br />
+<strong>依赖接口</strong>：阿里云市场 — 发票 OCR 识别 API</p>
+</blockquote>
+<hr />
+<h2 id="目录"><a class="markdownIt-Anchor" href="#目录"></a> 目录</h2>
+<ol>
+<li><a href="#1-%E5%8A%9F%E8%83%BD%E6%A6%82%E8%BF%B0">功能概述</a></li>
+<li><a href="#2-%E5%89%8D%E7%BD%AE%E5%87%86%E5%A4%87">前置准备</a></li>
+<li><a href="#3-%E5%AE%89%E8%A3%85%E4%B8%8E%E5%90%AF%E5%8A%A8">安装与启动</a></li>
+<li><a href="#4-%E4%BD%BF%E7%94%A8%E6%B5%81%E7%A8%8B">使用流程</a></li>
+<li><a href="#5-%E7%95%8C%E9%9D%A2%E8%AF%B4%E6%98%8E">界面说明</a></li>
+<li><a href="#6-%E6%95%B0%E6%8D%AE%E5%AF%BC%E5%87%BA">数据导出</a></li>
+<li><a href="#7-%E6%8A%80%E6%9C%AF%E6%9E%B6%E6%9E%84">技术架构</a></li>
+</ol>
+<hr />
+<h2 id="1-功能概述"><a class="markdownIt-Anchor" href="#1-功能概述"></a> 1. 功能概述</h2>
+<p>本脚本是一个<strong>独立运行于任意网页上的发票批量 OCR 识别工具</strong>，核心能力如下：</p>
+<table>
+<thead>
+<tr>
+<th>功能</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>批量识别</td>
+<td>支持一次拖入 / 选择多张图片或 PDF 文件，自动排队逐张识别</td>
+</tr>
+<tr>
+<td>全字段检测</td>
+<td>自动识别发票中的所有字段，无需预定义列名</td>
+</tr>
+<tr>
+<td>明细从属关系</td>
+<td>发票主体字段与发票明细（商品列表）以 <code>rowspan</code> 正确关联展示</td>
+</tr>
+<tr>
+<td>动态列合并</td>
+<td>每识别一张新发票，自动累积发现新列并扩展表格</td>
+</tr>
+<tr>
+<td>去重机制</td>
+<td>根据「发票代码 + 发票号码 + 开票日期」自动去重</td>
+</tr>
+<tr>
+<td>多格式导出</td>
+<td>一键复制为 HTML 表格或 CSV，可直接粘贴到 Excel</td>
+</tr>
+<tr>
+<td>悬浮面板</td>
+<td>页面右上角悬浮按钮，点击展开操作面板；按钮支持长按拖拽定位</td>
+</tr>
+<tr>
+<td>本地持久化</td>
+<td>AppCode 和按钮位置自动存储到 <code>localStorage</code>，刷新页面不丢失</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="2-前置准备"><a class="markdownIt-Anchor" href="#2-前置准备"></a> 2. 前置准备</h2>
+<h3 id="21-获取-appcode"><a class="markdownIt-Anchor" href="#21-获取-appcode"></a> 2.1 获取 AppCode</h3>
+<p>脚本调用的是阿里云市场「发票 OCR」API，需要一个有效的 <strong>AppCode</strong> 进行鉴权。</p>
+<p><strong>获取步骤：</strong></p>
+<ol>
+<li>前往 <a target="_blank" rel="noopener" href="https://market.aliyun.com/">阿里云 API 市场</a> 搜索「发票 OCR」</li>
+<li>购买或订阅相关服务（通常有免费额度）</li>
+<li>在控制台 → 我的 API 中找到对应服务的 <strong>AppCode</strong></li>
+<li>复制 AppCode 备用</li>
+</ol>
+<blockquote>
+<p><strong>注意</strong>：AppCode 是唯一的鉴权凭证，请妥善保管，不要泄露给他人。</p>
+</blockquote>
+<h3 id="22-浏览器环境"><a class="markdownIt-Anchor" href="#22-浏览器环境"></a> 2.2 浏览器环境</h3>
+<ul>
+<li>Chrome / Edge / Firefox 等主流浏览器</li>
+<li>已安装 Tampermonkey（或兼容的脚本管理器）</li>
+<li>脚本管理器已授予 <code>GM_xmlhttpRequest</code> 跨域请求权限</li>
+</ul>
+<hr />
+<h2 id="3-安装与启动"><a class="markdownIt-Anchor" href="#3-安装与启动"></a> 3. 安装与启动</h2>
+<ol>
+<li>打开 Tampermonkey 管理面板</li>
+<li>点击「新建脚本」或「+」</li>
+<li>将完整脚本代码粘贴进编辑器</li>
+<li>保存（Ctrl+S）</li>
+<li>打开任意网页，页面右侧中部出现悬浮按钮即表示安装成功</li>
+</ol>
+<hr />
+<h2 id="4-使用流程"><a class="markdownIt-Anchor" href="#4-使用流程"></a> 4. 使用流程</h2>
+<p>┌─────────────────────────────────────────────────────────┐</p>
+<p>│ 第一步：点击悬浮按钮，展开操作面板 │</p>
+<p>│ ↓ │ │ 第二步：在 AppCode 输入框中粘贴你的 AppCode，点击保存 │</p>
+<p>│ ↓ │ │ 第三步：将发票文件（图片/PDF）拖入虚线区域， │</p>
+<p>│ 或点击「选择文件」按钮批量选取 │</p>
+<p>│ ↓ │ │ 第四步：等待识别完成，表格自动展示结果 │</p>
+<p>│ ↓ │ │ 第五步：点击「复制 HTML」或「复制 CSV」导出数据 │ └─────────────────────────────────────────────────────────┘</p>
+<h3 id="41-支持的文件格式"><a class="markdownIt-Anchor" href="#41-支持的文件格式"></a> 4.1 支持的文件格式</h3>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>扩展名</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>图片</td>
+<td><code>.jpg</code> <code>.jpeg</code> <code>.png</code> <code>.bmp</code> <code>.gif</code> <code>.webp</code></td>
+</tr>
+<tr>
+<td>文档</td>
+<td><code>.pdf</code> <code>.ofd</code></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>脚本通过 MIME 类型和文件扩展名双重校验，仅接受上述格式。</p>
+</blockquote>
+<h3 id="42-识别流程"><a class="markdownIt-Anchor" href="#42-识别流程"></a> 4.2 识别流程</h3>
+<ol>
+<li>文件通过 <code>FileReader</code> 转为 Base64</li>
+<li>调用 API 接口进行 OCR 识别</li>
+<li>返回数据经过解析，分离为「主体字段」和「发票明细」</li>
+<li>动态检测新列，追加到表头</li>
+<li>渲染表格，自动滚动到底部</li>
+<li>每张文件间隔 <strong>1 秒</strong>（<code>DELAY_MS</code>），防止 API 限流</li>
+</ol>
+<hr />
+<h2 id="5-界面说明"><a class="markdownIt-Anchor" href="#5-界面说明"></a> 5. 界面说明</h2>
+<h3 id="51-悬浮按钮"><a class="markdownIt-Anchor" href="#51-悬浮按钮"></a> 5.1 悬浮按钮</h3>
+<ul>
+<li><strong>位置</strong>：默认位于页面右侧垂直居中</li>
+<li><strong>拖拽</strong>：长按按钮 <strong>350ms</strong> 后进入拖拽模式（按钮变为半透明，手机端触发震动反馈）</li>
+<li><strong>点击</strong>：短按展开 / 收起操作面板</li>
+<li><strong>角标</strong>：右上角显示已识别发票数量</li>
+</ul>
+<h3 id="52-操作面板"><a class="markdownIt-Anchor" href="#52-操作面板"></a> 5.2 操作面板</h3>
+<p>面板从上到下依次包含以下区域：</p>
+<p>┌──────────────────────────────────────────┐</p>
+<p>│ ● 标题栏 Invoice OCR [×] │</p>
+<p>├──────────────────────────────────────────┤</p>
+<p>│ 状态提示区域（成功/失败/信息） │ ├──────────────────────────────────────────┤</p>
+<p>│ AppCode 设置区 │ │ [ 输入框 ] [保存] [清除] │ ├──────────────────────────────────────────┤</p>
+<p>│ ┌ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ┐ │</p>
+<p>│ │ 📦 拖入发票文件，或点击选择 │ │</p>
+<p>│ │ 支持 JPG / PNG / BMP / PDF │ │</p>
+<p>│ │ [ 选择文件 ] │ │</p>
+<p>│ └ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ┘ │├──────────────────────────────────────────┤</p>
+<p>│ 处理进度条（识别中显示） │ ├──────────────────────────────────────────┤</p>
+<p>│ 已收录 N 张 [复制HTML] [复制CSV] [清空]│</p>
+<p>├──────────────────────────────────────────┤</p>
+<p>│ ┌────────────────────────────────────┐ │</p>
+<p>│ │ 识别结果表格 │ │</p>
+<p>│ │ # │ 主体字段 … │ 发票明细 … │ │</p>
+<p>│ │ 1 │ xxx │ xxx │ │</p>
+<p>│ │ │ │ xxx │ │</p>
+<p>│ └────────────────────────────────────┘ │ └──────────────────────────────────────────┘</p>
+<h3 id="53-表格结构"><a class="markdownIt-Anchor" href="#53-表格结构"></a> 5.3 表格结构</h3>
+<p>表格采用两层表头设计：</p>
+<table>
+<thead>
+<tr>
+<th>区域</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>左侧固定区</strong></td>
+<td>序号 <code>#</code> + 发票主体字段（如发票代码、发票号码、开票日期、购方名称等），纵向合并 <code>rowspan</code></td>
+</tr>
+<tr>
+<td><strong>右侧明细区</strong></td>
+<td>表头标注为「发票明细」，包含商品名称、数量、金额等明细字段</td>
+</tr>
+<tr>
+<td><strong>组分隔线</strong></td>
+<td>每张发票之间有一条金色分隔线，视觉区分不同发票</td>
+</tr>
+<tr>
+<td><strong>交替背景</strong></td>
+<td>奇偶发票组使用不同底色，提高可读性</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="6-数据导出"><a class="markdownIt-Anchor" href="#6-数据导出"></a> 6. 数据导出</h2>
+<h3 id="61-复制-html"><a class="markdownIt-Anchor" href="#61-复制-html"></a> 6.1 复制 HTML</h3>
+<ul>
+<li>点击 <strong>「复制 HTML」</strong> 按钮</li>
+<li>生成带样式的 <code>&lt;table&gt;</code> HTML 代码</li>
+<li>直接粘贴到 Excel、Word、邮件等富文本编辑器中，保留表格格式</li>
+<li>HTML 表格使用浅色主题（米白底 + 金色强调），适合打印</li>
+</ul>
+<h3 id="62-复制-csv"><a class="markdownIt-Anchor" href="#62-复制-csv"></a> 6.2 复制 CSV</h3>
+<ul>
+<li>点击 <strong>「复制 CSV」</strong> 按钮</li>
+<li>生成带 BOM 头（<code>\uFEFF</code>）的标准 CSV 文本，确保 Excel 打开中文不乱码</li>
+<li>字段使用双引号包裹，内部双引号自动转义</li>
+<li>可直接粘贴到 Excel 或保存为 <code>.csv</code> 文件</li>
+</ul>
+<h3 id="63-清空数据"><a class="markdownIt-Anchor" href="#63-清空数据"></a> 6.3 清空数据</h3>
+<ul>
+<li>点击 <strong>「清空」</strong> 按钮</li>
+<li>清除所有已识别的发票数据、列定义、队列状态</li>
+<li>操作不可撤销</li>
+</ul>
+<hr />
+<h2 id="7-技术架构"><a class="markdownIt-Anchor" href="#7-技术架构"></a> 7. 技术架构</h2>
+<h3 id="71-模块划分"><a class="markdownIt-Anchor" href="#71-模块划分"></a> 7.1 模块划分</h3>
+<p>脚本采用 IIFE 封装，内部分为以下功能模块：</p>
+<table>
+<thead>
+<tr>
+<th>章节</th>
+<th>模块名</th>
+<th>职责</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>§1</td>
+<td><strong>配置</strong></td>
+<td>API 地址、请求延迟、localStorage 键名、跳过字段列表</td>
+</tr>
+<tr>
+<td>§2</td>
+<td><strong>状态</strong></td>
+<td>全局变量：发票数组、列定义、队列、计数器等</td>
+</tr>
+<tr>
+<td>§3</td>
+<td><strong>工具函数</strong></td>
+<td>HTML 转义 <code>esc()</code>、Base64 前缀剥离 <code>stripPre()</code></td>
+</tr>
+<tr>
+<td>§4</td>
+<td><strong>AppCode 管理</strong></td>
+<td>读取 / 保存 / 更新 AppCode 状态（localStorage）</td>
+</tr>
+<tr>
+<td>§5</td>
+<td><strong>API 调用</strong></td>
+<td><code>callOCR()</code> — 发起 GM_xmlhttpRequest POST 请求</td>
+</tr>
+<tr>
+<td>§6</td>
+<td><strong>数据处理</strong></td>
+<td><code>addInvoice()</code> — 解析响应、分离主体/明细、去重、动态列检测</td>
+</tr>
+<tr>
+<td>§7</td>
+<td><strong>批量队列</strong></td>
+<td><code>enqueue()</code> / <code>next()</code> — 文件过滤入队、逐个处理、进度更新</td>
+</tr>
+<tr>
+<td>§8</td>
+<td><strong>CSS 注入</strong></td>
+<td><code>injectCSS()</code> — 生成并注入全部样式（暗色主题）</td>
+</tr>
+<tr>
+<td>§9</td>
+<td><strong>UI 构建</strong></td>
+<td><code>buildUI()</code> — 创建 DOM 元素、绑定事件</td>
+</tr>
+<tr>
+<td>§10</td>
+<td><strong>表格渲染</strong></td>
+<td><code>renderTable()</code> — 动态生成表头和表体 HTML</td>
+</tr>
+<tr>
+<td>§11</td>
+<td><strong>复制功能</strong></td>
+<td><code>copyHTML()</code> / <code>copyCSV()</code> / <code>clip()</code> — 导出与剪贴板操作</td>
+</tr>
+<tr>
+<td>§12-16</td>
+<td><strong>面板/拖拽/进度/状态/初始化</strong></td>
+<td>面板定位、按钮拖拽、进度条、状态提示、页面就绪检测</td>
+</tr>
+</tbody>
+</table>
+<h3 id="72-数据结构"><a class="markdownIt-Anchor" href="#72-数据结构"></a> 7.2 数据结构</h3>
+<pre><code class="javascript">// 单张发票
+&#123;
+  main: &#123;
+    &quot;发票代码&quot;: &quot;044001900111&quot;,
+    &quot;发票号码&quot;: &quot;12345678&quot;,
+    &quot;开票日期&quot;: &quot;2024年01月15日&quot;,
+    &quot;购买方名称&quot;: &quot;...&quot;,
+    &quot;销售方名称&quot;: &quot;...&quot;,
+    // ... 动态字段
+  &#125;,
+  details: [
+    &#123;
+      &quot;货物或应税劳务名称&quot;: &quot;办公用品&quot;,
+      &quot;数量&quot;: &quot;2&quot;,
+      &quot;金额&quot;: &quot;100.00&quot;
+    &#125;,
+    // ... 多条明细
+  ]
+&#125;
+</code></pre>
+
+    </div>
+    <footer class="article-footer">
+        <a class="article-category-link" href="/drda-blog/categories/%E5%85%B6%E5%AE%83/" title="其它" data-aos="zoom-in">其它</a>
+
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item" data-aos="zoom-in"><a class="article-tag-list-link" href="/drda-blog/tags/%E6%B2%B9%E7%8C%B4/" rel="tag" title="油猴">油猴</a></li></ul>
+
+    </footer>
+  </div>
+    <nav id="article-nav" aria-label="Article navigation" data-aos="fade-up">
+      <div class="article-nav-link-wrap left">
+          <img data-src="https://img.8845.top/img2/126611624.jpg" data-sizes="auto" alt="Hexo自动部署到 GitHub Pages" class="lazyload">
+        <a href="/drda-blog/2026/07/14/Hexo%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2%E5%88%B0%20GitHub%20Pages/" aria-label="前一篇: Hexo自动部署到 GitHub Pages" title="前一篇: Hexo自动部署到 GitHub Pages"></a>
+        <div class="article-nav-caption">前一篇</div>
+        <h3 class="article-nav-title">
+            Hexo自动部署到 GitHub Pages
+        </h3>
+      </div>
+    <div class="article-nav-link-wrap right">
+        <img data-src="https://p6.qhimg.com/bdm/0_0_100/t0190b2f324de258f72.jpg" data-sizes="auto" alt="利用GitHub+PicGo搭建个人图床" class="lazyload">
+      <a href="/drda-blog/2026/06/26/%E5%88%A9%E7%94%A8GitHub-picGo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%9B%BE%E5%BA%8A/" aria-label="后一篇: 利用GitHub+PicGo搭建个人图床"  title="后一篇: 利用GitHub+PicGo搭建个人图床"></a>
+      <div class="article-nav-caption">后一篇</div>
+      <h3 class="article-nav-title">
+          利用GitHub+PicGo搭建个人图床
+      </h3>
+    </div>
+  </nav>
+
+</article>
+
+  <section id="comments" data-aos="fade-up">
+    <div class="comment-header">
+        
+      <h2 class="comment-title">说些什么吧！</h2>
+      <div class="comment-selector">
+        <div class="comment-selector-wrap">
+            <div class="selector-item" data-selector="beaudar">
+              <span>beaudar</span>
+            </div>
+        </div>
+      </div>
+    </div>
+    <div class="comment-content">
+          <div class="comment beaudar-comment" data-aos="fade-up"
+            id="beaudar-comment">
+          </div>
+    </div>
+  </section>
+
+</section>
+        </div>
+        <footer id="footer" aria-label="Site footer">
+  <div style="width: 100%; overflow: hidden">
+    <div class="footer-line"></div>
+  </div>
+  <div id="footer-info">
+    <div>
+      <span class="icon-copyright"></span>
+        2020-2026
+        <span class="footer-info-sep "></span>
+      Drda
+    </div>
+      <div>
+        基于&nbsp;<a href="https://hexo.io/" rel="noopener nofollow noreferrer" target="_blank">Hexo</a>&nbsp;
+        Theme.<a href="https://github.com/D-Sketon/hexo-theme-reimu" rel="noopener nofollow noreferrer" target="_blank">Reimu</a>
+      </div>
+      <div>
+        <span class="icon-brush"></span>
+        15.5k
+        &nbsp;|&nbsp;
+        <span class="icon-coffee"></span>
+        01:11
+      </div>
+      <div>
+        <span class="icon-eye"></span>
+        <span id="busuanzi_container_site_pv">总访问量&nbsp;<span id="busuanzi_value_site_pv"></span></span>
+        &nbsp;|&nbsp;
+        <span class="icon-user"></span>
+        <span id="busuanzi_container_site_uv">总访客量&nbsp;<span id="busuanzi_value_site_uv"></span></span>
+      </div>
+  </div>
+</footer>
+
+          <div class="sidebar-top">
+            <div class="sidebar-top-taichi "></div>
+            <div class="arrow-up"></div>
+          </div>
+        <div id="mask" class="hide"></div>
+      </div>
+      <nav id="mobile-nav" aria-label="Mobile navigation">
+  <div class="sidebar-wrap">
+        <div class="sidebar-toc-sidebar"><h3 class="toc-title">文章目录</h3>
+<div class="sidebar-toc-wrapper toc-div-class" >
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%91%E7%A5%A8%E6%89%B9%E9%87%8F%E8%AF%86%E5%88%AB%E5%B7%A5%E5%85%B7-%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E6%96%87%E6%A1%A3"><span class="toc-number">1.</span> <span class="toc-text"> 发票批量识别工具 · 使用说明文档</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%AE%E5%BD%95"><span class="toc-number">1.1.</span> <span class="toc-text"> 目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%8A%9F%E8%83%BD%E6%A6%82%E8%BF%B0"><span class="toc-number">1.2.</span> <span class="toc-text"> 1. 功能概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%89%8D%E7%BD%AE%E5%87%86%E5%A4%87"><span class="toc-number">1.3.</span> <span class="toc-text"> 2. 前置准备</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#21-%E8%8E%B7%E5%8F%96-appcode"><span class="toc-number">1.3.1.</span> <span class="toc-text"> 2.1 获取 AppCode</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#22-%E6%B5%8F%E8%A7%88%E5%99%A8%E7%8E%AF%E5%A2%83"><span class="toc-number">1.3.2.</span> <span class="toc-text"> 2.2 浏览器环境</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%AE%89%E8%A3%85%E4%B8%8E%E5%90%AF%E5%8A%A8"><span class="toc-number">1.4.</span> <span class="toc-text"> 3. 安装与启动</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E4%BD%BF%E7%94%A8%E6%B5%81%E7%A8%8B"><span class="toc-number">1.5.</span> <span class="toc-text"> 4. 使用流程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#41-%E6%94%AF%E6%8C%81%E7%9A%84%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F"><span class="toc-number">1.5.1.</span> <span class="toc-text"> 4.1 支持的文件格式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#42-%E8%AF%86%E5%88%AB%E6%B5%81%E7%A8%8B"><span class="toc-number">1.5.2.</span> <span class="toc-text"> 4.2 识别流程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E7%95%8C%E9%9D%A2%E8%AF%B4%E6%98%8E"><span class="toc-number">1.6.</span> <span class="toc-text"> 5. 界面说明</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#51-%E6%82%AC%E6%B5%AE%E6%8C%89%E9%92%AE"><span class="toc-number">1.6.1.</span> <span class="toc-text"> 5.1 悬浮按钮</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#52-%E6%93%8D%E4%BD%9C%E9%9D%A2%E6%9D%BF"><span class="toc-number">1.6.2.</span> <span class="toc-text"> 5.2 操作面板</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#53-%E8%A1%A8%E6%A0%BC%E7%BB%93%E6%9E%84"><span class="toc-number">1.6.3.</span> <span class="toc-text"> 5.3 表格结构</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E6%95%B0%E6%8D%AE%E5%AF%BC%E5%87%BA"><span class="toc-number">1.7.</span> <span class="toc-text"> 6. 数据导出</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#61-%E5%A4%8D%E5%88%B6-html"><span class="toc-number">1.7.1.</span> <span class="toc-text"> 6.1 复制 HTML</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#62-%E5%A4%8D%E5%88%B6-csv"><span class="toc-number">1.7.2.</span> <span class="toc-text"> 6.2 复制 CSV</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#63-%E6%B8%85%E7%A9%BA%E6%95%B0%E6%8D%AE"><span class="toc-number">1.7.3.</span> <span class="toc-text"> 6.3 清空数据</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-%E6%8A%80%E6%9C%AF%E6%9E%B6%E6%9E%84"><span class="toc-number">1.8.</span> <span class="toc-text"> 7. 技术架构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#71-%E6%A8%A1%E5%9D%97%E5%88%92%E5%88%86"><span class="toc-number">1.8.1.</span> <span class="toc-text"> 7.1 模块划分</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#72-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="toc-number">1.8.2.</span> <span class="toc-text"> 7.2 数据结构</span></a></li></ol></li></ol></li></ol>
+</div>
+</div>
+        <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/drda-blog/avatar/avatar.webp" data-sizes="auto" alt="Drda" class="lazyload">
+  <div class="sidebar-author-name">Drda</div>
+  <div class="sidebar-description">Drda&#39;s Blog</div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div>
+    <div class="sidebar-state-number">12</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>分类</div>
+    <div class="sidebar-state-number">3</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>标签</div>
+    <div class="sidebar-state-number">17</div>
+  </div>
+</div>
+<div class="sidebar-social" >
+    <div class="icon-github sidebar-social-icon">
+      <a href=https://github.com/drda-x itemprop="url" target="_blank" aria-label="github" rel="noopener nofollow noreferrer"></a>
+    </div>
+    <div class="icon-bilibili sidebar-social-icon">
+      <a href=https://space.bilibili.com/28903889 itemprop="url" target="_blank" aria-label="bilibili" rel="noopener nofollow noreferrer"></a>
+    </div>
+</div>
+<div class="sidebar-menu">
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/drda-blog/" aria-label="首页"></a>
+          <div class="sidebar-menu-icon icon ">
+                <img src="/drda-blog/images/taichi.png" alt="home icon" style="width: 1em;">
+          </div>
+        <div class="sidebar-menu-link">首页</div>
+      </div>
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/drda-blog/archives" aria-label="归档"></a>
+          <div class="sidebar-menu-icon icon ">
+                <img src="/drda-blog/images/archives.png" alt="archives icon" style="width: 1em;">
+          </div>
+        <div class="sidebar-menu-link">归档</div>
+      </div>
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/drda-blog/about" aria-label="关于"></a>
+          <div class="sidebar-menu-icon icon ">
+                <img src="/drda-blog/images/about.png" alt="about icon" style="width: 1em;">
+          </div>
+        <div class="sidebar-menu-link">关于</div>
+      </div>
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/drda-blog/friend" aria-label="友链"></a>
+          <div class="sidebar-menu-icon icon ">
+                <img src="/drda-blog/images/friend.png" alt="friend icon" style="width: 1em;">
+          </div>
+        <div class="sidebar-menu-link">友链</div>
+      </div>
+</div>
+</div>
+  </div>
+      <div class="sidebar-btn-wrapper">
+        <div class="sidebar-toc-btn current"></div>
+        <div class="sidebar-common-btn"></div>
+      </div>
+</nav>
+
+    </div>
+      <div class="site-search">
+        <div class="reimu-popup popup">
+          <div class="reimu-search">
+            <div class="reimu-search-input-icon"></div>
+            <div id="reimu-search-input"></div>
+            <div class="popup-btn-close"></div>
+          </div>
+          <div class="reimu-results">
+            <div id="reimu-stats"></div>
+            <div id="reimu-hits"></div>
+            <div id="reimu-pagination" class="reimu-pagination"></div>
+          </div>
+          <img class="reimu-bg" src="/drda-blog/images/reimu.png" loading="lazy" decoding="async" fetchpriority="low"/>
+        </div>
+      </div>
+    
+<script src="https://npm.webcache.cn/lazysizes@5.3.2/lazysizes.min.js" integrity="sha384-3gT&#x2F;vsepWkfz&#x2F;ff7PpWNUeMzeWoH3cDhm&#x2F;A8jM7ouoAK0&#x2F;fP&#x2F;9bcHHR5kHq2nf+e" crossorigin="anonymous"></script>
+
+
+<script src="https://npm.webcache.cn/clipboard@2.0.11/dist/clipboard.min.js" integrity="sha384-J08i8An&#x2F;QeARD9ExYpvphB8BsyOj3Gh2TSh1aLINKO3L0cMSH2dN3E22zFoXEi0Q" crossorigin="anonymous"></script>
+
+
+
+
+<script src="/drda-blog/js/script.js"></script>
+
+
+  
+<script src="/drda-blog/js/aos.js"></script>
+
+  <script>
+    var aosInit = () => {
+      AOS.init({
+        duration: 1000,
+        easing: "ease",
+        once: true,
+        offset: 50,
+      });
+    };
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', aosInit);
+    } else {
+      aosInit();
+    }
+  </script>
+
+
+<script src="/drda-blog/js/pjax_script.js" data-pjax></script>
+
+
+
+  <script>
+    var ALGOLIA_CONFIG = {
+      logo: "/drda-blog/images/algolia_logo.svg",
+      algolia: {
+        applicationID: "YMYG3VEWNQ",
+        apiKey: "9cc40f37d1556b019e275e62719299fa",
+        indexName: "drdaBlog",
+        hits: {
+          "per_page": parseInt("10")
+        },
+        labels: {
+          "input_placeholder": "搜索.....",
+          "hits_empty": "未发现与 「${query}」相关内容",
+          "hits_stats": "找到${hits}条结果（用时 ${time} ms）"
+        }
+      }
+    };
+  </script>
+  
+<script src="https://npm.webcache.cn/algoliasearch@4.17.1/dist/algoliasearch-lite.umd.js" integrity="sha384-xvLS0jfKuoREs7pqkRI&#x2F;OI8GcqohO5S+jQz7ZBtQXnsXmD+9jDOOY4cL6dCPzlrk" crossorigin="anonymous" defer></script>
+
+  
+<script src="https://npm.webcache.cn/@reimujs/instantsearch.js@4.57.0-beta.1/dist/instantsearch.production.min.js" integrity="sha384-aagKMe8nkqaP2DYQc8kkYOL5l+M5Q2WH&#x2F;Uhr4teOh0Ybp0RZj0kUSDm45qPikMjK" crossorigin="anonymous" defer></script>
+
+  
+<script src="/drda-blog/js/algolia_search.js" defer></script>
+
+
+  <script>
+    var setupFirework = () => {
+      if (!false || !window.matchMedia('(max-width: 768px)').matches) {
+        window.firework && window.firework(JSON.parse('{"excludeElements":["a","button"],"particles":[{"shape":"circle","move":["emit"],"easing":"easeOutExpo","colors":["var(--red-1)","var(--red-2)","var(--red-3)","var(--red-4)"],"number":20,"duration":[1200,1800],"shapeOptions":{"radius":[16,32],"alpha":[0.3,0.5]}},{"shape":"circle","move":["diffuse"],"easing":"easeOutExpo","colors":["var(--red-0)"],"number":1,"duration":[1200,1800],"shapeOptions":{"radius":20,"alpha":[0.2,0.5],"lineWidth":6}}]}'));
+      }
+    }
+  </script>
+  
+<script src="https://npm.webcache.cn/mouse-firework@0.2.0/dist/index.umd.js" integrity="sha384-qi9WggRt19tv8Vc7pCHW3ulMNLwrn515zaLEWZjl1px07vz8+pUoWX8n1rgq282T" crossorigin="anonymous" onload="setupFirework()" defer></script>
+
+
+  
+<script src="https://npm.webcache.cn/theme-shokax-pjax@0.0.3/dist/index.umd.js" integrity="sha384-xneY1WY8hOfUzswrE4CrYq35N4BdVcxqxwHPr9zawE&#x2F;jMSCxD+jAPU55x&#x2F;jj3wlf" crossorigin="anonymous"></script>
+
+  
+<script src="/drda-blog/js/pjax.js"></script>
+
+
+
+
+
+<div id="lazy-script">
+  <div>
+      
+      
+      <script data-pjax>
+        window.REIMU_POST = {
+          author: "Drda",
+          title: "发票批量识别工具油猴脚本",
+          url: "https://drda-x.github.io/drda-blog/2026/07/10/%E5%8F%91%E7%A5%A8%E6%89%B9%E9%87%8F%E8%AF%86%E5%88%AB%E5%B7%A5%E5%85%B7%E6%B2%B9%E7%8C%B4%E8%84%9A%E6%9C%AC/",
+          excerpt: "",
+          description: "",
+          stripContent: " 发票批量识别工具 · 使用说明文档  版本：v5.0 运行环境：Tampermonkey / Violentmonkey 等浏览器脚本管理器 适用页面：任意网页（*://*/*） 依赖接口：阿里云市场 — 发票 OCR 识别 API    目录  功能概述 前置准备 安装与启动 使用流程 界面说明 数据导出 技术架构    1. 功能概述 本脚本是一个独立运行于任意网页上的发票批量 OCR 识别工具，核心能力如下：    功能 说明     批量识别 支持一次拖入 / 选择多张图片或 PDF ",
+          date: "Fri Jul 10 2026 17:19:38 GMT+0000",
+          updated: "Mon Jul 20 2026 08:30:37 GMT+0000",
+          cover: "https://img.8845.top/img2/18.jpg",
+        };
+      </script>
+        
+<script src="/drda-blog/js/insert_highlight.js" data-pjax></script>
+
+      
+<script src="/drda-blog/js/tabs.js" data-pjax defer></script>
+
+      <script type="module" data-pjax>
+        (async () => {
+          const PhotoSwipeLightbox = (await safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe-lightbox.esm.min.js", "sha384-DiL6M/gG+wmTxmCRZyD1zee6lIhawn5TGvED0FOh7fXcN9B0aZ9dexSF/N6lrZi/")).default;
+          const initPswp = (gallery, children) => {
+            if (_$$(`${gallery} ${children}`).length > 0) {
+              new PhotoSwipeLightbox({
+                gallery,
+                children,
+                pswpModule: () => safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8+oTJ7m3DfYEWX1fu1scuS4+s")
+              }).init();
+            }
+          }
+          const pswp = () => {
+            initPswp('.article-entry', 'a.article-gallery-item');
+            initPswp('.article-gallery', 'a.article-gallery-item');
+          }
+          pswp();
+        })();
+      </script>
+        
+
+<script data-pjax>
+  var loadScript = (src, integrity) => {
+    const script = document.createElement('script');
+    script.src = src;
+    if (integrity) script.integrity = integrity;
+    script.crossOrigin = 'anonymous';
+    return script;
+  };
+
+  var commentConfigKeys = ["beaudar"];
+  var commentConfig = {
+    beaudar: {
+      enable: true,
+      load: () => {
+        const container = document.querySelector('.beaudar-comment'); 
+        if (!container) return;
+        container.style.display = 'block';
+
+        let theme = 'auto';
+        const parsedTheme = theme === 'auto' ? (document.documentElement.getAttribute('data-theme') === 'dark' ? 'github-dark' : 'github-light') : theme;
+
+        // 创建 beaudar 脚本
+        const script = document.createElement('script');
+        script.src = 'https://beaudar.lipk.org/client.js';
+        script.setAttribute('repo', 'drda-x/drda-blog');
+        script.setAttribute('branch', 'main');
+        script.setAttribute('theme', parsedTheme);
+        script.setAttribute('crossorigin', 'anonymous');
+        script.async = true;
+
+        // 透传其他字段
+            script.setAttribute('issue-term', 'title');
+            script.setAttribute('input-position', 'top');
+            script.setAttribute('comment-order', 'desc');
+            script.setAttribute('keep-theme', 'true');
+            script.setAttribute('loading', 'true');
+        
+
+        // 清空容器（防止重复加载）并插入脚本
+        container.innerHTML = '';
+        container.appendChild(script);
+        if (theme === 'auto') {
+          const themeHandler = (e) => {
+            const iframe = container.querySelector('iframe.beaudar-frame');
+            if (!iframe || !iframe.contentWindow) {
+              document.body.removeEventListener('reimu:theme-set', themeHandler);
+              return;
+            }
+            iframe.contentWindow.postMessage({ type: 'set-theme', theme: e.detail.isDark ? 'github-dark' : 'github-light' }, 'https://beaudar.lipk.org');
+          };
+          document.body.addEventListener('reimu:theme-set', themeHandler);
+        }
+      }
+    },
+  }
+  commentConfig.enable = commentConfigKeys.some(key => commentConfig[key].enable);
+
+  var defaultComment = '';
+  if (commentConfig.enable) {
+    // 1. 首先检查localStorage中是否有保存的评论类型
+    var savedCommentType = localStorage.getItem('commentType');
+    
+    // 2. 如果localStorage中有值且对应的评论系统可用，就使用它
+    if (savedCommentType) {
+      if (commentConfig[savedCommentType]?.enable) {
+        defaultComment = savedCommentType;
+      }
+    }
+    
+    // 3. 如果localStorage无效，检查配置的默认评论系统
+    if (!defaultComment) {
+      var configDefault = 'waline';
+      if (commentConfig[configDefault]?.enable) {
+        defaultComment = configDefault;
+      }
+    }
+    
+    // 4. 如果前两项都无效，按指定顺序找到第一个可用的评论系统
+    if (!defaultComment) {
+      defaultComment = commentConfigKeys.find(sys => commentConfig[sys].enable) || '';
+    }
+  }
+  function loadComments() {
+    if (!commentConfig.enable) return;
+    const loadedComments = {
+      valine: false,
+      waline: false,
+      twikoo: false,
+      gitalk: false,
+      giscus: false,
+      utterances: false,
+      beaudar: false,
+      disqus: false,
+    };
+
+    // 隐藏所有评论容器
+    const hideAllComments = () => {
+      const commentContainers = document.querySelectorAll('.comment');
+      commentContainers.forEach(container => {
+        container.style.display = 'none';
+      });
+    };
+
+    // 按需加载评论系统
+    const loadCommentSystem = (type) => {
+      if (loadedComments[type]) {
+        // 如果已加载，只需显示对应容器
+        document.querySelector(`.${type}-comment`).style.display = 'block';
+        return;
+      }
+
+      // 根据类型加载对应的脚本
+      commentConfig[type]?.load();
+      loadedComments[type] = true;
+    };
+
+    // 评论组件选择器
+    const changeActiveCommentItems = (item) => {
+      const commentItems = document.querySelectorAll('.selector-item');
+      for (let i = 0; i < commentItems.length; i++) {
+        commentItems[i].classList.remove('active');
+      }
+      item.classList.add('active');
+
+      // 获取要加载的评论系统类型
+      const commentType = item.getAttribute('data-selector');
+
+      // 隐藏所有评论系统
+      hideAllComments();
+
+      // 加载选中的评论系统
+      loadCommentSystem(commentType);
+    };
+
+    const commentInit = () => {
+      // 评论组件选择器点击事件
+      const commentItems = document.querySelectorAll('.selector-item');
+      for (let item of commentItems) {
+        item.addEventListener('click', () => {
+          // 保存选择器状态
+          const commentType = item.getAttribute('data-selector');
+          window.localStorage.setItem('commentType', commentType);
+          // 切换选中状态
+          changeActiveCommentItems(item);
+        });
+      }
+
+      // 检查是否需要加载默认评论系统
+      if (defaultComment) {
+        const defaultSelectorItem = document.querySelector(`[data-selector="${defaultComment}"]`);
+        if (!defaultSelectorItem) return;
+        defaultSelectorItem.style.display = 'block';
+        defaultSelectorItem.classList.add('active');
+        loadCommentSystem(defaultComment);
+      }
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', commentInit);
+    } else {
+      commentInit();
+    }
+  };
+  loadComments();
+</script>
+
+  </div>
+</div>
+
+
+  <script>
+    console.log(String.raw`%c 
+ ______     ______     __     __    __     __  __    
+/\  == \   /\  ___\   /\ \   /\ "-./  \   /\ \/\ \   
+\ \  __<   \ \  __\   \ \ \  \ \ \-./\ \  \ \ \_\ \  
+ \ \_\ \_\  \ \_____\  \ \_\  \ \_\ \ \_\  \ \_____\ 
+  \/_/ /_/   \/_____/   \/_/   \/_/  \/_/   \/_____/ 
+                                                  
+`,'color: #ff5252;')
+    console.log('%c Theme.Reimu v' + '1.12.5' + ' %c https://github.com/D-Sketon/hexo-theme-reimu ', 'color: white; background: #ff5252; padding:5px 0;', 'padding:4px;border:1px solid #ff5252;')
+  </script>
+  
+
+
+  
+<script src="https://npm.webcache.cn/busuanzi@2.3.0/bsz.pure.mini.js" integrity="sha384-0M75wtSkhjIInv4coYlaJU83+OypaRCIq2SukQVQX04eGTCBXJDuWAbJet56id+S" crossorigin="anonymous" async></script>
+
+
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.getRegistrations().then((registrations) => {
+      for (let registration of registrations) {
+        registration.unregister();
+      }
+    });
+  }
+</script>
+
+
+    <script>
+      var setupAPlayer = () => {
+        if (!false || !window.matchMedia('(max-width: 768px)').matches) {
+          if (window.matchMedia('(max-width: 959px)').matches) {
+            const meting = _$('meting-js');
+            if (meting) {
+              meting.setAttribute('fixed', 'true');
+              const aside = meting.parentNode?.parentNode;
+              if (aside?.tagName === 'ASIDE') {
+                meting.parentNode.removeChild(meting);
+                document.body.appendChild(meting);
+              }
+            }
+          }
+        }
+      };
+        var meting_api = "https://api.i-meto.com/meting/api?server=:server&type=:type&id=:id&auth=c6e770266f69eab18dcb51fcc31710a47779ec5a";
+    </script>
+  
+<script src="https://npm.webcache.cn/aplayer@1.10.1/dist/APlayer.min.js" integrity="sha384-gdGYZwHnfJM54evoZhpO0s6ZF5BQiybkiyW7VXr+h5UfruuRL&#x2F;aORyw+5+HZoU6e" crossorigin="anonymous" defer onload="setupAPlayer()"></script>
+
+    
+<script src="https://npm.webcache.cn/meting@2.0.1/dist/Meting.min.js" integrity="sha384-ASVlpKF80A22OXTK3tfEjZm1EL6uFMKIC4p8+0maanw1S&#x2F;IyB+Y4JG+ZDU7GpKE8" crossorigin="anonymous" defer></script>
+
+
+
+  <script src="/drda-blog/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"live2d_modules/live2D/model/xiaomai"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7}});</script></body>
+  </html>
