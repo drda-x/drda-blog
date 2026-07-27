@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@reimujs/hexo-algoliasearch':
-        specifier: ^0.1.0
-        version: 0.1.0(hexo-util@4.0.0)
+        specifier: ^0.1.1
+        version: 0.1.1(hexo-util@4.0.0)
       '@reimujs/hexo-renderer-markdown-it-plus':
         specifier: ^1.2.3
         version: 1.2.3
@@ -671,8 +671,8 @@ packages:
   '@nodable/entities@2.1.1':
     resolution: {integrity: sha512-Pig3HxDIoMgjdEH8OCf/dkcTmLFjJRjWuq8jSnklu284/TKOPibSRERmOykiwmyXTtv61mP+44f3GMx0tLAyjg==}
 
-  '@reimujs/hexo-algoliasearch@0.1.0':
-    resolution: {integrity: sha512-flqAgtl8KZ85R/3GsCIFRjR+mreifeYD6+Cf7h3ookxqxbL3byClnaOmKs80l8bJn7fjnVJpJKjRDK4DfyUhgg==}
+  '@reimujs/hexo-algoliasearch@0.1.1':
+    resolution: {integrity: sha512-i8HEVrI7Sppr5dvCX8Y2jJoF6GB8vid+6fkq1ldmdtNcAry8dbmjIqK8miwjhATS6jteVHkPb2fhHS3AaADQCA==}
     engines: {node: '>=18'}
     peerDependencies:
       hexo-util: '>=2.0.0'
@@ -3796,7 +3796,7 @@ snapshots:
 
   '@nodable/entities@2.1.1': {}
 
-  '@reimujs/hexo-algoliasearch@0.1.0(hexo-util@4.0.0)':
+  '@reimujs/hexo-algoliasearch@0.1.1(hexo-util@4.0.0)':
     dependencies:
       algoliasearch: 4.20.0
       hexo-util: 4.0.0
