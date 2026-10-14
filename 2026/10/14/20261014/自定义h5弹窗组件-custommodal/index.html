@@ -1,0 +1,1179 @@
+  <!DOCTYPE html>
+  <html lang="zh-CN"  
+      data-theme-mode="auto"
+  >
+  <head>
+  <meta charset="utf-8">
+  
+  
+  
+  <script>window.REIMU_CONFIG = {};window.REIMU_CONFIG.clipboard_tips = {"success":{"zh-CN":"复制成功 (*^▽^*)"},"fail":{"zh-CN":"复制失败 (ﾟ⊿ﾟ)ﾂ"},"copyright":{"enable":false,"count":50,"license_type":"by-nc-sa"}};window.REIMU_CONFIG.clipboard_tips.copyright.content = '本博客所有文章除特别声明外，均采用 BY-NC-SA 许可协议。转载请注明出处！';window.REIMU_CONFIG.code_block = {"expand":true};window.REIMU_CONFIG.base = 'https://drda-x.github.io/drda-blog';window.REIMU_CONFIG.relative = '/drda-blog/';</script>
+  <title>
+    自定义H5弹窗组件 (CustomModal) | 加辣の秘密基地
+  </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic|Noto Serif SC:400,400italic,700,700italic&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic|Noto Serif SC:400,400italic,700,700italic&display=swap" media="print" onload="this.media='all'">
+    
+<link rel="stylesheet" href="https://npm.webcache.cn/@fortawesome/fontawesome-free@7.1.0/css/regular.min.css" integrity="sha384-4qYppzjH8EiA+cGdaubu2vL7Rk8WGiqCSj7oRuP1uwtFWkfKNHD20lPfcrbQc8dU" crossorigin="anonymous">
+<link rel="stylesheet" href="https://npm.webcache.cn/@fortawesome/fontawesome-free@7.1.0/css/solid.min.css" integrity="sha384-wbMWab3UDSPm2kvIgVOn&#x2F;d9KPTecgPU1+Nb3zoQrm&#x2F;oVu0EkPL6IaKinjbwW0rum" crossorigin="anonymous">
+
+    <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="https://npm.webcache.cn/@fortawesome/fontawesome-free@7.1.0/css/brands.min.css" integrity="sha384-KTGeC2hIMzpeQakhsmzB9bZfhCD5xZZCgI1iZH6f/O457SxzlkzTQg/WXFNoi3ih" crossorigin="anonymous">
+<link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="https://npm.webcache.cn/@fortawesome/fontawesome-free@7.1.0/css/v5-font-face.min.css" integrity="sha384-nJ1ThfldViXoLpJ6jlKcP2beas8BMbYq26SG9Hi8cH89bZi4RZ644v7helMCqJxd" crossorigin="anonymous">
+<link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="https://npm.webcache.cn/@fortawesome/fontawesome-free@7.1.0/css/v4-font-face.min.css" integrity="sha384-UlkrhOIvZxJFd4MElSUp7ow6/RUeYKi/orfCZIRRiOENFuQPIAA3T3HjYfmBRhNq" crossorigin="anonymous">
+    
+<link rel="stylesheet" href="/drda-blog/css/loader.css">
+
+    <meta name="description" content="我自己自定义了一套H5页面统一风格的弹窗组件，支持提示弹窗、确认弹窗、自定义内容弹窗，可插入表单、图片等任意元素，并支持自定义标题、图标和背景图。    目录  文件结构 快速开始 方式一：声明式组件 方式二：编程式调用 完整 Props 属性表 Events 事件 Slots 插槽 使用示例  基础提示弹窗 确认弹窗 成功&#x2F;错误&#x2F;警告弹窗 带表单的自定义弹窗 自定义底部按钮 带背景图的弹窗 Pr">
+<meta property="og:type" content="article">
+<meta property="og:title" content="自定义H5弹窗组件 (CustomModal)">
+<meta property="og:url" content="https://drda-x.github.io/drda-blog/2026/10/14/20261014/%E8%87%AA%E5%AE%9A%E4%B9%89h5%E5%BC%B9%E7%AA%97%E7%BB%84%E4%BB%B6-custommodal/index.html">
+<meta property="og:site_name" content="加辣の秘密基地">
+<meta property="og:description" content="我自己自定义了一套H5页面统一风格的弹窗组件，支持提示弹窗、确认弹窗、自定义内容弹窗，可插入表单、图片等任意元素，并支持自定义标题、图标和背景图。    目录  文件结构 快速开始 方式一：声明式组件 方式二：编程式调用 完整 Props 属性表 Events 事件 Slots 插槽 使用示例  基础提示弹窗 确认弹窗 成功&#x2F;错误&#x2F;警告弹窗 带表单的自定义弹窗 自定义底部按钮 带背景图的弹窗 Pr">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/drda-x/images/main/20261014150121391.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/drda-x/images/main/20261014151709813.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/drda-x/images/main/20261014151859874.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/drda-x/images/main/20261014151957082.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/drda-x/images/main/20261014152132227.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/drda-x/images/main/20261014152915988.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/drda-x/images/main/20261014153935595.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/drda-x/images/main/20261014154112003.png">
+<meta property="article:published_time" content="2026-10-14T15:09:31.000Z">
+<meta property="article:modified_time" content="2026-10-14T07:52:35.397Z">
+<meta property="article:author" content="Drda">
+<meta property="article:tag" content="Vue">
+<meta property="article:tag" content="随笔">
+<meta property="article:tag" content="js">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/drda-x/images/main/20261014150121391.png">
+    <link rel="alternate" href="/drda-blog/atom.xml" title="加辣の秘密基地" type="application/atom+xml"><link rel="alternate" href="/drda-blog/rss2.xml" title="加辣の秘密基地" type="application/rss+xml">
+    <link rel="shortcut icon" href="/drda-blog/images/favicon.ico">
+  
+<link rel="stylesheet" href="/drda-blog/css/style.css">
+
+  <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.css" integrity="sha384-IfxC36XL/toUyJ939C73PcgMuRzAZuIzZxE38drsmO5p6jD7ei+Zx/1oA/0l8ysE" crossorigin="anonymous">
+      <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="https://npm.webcache.cn/katex@0.16.24/dist/katex.min.css" integrity="sha384-tTgKLjMYmJr94v8qu2PE5MUGSMbyN2xiH266JUB3gpm8vnnJywd1dWSOEfrFz+YI" crossorigin="anonymous">
+    
+<script src="https://npm.webcache.cn/pace-js@1.2.4/pace.min.js" integrity="sha384-k6YtvFUEIuEFBdrLKJ3YAUbBki333tj1CSUisai5Cswsg9wcLNaPzsTHDswp4Az8" crossorigin="anonymous"></script>
+
+    
+<link rel="stylesheet" href="https://npm.webcache.cn/@reimujs/aos@0.1.2/dist/aos.css" integrity="sha384-GMRP93c6Hkz9JVKGAuRR3nTS7M07RwPgTFenXiosjq2VbVgvdDNcz1g6Mkj8AONa" crossorigin="anonymous">
+
+    <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="https://npm.webcache.cn/aplayer@1.10.1/dist/APlayer.min.css" integrity="sha384-tLMkTWh2pfXNWGFlUS0w1TFtRG5xZ9lPWFOooj+vDDLIL+xBGQU/voDBY5XE2lVh" crossorigin="anonymous">
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+  <body>
+      <div id='loader'>
+    <div class="loading-left-bg loading-bg"></div>
+    <div class="loading-right-bg loading-bg"></div>
+    <div class="spinner-box">
+      <div class="loading-taichi ">
+          <img src="/drda-blog/images/taichi.png" alt="loading" />
+      </div>
+      <div class="loading-word">给你们加辣中...</div>
+    </div>
+  </div>
+  <script>
+    var time = null;
+    var loaderEl = document.getElementById('loader');
+    var startLoading = () => {
+      time = Date.now();
+      loaderEl.classList.remove("loading");
+    }
+    var hideLoader = () => {
+      document.body.style.overflow = 'auto';
+      loader.classList.add('loading');
+    };
+
+    var endLoading = () => {
+      if (!time) {
+        hideLoader();
+      } else {
+        if (Date.now() - time > 500) {
+          time = null;
+          hideLoader();
+        } else {
+          setTimeout(endLoading, 500 - (Date.now() - time));
+          time = null;
+        }
+      }
+    }
+    window.addEventListener('DOMContentLoaded', endLoading);
+    loaderEl.addEventListener('click', endLoading);
+  </script>
+<div id="copy-tooltip"></div>
+<div id="heatmap-tooltip"></div>
+
+
+    <div id="container">
+      <div id="wrap">
+        <div id="header-nav">
+  <nav id="main-nav" aria-label="Primary navigation">
+        <a class="main-nav-link-wrap" href="/drda-blog/">
+            <div class="main-nav-icon icon ">
+                  <img src="/drda-blog/images/taichi.png" alt="home icon" style="height: 1em;">
+            </div>
+          <span class="main-nav-link">首页</span>
+        </a>
+        <a class="main-nav-link-wrap" href="/drda-blog/archives">
+            <div class="main-nav-icon icon ">
+                  <img src="/drda-blog/images/archives.png" alt="archives icon" style="height: 1em;">
+            </div>
+          <span class="main-nav-link">归档</span>
+        </a>
+        <a class="main-nav-link-wrap" href="/drda-blog/about">
+            <div class="main-nav-icon icon ">
+                  <img src="/drda-blog/images/about.png" alt="about icon" style="height: 1em;">
+            </div>
+          <span class="main-nav-link">关于</span>
+        </a>
+        <a class="main-nav-link-wrap" href="/drda-blog/friend">
+            <div class="main-nav-icon icon ">
+                  <img src="/drda-blog/images/friend.png" alt="friend icon" style="height: 1em;">
+            </div>
+          <span class="main-nav-link">友链</span>
+        </a>
+    <a id="main-nav-toggle" class="nav-icon" aria-label="Toggle navigation" role="button"></a>
+  </nav>
+  <nav id="sub-nav" aria-label="Secondary navigation">
+      <a id="nav-rss-link" class="nav-icon" href="/drda-blog/atom.xml" title="RSS 订阅" aria-label="RSS 订阅" target="_blank"></a>
+      <a id="nav-search-btn" class="nav-icon popup-trigger" title="搜索" aria-label="搜索"></a>
+  </nav>
+  <a href="https://github.com/drda-x" class="triangle-badge" title="github" target="_blank" rel="noopener nofollow noreferrer">
+    <div class="icon icon-github triangle-badge-icon"></div>
+  </a>
+</div>
+<header id="header" aria-label="Site header">
+    <picture></picture>
+    <img  fetchpriority="high" src="https://img.8845.top/img2/%E7%9C%9F%E5%AF%BB%E9%85%B1.png" alt="自定义H5弹窗组件 (CustomModal)">
+  <div id="header-outer">
+    <div id="header-title">
+          <span id="logo">
+            <h1 data-aos="slide-up">自定义H5弹窗组件 (CustomModal)</h1>
+          </span>
+        <h2 id="subtitle-wrap" data-aos="slide-down">
+        </h2>
+    </div>
+  </div>
+</header>
+
+        <div id="content" aria-label="Page content" class="sidebar-left"  >
+          <aside id="sidebar" aria-label="Sidebar">
+  <div class="sidebar-wrapper-container sticky">
+      <meting-js
+        theme="var(--color-link)"
+        id="646465"
+        server="netease"
+        type="song"
+        auto="0"
+        fixed="false"
+        autoplay="false"
+        loop="all"
+        order="random"
+        preload="auto"
+        volume="0.7"
+        mutex="true"
+        list-folded="false"
+        lrc-type="3"
+      ></meting-js>
+  <div class="sidebar-wrapper">
+    <div class="sidebar-wrap" data-aos="fade-up">
+          <div class="sidebar-toc-sidebar"><h3 class="toc-title">文章目录</h3>
+<div class="sidebar-toc-wrapper toc-div-class" >
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%AE%E5%BD%95"><span class="toc-number">1.</span> <span class="toc-text"> 目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84"><span class="toc-number">2.</span> <span class="toc-text"> 文件结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BF%AB%E9%80%9F%E5%BC%80%E5%A7%8B"><span class="toc-number">3.</span> <span class="toc-text"> 快速开始</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%B7%B2%E5%AE%8C%E6%88%90%E5%85%A8%E5%B1%80%E6%B3%A8%E5%86%8C"><span class="toc-number">3.1.</span> <span class="toc-text"> 1. 已完成全局注册</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E9%A1%B5%E9%9D%A2%E4%B8%AD%E4%BD%BF%E7%94%A8"><span class="toc-number">3.2.</span> <span class="toc-text"> 2. 页面中使用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B9%E5%BC%8F%E4%B8%80%E5%A3%B0%E6%98%8E%E5%BC%8F%E7%BB%84%E4%BB%B6"><span class="toc-number">4.</span> <span class="toc-text"> 方式一：声明式组件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B9%E5%BC%8F%E4%BA%8C%E7%BC%96%E7%A8%8B%E5%BC%8F%E8%B0%83%E7%94%A8"><span class="toc-number">5.</span> <span class="toc-text"> 方式二：编程式调用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%89%8D%E7%BD%AE%E5%87%86%E5%A4%87"><span class="toc-number">5.1.</span> <span class="toc-text"> 前置准备</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B0%83%E7%94%A8%E6%96%B9%E6%B3%95"><span class="toc-number">5.2.</span> <span class="toc-text"> 调用方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%8C%E6%95%B4-props-%E5%B1%9E%E6%80%A7%E8%A1%A8"><span class="toc-number">6.</span> <span class="toc-text"> 完整 Props 属性表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#mode-%E6%A8%A1%E5%BC%8F%E8%AF%B4%E6%98%8E"><span class="toc-number">6.1.</span> <span class="toc-text"> mode 模式说明</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#events-%E4%BA%8B%E4%BB%B6"><span class="toc-number">7.</span> <span class="toc-text"> Events 事件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#slots-%E6%8F%92%E6%A7%BD"><span class="toc-number">8.</span> <span class="toc-text"> Slots 插槽</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#footer-%E6%8F%92%E6%A7%BD%E7%A4%BA%E4%BE%8B"><span class="toc-number">8.1.</span> <span class="toc-text"> footer 插槽示例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E7%A4%BA%E4%BE%8B"><span class="toc-number">9.</span> <span class="toc-text"> 使用示例</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%9F%BA%E7%A1%80%E6%8F%90%E7%A4%BA%E5%BC%B9%E7%AA%97"><span class="toc-number">9.1.</span> <span class="toc-text"> 1. 基础提示弹窗</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E7%A1%AE%E8%AE%A4%E5%BC%B9%E7%AA%97"><span class="toc-number">9.2.</span> <span class="toc-text"> 2. 确认弹窗</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E6%88%90%E5%8A%9F%E9%94%99%E8%AF%AF%E8%AD%A6%E5%91%8A%E5%BC%B9%E7%AA%97"><span class="toc-number">9.3.</span> <span class="toc-text"> 3. 成功&#x2F;错误&#x2F;警告弹窗</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E5%B8%A6%E8%A1%A8%E5%8D%95%E7%9A%84%E8%87%AA%E5%AE%9A%E4%B9%89%E5%BC%B9%E7%AA%97"><span class="toc-number">9.4.</span> <span class="toc-text"> 4. 带表单的自定义弹窗</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%BA%95%E9%83%A8%E6%8C%89%E9%92%AE"><span class="toc-number">9.5.</span> <span class="toc-text"> 5. 自定义底部按钮</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E5%B8%A6%E8%83%8C%E6%99%AF%E5%9B%BE%E7%9A%84%E5%BC%B9%E7%AA%97"><span class="toc-number">9.6.</span> <span class="toc-text"> 6. 带背景图的弹窗</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-promise-%E5%BC%82%E6%AD%A5%E7%94%A8%E6%B3%95"><span class="toc-number">9.7.</span> <span class="toc-text"> 7. Promise 异步用法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95%E9%A1%B5%E9%9D%A2"><span class="toc-number">10.</span> <span class="toc-text"> 测试页面</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%B7%E5%BC%8F%E5%AE%9A%E5%88%B6"><span class="toc-number">11.</span> <span class="toc-text"> 样式定制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98"><span class="toc-number">12.</span> <span class="toc-text"> 常见问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%80%E5%90%8E%E9%99%84%E4%B8%8A%E6%BA%90%E7%A0%81"><span class="toc-number">13.</span> <span class="toc-text"> 最后附上源码</span></a></li></ol>
+</div>
+</div>
+          <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/drda-blog/avatar/avatar.webp" data-sizes="auto" alt="Drda" class="lazyload">
+  <div class="sidebar-author-name">Drda</div>
+  <div class="sidebar-description">Drda&#39;s Blog</div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div>
+    <div class="sidebar-state-number">16</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>分类</div>
+    <div class="sidebar-state-number">3</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>标签</div>
+    <div class="sidebar-state-number">17</div>
+  </div>
+</div>
+<div class="sidebar-social" >
+    <div class="icon-github sidebar-social-icon">
+      <a href=https://github.com/drda-x itemprop="url" target="_blank" aria-label="github" rel="noopener nofollow noreferrer"></a>
+    </div>
+    <div class="icon-bilibili sidebar-social-icon">
+      <a href=https://space.bilibili.com/28903889 itemprop="url" target="_blank" aria-label="bilibili" rel="noopener nofollow noreferrer"></a>
+    </div>
+</div>
+<div class="sidebar-menu">
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/drda-blog/" aria-label="首页"></a>
+          <div class="sidebar-menu-icon icon ">
+                <img src="/drda-blog/images/taichi.png" alt="home icon" style="width: 1em;">
+          </div>
+        <div class="sidebar-menu-link">首页</div>
+      </div>
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/drda-blog/archives" aria-label="归档"></a>
+          <div class="sidebar-menu-icon icon ">
+                <img src="/drda-blog/images/archives.png" alt="archives icon" style="width: 1em;">
+          </div>
+        <div class="sidebar-menu-link">归档</div>
+      </div>
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/drda-blog/about" aria-label="关于"></a>
+          <div class="sidebar-menu-icon icon ">
+                <img src="/drda-blog/images/about.png" alt="about icon" style="width: 1em;">
+          </div>
+        <div class="sidebar-menu-link">关于</div>
+      </div>
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/drda-blog/friend" aria-label="友链"></a>
+          <div class="sidebar-menu-icon icon ">
+                <img src="/drda-blog/images/friend.png" alt="friend icon" style="width: 1em;">
+          </div>
+        <div class="sidebar-menu-link">友链</div>
+      </div>
+</div>
+</div>
+          <div class="sidebar-btn-wrapper" style="position:static">
+            <div class="sidebar-toc-btn current"></div>
+            <div class="sidebar-common-btn"></div>
+          </div>
+    </div>
+  </div>
+  <div class="sidebar-widget">
+  </div>
+  </div>
+</aside>
+
+          <section id="main" aria-label="Main content"><article id="post-20261014/自定义h5弹窗组件-custommodal" class="h-entry article" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner" data-aos="fade-up">
+    <div class="article-meta">
+      <div class="article-date">
+  <span class="article-date-link icon-calendar" data-aos="zoom-in">
+    <time datetime="2026-10-14T15:09:31.000Z" itemprop="datePublished">2026-10-14</time>
+    <time style="display: none;" id="post-update-time">2026-10-14</time>
+  </span>
+</div>
+
+    </div>
+    
+    <div class="hr-line"></div>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+        <p>我自己自定义了一套H5页面统一风格的弹窗组件，支持<strong>提示弹窗</strong>、<strong>确认弹窗</strong>、<strong>自定义内容弹窗</strong>，可插入表单、图片等任意元素，并支持自定义标题、图标和背景图。<br />
+<img src="https://raw.githubusercontent.com/drda-x/images/main/20261014150121391.png" alt="" /></p>
+<hr />
+<h2 id="目录"><a class="markdownIt-Anchor" href="#目录"></a> 目录</h2>
+<ul>
+<li><a href="#%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84">文件结构</a></li>
+<li><a href="#%E5%BF%AB%E9%80%9F%E5%BC%80%E5%A7%8B">快速开始</a></li>
+<li><a href="#%E6%96%B9%E5%BC%8F%E4%B8%80%E5%A3%B0%E6%98%8E%E5%BC%8F%E7%BB%84%E4%BB%B6">方式一：声明式组件</a></li>
+<li><a href="#%E6%96%B9%E5%BC%8F%E4%BA%8C%E7%BC%96%E7%A8%8B%E5%BC%8F%E8%B0%83%E7%94%A8">方式二：编程式调用</a></li>
+<li><a href="#%E5%AE%8C%E6%95%B4-props-%E5%B1%9E%E6%80%A7%E8%A1%A8">完整 Props 属性表</a></li>
+<li><a href="#events-%E4%BA%8B%E4%BB%B6">Events 事件</a></li>
+<li><a href="#slots-%E6%8F%92%E6%A7%BD">Slots 插槽</a></li>
+<li><a href="#%E4%BD%BF%E7%94%A8%E7%A4%BA%E4%BE%8B">使用示例</a>
+<ul>
+<li><a href="#1-%E5%9F%BA%E7%A1%80%E6%8F%90%E7%A4%BA%E5%BC%B9%E7%AA%97">基础提示弹窗</a></li>
+<li><a href="#2-%E7%A1%AE%E8%AE%A4%E5%BC%B9%E7%AA%97">确认弹窗</a></li>
+<li><a href="#3-%E6%88%90%E5%8A%9F%E9%94%99%E8%AF%AF%E8%AD%A6%E5%91%8A%E5%BC%B9%E7%AA%97">成功/错误/警告弹窗</a></li>
+<li><a href="#4-%E5%B8%A6%E8%A1%A8%E5%8D%95%E7%9A%84%E8%87%AA%E5%AE%9A%E4%B9%89%E5%BC%B9%E7%AA%97">带表单的自定义弹窗</a></li>
+<li><a href="#5-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%BA%95%E9%83%A8%E6%8C%89%E9%92%AE">自定义底部按钮</a></li>
+<li><a href="#6-%E5%B8%A6%E8%83%8C%E6%99%AF%E5%9B%BE%E7%9A%84%E5%BC%B9%E7%AA%97">带背景图的弹窗</a></li>
+<li><a href="#7-promise-%E5%BC%82%E6%AD%A5%E7%94%A8%E6%B3%95">Promise 异步用法</a></li>
+</ul>
+</li>
+</ul>
+<hr />
+<h2 id="文件结构"><a class="markdownIt-Anchor" href="#文件结构"></a> 文件结构</h2>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">compones/</span><br><span class="line">├── CustomModal.vue    ← 核心弹窗组件（声明式使用）</span><br><span class="line">└── GlobalModal.vue    ← 全局弹窗容器（编程式使用）</span><br><span class="line"></span><br><span class="line">utils/</span><br><span class="line">├── modal.js           ← $modal 服务（alert/confirm/show）</span><br><span class="line">└── modal-mixin.js     ← 快捷混入（showSuccess/showError/showWarning）</span><br><span class="line"></span><br><span class="line">pages/</span><br><span class="line">└── modaltest/</span><br><span class="line">    └── modaltest.vue  ← 测试用例页面</span><br></pre></td></tr></table></figure>
+<hr />
+<h2 id="快速开始"><a class="markdownIt-Anchor" href="#快速开始"></a> 快速开始</h2>
+<h3 id="1-已完成全局注册"><a class="markdownIt-Anchor" href="#1-已完成全局注册"></a> 1. 已完成全局注册</h3>
+<p>在 <code>main.js</code> 中已自动注册 <code>$modal</code> 服务，<strong>所有页面</strong>均可直接使用 <code>this.$modal</code>：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// main.js（已完成配置）</span></span><br><span class="line"><span class="keyword">import</span> $modal <span class="keyword">from</span> <span class="string">&#x27;@/utils/modal.js&#x27;</span></span><br><span class="line"><span class="title class_">Vue</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">$modal</span> = $modal</span><br></pre></td></tr></table></figure>
+<h3 id="2-页面中使用"><a class="markdownIt-Anchor" href="#2-页面中使用"></a> 2. 页面中使用</h3>
+<p>只需两步：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;view&gt;</span><br><span class="line">    &lt;!-- 页面内容 --&gt;</span><br><span class="line">    &lt;button @click=&quot;handleClick&quot;&gt;打开弹窗&lt;/button&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!-- 第一步：在 template 末尾添加 GlobalModal --&gt;</span><br><span class="line">    &lt;GlobalModal /&gt;</span><br><span class="line">  &lt;/view&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">// 第二步：引入组件和 mixin</span><br><span class="line">import GlobalModal from &#x27;@/compones/GlobalModal.vue&#x27;</span><br><span class="line">import modalMixin from &#x27;@/utils/modal-mixin.js&#x27;</span><br><span class="line"></span><br><span class="line">export default &#123;</span><br><span class="line">  components: &#123; GlobalModal &#125;,</span><br><span class="line">  mixins: [modalMixin],</span><br><span class="line">  methods: &#123;</span><br><span class="line">    handleClick() &#123;</span><br><span class="line">      // 第三步：直接调用</span><br><span class="line">      this.$modal.alert(&#123; title: &#x27;提示&#x27;, content: &#x27;操作成功&#x27; &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<hr />
+<h2 id="方式一声明式组件"><a class="markdownIt-Anchor" href="#方式一声明式组件"></a> 方式一：声明式组件</h2>
+<p>适合需要插入<strong>自定义内容</strong>（表单、列表等）的场景。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;CustomModal</span><br><span class="line">    :show=&quot;showModal&quot;</span><br><span class="line">    mode=&quot;confirm&quot;</span><br><span class="line">    title=&quot;编辑信息&quot;</span><br><span class="line">    iconType=&quot;person&quot;</span><br><span class="line">    iconColor=&quot;#3b82f6&quot;</span><br><span class="line">    :headerGradient=&quot;[&#x27;#3b82f6&#x27;, &#x27;#60a5fa&#x27;]&quot;</span><br><span class="line">    confirmText=&quot;保存&quot;</span><br><span class="line">    cancelText=&quot;取消&quot;</span><br><span class="line">    @confirm=&quot;onSubmit&quot;</span><br><span class="line">    @cancel=&quot;showModal = false&quot;</span><br><span class="line">  &gt;</span><br><span class="line">    &lt;!-- 默认插槽：可插入任意内容 --&gt;</span><br><span class="line">    &lt;u-form :model=&quot;form&quot;&gt;</span><br><span class="line">      &lt;u-form-item label=&quot;姓名&quot; borderBottom&gt;</span><br><span class="line">        &lt;u-input v-model=&quot;form.name&quot; /&gt;</span><br><span class="line">      &lt;/u-form-item&gt;</span><br><span class="line">      &lt;u-form-item label=&quot;手机号&quot; borderBottom&gt;</span><br><span class="line">        &lt;u-input v-model=&quot;form.phone&quot; /&gt;</span><br><span class="line">      &lt;/u-form-item&gt;</span><br><span class="line">    &lt;/u-form&gt;</span><br><span class="line">  &lt;/CustomModal&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">import CustomModal from &#x27;@/compones/CustomModal.vue&#x27;</span><br><span class="line"></span><br><span class="line">export default &#123;</span><br><span class="line">  components: &#123; CustomModal &#125;,</span><br><span class="line">  data() &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">      showModal: false,</span><br><span class="line">      form: &#123; name: &#x27;&#x27;, phone: &#x27;&#x27; &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    onSubmit() &#123;</span><br><span class="line">      console.log(&#x27;提交&#x27;, this.form)</span><br><span class="line">      this.showModal = false</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<hr />
+<h2 id="方式二编程式调用"><a class="markdownIt-Anchor" href="#方式二编程式调用"></a> 方式二：编程式调用</h2>
+<p>适合简单的提示、确认场景，无需在 template 中写组件。</p>
+<h3 id="前置准备"><a class="markdownIt-Anchor" href="#前置准备"></a> 前置准备</h3>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;view&gt;</span><br><span class="line">    &lt;!-- 页面内容 --&gt;</span><br><span class="line">    &lt;!-- 在 template 末尾添加 --&gt;</span><br><span class="line">    &lt;GlobalModal /&gt;</span><br><span class="line">  &lt;/view&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">import GlobalModal from &#x27;@/compones/GlobalModal.vue&#x27;</span><br><span class="line">import modalMixin from &#x27;@/utils/modal-mixin.js&#x27;</span><br><span class="line"></span><br><span class="line">export default &#123;</span><br><span class="line">  components: &#123; GlobalModal &#125;,</span><br><span class="line">  mixins: [modalMixin]</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="调用方法"><a class="markdownIt-Anchor" href="#调用方法"></a> 调用方法</h3>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 提示弹窗</span></span><br><span class="line"><span class="variable language_">this</span>.<span class="property">$modal</span>.<span class="title function_">alert</span>(&#123; <span class="attr">title</span>: <span class="string">&#x27;提示&#x27;</span>, <span class="attr">content</span>: <span class="string">&#x27;操作成功&#x27;</span> &#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 确认弹窗</span></span><br><span class="line"><span class="variable language_">this</span>.<span class="property">$modal</span>.<span class="title function_">confirm</span>(&#123;</span><br><span class="line">  <span class="attr">title</span>: <span class="string">&#x27;确认删除&#x27;</span>,</span><br><span class="line">  <span class="attr">content</span>: <span class="string">&#x27;删除后无法恢复，是否继续？&#x27;</span>,</span><br><span class="line">  <span class="attr">onConfirm</span>: <span class="function">() =&gt;</span> &#123; <span class="comment">/* 用户点了确定 */</span> &#125;,</span><br><span class="line">  <span class="attr">onCancel</span>: <span class="function">() =&gt;</span> &#123; <span class="comment">/* 用户点了取消 */</span> &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 快捷方法（需引入 modalMixin）</span></span><br><span class="line"><span class="variable language_">this</span>.<span class="title function_">showSuccess</span>(<span class="string">&#x27;保存成功！&#x27;</span>)</span><br><span class="line"><span class="variable language_">this</span>.<span class="title function_">showError</span>(<span class="string">&#x27;网络错误，请重试&#x27;</span>)</span><br><span class="line"><span class="variable language_">this</span>.<span class="title function_">showWarning</span>(<span class="string">&#x27;余额不足&#x27;</span>)</span><br><span class="line"><span class="variable language_">this</span>.<span class="title function_">showAlert</span>(<span class="string">&#x27;这是一条提示&#x27;</span>)</span><br><span class="line"><span class="variable language_">this</span>.<span class="title function_">showConfirm</span>(<span class="string">&#x27;是否继续？&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<hr />
+<h2 id="完整-props-属性表"><a class="markdownIt-Anchor" href="#完整-props-属性表"></a> 完整 Props 属性表</h2>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>show</code></td>
+<td>Boolean</td>
+<td><code>false</code></td>
+<td>控制弹窗显示/隐藏</td>
+</tr>
+<tr>
+<td><code>mode</code></td>
+<td>String</td>
+<td><code>'alert'</code></td>
+<td>弹窗模式：<code>alert</code> / <code>confirm</code> / <code>custom</code></td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td>String</td>
+<td><code>''</code></td>
+<td>标题文字</td>
+</tr>
+<tr>
+<td><code>subtitle</code></td>
+<td>String</td>
+<td><code>''</code></td>
+<td>副标题描述文字</td>
+</tr>
+<tr>
+<td><code>content</code></td>
+<td>String</td>
+<td><code>''</code></td>
+<td>文本内容（不使用插槽时生效）</td>
+</tr>
+<tr>
+<td><code>icon</code></td>
+<td>String</td>
+<td><code>''</code></td>
+<td>图片图标路径（优先级高于 iconType）</td>
+</tr>
+<tr>
+<td><code>iconType</code></td>
+<td>String</td>
+<td><code>''</code></td>
+<td>uni-icons 图标类型名</td>
+</tr>
+<tr>
+<td><code>iconSize</code></td>
+<td>Number/String</td>
+<td><code>60</code></td>
+<td>图标大小（rpx）</td>
+</tr>
+<tr>
+<td><code>iconColor</code></td>
+<td>String</td>
+<td><code>'#3b82f6'</code></td>
+<td>图标颜色</td>
+</tr>
+<tr>
+<td><code>bgImage</code></td>
+<td>String</td>
+<td><code>''</code></td>
+<td>顶部背景图片路径</td>
+</tr>
+<tr>
+<td><code>headerGradient</code></td>
+<td>Array</td>
+<td><code>['#3b82f6','#60a5fa']</code></td>
+<td>顶部渐变色 <code>[起始色, 结束色]</code></td>
+</tr>
+<tr>
+<td><code>showHeader</code></td>
+<td>Boolean</td>
+<td><code>true</code></td>
+<td>是否显示顶部区域</td>
+</tr>
+<tr>
+<td><code>confirmText</code></td>
+<td>String</td>
+<td><code>'确定'</code></td>
+<td>确认按钮文字</td>
+</tr>
+<tr>
+<td><code>cancelText</code></td>
+<td>String</td>
+<td><code>'取消'</code></td>
+<td>取消按钮文字</td>
+</tr>
+<tr>
+<td><code>showConfirmButton</code></td>
+<td>Boolean</td>
+<td><code>true</code></td>
+<td>是否显示确认按钮</td>
+</tr>
+<tr>
+<td><code>showCancelButton</code></td>
+<td>Boolean</td>
+<td><code>false</code></td>
+<td>是否显示取消按钮</td>
+</tr>
+<tr>
+<td><code>confirmColor</code></td>
+<td>String</td>
+<td><code>''</code></td>
+<td>确认按钮自定义颜色</td>
+</tr>
+<tr>
+<td><code>cancelColor</code></td>
+<td>String</td>
+<td><code>''</code></td>
+<td>取消按钮自定义颜色</td>
+</tr>
+<tr>
+<td><code>maskCloseAble</code></td>
+<td>Boolean</td>
+<td><code>true</code></td>
+<td>点击遮罩是否关闭</td>
+</tr>
+<tr>
+<td><code>showClose</code></td>
+<td>Boolean</td>
+<td><code>false</code></td>
+<td>是否显示右上角关闭按钮</td>
+</tr>
+<tr>
+<td><code>closeSize</code></td>
+<td>Number/String</td>
+<td><code>20</code></td>
+<td>关闭按钮图标大小</td>
+</tr>
+<tr>
+<td><code>confirmLoading</code></td>
+<td>Boolean</td>
+<td><code>false</code></td>
+<td>确认按钮 loading 状态</td>
+</tr>
+<tr>
+<td><code>cancelLoading</code></td>
+<td>Boolean</td>
+<td><code>false</code></td>
+<td>取消按钮 loading 状态</td>
+</tr>
+<tr>
+<td><code>titleStyle</code></td>
+<td>Object</td>
+<td><code>&#123;&#125;</code></td>
+<td>标题自定义样式</td>
+</tr>
+</tbody>
+</table>
+<h3 id="mode-模式说明"><a class="markdownIt-Anchor" href="#mode-模式说明"></a> mode 模式说明</h3>
+<table>
+<thead>
+<tr>
+<th>模式</th>
+<th>说明</th>
+<th>默认按钮</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>alert</code></td>
+<td>提示弹窗</td>
+<td>仅显示「确定」按钮</td>
+</tr>
+<tr>
+<td><code>confirm</code></td>
+<td>确认弹窗</td>
+<td>显示「确定」+「取消」按钮</td>
+</tr>
+<tr>
+<td><code>custom</code></td>
+<td>自定义模式</td>
+<td>由使用者自行控制</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="events-事件"><a class="markdownIt-Anchor" href="#events-事件"></a> Events 事件</h2>
+<table>
+<thead>
+<tr>
+<th>事件名</th>
+<th>说明</th>
+<th>回调参数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>confirm</code></td>
+<td>点击确认按钮时触发</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code>cancel</code></td>
+<td>点击取消按钮或遮罩时触发</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code>update:show</code></td>
+<td>show 值变化时触发（支持 .sync）</td>
+<td>Boolean</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="slots-插槽"><a class="markdownIt-Anchor" href="#slots-插槽"></a> Slots 插槽</h2>
+<table>
+<thead>
+<tr>
+<th>插槽名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>default</code></td>
+<td>内容区域默认插槽，可插入任意元素（表单、图片、列表等）</td>
+</tr>
+<tr>
+<td><code>footer</code></td>
+<td>底部按钮区域插槽，完全自定义底部按钮</td>
+</tr>
+</tbody>
+</table>
+<h3 id="footer-插槽示例"><a class="markdownIt-Anchor" href="#footer-插槽示例"></a> footer 插槽示例</h3>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;CustomModal :show=&quot;show&quot; title=&quot;自定义按钮&quot;&gt;</span><br><span class="line">  &lt;text&gt;内容&lt;/text&gt;</span><br><span class="line"></span><br><span class="line">  &lt;template #footer&gt;</span><br><span class="line">    &lt;view style=&quot;display: flex; gap: 20rpx;&quot;&gt;</span><br><span class="line">      &lt;button @click=&quot;show = false&quot;&gt;返回&lt;/button&gt;</span><br><span class="line">      &lt;button @click=&quot;handleSave&quot;&gt;保存&lt;/button&gt;</span><br><span class="line">      &lt;button @click=&quot;handleDelete&quot;&gt;删除&lt;/button&gt;</span><br><span class="line">    &lt;/view&gt;</span><br><span class="line">  &lt;/template&gt;</span><br><span class="line">&lt;/CustomModal&gt;</span><br></pre></td></tr></table></figure>
+<hr />
+<h2 id="使用示例"><a class="markdownIt-Anchor" href="#使用示例"></a> 使用示例</h2>
+<h3 id="1-基础提示弹窗"><a class="markdownIt-Anchor" href="#1-基础提示弹窗"></a> 1. 基础提示弹窗</h3>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="variable language_">this</span>.<span class="property">$modal</span>.<span class="title function_">alert</span>(&#123;</span><br><span class="line">  <span class="attr">title</span>: <span class="string">&#x27;提示&#x27;</span>,</span><br><span class="line">  <span class="attr">content</span>: <span class="string">&#x27;操作成功&#x27;</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/drda-x/images/main/20261014151709813.png" alt="" /></p>
+<h3 id="2-确认弹窗"><a class="markdownIt-Anchor" href="#2-确认弹窗"></a> 2. 确认弹窗</h3>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> confirmed = <span class="keyword">await</span> <span class="variable language_">this</span>.<span class="property">$modal</span>.<span class="title function_">confirm</span>(&#123;</span><br><span class="line">  <span class="attr">title</span>: <span class="string">&#x27;确认删除&#x27;</span>,</span><br><span class="line">  <span class="attr">content</span>: <span class="string">&#x27;删除后无法恢复，是否继续？&#x27;</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">if</span> (confirmed) &#123;</span><br><span class="line">  <span class="comment">// 执行删除</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/drda-x/images/main/20261014151859874.png" alt="" /></p>
+<h3 id="3-成功错误警告弹窗"><a class="markdownIt-Anchor" href="#3-成功错误警告弹窗"></a> 3. 成功/错误/警告弹窗</h3>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 成功提示（绿色主题 + 勾选图标）</span></span><br><span class="line"><span class="variable language_">this</span>.<span class="title function_">showSuccess</span>(<span class="string">&#x27;数据保存成功！&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 错误提示（红色主题 + X 图标）</span></span><br><span class="line"><span class="variable language_">this</span>.<span class="title function_">showError</span>(<span class="string">&#x27;网络请求失败，请重试&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 警告提示（橙色主题 + 感叹号图标）</span></span><br><span class="line"><span class="variable language_">this</span>.<span class="title function_">showWarning</span>(<span class="string">&#x27;账户余额不足，请先充值&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>错误提示作为例子展示</p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/drda-x/images/main/20261014151957082.png" alt="" /></p>
+<h3 id="4-带表单的自定义弹窗"><a class="markdownIt-Anchor" href="#4-带表单的自定义弹窗"></a> 4. 带表单的自定义弹窗</h3>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;CustomModal</span><br><span class="line">  :show=&quot;showForm&quot;</span><br><span class="line">  mode=&quot;custom&quot;</span><br><span class="line">  title=&quot;新增设备&quot;</span><br><span class="line">  iconType=&quot;plus-filled&quot;</span><br><span class="line">  iconColor=&quot;#8b5cf6&quot;</span><br><span class="line">  :headerGradient=&quot;[&#x27;#8b5cf6&#x27;, &#x27;#a78bfa&#x27;]&quot;</span><br><span class="line">  :showHeader=&quot;true&quot;</span><br><span class="line">  :showConfirmButton=&quot;true&quot;</span><br><span class="line">  :showCancelButton=&quot;true&quot;</span><br><span class="line">  confirmText=&quot;提交&quot;</span><br><span class="line">  cancelText=&quot;关闭&quot;</span><br><span class="line">  :showClose=&quot;true&quot;</span><br><span class="line">  :maskCloseAble=&quot;false&quot;</span><br><span class="line">  @confirm=&quot;submitForm&quot;</span><br><span class="line">  @cancel=&quot;showForm = false&quot;</span><br><span class="line">&gt;</span><br><span class="line">  &lt;u-form :model=&quot;form&quot; ref=&quot;uForm&quot; :rules=&quot;rules&quot;&gt;</span><br><span class="line">    &lt;u-form-item label=&quot;设备名称&quot; prop=&quot;name&quot; borderBottom&gt;</span><br><span class="line">      &lt;u-input v-model=&quot;form.name&quot; placeholder=&quot;请输入设备名称&quot; /&gt;</span><br><span class="line">    &lt;/u-form-item&gt;</span><br><span class="line">    &lt;u-form-item label=&quot;设备编号&quot; prop=&quot;code&quot; borderBottom&gt;</span><br><span class="line">      &lt;u-input v-model=&quot;form.code&quot; placeholder=&quot;请输入设备编号&quot; /&gt;</span><br><span class="line">    &lt;/u-form-item&gt;</span><br><span class="line">    &lt;u-form-item label=&quot;所在区域&quot; prop=&quot;area&quot; borderBottom&gt;</span><br><span class="line">      &lt;u-input v-model=&quot;form.area&quot; placeholder=&quot;请选择区域&quot; disabled @click=&quot;pickArea&quot; /&gt;</span><br><span class="line">    &lt;/u-form-item&gt;</span><br><span class="line">  &lt;/u-form&gt;</span><br><span class="line">&lt;/CustomModal&gt;</span><br></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/drda-x/images/main/20261014152132227.png" alt="" /></p>
+<h3 id="5-自定义底部按钮"><a class="markdownIt-Anchor" href="#5-自定义底部按钮"></a> 5. 自定义底部按钮</h3>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;CustomModal :show=&quot;showFooterModal&quot; title=&quot;订单操作&quot;</span><br><span class="line">			iconType=&quot;list&quot; iconColor=&quot;#14b8a6&quot; :headerGradient=&quot;[&#x27;#14b8a6&#x27;, &#x27;#2dd4bf&#x27;]&quot;&gt;</span><br><span class="line">			&lt;view class=&quot;order-info&quot;&gt;</span><br><span class="line">				&lt;view class=&quot;order-row&quot;&gt;</span><br><span class="line">					&lt;text class=&quot;order-label&quot;&gt;订单编号&lt;/text&gt;</span><br><span class="line">					&lt;text class=&quot;order-value&quot;&gt;ORD20261013001&lt;/text&gt;</span><br><span class="line">				&lt;/view&gt;</span><br><span class="line">				&lt;view class=&quot;order-row&quot;&gt;</span><br><span class="line">					&lt;text class=&quot;order-label&quot;&gt;消费金额&lt;/text&gt;</span><br><span class="line">					&lt;text class=&quot;order-value price&quot;&gt;¥15.00&lt;/text&gt;</span><br><span class="line">				&lt;/view&gt;</span><br><span class="line">				&lt;view class=&quot;order-row&quot;&gt;</span><br><span class="line">					&lt;text class=&quot;order-label&quot;&gt;订单状态&lt;/text&gt;</span><br><span class="line">					&lt;text class=&quot;order-value status&quot;&gt;待支付&lt;/text&gt;</span><br><span class="line">				&lt;/view&gt;</span><br><span class="line">			&lt;/view&gt;</span><br><span class="line">			&lt;template #footer&gt;</span><br><span class="line">				&lt;view class=&quot;multi-btn-group&quot;&gt;</span><br><span class="line">					&lt;view class=&quot;multi-btn btn-cancel&quot; @click=&quot;showFooterModal = false&quot;&gt;</span><br><span class="line">						&lt;text&gt;取消订单&lt;/text&gt;</span><br><span class="line">					&lt;/view&gt;</span><br><span class="line">					&lt;view class=&quot;multi-btn btn-detail&quot; @click=&quot;handleDetail&quot;&gt;</span><br><span class="line">						&lt;text&gt;查看详情&lt;/text&gt;</span><br><span class="line">					&lt;/view&gt;</span><br><span class="line">					&lt;view class=&quot;multi-btn btn-pay&quot; @click=&quot;handlePay&quot;&gt;</span><br><span class="line">						&lt;text&gt;立即支付&lt;/text&gt;</span><br><span class="line">					&lt;/view&gt;</span><br><span class="line">				&lt;/view&gt;</span><br><span class="line">			&lt;/template&gt;</span><br><span class="line">		&lt;/CustomModal&gt;</span><br></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/drda-x/images/main/20261014152915988.png" alt="" /></p>
+<h3 id="6-带背景图的弹窗"><a class="markdownIt-Anchor" href="#6-带背景图的弹窗"></a> 6. 带背景图的弹窗</h3>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;CustomModal</span><br><span class="line">  :show=&quot;show&quot;</span><br><span class="line">  title=&quot;活动详情&quot;</span><br><span class="line">  bgImage=&quot;/static/image/banner.png&quot;</span><br><span class="line">  iconType=&quot;gift-filled&quot;</span><br><span class="line">  iconColor=&quot;#ffffff&quot;</span><br><span class="line">  content=&quot;参与活动即可获得丰厚奖励！&quot;</span><br><span class="line">  confirmText=&quot;立即参与&quot;</span><br><span class="line">  @confirm=&quot;joinActivity&quot;</span><br><span class="line">  @cancel=&quot;show = false&quot;</span><br><span class="line">/&gt;</span><br></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/drda-x/images/main/20261014153935595.png" alt="" /></p>
+<h3 id="7-promise-异步用法"><a class="markdownIt-Anchor" href="#7-promise-异步用法"></a> 7. Promise 异步用法</h3>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="title function_">handleDelete</span>(<span class="params">item</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> confirmed = <span class="keyword">await</span> <span class="variable language_">this</span>.<span class="property">$modal</span>.<span class="title function_">confirm</span>(&#123;</span><br><span class="line">    <span class="attr">title</span>: <span class="string">&#x27;确认删除&#x27;</span>,</span><br><span class="line">    <span class="attr">content</span>: <span class="string">`确定要删除「<span class="subst">$&#123;item.name&#125;</span>」吗？`</span>,</span><br><span class="line">    <span class="attr">confirmColor</span>: <span class="string">&#x27;#ef4444&#x27;</span>,</span><br><span class="line">    <span class="attr">iconType</span>: <span class="string">&#x27;trash&#x27;</span>,</span><br><span class="line">    <span class="attr">iconColor</span>: <span class="string">&#x27;#ef4444&#x27;</span>,</span><br><span class="line">    <span class="attr">headerGradient</span>: [<span class="string">&#x27;#ef4444&#x27;</span>, <span class="string">&#x27;#f87171&#x27;</span>]</span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (confirmed) &#123;</span><br><span class="line">    <span class="keyword">await</span> <span class="variable language_">this</span>.<span class="title function_">deleteItem</span>(item.<span class="property">id</span>)</span><br><span class="line">    <span class="variable language_">this</span>.<span class="title function_">showSuccess</span>(<span class="string">&#x27;删除成功&#x27;</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/drda-x/images/main/20261014154112003.png" alt="" /></p>
+<hr />
+<h2 id="测试页面"><a class="markdownIt-Anchor" href="#测试页面"></a> 测试页面</h2>
+<p>项目已内置测试页面，包含所有弹窗类型的演示：</p>
+<p><strong>路径</strong>：<code>pages/modaltest/modaltest.vue</code></p>
+<p><strong>访问方式</strong>：在浏览器中直接访问 <code>#/pages/modaltest/modaltest</code></p>
+<p>测试页面包含以下场景：</p>
+<table>
+<thead>
+<tr>
+<th>测试项</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>基础提示弹窗</td>
+<td>最简单的 alert 用法</td>
+</tr>
+<tr>
+<td>确认弹窗</td>
+<td>带确认/取消的 confirm 用法</td>
+</tr>
+<tr>
+<td>成功提示</td>
+<td>绿色主题成功弹窗</td>
+</tr>
+<tr>
+<td>错误提示</td>
+<td>红色主题错误弹窗</td>
+</tr>
+<tr>
+<td>警告提示</td>
+<td>橙色主题警告弹窗</td>
+</tr>
+<tr>
+<td>自定义表单弹窗</td>
+<td>插入 u-form 表单的完整示例</td>
+</tr>
+<tr>
+<td>带背景图弹窗</td>
+<td>使用 bgImage 自定义背景</td>
+</tr>
+<tr>
+<td>多按钮弹窗</td>
+<td>使用 footer 插槽自定义底部</td>
+</tr>
+<tr>
+<td>编程式 Promise</td>
+<td>async/await 异步调用示例</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="样式定制"><a class="markdownIt-Anchor" href="#样式定制"></a> 样式定制</h2>
+<p>组件使用 <code>scoped</code> 样式，如需全局覆盖，可在 <code>App.vue</code> 中使用 <code>::v-deep</code>：</p>
+<figure class="highlight scss"><table><tr><td class="code"><pre><span class="line">::v-deep .custom-modal-wrapper &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">650</span>rpx; <span class="comment">// 修改弹窗宽度</span></span><br><span class="line">  <span class="attribute">border-radius</span>: <span class="number">32</span>rpx; <span class="comment">// 修改圆角</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">::v-deep .confirm-btn &#123;</span><br><span class="line">  <span class="comment">// 修改确认按钮默认样式</span></span><br><span class="line">  <span class="attribute">background</span>: <span class="built_in">linear-gradient</span>(<span class="number">135deg</span>, <span class="number">#10b981</span>, <span class="number">#059669</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr />
+<h2 id="常见问题"><a class="markdownIt-Anchor" href="#常见问题"></a> 常见问题</h2>
+<p><strong>Q: 为什么弹窗不显示？</strong><br />
+A: 确保已在页面 template 中添加 <code>&lt;GlobalModal /&gt;</code>（编程式），或正确绑定 <code>:show</code>（声明式）。</p>
+<p><strong>Q: 如何在弹窗关闭后执行操作？</strong><br />
+A: 监听 <code>@cancel</code> 事件，或使用 <code>$modal.confirm()</code> 的 Promise 返回值。</p>
+<p><strong>Q: 如何阻止点击遮罩关闭？</strong><br />
+A: 设置 <code>:mask-close-able=&quot;false&quot;</code>。</p>
+<p><strong>Q: 编程式弹窗可以插入自定义内容吗？</strong><br />
+A: 编程式弹窗仅支持文本内容。如需插入表单等自定义内容，请使用声明式 <code>&lt;CustomModal&gt;</code> 组件。</p>
+<hr />
+<h2 id="最后附上源码"><a class="markdownIt-Anchor" href="#最后附上源码"></a> 最后附上源码</h2>
+<p><strong>compones/CustomModal.vue</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">	&lt;view v-if=&quot;visible&quot; class=&quot;custom-modal-mask&quot; :class=&quot;&#123; &#x27;mask-show&#x27;: show &#125;&quot; @click=&quot;handleMaskClick&quot;&gt;</span><br><span class="line">		&lt;view class=&quot;custom-modal-wrapper&quot; :class=&quot;&#123; &#x27;modal-show&#x27;: show &#125;&quot; @click.stop&gt;</span><br><span class="line">			&lt;!-- 顶部背景图区域 --&gt;</span><br><span class="line">			&lt;view class=&quot;modal-header&quot; v-if=&quot;showHeader&quot;&gt;</span><br><span class="line">				&lt;image v-if=&quot;bgImage&quot; :src=&quot;bgImage&quot; class=&quot;header-bg-image&quot; mode=&quot;aspectFill&quot; /&gt;</span><br><span class="line">				&lt;view class=&quot;header-bg-gradient&quot; :style=&quot;headerGradientStyle&quot;&gt;&lt;/view&gt;</span><br><span class="line">				&lt;!-- 图标背景 + 标题浮于图标之上 --&gt;</span><br><span class="line">				&lt;view class=&quot;header-main&quot;&gt;</span><br><span class="line">					&lt;view class=&quot;header-icon-wrapper&quot; v-if=&quot;icon || iconType&quot;&gt;</span><br><span class="line">						&lt;image v-if=&quot;icon&quot; :src=&quot;icon&quot; class=&quot;header-icon-image&quot; mode=&quot;aspectFit&quot; /&gt;</span><br><span class="line">						&lt;uni-icons v-else :type=&quot;iconType&quot; :size=&quot;iconSize&quot; :color=&quot;iconColor&quot;&gt;&lt;/uni-icons&gt;</span><br><span class="line">					&lt;/view&gt;</span><br><span class="line">					&lt;view class=&quot;header-title-wrapper&quot; v-if=&quot;title&quot;&gt;</span><br><span class="line">						&lt;text class=&quot;header-title&quot; :style=&quot;titleStyle&quot;&gt;&#123;&#123; title &#125;&#125;&lt;/text&gt;</span><br><span class="line">					&lt;/view&gt;</span><br><span class="line">				&lt;/view&gt;</span><br><span class="line">				&lt;!-- 副标题 --&gt;</span><br><span class="line">				&lt;view class=&quot;header-subtitle-wrapper&quot; v-if=&quot;subtitle&quot;&gt;</span><br><span class="line">					&lt;text class=&quot;header-subtitle&quot;&gt;&#123;&#123; subtitle &#125;&#125;&lt;/text&gt;</span><br><span class="line">				&lt;/view&gt;</span><br><span class="line">			&lt;/view&gt;</span><br><span class="line"></span><br><span class="line">			&lt;!-- 内容区域 --&gt;</span><br><span class="line">			&lt;view class=&quot;modal-body&quot;&gt;</span><br><span class="line">				&lt;!-- 文本内容 --&gt;</span><br><span class="line">				&lt;view class=&quot;modal-content-wrapper&quot; v-if=&quot;content &amp;&amp; !$slots.default&quot;&gt;</span><br><span class="line">					&lt;text class=&quot;modal-content&quot;&gt;&#123;&#123; content &#125;&#125;&lt;/text&gt;</span><br><span class="line">				&lt;/view&gt;</span><br><span class="line"></span><br><span class="line">				&lt;!-- 自定义插槽内容（支持表单等任意元素） --&gt;</span><br><span class="line">				&lt;view class=&quot;modal-slot-wrapper&quot; v-if=&quot;$slots.default&quot;&gt;</span><br><span class="line">					&lt;slot&gt;&lt;/slot&gt;</span><br><span class="line">				&lt;/view&gt;</span><br><span class="line">			&lt;/view&gt;</span><br><span class="line"></span><br><span class="line">			&lt;!-- 底部按钮区域 --&gt;</span><br><span class="line">			&lt;view class=&quot;modal-footer&quot;&gt;</span><br><span class="line">				&lt;!-- 自定义底部插槽 --&gt;</span><br><span class="line">				&lt;slot name=&quot;footer&quot;&gt;</span><br><span class="line">					&lt;view class=&quot;footer-buttons&quot;&gt;</span><br><span class="line">						&lt;button v-if=&quot;showCancelButton&quot; class=&quot;modal-btn cancel-btn&quot; :style=&quot;cancelBtnStyle&quot;</span><br><span class="line">							@click=&quot;handleCancel&quot; :loading=&quot;cancelLoading&quot;&gt;</span><br><span class="line">							&#123;&#123; cancelText &#125;&#125;</span><br><span class="line">						&lt;/button&gt;</span><br><span class="line">						&lt;button v-if=&quot;showConfirmButton&quot; class=&quot;modal-btn confirm-btn&quot; :style=&quot;confirmBtnStyle&quot;</span><br><span class="line">							@click=&quot;handleConfirm&quot; :loading=&quot;confirmLoading&quot;&gt;</span><br><span class="line">							&#123;&#123; confirmText &#125;&#125;</span><br><span class="line">						&lt;/button&gt;</span><br><span class="line">					&lt;/view&gt;</span><br><span class="line">				&lt;/slot&gt;</span><br><span class="line">			&lt;/view&gt;</span><br><span class="line"></span><br><span class="line">			&lt;!-- 关闭按钮 --&gt;</span><br><span class="line">			&lt;view v-if=&quot;showClose&quot; class=&quot;modal-close-btn&quot; @click=&quot;handleCancel&quot;&gt;</span><br><span class="line">				&lt;uni-icons type=&quot;closeempty&quot; :size=&quot;closeSize&quot; color=&quot;#999999&quot;&gt;&lt;/uni-icons&gt;</span><br><span class="line">			&lt;/view&gt;</span><br><span class="line">		&lt;/view&gt;</span><br><span class="line">	&lt;/view&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">	export default &#123;</span><br><span class="line">		name: &#x27;CustomModal&#x27;,</span><br><span class="line">		props: &#123;</span><br><span class="line">			// 控制弹窗显示</span><br><span class="line">			show: &#123;</span><br><span class="line">				type: Boolean,</span><br><span class="line">				default: false</span><br><span class="line">			&#125;,</span><br><span class="line">			// 弹窗模式：alert(提示) / confirm(确认) / custom(自定义)</span><br><span class="line">			mode: &#123;</span><br><span class="line">				type: String,</span><br><span class="line">				default: &#x27;alert&#x27;,</span><br><span class="line">				validator: (val) =&gt; [&#x27;alert&#x27;, &#x27;confirm&#x27;, &#x27;custom&#x27;].includes(val)</span><br><span class="line">			&#125;,</span><br><span class="line">			// 标题</span><br><span class="line">			title: &#123;</span><br><span class="line">				type: String,</span><br><span class="line">				default: &#x27;&#x27;</span><br><span class="line">			&#125;,</span><br><span class="line">			// 副标题</span><br><span class="line">			subtitle: &#123;</span><br><span class="line">				type: String,</span><br><span class="line">				default: &#x27;&#x27;</span><br><span class="line">			&#125;,</span><br><span class="line">			// 文本内容（不使用插槽时生效）</span><br><span class="line">			content: &#123;</span><br><span class="line">				type: String,</span><br><span class="line">				default: &#x27;&#x27;</span><br><span class="line">			&#125;,</span><br><span class="line">			// 图片图标路径</span><br><span class="line">			icon: &#123;</span><br><span class="line">				type: String,</span><br><span class="line">				default: &#x27;&#x27;</span><br><span class="line">			&#125;,</span><br><span class="line">			// uni-icons 图标类型</span><br><span class="line">			iconType: &#123;</span><br><span class="line">				type: String,</span><br><span class="line">				default: &#x27;&#x27;</span><br><span class="line">			&#125;,</span><br><span class="line">			// 图标大小</span><br><span class="line">			iconSize: &#123;</span><br><span class="line">				type: [Number, String],</span><br><span class="line">				default: 60</span><br><span class="line">			&#125;,</span><br><span class="line">			// 图标颜色</span><br><span class="line">			iconColor: &#123;</span><br><span class="line">				type: String,</span><br><span class="line">				default: &#x27;#3b82f6&#x27;</span><br><span class="line">			&#125;,</span><br><span class="line">			// 顶部背景图</span><br><span class="line">			bgImage: &#123;</span><br><span class="line">				type: String,</span><br><span class="line">				default: &#x27;&#x27;</span><br><span class="line">			&#125;,</span><br><span class="line">			// 顶部渐变色 [起始色, 结束色]</span><br><span class="line">			headerGradient: &#123;</span><br><span class="line">				type: Array,</span><br><span class="line">				default: () =&gt; [&#x27;#3b82f6&#x27;, &#x27;#60a5fa&#x27;]</span><br><span class="line">			&#125;,</span><br><span class="line">			// 是否显示顶部区域</span><br><span class="line">			showHeader: &#123;</span><br><span class="line">				type: Boolean,</span><br><span class="line">				default: true</span><br><span class="line">			&#125;,</span><br><span class="line">			// 确认按钮文字</span><br><span class="line">			confirmText: &#123;</span><br><span class="line">				type: String,</span><br><span class="line">				default: &#x27;确定&#x27;</span><br><span class="line">			&#125;,</span><br><span class="line">			// 取消按钮文字</span><br><span class="line">			cancelText: &#123;</span><br><span class="line">				type: String,</span><br><span class="line">				default: &#x27;取消&#x27;</span><br><span class="line">			&#125;,</span><br><span class="line">			// 是否显示确认按钮</span><br><span class="line">			showConfirmButton: &#123;</span><br><span class="line">				type: Boolean,</span><br><span class="line">				default: true</span><br><span class="line">			&#125;,</span><br><span class="line">			// 是否显示取消按钮</span><br><span class="line">			showCancelButton: &#123;</span><br><span class="line">				type: Boolean,</span><br><span class="line">				default: false</span><br><span class="line">			&#125;,</span><br><span class="line">			// 确认按钮颜色</span><br><span class="line">			confirmColor: &#123;</span><br><span class="line">				type: String,</span><br><span class="line">				default: &#x27;&#x27;</span><br><span class="line">			&#125;,</span><br><span class="line">			// 取消按钮颜色</span><br><span class="line">			cancelColor: &#123;</span><br><span class="line">				type: String,</span><br><span class="line">				default: &#x27;&#x27;</span><br><span class="line">			&#125;,</span><br><span class="line">			// 点击遮罩是否关闭</span><br><span class="line">			maskCloseAble: &#123;</span><br><span class="line">				type: Boolean,</span><br><span class="line">				default: true</span><br><span class="line">			&#125;,</span><br><span class="line">			// 是否显示右上角关闭按钮</span><br><span class="line">			showClose: &#123;</span><br><span class="line">				type: Boolean,</span><br><span class="line">				default: false</span><br><span class="line">			&#125;,</span><br><span class="line">			// 关闭按钮大小</span><br><span class="line">			closeSize: &#123;</span><br><span class="line">				type: [Number, String],</span><br><span class="line">				default: 20</span><br><span class="line">			&#125;,</span><br><span class="line">			// 确认按钮 loading</span><br><span class="line">			confirmLoading: &#123;</span><br><span class="line">				type: Boolean,</span><br><span class="line">				default: false</span><br><span class="line">			&#125;,</span><br><span class="line">			// 取消按钮 loading</span><br><span class="line">			cancelLoading: &#123;</span><br><span class="line">				type: Boolean,</span><br><span class="line">				default: false</span><br><span class="line">			&#125;,</span><br><span class="line">			// 标题自定义样式</span><br><span class="line">			titleStyle: &#123;</span><br><span class="line">				type: Object,</span><br><span class="line">				default: () =&gt; (&#123;&#125;)</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;,</span><br><span class="line">		data() &#123;</span><br><span class="line">			return &#123;</span><br><span class="line">				visible: false</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;,</span><br><span class="line">		computed: &#123;</span><br><span class="line">			headerGradientStyle() &#123;</span><br><span class="line">				if (this.bgImage) return &#123;&#125;</span><br><span class="line">				const colors = this.headerGradient</span><br><span class="line">				if (!colors || colors.length &lt; 2) return &#123;&#125;</span><br><span class="line">				return &#123;</span><br><span class="line">					background: `linear-gradient(135deg, $&#123;colors[0]&#125;, $&#123;colors[1]&#125;)`</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;,</span><br><span class="line">			confirmBtnStyle() &#123;</span><br><span class="line">				if (!this.confirmColor) return &#123;&#125;</span><br><span class="line">				return &#123;</span><br><span class="line">					background: this.confirmColor,</span><br><span class="line">					borderColor: this.confirmColor</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;,</span><br><span class="line">			cancelBtnStyle() &#123;</span><br><span class="line">				if (!this.cancelColor) return &#123;&#125;</span><br><span class="line">				return &#123;</span><br><span class="line">					color: this.cancelColor,</span><br><span class="line">					borderColor: this.cancelColor</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;,</span><br><span class="line">		watch: &#123;</span><br><span class="line">			show: &#123;</span><br><span class="line">				handler(val) &#123;</span><br><span class="line">					if (val) &#123;</span><br><span class="line">						this.visible = true</span><br><span class="line">					&#125; else &#123;</span><br><span class="line">						// 延迟隐藏以播放关闭动画</span><br><span class="line">						setTimeout(() =&gt; &#123;</span><br><span class="line">							this.visible = false</span><br><span class="line">						&#125;, 300)</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;,</span><br><span class="line">				immediate: true</span><br><span class="line">			&#125;,</span><br><span class="line">			// 根据 mode 自动设置按钮</span><br><span class="line">			mode: &#123;</span><br><span class="line">				handler(val) &#123;</span><br><span class="line">					if (val === &#x27;alert&#x27;) &#123;</span><br><span class="line">						this.$emit(&#x27;update:showCancelButton&#x27;, false)</span><br><span class="line">					&#125; else if (val === &#x27;confirm&#x27;) &#123;</span><br><span class="line">						this.$emit(&#x27;update:showCancelButton&#x27;, true)</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;,</span><br><span class="line">				immediate: true</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;,</span><br><span class="line">		methods: &#123;</span><br><span class="line">			handleConfirm() &#123;</span><br><span class="line">				this.$emit(&#x27;confirm&#x27;)</span><br><span class="line">				this.$emit(&#x27;update:show&#x27;, false)</span><br><span class="line">			&#125;,</span><br><span class="line">			handleCancel() &#123;</span><br><span class="line">				this.$emit(&#x27;cancel&#x27;)</span><br><span class="line">				this.$emit(&#x27;update:show&#x27;, false)</span><br><span class="line">			&#125;,</span><br><span class="line">			handleMaskClick() &#123;</span><br><span class="line">				if (this.maskCloseAble) &#123;</span><br><span class="line">					this.handleCancel()</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">&lt;style lang=&quot;scss&quot; scoped&gt;</span><br><span class="line">	/* 遮罩层 */</span><br><span class="line">	.custom-modal-mask &#123;</span><br><span class="line">		position: fixed;</span><br><span class="line">		top: 0;</span><br><span class="line">		left: 0;</span><br><span class="line">		right: 0;</span><br><span class="line">		bottom: 0;</span><br><span class="line">		background: rgba(0, 0, 0, 0.5);</span><br><span class="line">		z-index: 9999;</span><br><span class="line">		display: flex;</span><br><span class="line">		align-items: center;</span><br><span class="line">		justify-content: center;</span><br><span class="line">		opacity: 0;</span><br><span class="line">		transition: opacity 0.3s ease;</span><br><span class="line"></span><br><span class="line">		&amp;.mask-show &#123;</span><br><span class="line">			opacity: 1;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	/* 弹窗主体 */</span><br><span class="line">	.custom-modal-wrapper &#123;</span><br><span class="line">		position: relative;</span><br><span class="line">		width: 600rpx;</span><br><span class="line">		background: #ffffff;</span><br><span class="line">		border-radius: 24rpx;</span><br><span class="line">		overflow: hidden;</span><br><span class="line">		transform: scale(0.85) translateY(40rpx);</span><br><span class="line">		opacity: 0;</span><br><span class="line">		transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);</span><br><span class="line">		box-shadow: 0 20rpx 60rpx rgba(0, 0, 0, 0.15);</span><br><span class="line"></span><br><span class="line">		&amp;.modal-show &#123;</span><br><span class="line">			transform: scale(1) translateY(0);</span><br><span class="line">			opacity: 1;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	/* 顶部背景区域 */</span><br><span class="line">	.modal-header &#123;</span><br><span class="line">		position: relative;</span><br><span class="line">		width: 100%;</span><br><span class="line">		// padding: 20rpx 40rpx 18rpx;</span><br><span class="line">		display: flex;</span><br><span class="line">		flex-direction: column;</span><br><span class="line">		align-items: center;</span><br><span class="line">		justify-content: center;</span><br><span class="line">		overflow: hidden;</span><br><span class="line"></span><br><span class="line">		.header-bg-image &#123;</span><br><span class="line">			position: absolute;</span><br><span class="line">			top: 0;</span><br><span class="line">			left: 0;</span><br><span class="line">			width: 100%;</span><br><span class="line">			height: 100%;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		.header-bg-gradient &#123;</span><br><span class="line">			position: absolute;</span><br><span class="line">			top: 0;</span><br><span class="line">			left: 0;</span><br><span class="line">			width: 100%;</span><br><span class="line">			height: 100%;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		.header-main &#123;</span><br><span class="line">			position: relative;</span><br><span class="line">			z-index: 2;</span><br><span class="line">			display: flex;</span><br><span class="line">			flex-direction: row;</span><br><span class="line">			align-items: center;</span><br><span class="line">			justify-content: center;</span><br><span class="line">			min-height: 110rpx;</span><br><span class="line">			padding: 10rpx 30rpx;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		.header-icon-wrapper &#123;</span><br><span class="line">			position: absolute;</span><br><span class="line">			left: 50%;</span><br><span class="line">			top: 50%;</span><br><span class="line">			transform: translate(-50%, -50%);</span><br><span class="line">			width: 130rpx;</span><br><span class="line">			height: 130rpx;</span><br><span class="line">			display: flex;</span><br><span class="line">			align-items: center;</span><br><span class="line">			justify-content: center;</span><br><span class="line">			background: rgba(255, 255, 255, 0.18);</span><br><span class="line">			border-radius: 50%;</span><br><span class="line">			border: 3rpx solid rgba(255, 255, 255, 0.3);</span><br><span class="line">			z-index: 1;</span><br><span class="line"></span><br><span class="line">			.header-icon-image &#123;</span><br><span class="line">				width: 70rpx;</span><br><span class="line">				height: 70rpx;</span><br><span class="line">				opacity: 0.9;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		.header-title-wrapper &#123;</span><br><span class="line">			position: relative;</span><br><span class="line">			z-index: 2;</span><br><span class="line">			text-align: center;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		.header-title &#123;</span><br><span class="line">			font-size: 38rpx;</span><br><span class="line">			font-weight: 700;</span><br><span class="line">			color: #ffffff;</span><br><span class="line">			line-height: 1.4;</span><br><span class="line">			text-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.35);</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		.header-subtitle-wrapper &#123;</span><br><span class="line">			position: relative;</span><br><span class="line">			z-index: 2;</span><br><span class="line">			text-align: center;</span><br><span class="line">			margin-top: 6rpx;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		.header-subtitle &#123;</span><br><span class="line">			font-size: 26rpx;</span><br><span class="line">			color: rgba(255, 255, 255, 0.85);</span><br><span class="line">			line-height: 1.5;</span><br><span class="line">			text-shadow: 0 1rpx 4rpx rgba(0, 0, 0, 0.1);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	/* 内容区域 */</span><br><span class="line">	.modal-body &#123;</span><br><span class="line">		padding: 32rpx 40rpx 20rpx;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	.modal-content-wrapper &#123;</span><br><span class="line">		padding: 10rpx 0;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	.modal-content &#123;</span><br><span class="line">		font-size: 28rpx;</span><br><span class="line">		color: #64748b;</span><br><span class="line">		line-height: 1.7;</span><br><span class="line">		text-align: center;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	.modal-slot-wrapper &#123;</span><br><span class="line">		padding: 10rpx 0;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	/* 底部按钮 */</span><br><span class="line">	.modal-footer &#123;</span><br><span class="line">		padding: 20rpx 40rpx 40rpx;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	.footer-buttons &#123;</span><br><span class="line">		display: flex;</span><br><span class="line">		gap: 24rpx;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	.modal-btn &#123;</span><br><span class="line">		flex: 1;</span><br><span class="line">		height: 84rpx;</span><br><span class="line">		display: flex;</span><br><span class="line">		align-items: center;</span><br><span class="line">		justify-content: center;</span><br><span class="line">		border-radius: 42rpx;</span><br><span class="line">		font-size: 30rpx;</span><br><span class="line">		font-weight: 600;</span><br><span class="line">		border: none;</span><br><span class="line">		transition: all 0.25s ease;</span><br><span class="line">		position: relative;</span><br><span class="line">		overflow: hidden;</span><br><span class="line"></span><br><span class="line">		&amp;::after &#123;</span><br><span class="line">			border: none;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		&amp;:active &#123;</span><br><span class="line">			transform: scale(0.96);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	.confirm-btn &#123;</span><br><span class="line">		background: linear-gradient(135deg, #3b82f6, #2563eb);</span><br><span class="line">		color: #ffffff;</span><br><span class="line">		box-shadow: 0 8rpx 24rpx rgba(59, 130, 246, 0.35);</span><br><span class="line"></span><br><span class="line">		&amp;:active &#123;</span><br><span class="line">			box-shadow: 0 4rpx 12rpx rgba(59, 130, 246, 0.2);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	.cancel-btn &#123;</span><br><span class="line">		background: #ffffff;</span><br><span class="line">		color: #64748b;</span><br><span class="line">		border: 2rpx solid #e2e8f0;</span><br><span class="line"></span><br><span class="line">		&amp;:active &#123;</span><br><span class="line">			background: #f8fafc;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	/* 关闭按钮 */</span><br><span class="line">	.modal-close-btn &#123;</span><br><span class="line">		position: absolute;</span><br><span class="line">		top: 20rpx;</span><br><span class="line">		right: 20rpx;</span><br><span class="line">		width: 56rpx;</span><br><span class="line">		height: 56rpx;</span><br><span class="line">		display: flex;</span><br><span class="line">		align-items: center;</span><br><span class="line">		justify-content: center;</span><br><span class="line">		background: rgba(255, 255, 255, 0.8);</span><br><span class="line">		border-radius: 50%;</span><br><span class="line">		z-index: 10;</span><br><span class="line">		transition: all 0.2s ease;</span><br><span class="line"></span><br><span class="line">		&amp;:active &#123;</span><br><span class="line">			transform: scale(0.9);</span><br><span class="line">			background: rgba(255, 255, 255, 0.6);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+<p><strong>compones/GlobaModal.vue</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">	&lt;CustomModal</span><br><span class="line">		:show=&quot;show&quot;</span><br><span class="line">		:mode=&quot;config.mode&quot;</span><br><span class="line">		:title=&quot;config.title&quot;</span><br><span class="line">		:subtitle=&quot;config.subtitle&quot;</span><br><span class="line">		:content=&quot;config.content&quot;</span><br><span class="line">		:icon=&quot;config.icon&quot;</span><br><span class="line">		:iconType=&quot;config.iconType&quot;</span><br><span class="line">		:iconSize=&quot;config.iconSize&quot;</span><br><span class="line">		:iconColor=&quot;config.iconColor&quot;</span><br><span class="line">		:bgImage=&quot;config.bgImage&quot;</span><br><span class="line">		:headerGradient=&quot;config.headerGradient&quot;</span><br><span class="line">		:showHeader=&quot;config.showHeader&quot;</span><br><span class="line">		:confirmText=&quot;config.confirmText&quot;</span><br><span class="line">		:cancelText=&quot;config.cancelText&quot;</span><br><span class="line">		:showConfirmButton=&quot;config.showConfirmButton&quot;</span><br><span class="line">		:showCancelButton=&quot;config.showCancelButton&quot;</span><br><span class="line">		:confirmColor=&quot;config.confirmColor&quot;</span><br><span class="line">		:cancelColor=&quot;config.cancelColor&quot;</span><br><span class="line">		:maskCloseAble=&quot;config.maskCloseAble&quot;</span><br><span class="line">		:showClose=&quot;config.showClose&quot;</span><br><span class="line">		:confirmLoading=&quot;config.confirmLoading&quot;</span><br><span class="line">		:titleStyle=&quot;config.titleStyle&quot;</span><br><span class="line">		@confirm=&quot;handleConfirm&quot;</span><br><span class="line">		@cancel=&quot;handleCancel&quot;</span><br><span class="line">	/&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">	import CustomModal from &#x27;@/compones/CustomModal.vue&#x27;</span><br><span class="line">	import modalService from &#x27;@/utils/modal.js&#x27;</span><br><span class="line">	</span><br><span class="line">	export default &#123;</span><br><span class="line">		name: &#x27;GlobalModal&#x27;,</span><br><span class="line">		components: &#123; CustomModal &#125;,</span><br><span class="line">		data() &#123;</span><br><span class="line">			return &#123;</span><br><span class="line">				show: false,</span><br><span class="line">				defaultConfig: &#123;</span><br><span class="line">					mode: &#x27;alert&#x27;,</span><br><span class="line">					title: &#x27;提示&#x27;,</span><br><span class="line">					subtitle: &#x27;&#x27;,</span><br><span class="line">					content: &#x27;&#x27;,</span><br><span class="line">					icon: &#x27;&#x27;,</span><br><span class="line">					iconType: &#x27;&#x27;,</span><br><span class="line">					iconSize: 60,</span><br><span class="line">					iconColor: &#x27;#3b82f6&#x27;,</span><br><span class="line">					bgImage: &#x27;&#x27;,</span><br><span class="line">					headerGradient: [&#x27;#3b82f6&#x27;, &#x27;#60a5fa&#x27;],</span><br><span class="line">					showHeader: true,</span><br><span class="line">					confirmText: &#x27;确定&#x27;,</span><br><span class="line">					cancelText: &#x27;取消&#x27;,</span><br><span class="line">					showConfirmButton: true,</span><br><span class="line">					showCancelButton: false,</span><br><span class="line">					confirmColor: &#x27;&#x27;,</span><br><span class="line">					cancelColor: &#x27;&#x27;,</span><br><span class="line">					maskCloseAble: true,</span><br><span class="line">					showClose: false,</span><br><span class="line">					confirmLoading: false,</span><br><span class="line">					titleStyle: &#123;&#125;</span><br><span class="line">				&#125;,</span><br><span class="line">				config: &#123;&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;,</span><br><span class="line">		created() &#123;</span><br><span class="line">			this.config = &#123; ...this.defaultConfig &#125;</span><br><span class="line">			uni.$on(&#x27;__custom_modal_show__&#x27;, (config) =&gt; &#123;</span><br><span class="line">				this.config = &#123; ...this.defaultConfig, ...config &#125;</span><br><span class="line">				this.show = true</span><br><span class="line">			&#125;)</span><br><span class="line">			uni.$on(&#x27;__custom_modal_hide__&#x27;, () =&gt; &#123;</span><br><span class="line">				this.show = false</span><br><span class="line">			&#125;)</span><br><span class="line">		&#125;,</span><br><span class="line">		beforeDestroy() &#123;</span><br><span class="line">			uni.$off(&#x27;__custom_modal_show__&#x27;)</span><br><span class="line">			uni.$off(&#x27;__custom_modal_hide__&#x27;)</span><br><span class="line">		&#125;,</span><br><span class="line">		methods: &#123;</span><br><span class="line">			handleConfirm() &#123;</span><br><span class="line">				const &#123; onConfirm &#125; = modalService.getCallbacks()</span><br><span class="line">				onConfirm &amp;&amp; onConfirm()</span><br><span class="line">				modalService.clearCallbacks()</span><br><span class="line">				this.show = false</span><br><span class="line">			&#125;,</span><br><span class="line">			handleCancel() &#123;</span><br><span class="line">				const &#123; onCancel &#125; = modalService.getCallbacks()</span><br><span class="line">				onCancel &amp;&amp; onCancel()</span><br><span class="line">				modalService.clearCallbacks()</span><br><span class="line">				this.show = false</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<p><strong>utils/modal.js</strong></p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 自定义弹窗服务</span></span><br><span class="line"><span class="comment"> * </span></span><br><span class="line"><span class="comment"> * 使用方式：</span></span><br><span class="line"><span class="comment"> * 1. 在 App.vue 中引入并注册组件</span></span><br><span class="line"><span class="comment"> * 2. 在任意页面调用 this.$modal.alert / this.$modal.confirm / this.$modal.show</span></span><br><span class="line"><span class="comment"> * </span></span><br><span class="line"><span class="comment"> * 示例：</span></span><br><span class="line"><span class="comment"> * this.$modal.alert(&#123;</span></span><br><span class="line"><span class="comment"> *   title: &#x27;提示&#x27;,</span></span><br><span class="line"><span class="comment"> *   content: &#x27;操作成功&#x27;,</span></span><br><span class="line"><span class="comment"> *   iconType: &#x27;checkbox-filled&#x27;,</span></span><br><span class="line"><span class="comment"> *   iconColor: &#x27;#10b981&#x27;</span></span><br><span class="line"><span class="comment"> * &#125;)</span></span><br><span class="line"><span class="comment"> * </span></span><br><span class="line"><span class="comment"> * this.$modal.confirm(&#123;</span></span><br><span class="line"><span class="comment"> *   title: &#x27;确认&#x27;,</span></span><br><span class="line"><span class="comment"> *   content: &#x27;是否确定取消该订单？&#x27;,</span></span><br><span class="line"><span class="comment"> *   onConfirm: () =&gt; &#123; ... &#125;</span></span><br><span class="line"><span class="comment"> * &#125;)</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 存储回调函数</span></span><br><span class="line"><span class="keyword">let</span> _onConfirm = <span class="literal">null</span></span><br><span class="line"><span class="keyword">let</span> _onCancel = <span class="literal">null</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 提示弹窗</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">Object</span>&#125; options 配置项</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">alert</span>(<span class="params">options = &#123;&#125;</span>) &#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve</span>) =&gt;</span> &#123;</span><br><span class="line">		<span class="keyword">const</span> config = &#123;</span><br><span class="line">			<span class="attr">mode</span>: <span class="string">&#x27;alert&#x27;</span>,</span><br><span class="line">			<span class="attr">showCancelButton</span>: <span class="literal">false</span>,</span><br><span class="line">			<span class="attr">maskCloseAble</span>: options.<span class="property">maskCloseAble</span> !== <span class="literal">undefined</span> ? options.<span class="property">maskCloseAble</span> : <span class="literal">true</span>,</span><br><span class="line">			...options</span><br><span class="line">		&#125;</span><br><span class="line">		_onConfirm = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">			options.<span class="property">onConfirm</span> &amp;&amp; options.<span class="title function_">onConfirm</span>()</span><br><span class="line">			<span class="title function_">resolve</span>(<span class="literal">true</span>)</span><br><span class="line">		&#125;</span><br><span class="line">		_onCancel = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">			options.<span class="property">onCancel</span> &amp;&amp; options.<span class="title function_">onCancel</span>()</span><br><span class="line">			<span class="title function_">resolve</span>(<span class="literal">false</span>)</span><br><span class="line">		&#125;</span><br><span class="line">		uni.$emit(<span class="string">&#x27;__custom_modal_show__&#x27;</span>, config)</span><br><span class="line">	&#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 确认弹窗</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">Object</span>&#125; options 配置项</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">confirm</span>(<span class="params">options = &#123;&#125;</span>) &#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve</span>) =&gt;</span> &#123;</span><br><span class="line">		<span class="keyword">const</span> config = &#123;</span><br><span class="line">			<span class="attr">mode</span>: <span class="string">&#x27;confirm&#x27;</span>,</span><br><span class="line">			<span class="attr">showCancelButton</span>: <span class="literal">true</span>,</span><br><span class="line">			<span class="attr">maskCloseAble</span>: options.<span class="property">maskCloseAble</span> !== <span class="literal">undefined</span> ? options.<span class="property">maskCloseAble</span> : <span class="literal">false</span>,</span><br><span class="line">			...options</span><br><span class="line">		&#125;</span><br><span class="line">		_onConfirm = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">			options.<span class="property">onConfirm</span> &amp;&amp; options.<span class="title function_">onConfirm</span>()</span><br><span class="line">			<span class="title function_">resolve</span>(<span class="literal">true</span>)</span><br><span class="line">		&#125;</span><br><span class="line">		_onCancel = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">			options.<span class="property">onCancel</span> &amp;&amp; options.<span class="title function_">onCancel</span>()</span><br><span class="line">			<span class="title function_">resolve</span>(<span class="literal">false</span>)</span><br><span class="line">		&#125;</span><br><span class="line">		uni.$emit(<span class="string">&#x27;__custom_modal_show__&#x27;</span>, config)</span><br><span class="line">	&#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 自定义弹窗</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">Object</span>&#125; options 配置项</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">show</span>(<span class="params">options = &#123;&#125;</span>) &#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve</span>) =&gt;</span> &#123;</span><br><span class="line">		<span class="keyword">const</span> config = &#123;</span><br><span class="line">			<span class="attr">mode</span>: <span class="string">&#x27;custom&#x27;</span>,</span><br><span class="line">			...options</span><br><span class="line">		&#125;</span><br><span class="line">		_onConfirm = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">			options.<span class="property">onConfirm</span> &amp;&amp; options.<span class="title function_">onConfirm</span>()</span><br><span class="line">			<span class="title function_">resolve</span>(<span class="literal">true</span>)</span><br><span class="line">		&#125;</span><br><span class="line">		_onCancel = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">			options.<span class="property">onCancel</span> &amp;&amp; options.<span class="title function_">onCancel</span>()</span><br><span class="line">			<span class="title function_">resolve</span>(<span class="literal">false</span>)</span><br><span class="line">		&#125;</span><br><span class="line">		uni.$emit(<span class="string">&#x27;__custom_modal_show__&#x27;</span>, config)</span><br><span class="line">	&#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 关闭弹窗</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">close</span>(<span class="params"></span>) &#123;</span><br><span class="line">	uni.$emit(<span class="string">&#x27;__custom_modal_hide__&#x27;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 获取回调函数（供组件内部使用）</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">getCallbacks</span>(<span class="params"></span>) &#123;</span><br><span class="line">	<span class="keyword">return</span> &#123; <span class="attr">onConfirm</span>: _onConfirm, <span class="attr">onCancel</span>: _onCancel &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 清除回调</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">clearCallbacks</span>(<span class="params"></span>) &#123;</span><br><span class="line">	_onConfirm = <span class="literal">null</span></span><br><span class="line">	_onCancel = <span class="literal">null</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">	alert,</span><br><span class="line">	confirm,</span><br><span class="line">	show,</span><br><span class="line">	close,</span><br><span class="line">	getCallbacks,</span><br><span class="line">	clearCallbacks</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>utils/modal-mixin.js</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 弹窗混入</span></span><br><span class="line"><span class="comment"> * 在页面的 components 中引入 GlobalModal 后，使用此 mixin 即可自动获得 $modal 功能</span></span><br><span class="line"><span class="comment"> * </span></span><br><span class="line"><span class="comment"> * 使用方式：</span></span><br><span class="line"><span class="comment"> * 1. 在页面 script 中：import modalMixin from &#x27;@/utils/modal-mixin.js&#x27;</span></span><br><span class="line"><span class="comment"> * 2. 在页面 components 中：import GlobalModal from &#x27;@/compones/GlobalModal.vue&#x27;</span></span><br><span class="line"><span class="comment"> * 3. 在 mixins 中：mixins: [modalMixin]</span></span><br><span class="line"><span class="comment"> * 4. 在 template 末尾添加：&lt;GlobalModal /&gt;</span></span><br><span class="line"><span class="comment"> * </span></span><br><span class="line"><span class="comment"> * 然后即可使用：</span></span><br><span class="line"><span class="comment"> * this.$modal.alert(&#123; title: &#x27;提示&#x27;, content: &#x27;操作成功&#x27; &#125;)</span></span><br><span class="line"><span class="comment"> * this.$modal.confirm(&#123; title: &#x27;确认&#x27;, content: &#x27;是否删除？&#x27; &#125;)</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">	<span class="attr">components</span>: &#123;&#125;,</span><br><span class="line">	<span class="attr">methods</span>: &#123;</span><br><span class="line">		<span class="comment">/**</span></span><br><span class="line"><span class="comment">		 * 快捷提示弹窗</span></span><br><span class="line"><span class="comment">		 * <span class="doctag">@param</span> &#123;<span class="type">String</span>&#125; content 提示内容</span></span><br><span class="line"><span class="comment">		 * <span class="doctag">@param</span> &#123;<span class="type">String</span>&#125; title 标题（可选）</span></span><br><span class="line"><span class="comment">		 */</span></span><br><span class="line">		<span class="title function_">showAlert</span>(<span class="params">content, title = <span class="string">&#x27;提示&#x27;</span></span>) &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">$modal</span>.<span class="title function_">alert</span>(&#123; title, content &#125;)</span><br><span class="line">		&#125;,</span><br><span class="line">		<span class="comment">/**</span></span><br><span class="line"><span class="comment">		 * 快捷确认弹窗</span></span><br><span class="line"><span class="comment">		 * <span class="doctag">@param</span> &#123;<span class="type">String</span>&#125; content 确认内容</span></span><br><span class="line"><span class="comment">		 * <span class="doctag">@param</span> &#123;<span class="type">String</span>&#125; title 标题（可选）</span></span><br><span class="line"><span class="comment">		 */</span></span><br><span class="line">		<span class="title function_">showConfirm</span>(<span class="params">content, title = <span class="string">&#x27;确认&#x27;</span></span>) &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">$modal</span>.<span class="title function_">confirm</span>(&#123; title, content &#125;)</span><br><span class="line">		&#125;,</span><br><span class="line">		<span class="comment">/**</span></span><br><span class="line"><span class="comment">		 * 成功提示</span></span><br><span class="line"><span class="comment">		 * <span class="doctag">@param</span> &#123;<span class="type">String</span>&#125; content 内容</span></span><br><span class="line"><span class="comment">		 */</span></span><br><span class="line">		<span class="title function_">showSuccess</span>(<span class="params">content</span>) &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">$modal</span>.<span class="title function_">alert</span>(&#123;</span><br><span class="line">				<span class="attr">title</span>: <span class="string">&#x27;成功&#x27;</span>,</span><br><span class="line">				content,</span><br><span class="line">				<span class="attr">iconType</span>: <span class="string">&#x27;checkbox-filled&#x27;</span>,</span><br><span class="line">				<span class="attr">iconColor</span>: <span class="string">&#x27;#10b981&#x27;</span>,</span><br><span class="line">				<span class="attr">headerGradient</span>: [<span class="string">&#x27;#10b981&#x27;</span>, <span class="string">&#x27;#34d399&#x27;</span>],</span><br><span class="line">				<span class="attr">confirmColor</span>: <span class="string">&#x27;#10b981&#x27;</span></span><br><span class="line">			&#125;)</span><br><span class="line">		&#125;,</span><br><span class="line">		<span class="comment">/**</span></span><br><span class="line"><span class="comment">		 * 错误提示</span></span><br><span class="line"><span class="comment">		 * <span class="doctag">@param</span> &#123;<span class="type">String</span>&#125; content 内容</span></span><br><span class="line"><span class="comment">		 */</span></span><br><span class="line">		<span class="title function_">showError</span>(<span class="params">content</span>) &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">$modal</span>.<span class="title function_">alert</span>(&#123;</span><br><span class="line">				<span class="attr">title</span>: <span class="string">&#x27;错误&#x27;</span>,</span><br><span class="line">				content,</span><br><span class="line">				<span class="attr">iconType</span>: <span class="string">&#x27;closeempty&#x27;</span>,</span><br><span class="line">				<span class="attr">iconColor</span>: <span class="string">&#x27;#ef4444&#x27;</span>,</span><br><span class="line">				<span class="attr">headerGradient</span>: [<span class="string">&#x27;#ef4444&#x27;</span>, <span class="string">&#x27;#f87171&#x27;</span>],</span><br><span class="line">				<span class="attr">confirmColor</span>: <span class="string">&#x27;#ef4444&#x27;</span></span><br><span class="line">			&#125;)</span><br><span class="line">		&#125;,</span><br><span class="line">		<span class="comment">/**</span></span><br><span class="line"><span class="comment">		 * 警告提示</span></span><br><span class="line"><span class="comment">		 * <span class="doctag">@param</span> &#123;<span class="type">String</span>&#125; content 内容</span></span><br><span class="line"><span class="comment">		 */</span></span><br><span class="line">		<span class="title function_">showWarning</span>(<span class="params">content</span>) &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">$modal</span>.<span class="title function_">alert</span>(&#123;</span><br><span class="line">				<span class="attr">title</span>: <span class="string">&#x27;警告&#x27;</span>,</span><br><span class="line">				content,</span><br><span class="line">				<span class="attr">iconType</span>: <span class="string">&#x27;info&#x27;</span>,</span><br><span class="line">				<span class="attr">iconColor</span>: <span class="string">&#x27;#f59e0b&#x27;</span>,</span><br><span class="line">				<span class="attr">headerGradient</span>: [<span class="string">&#x27;#f59e0b&#x27;</span>, <span class="string">&#x27;#fbbf24&#x27;</span>],</span><br><span class="line">				<span class="attr">confirmColor</span>: <span class="string">&#x27;#f59e0b&#x27;</span></span><br><span class="line">			&#125;)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>pages/modaltest/modaltest.vue</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">	&lt;view class=&quot;test-page&quot;&gt;</span><br><span class="line">		&lt;!-- 顶部背景 --&gt;</span><br><span class="line">		&lt;view class=&quot;header-bg&quot;&gt;&lt;/view&gt;</span><br><span class="line"></span><br><span class="line">		&lt;view class=&quot;content&quot;&gt;</span><br><span class="line">			&lt;!-- 页面标题 --&gt;</span><br><span class="line">			&lt;view class=&quot;page-header&quot;&gt;</span><br><span class="line">				&lt;view class=&quot;page-icon&quot;&gt;</span><br><span class="line">					&lt;uni-icons type=&quot;chat&quot; size=&quot;28&quot; color=&quot;#ffffff&quot;&gt;&lt;/uni-icons&gt;</span><br><span class="line">				&lt;/view&gt;</span><br><span class="line">				&lt;text class=&quot;page-title&quot;&gt;自定义弹窗组件测试&lt;/text&gt;</span><br><span class="line">				&lt;text class=&quot;page-desc&quot;&gt;CustomModal 完整功能演示&lt;/text&gt;</span><br><span class="line">			&lt;/view&gt;</span><br><span class="line"></span><br><span class="line">			&lt;!-- 编程式调用 --&gt;</span><br><span class="line">			&lt;view class=&quot;section&quot;&gt;</span><br><span class="line">				&lt;view class=&quot;section-title&quot;&gt;</span><br><span class="line">					&lt;uni-icons type=&quot;code&quot; size=&quot;18&quot; color=&quot;#3b82f6&quot;&gt;&lt;/uni-icons&gt;</span><br><span class="line">					&lt;text&gt;编程式调用（this.$modal）&lt;/text&gt;</span><br><span class="line">				&lt;/view&gt;</span><br><span class="line">				&lt;view class=&quot;btn-grid&quot;&gt;</span><br><span class="line">					&lt;view class=&quot;test-btn alert-btn&quot; @click=&quot;testAlert&quot;&gt;</span><br><span class="line">						&lt;uni-icons type=&quot;info&quot; size=&quot;20&quot; color=&quot;#3b82f6&quot;&gt;&lt;/uni-icons&gt;</span><br><span class="line">						&lt;text&gt;基础提示&lt;/text&gt;</span><br><span class="line">					&lt;/view&gt;</span><br><span class="line">					&lt;view class=&quot;test-btn confirm-btn&quot; @click=&quot;testConfirm&quot;&gt;</span><br><span class="line">						&lt;uni-icons type=&quot;help&quot; size=&quot;20&quot; color=&quot;#8b5cf6&quot;&gt;&lt;/uni-icons&gt;</span><br><span class="line">						&lt;text&gt;确认弹窗&lt;/text&gt;</span><br><span class="line">					&lt;/view&gt;</span><br><span class="line">					&lt;view class=&quot;test-btn success-btn&quot; @click=&quot;testSuccess&quot;&gt;</span><br><span class="line">						&lt;uni-icons type=&quot;checkbox-filled&quot; size=&quot;20&quot; color=&quot;#10b981&quot;&gt;&lt;/uni-icons&gt;</span><br><span class="line">						&lt;text&gt;成功提示&lt;/text&gt;</span><br><span class="line">					&lt;/view&gt;</span><br><span class="line">					&lt;view class=&quot;test-btn error-btn&quot; @click=&quot;testError&quot;&gt;</span><br><span class="line">						&lt;uni-icons type=&quot;closeempty&quot; size=&quot;20&quot; color=&quot;#ef4444&quot;&gt;&lt;/uni-icons&gt;</span><br><span class="line">						&lt;text&gt;错误提示&lt;/text&gt;</span><br><span class="line">					&lt;/view&gt;</span><br><span class="line">					&lt;view class=&quot;test-btn warning-btn&quot; @click=&quot;testWarning&quot;&gt;</span><br><span class="line">						&lt;uni-icons type=&quot;info&quot; size=&quot;20&quot; color=&quot;#f59e0b&quot;&gt;&lt;/uni-icons&gt;</span><br><span class="line">						&lt;text&gt;警告提示&lt;/text&gt;</span><br><span class="line">					&lt;/view&gt;</span><br><span class="line">					&lt;view class=&quot;test-btn promise-btn&quot; @click=&quot;testPromise&quot;&gt;</span><br><span class="line">						&lt;uni-icons type=&quot;loop&quot; size=&quot;20&quot; color=&quot;#06b6d4&quot;&gt;&lt;/uni-icons&gt;</span><br><span class="line">						&lt;text&gt;Promise&lt;/text&gt;</span><br><span class="line">					&lt;/view&gt;</span><br><span class="line">				&lt;/view&gt;</span><br><span class="line">			&lt;/view&gt;</span><br><span class="line"></span><br><span class="line">			&lt;!-- 声明式调用 --&gt;</span><br><span class="line">			&lt;view class=&quot;section&quot;&gt;</span><br><span class="line">				&lt;view class=&quot;section-title&quot;&gt;</span><br><span class="line">					&lt;uni-icons type=&quot;compose&quot; size=&quot;18&quot; color=&quot;#8b5cf6&quot;&gt;&lt;/uni-icons&gt;</span><br><span class="line">					&lt;text&gt;声明式调用（组件）&lt;/text&gt;</span><br><span class="line">				&lt;/view&gt;</span><br><span class="line">				&lt;view class=&quot;btn-grid&quot;&gt;</span><br><span class="line">					&lt;view class=&quot;test-btn form-btn&quot; @click=&quot;showFormModal = true&quot;&gt;</span><br><span class="line">						&lt;uni-icons type=&quot;compose&quot; size=&quot;20&quot; color=&quot;#8b5cf6&quot;&gt;&lt;/uni-icons&gt;</span><br><span class="line">						&lt;text&gt;表单弹窗&lt;/text&gt;</span><br><span class="line">					&lt;/view&gt;</span><br><span class="line">					&lt;view class=&quot;test-btn bg-btn&quot; @click=&quot;showBgModal = true&quot;&gt;</span><br><span class="line">						&lt;uni-icons type=&quot;image&quot; size=&quot;20&quot; color=&quot;#f97316&quot;&gt;&lt;/uni-icons&gt;</span><br><span class="line">						&lt;text&gt;背景图弹窗&lt;/text&gt;</span><br><span class="line">					&lt;/view&gt;</span><br><span class="line">					&lt;view class=&quot;test-btn footer-btn&quot; @click=&quot;showFooterModal = true&quot;&gt;</span><br><span class="line">						&lt;uni-icons type=&quot;more-filled&quot; size=&quot;20&quot; color=&quot;#14b8a6&quot;&gt;&lt;/uni-icons&gt;</span><br><span class="line">						&lt;text&gt;多按钮弹窗&lt;/text&gt;</span><br><span class="line">					&lt;/view&gt;</span><br><span class="line">					&lt;view class=&quot;test-btn close-btn&quot; @click=&quot;showCloseModal = true&quot;&gt;</span><br><span class="line">						&lt;uni-icons type=&quot;closeempty&quot; size=&quot;20&quot; color=&quot;#64748b&quot;&gt;&lt;/uni-icons&gt;</span><br><span class="line">						&lt;text&gt;关闭按钮&lt;/text&gt;</span><br><span class="line">					&lt;/view&gt;</span><br><span class="line">					&lt;view class=&quot;test-btn custom-btn&quot; @click=&quot;showCustomModal = true&quot;&gt;</span><br><span class="line">						&lt;uni-icons type=&quot;star-filled&quot; size=&quot;20&quot; color=&quot;#ec4899&quot;&gt;&lt;/uni-icons&gt;</span><br><span class="line">						&lt;text&gt;自定义图标&lt;/text&gt;</span><br><span class="line">					&lt;/view&gt;</span><br><span class="line">					&lt;view class=&quot;test-btn loading-btn&quot; @click=&quot;showLoadingModal = true&quot;&gt;</span><br><span class="line">						&lt;uni-icons type=&quot;spinner-cycle&quot; size=&quot;20&quot; color=&quot;#6366f1&quot;&gt;&lt;/uni-icons&gt;</span><br><span class="line">						&lt;text&gt;Loading&lt;/text&gt;</span><br><span class="line">					&lt;/view&gt;</span><br><span class="line">				&lt;/view&gt;</span><br><span class="line">			&lt;/view&gt;</span><br><span class="line"></span><br><span class="line">			&lt;!-- 调用结果 --&gt;</span><br><span class="line">			&lt;view class=&quot;section&quot; v-if=&quot;resultText&quot;&gt;</span><br><span class="line">				&lt;view class=&quot;section-title&quot;&gt;</span><br><span class="line">					&lt;uni-icons type=&quot;checkbox&quot; size=&quot;18&quot; color=&quot;#10b981&quot;&gt;&lt;/uni-icons&gt;</span><br><span class="line">					&lt;text&gt;调用结果&lt;/text&gt;</span><br><span class="line">				&lt;/view&gt;</span><br><span class="line">				&lt;view class=&quot;result-card&quot;&gt;</span><br><span class="line">					&lt;text class=&quot;result-text&quot;&gt;&#123;&#123; resultText &#125;&#125;&lt;/text&gt;</span><br><span class="line">				&lt;/view&gt;</span><br><span class="line">			&lt;/view&gt;</span><br><span class="line">		&lt;/view&gt;</span><br><span class="line"></span><br><span class="line">		&lt;!-- ====== 声明式弹窗区域 ====== --&gt;</span><br><span class="line"></span><br><span class="line">		&lt;!-- 1. 表单弹窗 --&gt;</span><br><span class="line">		&lt;CustomModal :show=&quot;showFormModal&quot; mode=&quot;custom&quot; title=&quot;新增设备&quot;</span><br><span class="line">			iconType=&quot;plus-filled&quot; iconColor=&quot;#8b5cf6&quot; :headerGradient=&quot;[&#x27;#8b5cf6&#x27;, &#x27;#a78bfa&#x27;]&quot;</span><br><span class="line">			:showClose=&quot;true&quot; :maskCloseAble=&quot;false&quot; :showCancelButton=&quot;true&quot;</span><br><span class="line">			confirmText=&quot;提交&quot; cancelText=&quot;关闭&quot;</span><br><span class="line">			@confirm=&quot;submitForm&quot; @cancel=&quot;showFormModal = false&quot;&gt;</span><br><span class="line">			&lt;u-form :model=&quot;formData&quot; ref=&quot;uForm&quot;&gt;</span><br><span class="line">				&lt;u-form-item label=&quot;设备名称&quot; borderBottom labelWidth=&quot;80&quot;&gt;</span><br><span class="line">					&lt;u-input v-model=&quot;formData.name&quot; placeholder=&quot;请输入设备名称&quot; /&gt;</span><br><span class="line">				&lt;/u-form-item&gt;</span><br><span class="line">				&lt;u-form-item label=&quot;设备编号&quot; borderBottom labelWidth=&quot;80&quot;&gt;</span><br><span class="line">					&lt;u-input v-model=&quot;formData.code&quot; placeholder=&quot;请输入设备编号&quot; /&gt;</span><br><span class="line">				&lt;/u-form-item&gt;</span><br><span class="line">				&lt;u-form-item label=&quot;所在区域&quot; borderBottom labelWidth=&quot;80&quot;&gt;</span><br><span class="line">					&lt;u-input v-model=&quot;formData.area&quot; placeholder=&quot;请选择区域&quot; /&gt;</span><br><span class="line">				&lt;/u-form-item&gt;</span><br><span class="line">				&lt;u-form-item label=&quot;备注&quot; labelWidth=&quot;80&quot;&gt;</span><br><span class="line">					&lt;u-input v-model=&quot;formData.remark&quot; placeholder=&quot;选填&quot; /&gt;</span><br><span class="line">				&lt;/u-form-item&gt;</span><br><span class="line">			&lt;/u-form&gt;</span><br><span class="line">		&lt;/CustomModal&gt;</span><br><span class="line"></span><br><span class="line">		&lt;!-- 2. 背景图弹窗（用渐变模拟） --&gt;</span><br><span class="line">		&lt;CustomModal :show=&quot;showBgModal&quot; title=&quot;新年活动&quot;</span><br><span class="line">		    bgImage=&quot;https://img.8845.top/img2/%E7%9C%9F%E5%AF%BB%E9%85%B1.png&quot;</span><br><span class="line">			:headerGradient=&quot;[&#x27;#f97316&#x27;, &#x27;#fbbf24&#x27;]&quot;</span><br><span class="line">			iconType=&quot;gift-filled&quot; iconColor=&quot;#fbbf24&quot; :iconSize=&quot;50&quot;</span><br><span class="line">			content=&quot;参与新年活动，充值满100送20！限时优惠，不容错过！&quot;</span><br><span class="line">			confirmText=&quot;立即参与&quot; cancelText=&quot;稍后再说&quot; :showCancelButton=&quot;true&quot;</span><br><span class="line">			@confirm=&quot;handleBgConfirm&quot; @cancel=&quot;showBgModal = false&quot; /&gt;</span><br><span class="line"></span><br><span class="line">		&lt;!-- 3. 多按钮弹窗 --&gt;</span><br><span class="line">		&lt;CustomModal :show=&quot;showFooterModal&quot; title=&quot;订单操作&quot;</span><br><span class="line">			iconType=&quot;list&quot; iconColor=&quot;#14b8a6&quot; :headerGradient=&quot;[&#x27;#14b8a6&#x27;, &#x27;#2dd4bf&#x27;]&quot;&gt;</span><br><span class="line">			&lt;view class=&quot;order-info&quot;&gt;</span><br><span class="line">				&lt;view class=&quot;order-row&quot;&gt;</span><br><span class="line">					&lt;text class=&quot;order-label&quot;&gt;订单编号&lt;/text&gt;</span><br><span class="line">					&lt;text class=&quot;order-value&quot;&gt;ORD20261013001&lt;/text&gt;</span><br><span class="line">				&lt;/view&gt;</span><br><span class="line">				&lt;view class=&quot;order-row&quot;&gt;</span><br><span class="line">					&lt;text class=&quot;order-label&quot;&gt;消费金额&lt;/text&gt;</span><br><span class="line">					&lt;text class=&quot;order-value price&quot;&gt;¥15.00&lt;/text&gt;</span><br><span class="line">				&lt;/view&gt;</span><br><span class="line">				&lt;view class=&quot;order-row&quot;&gt;</span><br><span class="line">					&lt;text class=&quot;order-label&quot;&gt;订单状态&lt;/text&gt;</span><br><span class="line">					&lt;text class=&quot;order-value status&quot;&gt;待支付&lt;/text&gt;</span><br><span class="line">				&lt;/view&gt;</span><br><span class="line">			&lt;/view&gt;</span><br><span class="line">			&lt;template #footer&gt;</span><br><span class="line">				&lt;view class=&quot;multi-btn-group&quot;&gt;</span><br><span class="line">					&lt;view class=&quot;multi-btn btn-cancel&quot; @click=&quot;showFooterModal = false&quot;&gt;</span><br><span class="line">						&lt;text&gt;取消订单&lt;/text&gt;</span><br><span class="line">					&lt;/view&gt;</span><br><span class="line">					&lt;view class=&quot;multi-btn btn-detail&quot; @click=&quot;handleDetail&quot;&gt;</span><br><span class="line">						&lt;text&gt;查看详情&lt;/text&gt;</span><br><span class="line">					&lt;/view&gt;</span><br><span class="line">					&lt;view class=&quot;multi-btn btn-pay&quot; @click=&quot;handlePay&quot;&gt;</span><br><span class="line">						&lt;text&gt;立即支付&lt;/text&gt;</span><br><span class="line">					&lt;/view&gt;</span><br><span class="line">				&lt;/view&gt;</span><br><span class="line">			&lt;/template&gt;</span><br><span class="line">		&lt;/CustomModal&gt;</span><br><span class="line"></span><br><span class="line">		&lt;!-- 4. 带关闭按钮弹窗 --&gt;</span><br><span class="line">		&lt;CustomModal :show=&quot;showCloseModal&quot; title=&quot;系统公告&quot;</span><br><span class="line">			iconType=&quot;sound-filled&quot; iconColor=&quot;#3b82f6&quot; :headerGradient=&quot;[&#x27;#3b82f6&#x27;, &#x27;#60a5fa&#x27;]&quot;</span><br><span class="line">			:showClose=&quot;true&quot; :showConfirmButton=&quot;false&quot; :showCancelButton=&quot;false&quot; @cancel=&quot;showCloseModal = false&quot;&gt;</span><br><span class="line">			&lt;view class=&quot;notice-content&quot;&gt;</span><br><span class="line">				&lt;text class=&quot;notice-title&quot;&gt;关于系统升级的通知&lt;/text&gt;</span><br><span class="line">				&lt;text class=&quot;notice-body&quot;&gt;尊敬的用户，系统将于2026年10月15日凌晨2:00-4:00进行维护升级，届时部分功能将暂时不可用，请提前做好相关安排。&lt;/text&gt;</span><br><span class="line">				&lt;text class=&quot;notice-date&quot;&gt;发布日期：2026-10-13&lt;/text&gt;</span><br><span class="line">			&lt;/view&gt;</span><br><span class="line">		&lt;/CustomModal&gt;</span><br><span class="line"></span><br><span class="line">		&lt;!-- 5. 自定义图标弹窗 --&gt;</span><br><span class="line">		&lt;CustomModal :show=&quot;showCustomModal&quot; title=&quot;VIP 升级&quot;</span><br><span class="line">		</span><br><span class="line">			icon=&quot;/static/image/functions/huiyuanchongzhitaocan_icon.png&quot; :iconSize=&quot;56&quot;</span><br><span class="line">			:headerGradient=&quot;[&#x27;#ec4899&#x27;, &#x27;#f472b6&#x27;]&quot;</span><br><span class="line">			content=&quot;恭喜您升级为 VIP 会员！享受专属折扣和优先服务。&quot;</span><br><span class="line">			confirmText=&quot;查看权益&quot; cancelText=&quot;知道了&quot; :showCancelButton=&quot;true&quot;</span><br><span class="line">			@confirm=&quot;showCustomModal = false&quot; @cancel=&quot;showCustomModal = false&quot; /&gt;</span><br><span class="line"></span><br><span class="line">		&lt;!-- 6. Loading 弹窗 --&gt;</span><br><span class="line">		&lt;CustomModal :show=&quot;showLoadingModal&quot; title=&quot;提交中&quot;</span><br><span class="line">			iconType=&quot;spinner-cycle&quot; iconColor=&quot;#6366f1&quot; :headerGradient=&quot;[&#x27;#6366f1&#x27;, &#x27;#818cf8&#x27;]&quot;</span><br><span class="line">			content=&quot;正在提交您的数据，请稍候...&quot;</span><br><span class="line">			:confirmLoading=&quot;true&quot; :showCancelButton=&quot;false&quot;</span><br><span class="line">			confirmText=&quot;提交中...&quot; :maskCloseAble=&quot;false&quot; /&gt;</span><br><span class="line"></span><br><span class="line">		&lt;!-- 全局弹窗（供编程式调用） --&gt;</span><br><span class="line">		&lt;GlobalModal /&gt;</span><br><span class="line">	&lt;/view&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">	import CustomModal from &#x27;@/compones/CustomModal.vue&#x27;</span><br><span class="line">	import GlobalModal from &#x27;@/compones/GlobalModal.vue&#x27;</span><br><span class="line">	import modalMixin from &#x27;@/utils/modal-mixin.js&#x27;</span><br><span class="line"></span><br><span class="line">	export default &#123;</span><br><span class="line">		components: &#123;</span><br><span class="line">			CustomModal,</span><br><span class="line">			GlobalModal</span><br><span class="line">		&#125;,</span><br><span class="line">		mixins: [modalMixin],</span><br><span class="line">		data() &#123;</span><br><span class="line">			return &#123;</span><br><span class="line">				resultText: &#x27;&#x27;,</span><br><span class="line">				// 声明式弹窗控制</span><br><span class="line">				showFormModal: false,</span><br><span class="line">				showBgModal: false,</span><br><span class="line">				showFooterModal: false,</span><br><span class="line">				showCloseModal: false,</span><br><span class="line">				showCustomModal: false,</span><br><span class="line">				showLoadingModal: false,</span><br><span class="line">				// 表单数据</span><br><span class="line">				formData: &#123;</span><br><span class="line">					name: &#x27;&#x27;,</span><br><span class="line">					code: &#x27;&#x27;,</span><br><span class="line">					area: &#x27;&#x27;,</span><br><span class="line">					remark: &#x27;&#x27;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;,</span><br><span class="line">		methods: &#123;</span><br><span class="line">			// ====== 编程式调用测试 ======</span><br><span class="line">			testAlert() &#123;</span><br><span class="line">				this.resultText = &#x27;调用 this.$modal.alert()&#x27;</span><br><span class="line">				this.$modal.alert(&#123;</span><br><span class="line">					title: &#x27;这是标题&#x27;,</span><br><span class="line">					content: &#x27;这是一条基础提示信息&#x27;,</span><br><span class="line">					iconType: &#x27;info&#x27;,</span><br><span class="line">					iconColor: &#x27;#3b82f6&#x27;</span><br><span class="line">				&#125;)</span><br><span class="line">			&#125;,</span><br><span class="line"></span><br><span class="line">			async testConfirm() &#123;</span><br><span class="line">				this.resultText = &#x27;调用 this.$modal.confirm()&#x27;</span><br><span class="line">				const confirmed = await this.$modal.confirm(&#123;</span><br><span class="line">					title: &#x27;确认操作&#x27;,</span><br><span class="line">					content: &#x27;确定要执行此操作吗？&#x27;,</span><br><span class="line">					confirmText: &#x27;确定执行&#x27;,</span><br><span class="line">					cancelText: &#x27;取消&#x27;,</span><br><span class="line">					iconType: &#x27;help-filled&#x27;,</span><br><span class="line">					iconColor: &#x27;#8b5cf6&#x27;,</span><br><span class="line">					headerGradient: [&#x27;#8b5cf6&#x27;, &#x27;#a78bfa&#x27;]</span><br><span class="line">				&#125;)</span><br><span class="line">				this.resultText = confirmed ? &#x27;用户点击了【确定】&#x27; : &#x27;用户点击了【取消】&#x27;</span><br><span class="line">			&#125;,</span><br><span class="line"></span><br><span class="line">			testSuccess() &#123;</span><br><span class="line">				this.resultText = &#x27;调用 this.showSuccess()&#x27;</span><br><span class="line">				this.showSuccess(&#x27;数据保存成功！&#x27;)</span><br><span class="line">			&#125;,</span><br><span class="line"></span><br><span class="line">			testError() &#123;</span><br><span class="line">				this.resultText = &#x27;调用 this.showError()&#x27;</span><br><span class="line">				this.showError(&#x27;网络请求失败，请检查网络连接后重试&#x27;)</span><br><span class="line">			&#125;,</span><br><span class="line"></span><br><span class="line">			testWarning() &#123;</span><br><span class="line">				this.resultText = &#x27;调用 this.showWarning()&#x27;</span><br><span class="line">				this.showWarning(&#x27;账户余额不足，请先充值&#x27;)</span><br><span class="line">			&#125;,</span><br><span class="line"></span><br><span class="line">			async testPromise() &#123;</span><br><span class="line">				this.resultText = &#x27;调用 async/await 模式&#x27;</span><br><span class="line">				const confirmed = await this.$modal.confirm(&#123;</span><br><span class="line">					title: &#x27;异步确认&#x27;,</span><br><span class="line">					content: &#x27;此操作将删除选中的 3 条记录，是否继续？&#x27;,</span><br><span class="line">					confirmColor: &#x27;#ef4444&#x27;,</span><br><span class="line">					iconType: &#x27;trash&#x27;,</span><br><span class="line">					iconColor: &#x27;#ef4444&#x27;,</span><br><span class="line">					headerGradient: [&#x27;#ef4444&#x27;, &#x27;#f87171&#x27;]</span><br><span class="line">				&#125;)</span><br><span class="line">				if (confirmed) &#123;</span><br><span class="line">					await this.showSuccess(&#x27;删除成功，共删除 3 条记录&#x27;)</span><br><span class="line">				&#125; else &#123;</span><br><span class="line">					this.resultText = &#x27;已取消删除操作&#x27;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;,</span><br><span class="line"></span><br><span class="line">			// ====== 声明式弹窗测试 ======</span><br><span class="line">			submitForm() &#123;</span><br><span class="line">				this.showFormModal = false</span><br><span class="line">				this.resultText = `表单提交：$&#123;JSON.stringify(this.formData)&#125;`</span><br><span class="line">				this.showSuccess(&#x27;设备添加成功！&#x27;)</span><br><span class="line">				this.formData = &#123; name: &#x27;&#x27;, code: &#x27;&#x27;, area: &#x27;&#x27;, remark: &#x27;&#x27; &#125;</span><br><span class="line">			&#125;,</span><br><span class="line"></span><br><span class="line">			handleBgConfirm() &#123;</span><br><span class="line">				this.showBgModal = false</span><br><span class="line">				this.resultText = &#x27;参与活动成功&#x27;</span><br><span class="line">				this.showSuccess(&#x27;恭喜您成功参与活动！&#x27;)</span><br><span class="line">			&#125;,</span><br><span class="line"></span><br><span class="line">			handleDetail() &#123;</span><br><span class="line">				this.showFooterModal = false</span><br><span class="line">				this.resultText = &#x27;点击了「查看详情」&#x27;</span><br><span class="line">			&#125;,</span><br><span class="line"></span><br><span class="line">			handlePay() &#123;</span><br><span class="line">				this.showFooterModal = false</span><br><span class="line">				this.resultText = &#x27;点击了「立即支付」&#x27;</span><br><span class="line">				this.showSuccess(&#x27;支付成功！&#x27;)</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">&lt;style lang=&quot;scss&quot; scoped&gt;</span><br><span class="line">	.test-page &#123;</span><br><span class="line">		min-height: 100vh;</span><br><span class="line">		background: #f0f5ff;</span><br><span class="line">		padding-bottom: calc(40rpx + env(safe-area-inset-bottom));</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	.header-bg &#123;</span><br><span class="line">		position: fixed;</span><br><span class="line">		top: 0;</span><br><span class="line">		left: 0;</span><br><span class="line">		right: 0;</span><br><span class="line">		height: 400rpx;</span><br><span class="line">		background: linear-gradient(135deg, #1d4ed8, #3b82f6, #60a5fa);</span><br><span class="line">		border-radius: 0 0 60rpx 60rpx;</span><br><span class="line">		z-index: 0;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	.content &#123;</span><br><span class="line">		position: relative;</span><br><span class="line">		z-index: 1;</span><br><span class="line">		padding: 0 30rpx;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	/* 页面标题 */</span><br><span class="line">	.page-header &#123;</span><br><span class="line">		padding-top: 60rpx;</span><br><span class="line">		padding-bottom: 40rpx;</span><br><span class="line">		display: flex;</span><br><span class="line">		flex-direction: column;</span><br><span class="line">		align-items: center;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	.page-icon &#123;</span><br><span class="line">		width: 96rpx;</span><br><span class="line">		height: 96rpx;</span><br><span class="line">		background: rgba(255, 255, 255, 0.2);</span><br><span class="line">		border-radius: 50%;</span><br><span class="line">		display: flex;</span><br><span class="line">		align-items: center;</span><br><span class="line">		justify-content: center;</span><br><span class="line">		margin-bottom: 20rpx;</span><br><span class="line">		border: 2rpx solid rgba(255, 255, 255, 0.3);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	.page-title &#123;</span><br><span class="line">		font-size: 40rpx;</span><br><span class="line">		font-weight: 700;</span><br><span class="line">		color: #ffffff;</span><br><span class="line">		margin-bottom: 10rpx;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	.page-desc &#123;</span><br><span class="line">		font-size: 26rpx;</span><br><span class="line">		color: rgba(255, 255, 255, 0.75);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	/* 区块 */</span><br><span class="line">	.section &#123;</span><br><span class="line">		background: #ffffff;</span><br><span class="line">		border-radius: 24rpx;</span><br><span class="line">		padding: 36rpx;</span><br><span class="line">		margin-bottom: 24rpx;</span><br><span class="line">		box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.05);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	.section-title &#123;</span><br><span class="line">		display: flex;</span><br><span class="line">		align-items: center;</span><br><span class="line">		gap: 12rpx;</span><br><span class="line">		margin-bottom: 28rpx;</span><br><span class="line"></span><br><span class="line">		text &#123;</span><br><span class="line">			font-size: 30rpx;</span><br><span class="line">			font-weight: 600;</span><br><span class="line">			color: #1e293b;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	/* 按钮网格 */</span><br><span class="line">	.btn-grid &#123;</span><br><span class="line">		display: flex;</span><br><span class="line">		flex-wrap: wrap;</span><br><span class="line">		gap: 20rpx;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	.test-btn &#123;</span><br><span class="line">		flex: 0 0 calc(50% - 10rpx);</span><br><span class="line">		display: flex;</span><br><span class="line">		align-items: center;</span><br><span class="line">		justify-content: center;</span><br><span class="line">		gap: 12rpx;</span><br><span class="line">		height: 88rpx;</span><br><span class="line">		border-radius: 16rpx;</span><br><span class="line">		font-size: 26rpx;</span><br><span class="line">		font-weight: 600;</span><br><span class="line">		transition: all 0.2s ease;</span><br><span class="line"></span><br><span class="line">		&amp;:active &#123;</span><br><span class="line">			transform: scale(0.96);</span><br><span class="line">			opacity: 0.85;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		text &#123;</span><br><span class="line">			color: inherit;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	.alert-btn &#123;</span><br><span class="line">		background: #eff6ff;</span><br><span class="line">		color: #3b82f6;</span><br><span class="line">		border: 2rpx solid #bfdbfe;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	.confirm-btn &#123;</span><br><span class="line">		background: #f5f3ff;</span><br><span class="line">		color: #8b5cf6;</span><br><span class="line">		border: 2rpx solid #ddd6fe;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	.success-btn &#123;</span><br><span class="line">		background: #ecfdf5;</span><br><span class="line">		color: #10b981;</span><br><span class="line">		border: 2rpx solid #a7f3d0;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	.error-btn &#123;</span><br><span class="line">		background: #fef2f2;</span><br><span class="line">		color: #ef4444;</span><br><span class="line">		border: 2rpx solid #fecaca;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	.warning-btn &#123;</span><br><span class="line">		background: #fffbeb;</span><br><span class="line">		color: #f59e0b;</span><br><span class="line">		border: 2rpx solid #fde68a;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	.promise-btn &#123;</span><br><span class="line">		background: #ecfeff;</span><br><span class="line">		color: #06b6d4;</span><br><span class="line">		border: 2rpx solid #a5f3fc;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	.form-btn &#123;</span><br><span class="line">		background: #f5f3ff;</span><br><span class="line">		color: #8b5cf6;</span><br><span class="line">		border: 2rpx solid #ddd6fe;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	.bg-btn &#123;</span><br><span class="line">		background: #fff7ed;</span><br><span class="line">		color: #f97316;</span><br><span class="line">		border: 2rpx solid #fed7aa;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	.footer-btn &#123;</span><br><span class="line">		background: #f0fdfa;</span><br><span class="line">		color: #14b8a6;</span><br><span class="line">		border: 2rpx solid #99f6e4;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	.close-btn &#123;</span><br><span class="line">		background: #f8fafc;</span><br><span class="line">		color: #64748b;</span><br><span class="line">		border: 2rpx solid #e2e8f0;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	.custom-btn &#123;</span><br><span class="line">		background: #fdf2f8;</span><br><span class="line">		color: #ec4899;</span><br><span class="line">		border: 2rpx solid #fbcfe8;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	.loading-btn &#123;</span><br><span class="line">		background: #eef2ff;</span><br><span class="line">		color: #6366f1;</span><br><span class="line">		border: 2rpx solid #c7d2fe;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	/* 调用结果 */</span><br><span class="line">	.result-card &#123;</span><br><span class="line">		padding: 24rpx;</span><br><span class="line">		background: #f0fdf4;</span><br><span class="line">		border-radius: 16rpx;</span><br><span class="line">		border: 2rpx solid #bbf7d0;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	.result-text &#123;</span><br><span class="line">		font-size: 26rpx;</span><br><span class="line">		color: #166534;</span><br><span class="line">		word-break: break-all;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	/* ====== 弹窗内部样式 ====== */</span><br><span class="line"></span><br><span class="line">	/* 订单信息 */</span><br><span class="line">	.order-info &#123;</span><br><span class="line">		padding: 10rpx 0;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	.order-row &#123;</span><br><span class="line">		display: flex;</span><br><span class="line">		justify-content: space-between;</span><br><span class="line">		align-items: center;</span><br><span class="line">		padding: 18rpx 0;</span><br><span class="line">		border-bottom: 1rpx solid #f1f5f9;</span><br><span class="line"></span><br><span class="line">		&amp;:last-child &#123;</span><br><span class="line">			border-bottom: none;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	.order-label &#123;</span><br><span class="line">		font-size: 26rpx;</span><br><span class="line">		color: #94a3b8;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	.order-value &#123;</span><br><span class="line">		font-size: 28rpx;</span><br><span class="line">		color: #1e293b;</span><br><span class="line">		font-weight: 500;</span><br><span class="line"></span><br><span class="line">		&amp;.price &#123;</span><br><span class="line">			color: #ef4444;</span><br><span class="line">			font-weight: 700;</span><br><span class="line">			font-size: 32rpx;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		&amp;.status &#123;</span><br><span class="line">			color: #f59e0b;</span><br><span class="line">			font-weight: 600;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	/* 多按钮组 */</span><br><span class="line">	.multi-btn-group &#123;</span><br><span class="line">		display: flex;</span><br><span class="line">		gap: 16rpx;</span><br><span class="line">		width: 100%;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	.multi-btn &#123;</span><br><span class="line">		flex: 1;</span><br><span class="line">		height: 80rpx;</span><br><span class="line">		display: flex;</span><br><span class="line">		align-items: center;</span><br><span class="line">		justify-content: center;</span><br><span class="line">		border-radius: 40rpx;</span><br><span class="line">		font-size: 26rpx;</span><br><span class="line">		font-weight: 600;</span><br><span class="line">		transition: all 0.2s ease;</span><br><span class="line"></span><br><span class="line">		&amp;:active &#123;</span><br><span class="line">			transform: scale(0.96);</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		text &#123;</span><br><span class="line">			color: inherit;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	.btn-cancel &#123;</span><br><span class="line">		background: #f8fafc;</span><br><span class="line">		color: #64748b;</span><br><span class="line">		border: 2rpx solid #e2e8f0;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	.btn-detail &#123;</span><br><span class="line">		background: #eff6ff;</span><br><span class="line">		color: #3b82f6;</span><br><span class="line">		border: 2rpx solid #bfdbfe;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	.btn-pay &#123;</span><br><span class="line">		background: linear-gradient(135deg, #10b981, #059669);</span><br><span class="line">		color: #ffffff;</span><br><span class="line">		box-shadow: 0 8rpx 20rpx rgba(16, 185, 129, 0.3);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	/* 公告内容 */</span><br><span class="line">	.notice-content &#123;</span><br><span class="line">		padding: 10rpx 0;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	.notice-title &#123;</span><br><span class="line">		font-size: 30rpx;</span><br><span class="line">		font-weight: 700;</span><br><span class="line">		color: #1e293b;</span><br><span class="line">		margin-bottom: 20rpx;</span><br><span class="line">		text-align: center;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	.notice-body &#123;</span><br><span class="line">		font-size: 26rpx;</span><br><span class="line">		color: #64748b;</span><br><span class="line">		line-height: 1.8;</span><br><span class="line">		text-align: justify;</span><br><span class="line">		margin-bottom: 24rpx;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	.notice-date &#123;</span><br><span class="line">		font-size: 24rpx;</span><br><span class="line">		color: #94a3b8;</span><br><span class="line">		text-align: right;</span><br><span class="line">	&#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+
+    </div>
+    <footer class="article-footer">
+        <a class="article-category-link" href="/drda-blog/categories/%E7%AC%94%E8%AE%B0/" title="笔记" data-aos="zoom-in">笔记</a>
+
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item" data-aos="zoom-in"><a class="article-tag-list-link" href="/drda-blog/tags/Vue/" rel="tag" title="Vue">Vue</a></li><li class="article-tag-list-item" data-aos="zoom-in"><a class="article-tag-list-link" href="/drda-blog/tags/js/" rel="tag" title="js">js</a></li><li class="article-tag-list-item" data-aos="zoom-in"><a class="article-tag-list-link" href="/drda-blog/tags/%E9%9A%8F%E7%AC%94/" rel="tag" title="随笔">随笔</a></li></ul>
+
+    </footer>
+  </div>
+    <nav id="article-nav" aria-label="Article navigation" data-aos="fade-up">
+    <div class="article-nav-link-wrap right">
+        <img data-src="https://img.8845.top/img2/%E8%94%9A%E8%93%9D%E6%A1%A3%E6%A1%88%20%E4%B8%89%E4%B8%AA%E5%8F%AF%E7%88%B1%E5%A5%B3%E7%94%9F%204k.jpg" data-sizes="auto" alt="「此身姓唐名小辣」— 一篇修仙互动故事" class="lazyload">
+      <a href="/drda-blog/2026/10/12/20261012/%E6%AD%A4%E8%BA%AB%E5%A7%93%E5%94%90%E5%90%8D%E5%B0%8F%E8%BE%A3-%E4%B8%80%E7%AF%87%E4%BF%AE%E4%BB%99%E4%BA%92%E5%8A%A8%E6%95%85%E4%BA%8B/" aria-label="后一篇: 「此身姓唐名小辣」— 一篇修仙互动故事"  title="后一篇: 「此身姓唐名小辣」— 一篇修仙互动故事"></a>
+      <div class="article-nav-caption">后一篇</div>
+      <h3 class="article-nav-title">
+          「此身姓唐名小辣」— 一篇修仙互动故事
+      </h3>
+    </div>
+  </nav>
+
+</article>
+
+  <section id="comments" data-aos="fade-up">
+    <div class="comment-header">
+        
+      <h2 class="comment-title">说些什么吧！</h2>
+      <div class="comment-selector">
+        <div class="comment-selector-wrap">
+            <div class="selector-item" data-selector="beaudar">
+              <span>beaudar</span>
+            </div>
+        </div>
+      </div>
+    </div>
+    <div class="comment-content">
+          <div class="comment beaudar-comment" data-aos="fade-up"
+            id="beaudar-comment">
+          </div>
+    </div>
+  </section>
+
+</section>
+        </div>
+        <footer id="footer" aria-label="Site footer">
+  <div style="width: 100%; overflow: hidden">
+    <div class="footer-line"></div>
+  </div>
+  <div id="footer-info">
+    <div>
+      <span class="icon-copyright"></span>
+        2020-2026
+        <span class="footer-info-sep "></span>
+      Drda
+    </div>
+      <div>
+        基于&nbsp;<a href="https://hexo.io/" rel="noopener nofollow noreferrer" target="_blank">Hexo</a>&nbsp;
+        Theme.<a href="https://github.com/D-Sketon/hexo-theme-reimu" rel="noopener nofollow noreferrer" target="_blank">Reimu</a>
+      </div>
+      <div>
+        <span class="icon-brush"></span>
+        25.6k
+        &nbsp;|&nbsp;
+        <span class="icon-coffee"></span>
+        02:05
+      </div>
+      <div>
+        <span class="icon-eye"></span>
+        <span id="busuanzi_container_site_pv">总访问量&nbsp;<span id="busuanzi_value_site_pv"></span></span>
+        &nbsp;|&nbsp;
+        <span class="icon-user"></span>
+        <span id="busuanzi_container_site_uv">总访客量&nbsp;<span id="busuanzi_value_site_uv"></span></span>
+      </div>
+  </div>
+</footer>
+
+          <div class="sidebar-top">
+            <div class="sidebar-top-taichi "></div>
+            <div class="arrow-up"></div>
+          </div>
+        <div id="mask" class="hide"></div>
+      </div>
+      <nav id="mobile-nav" aria-label="Mobile navigation">
+  <div class="sidebar-wrap">
+        <div class="sidebar-toc-sidebar"><h3 class="toc-title">文章目录</h3>
+<div class="sidebar-toc-wrapper toc-div-class" >
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%AE%E5%BD%95"><span class="toc-number">1.</span> <span class="toc-text"> 目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84"><span class="toc-number">2.</span> <span class="toc-text"> 文件结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BF%AB%E9%80%9F%E5%BC%80%E5%A7%8B"><span class="toc-number">3.</span> <span class="toc-text"> 快速开始</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%B7%B2%E5%AE%8C%E6%88%90%E5%85%A8%E5%B1%80%E6%B3%A8%E5%86%8C"><span class="toc-number">3.1.</span> <span class="toc-text"> 1. 已完成全局注册</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E9%A1%B5%E9%9D%A2%E4%B8%AD%E4%BD%BF%E7%94%A8"><span class="toc-number">3.2.</span> <span class="toc-text"> 2. 页面中使用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B9%E5%BC%8F%E4%B8%80%E5%A3%B0%E6%98%8E%E5%BC%8F%E7%BB%84%E4%BB%B6"><span class="toc-number">4.</span> <span class="toc-text"> 方式一：声明式组件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B9%E5%BC%8F%E4%BA%8C%E7%BC%96%E7%A8%8B%E5%BC%8F%E8%B0%83%E7%94%A8"><span class="toc-number">5.</span> <span class="toc-text"> 方式二：编程式调用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%89%8D%E7%BD%AE%E5%87%86%E5%A4%87"><span class="toc-number">5.1.</span> <span class="toc-text"> 前置准备</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B0%83%E7%94%A8%E6%96%B9%E6%B3%95"><span class="toc-number">5.2.</span> <span class="toc-text"> 调用方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%8C%E6%95%B4-props-%E5%B1%9E%E6%80%A7%E8%A1%A8"><span class="toc-number">6.</span> <span class="toc-text"> 完整 Props 属性表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#mode-%E6%A8%A1%E5%BC%8F%E8%AF%B4%E6%98%8E"><span class="toc-number">6.1.</span> <span class="toc-text"> mode 模式说明</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#events-%E4%BA%8B%E4%BB%B6"><span class="toc-number">7.</span> <span class="toc-text"> Events 事件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#slots-%E6%8F%92%E6%A7%BD"><span class="toc-number">8.</span> <span class="toc-text"> Slots 插槽</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#footer-%E6%8F%92%E6%A7%BD%E7%A4%BA%E4%BE%8B"><span class="toc-number">8.1.</span> <span class="toc-text"> footer 插槽示例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E7%A4%BA%E4%BE%8B"><span class="toc-number">9.</span> <span class="toc-text"> 使用示例</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%9F%BA%E7%A1%80%E6%8F%90%E7%A4%BA%E5%BC%B9%E7%AA%97"><span class="toc-number">9.1.</span> <span class="toc-text"> 1. 基础提示弹窗</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E7%A1%AE%E8%AE%A4%E5%BC%B9%E7%AA%97"><span class="toc-number">9.2.</span> <span class="toc-text"> 2. 确认弹窗</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E6%88%90%E5%8A%9F%E9%94%99%E8%AF%AF%E8%AD%A6%E5%91%8A%E5%BC%B9%E7%AA%97"><span class="toc-number">9.3.</span> <span class="toc-text"> 3. 成功&#x2F;错误&#x2F;警告弹窗</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E5%B8%A6%E8%A1%A8%E5%8D%95%E7%9A%84%E8%87%AA%E5%AE%9A%E4%B9%89%E5%BC%B9%E7%AA%97"><span class="toc-number">9.4.</span> <span class="toc-text"> 4. 带表单的自定义弹窗</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%BA%95%E9%83%A8%E6%8C%89%E9%92%AE"><span class="toc-number">9.5.</span> <span class="toc-text"> 5. 自定义底部按钮</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E5%B8%A6%E8%83%8C%E6%99%AF%E5%9B%BE%E7%9A%84%E5%BC%B9%E7%AA%97"><span class="toc-number">9.6.</span> <span class="toc-text"> 6. 带背景图的弹窗</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-promise-%E5%BC%82%E6%AD%A5%E7%94%A8%E6%B3%95"><span class="toc-number">9.7.</span> <span class="toc-text"> 7. Promise 异步用法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95%E9%A1%B5%E9%9D%A2"><span class="toc-number">10.</span> <span class="toc-text"> 测试页面</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%B7%E5%BC%8F%E5%AE%9A%E5%88%B6"><span class="toc-number">11.</span> <span class="toc-text"> 样式定制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98"><span class="toc-number">12.</span> <span class="toc-text"> 常见问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%80%E5%90%8E%E9%99%84%E4%B8%8A%E6%BA%90%E7%A0%81"><span class="toc-number">13.</span> <span class="toc-text"> 最后附上源码</span></a></li></ol>
+</div>
+</div>
+        <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/drda-blog/avatar/avatar.webp" data-sizes="auto" alt="Drda" class="lazyload">
+  <div class="sidebar-author-name">Drda</div>
+  <div class="sidebar-description">Drda&#39;s Blog</div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div>
+    <div class="sidebar-state-number">16</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>分类</div>
+    <div class="sidebar-state-number">3</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>标签</div>
+    <div class="sidebar-state-number">17</div>
+  </div>
+</div>
+<div class="sidebar-social" >
+    <div class="icon-github sidebar-social-icon">
+      <a href=https://github.com/drda-x itemprop="url" target="_blank" aria-label="github" rel="noopener nofollow noreferrer"></a>
+    </div>
+    <div class="icon-bilibili sidebar-social-icon">
+      <a href=https://space.bilibili.com/28903889 itemprop="url" target="_blank" aria-label="bilibili" rel="noopener nofollow noreferrer"></a>
+    </div>
+</div>
+<div class="sidebar-menu">
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/drda-blog/" aria-label="首页"></a>
+          <div class="sidebar-menu-icon icon ">
+                <img src="/drda-blog/images/taichi.png" alt="home icon" style="width: 1em;">
+          </div>
+        <div class="sidebar-menu-link">首页</div>
+      </div>
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/drda-blog/archives" aria-label="归档"></a>
+          <div class="sidebar-menu-icon icon ">
+                <img src="/drda-blog/images/archives.png" alt="archives icon" style="width: 1em;">
+          </div>
+        <div class="sidebar-menu-link">归档</div>
+      </div>
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/drda-blog/about" aria-label="关于"></a>
+          <div class="sidebar-menu-icon icon ">
+                <img src="/drda-blog/images/about.png" alt="about icon" style="width: 1em;">
+          </div>
+        <div class="sidebar-menu-link">关于</div>
+      </div>
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/drda-blog/friend" aria-label="友链"></a>
+          <div class="sidebar-menu-icon icon ">
+                <img src="/drda-blog/images/friend.png" alt="friend icon" style="width: 1em;">
+          </div>
+        <div class="sidebar-menu-link">友链</div>
+      </div>
+</div>
+</div>
+  </div>
+      <div class="sidebar-btn-wrapper">
+        <div class="sidebar-toc-btn current"></div>
+        <div class="sidebar-common-btn"></div>
+      </div>
+</nav>
+
+    </div>
+      <div class="site-search">
+        <div class="reimu-popup popup">
+          <div class="reimu-search">
+            <div class="reimu-search-input-icon"></div>
+            <div id="reimu-search-input"></div>
+            <div class="popup-btn-close"></div>
+          </div>
+          <div class="reimu-results">
+            <div id="reimu-stats"></div>
+            <div id="reimu-hits"></div>
+            <div id="reimu-pagination" class="reimu-pagination"></div>
+          </div>
+          <img class="reimu-bg" src="/drda-blog/images/reimu.png" loading="lazy" decoding="async" fetchpriority="low"/>
+        </div>
+      </div>
+    
+<script src="https://npm.webcache.cn/lazysizes@5.3.2/lazysizes.min.js" integrity="sha384-3gT&#x2F;vsepWkfz&#x2F;ff7PpWNUeMzeWoH3cDhm&#x2F;A8jM7ouoAK0&#x2F;fP&#x2F;9bcHHR5kHq2nf+e" crossorigin="anonymous"></script>
+
+
+<script src="https://npm.webcache.cn/clipboard@2.0.11/dist/clipboard.min.js" integrity="sha384-J08i8An&#x2F;QeARD9ExYpvphB8BsyOj3Gh2TSh1aLINKO3L0cMSH2dN3E22zFoXEi0Q" crossorigin="anonymous"></script>
+
+
+
+
+<script src="/drda-blog/js/script.js"></script>
+
+
+  
+<script src="/drda-blog/js/aos.js"></script>
+
+  <script>
+    var aosInit = () => {
+      AOS.init({
+        duration: 1000,
+        easing: "ease",
+        once: true,
+        offset: 50,
+      });
+    };
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', aosInit);
+    } else {
+      aosInit();
+    }
+  </script>
+
+
+<script src="/drda-blog/js/pjax_script.js" data-pjax></script>
+
+
+
+  <script>
+    var ALGOLIA_CONFIG = {
+      logo: "/drda-blog/images/algolia_logo.svg",
+      algolia: {
+        applicationID: "YMYG3VEWNQ",
+        apiKey: "9cc40f37d1556b019e275e62719299fa",
+        indexName: "drdaBlog",
+        hits: {
+          "per_page": parseInt("10")
+        },
+        labels: {
+          "input_placeholder": "搜索.....",
+          "hits_empty": "未发现与 「${query}」相关内容",
+          "hits_stats": "找到${hits}条结果（用时 ${time} ms）"
+        }
+      }
+    };
+  </script>
+  
+<script src="https://npm.webcache.cn/algoliasearch@4.17.1/dist/algoliasearch-lite.umd.js" integrity="sha384-xvLS0jfKuoREs7pqkRI&#x2F;OI8GcqohO5S+jQz7ZBtQXnsXmD+9jDOOY4cL6dCPzlrk" crossorigin="anonymous" defer></script>
+
+  
+<script src="https://npm.webcache.cn/@reimujs/instantsearch.js@4.57.0-beta.1/dist/instantsearch.production.min.js" integrity="sha384-aagKMe8nkqaP2DYQc8kkYOL5l+M5Q2WH&#x2F;Uhr4teOh0Ybp0RZj0kUSDm45qPikMjK" crossorigin="anonymous" defer></script>
+
+  
+<script src="/drda-blog/js/algolia_search.js" defer></script>
+
+
+  <script>
+    var setupFirework = () => {
+      if (!false || !window.matchMedia('(max-width: 768px)').matches) {
+        window.firework && window.firework(JSON.parse('{"excludeElements":["a","button"],"particles":[{"shape":"circle","move":["emit"],"easing":"easeOutExpo","colors":["var(--red-1)","var(--red-2)","var(--red-3)","var(--red-4)"],"number":20,"duration":[1200,1800],"shapeOptions":{"radius":[16,32],"alpha":[0.3,0.5]}},{"shape":"circle","move":["diffuse"],"easing":"easeOutExpo","colors":["var(--red-0)"],"number":1,"duration":[1200,1800],"shapeOptions":{"radius":20,"alpha":[0.2,0.5],"lineWidth":6}}]}'));
+      }
+    }
+  </script>
+  
+<script src="https://npm.webcache.cn/mouse-firework@0.2.0/dist/index.umd.js" integrity="sha384-qi9WggRt19tv8Vc7pCHW3ulMNLwrn515zaLEWZjl1px07vz8+pUoWX8n1rgq282T" crossorigin="anonymous" onload="setupFirework()" defer></script>
+
+
+  
+<script src="https://npm.webcache.cn/theme-shokax-pjax@0.0.3/dist/index.umd.js" integrity="sha384-xneY1WY8hOfUzswrE4CrYq35N4BdVcxqxwHPr9zawE&#x2F;jMSCxD+jAPU55x&#x2F;jj3wlf" crossorigin="anonymous"></script>
+
+  
+<script src="/drda-blog/js/pjax.js"></script>
+
+
+
+
+
+<div id="lazy-script">
+  <div>
+      
+      
+      <script data-pjax>
+        window.REIMU_POST = {
+          author: "Drda",
+          title: "自定义H5弹窗组件 (CustomModal)",
+          url: "https://drda-x.github.io/drda-blog/2026/10/14/20261014/%E8%87%AA%E5%AE%9A%E4%B9%89h5%E5%BC%B9%E7%AA%97%E7%BB%84%E4%BB%B6-custommodal/",
+          excerpt: "",
+          description: "",
+          stripContent: "我自己自定义了一套H5页面统一风格的弹窗组件，支持提示弹窗、确认弹窗、自定义内容弹窗，可插入表单、图片等任意元素，并支持自定义标题、图标和背景图。    目录  文件结构 快速开始 方式一：声明式组件 方式二：编程式调用 完整 Props 属性表 Events 事件 Slots 插槽 使用示例  基础提示弹窗 确认弹窗 成功/错误/警告弹窗 带表单的自定义弹窗 自定义底部按钮 带背景图的弹窗 Promise 异步用法      文件结构 compones/├── CustomModal.vue ",
+          date: "Wed Oct 14 2026 15:09:31 GMT+0000",
+          updated: "Wed Oct 14 2026 07:52:35 GMT+0000",
+          cover: "https://img.8845.top/img2/%E7%9C%9F%E5%AF%BB%E9%85%B1.png",
+        };
+      </script>
+        
+<script src="/drda-blog/js/insert_highlight.js" data-pjax></script>
+
+      
+<script src="/drda-blog/js/tabs.js" data-pjax defer></script>
+
+      <script type="module" data-pjax>
+        (async () => {
+          const PhotoSwipeLightbox = (await safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe-lightbox.esm.min.js", "sha384-DiL6M/gG+wmTxmCRZyD1zee6lIhawn5TGvED0FOh7fXcN9B0aZ9dexSF/N6lrZi/")).default;
+          const initPswp = (gallery, children) => {
+            if (_$$(`${gallery} ${children}`).length > 0) {
+              new PhotoSwipeLightbox({
+                gallery,
+                children,
+                pswpModule: () => safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8+oTJ7m3DfYEWX1fu1scuS4+s")
+              }).init();
+            }
+          }
+          const pswp = () => {
+            initPswp('.article-entry', 'a.article-gallery-item');
+            initPswp('.article-gallery', 'a.article-gallery-item');
+          }
+          pswp();
+        })();
+      </script>
+        
+
+<script data-pjax>
+  var loadScript = (src, integrity) => {
+    const script = document.createElement('script');
+    script.src = src;
+    if (integrity) script.integrity = integrity;
+    script.crossOrigin = 'anonymous';
+    return script;
+  };
+
+  var commentConfigKeys = ["beaudar"];
+  var commentConfig = {
+    beaudar: {
+      enable: true,
+      load: () => {
+        const container = document.querySelector('.beaudar-comment'); 
+        if (!container) return;
+        container.style.display = 'block';
+
+        let theme = 'auto';
+        const parsedTheme = theme === 'auto' ? (document.documentElement.getAttribute('data-theme') === 'dark' ? 'github-dark' : 'github-light') : theme;
+
+        // 创建 beaudar 脚本
+        const script = document.createElement('script');
+        script.src = 'https://beaudar.lipk.org/client.js';
+        script.setAttribute('repo', 'drda-x/drda-blog');
+        script.setAttribute('branch', 'main');
+        script.setAttribute('theme', parsedTheme);
+        script.setAttribute('crossorigin', 'anonymous');
+        script.async = true;
+
+        // 透传其他字段
+            script.setAttribute('issue-term', 'title');
+            script.setAttribute('input-position', 'top');
+            script.setAttribute('comment-order', 'desc');
+            script.setAttribute('keep-theme', 'true');
+            script.setAttribute('loading', 'true');
+        
+
+        // 清空容器（防止重复加载）并插入脚本
+        container.innerHTML = '';
+        container.appendChild(script);
+        if (theme === 'auto') {
+          const themeHandler = (e) => {
+            const iframe = container.querySelector('iframe.beaudar-frame');
+            if (!iframe || !iframe.contentWindow) {
+              document.body.removeEventListener('reimu:theme-set', themeHandler);
+              return;
+            }
+            iframe.contentWindow.postMessage({ type: 'set-theme', theme: e.detail.isDark ? 'github-dark' : 'github-light' }, 'https://beaudar.lipk.org');
+          };
+          document.body.addEventListener('reimu:theme-set', themeHandler);
+        }
+      }
+    },
+  }
+  commentConfig.enable = commentConfigKeys.some(key => commentConfig[key].enable);
+
+  var defaultComment = '';
+  if (commentConfig.enable) {
+    // 1. 首先检查localStorage中是否有保存的评论类型
+    var savedCommentType = localStorage.getItem('commentType');
+    
+    // 2. 如果localStorage中有值且对应的评论系统可用，就使用它
+    if (savedCommentType) {
+      if (commentConfig[savedCommentType]?.enable) {
+        defaultComment = savedCommentType;
+      }
+    }
+    
+    // 3. 如果localStorage无效，检查配置的默认评论系统
+    if (!defaultComment) {
+      var configDefault = 'waline';
+      if (commentConfig[configDefault]?.enable) {
+        defaultComment = configDefault;
+      }
+    }
+    
+    // 4. 如果前两项都无效，按指定顺序找到第一个可用的评论系统
+    if (!defaultComment) {
+      defaultComment = commentConfigKeys.find(sys => commentConfig[sys].enable) || '';
+    }
+  }
+  function loadComments() {
+    if (!commentConfig.enable) return;
+    const loadedComments = {
+      valine: false,
+      waline: false,
+      twikoo: false,
+      gitalk: false,
+      giscus: false,
+      utterances: false,
+      beaudar: false,
+      disqus: false,
+    };
+
+    // 隐藏所有评论容器
+    const hideAllComments = () => {
+      const commentContainers = document.querySelectorAll('.comment');
+      commentContainers.forEach(container => {
+        container.style.display = 'none';
+      });
+    };
+
+    // 按需加载评论系统
+    const loadCommentSystem = (type) => {
+      if (loadedComments[type]) {
+        // 如果已加载，只需显示对应容器
+        document.querySelector(`.${type}-comment`).style.display = 'block';
+        return;
+      }
+
+      // 根据类型加载对应的脚本
+      commentConfig[type]?.load();
+      loadedComments[type] = true;
+    };
+
+    // 评论组件选择器
+    const changeActiveCommentItems = (item) => {
+      const commentItems = document.querySelectorAll('.selector-item');
+      for (let i = 0; i < commentItems.length; i++) {
+        commentItems[i].classList.remove('active');
+      }
+      item.classList.add('active');
+
+      // 获取要加载的评论系统类型
+      const commentType = item.getAttribute('data-selector');
+
+      // 隐藏所有评论系统
+      hideAllComments();
+
+      // 加载选中的评论系统
+      loadCommentSystem(commentType);
+    };
+
+    const commentInit = () => {
+      // 评论组件选择器点击事件
+      const commentItems = document.querySelectorAll('.selector-item');
+      for (let item of commentItems) {
+        item.addEventListener('click', () => {
+          // 保存选择器状态
+          const commentType = item.getAttribute('data-selector');
+          window.localStorage.setItem('commentType', commentType);
+          // 切换选中状态
+          changeActiveCommentItems(item);
+        });
+      }
+
+      // 检查是否需要加载默认评论系统
+      if (defaultComment) {
+        const defaultSelectorItem = document.querySelector(`[data-selector="${defaultComment}"]`);
+        if (!defaultSelectorItem) return;
+        defaultSelectorItem.style.display = 'block';
+        defaultSelectorItem.classList.add('active');
+        loadCommentSystem(defaultComment);
+      }
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', commentInit);
+    } else {
+      commentInit();
+    }
+  };
+  loadComments();
+</script>
+
+  </div>
+</div>
+
+
+  <script>
+    console.log(String.raw`%c 
+ ______     ______     __     __    __     __  __    
+/\  == \   /\  ___\   /\ \   /\ "-./  \   /\ \/\ \   
+\ \  __<   \ \  __\   \ \ \  \ \ \-./\ \  \ \ \_\ \  
+ \ \_\ \_\  \ \_____\  \ \_\  \ \_\ \ \_\  \ \_____\ 
+  \/_/ /_/   \/_____/   \/_/   \/_/  \/_/   \/_____/ 
+                                                  
+`,'color: #ff5252;')
+    console.log('%c Theme.Reimu v' + '1.12.5' + ' %c https://github.com/D-Sketon/hexo-theme-reimu ', 'color: white; background: #ff5252; padding:5px 0;', 'padding:4px;border:1px solid #ff5252;')
+  </script>
+  
+
+
+  
+<script src="https://npm.webcache.cn/busuanzi@2.3.0/bsz.pure.mini.js" integrity="sha384-0M75wtSkhjIInv4coYlaJU83+OypaRCIq2SukQVQX04eGTCBXJDuWAbJet56id+S" crossorigin="anonymous" async></script>
+
+
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.getRegistrations().then((registrations) => {
+      for (let registration of registrations) {
+        registration.unregister();
+      }
+    });
+  }
+</script>
+
+
+    <script>
+      var setupAPlayer = () => {
+        if (!false || !window.matchMedia('(max-width: 768px)').matches) {
+          if (window.matchMedia('(max-width: 959px)').matches) {
+            const meting = _$('meting-js');
+            if (meting) {
+              meting.setAttribute('fixed', 'true');
+              const aside = meting.parentNode?.parentNode;
+              if (aside?.tagName === 'ASIDE') {
+                meting.parentNode.removeChild(meting);
+                document.body.appendChild(meting);
+              }
+            }
+          }
+        }
+      };
+        var meting_api = "https://api.i-meto.com/meting/api?server=:server&type=:type&id=:id&auth=c6e770266f69eab18dcb51fcc31710a47779ec5a";
+    </script>
+  
+<script src="https://npm.webcache.cn/aplayer@1.10.1/dist/APlayer.min.js" integrity="sha384-gdGYZwHnfJM54evoZhpO0s6ZF5BQiybkiyW7VXr+h5UfruuRL&#x2F;aORyw+5+HZoU6e" crossorigin="anonymous" defer onload="setupAPlayer()"></script>
+
+    
+<script src="https://npm.webcache.cn/meting@2.0.1/dist/Meting.min.js" integrity="sha384-ASVlpKF80A22OXTK3tfEjZm1EL6uFMKIC4p8+0maanw1S&#x2F;IyB+Y4JG+ZDU7GpKE8" crossorigin="anonymous" defer></script>
+
+
+
+  <script src="/drda-blog/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"live2d_modules/live2D/model/xiaomai"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7}});</script></body>
+  </html>
